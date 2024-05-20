@@ -1,5 +1,5 @@
 # rubyのバージョン
-FROM RUBY_VERSION=3.2.2
+FROM ruby:3.2.2
 
 # コンテナ内の作業ディレクトリ
 WORKDIR /app
