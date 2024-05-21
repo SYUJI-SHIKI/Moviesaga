@@ -3,7 +3,7 @@ default: &default
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   port: 5432
-  host: db
+  host: moviesaga-db-1
   username: root
   password: password
 
