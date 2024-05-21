@@ -66,4 +66,6 @@ group :test do
   gem "selenium-webdriver"
 end
 
-# gem "webpacker", "~> 5.4"
+gem "webpacker", "~> 5.4"
+gem 'devise'
+gem 'pundit'
