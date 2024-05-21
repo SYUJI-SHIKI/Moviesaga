@@ -34,7 +34,7 @@ RUN bundle install && \
 COPY --link . .
 
 # bootsnapでアプリケーションのブート時間を短縮
-RUN bundle exec bootsnap precompile app/ lib/
+RUN bundle exec bootsnap precompile app/ lib/ 
 
 # 最終的なアプリケーションイメージ
 FROM base
