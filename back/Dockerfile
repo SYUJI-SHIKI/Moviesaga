@@ -3,7 +3,7 @@ FROM ruby:3.2.2
 WORKDIR /app
 
 RUN apt-get update -qq && \
-    apt-get install -y build-essential nodejs postgresql-client vim
+    apt-get install -y build-essential nodejs postgresql-client
 
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
