@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: Moviesaga
+    env: docker
+    rootDir: back
+    dockerfilePath: Dockerfile
