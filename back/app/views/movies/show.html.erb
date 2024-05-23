@@ -1,0 +1,17 @@
+# <h1>ランダムな映画予告</h1>
+
+<% if @movie_title %>
+<h2><%= @movie_title %></h2>
+<% if @movie_poster %>
+    <p><%= image_tag 'https://image.tmdb.org/t/p/w200' + @movie_poster, class: "card-img" %></p>
+<% end %>
+<div id='player'></div>
+<p><%= @movie_overview %></p>
+<iframe id="player" width="640" height="360" 
+  src="https://www.youtube.com/embed/<%= @video_id['id']['videoId'] %>?autoplay=1&mute=1" 
+  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+  allowfullscreen>
+</iframe>
+<% else %>
+<p>映画情報を取得できませんでした。</p>
+<% end %>
