@@ -4,7 +4,7 @@ class TmdbService
   BASE_URL = "https://api.themoviedb.org/3"
   API_KEY = ENV['TMDB_API']
 
-  def self.get_popular_movies(limit = 500)
+  def self.get_popular_movies(limit = 250)
     movie_ids = []
     page = 1
 

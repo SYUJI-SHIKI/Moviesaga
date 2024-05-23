@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   root 'movies#index'
-  resources :movies, only: %i[index show]
-  resources :posts
+  resources :movies do
+    collection do
+      get 'random'
+    end
+  end
   devise_for :users, controllers: { registrations: 'users/registrations' }
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

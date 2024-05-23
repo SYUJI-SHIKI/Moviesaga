@@ -12,12 +12,12 @@ class MoviesController < ApplicationController
     render 'index'
   end
 
-  def show
+  def random
     movie_data = TmdbService.get_random_movie_title
     @movie_title = movie_data[:title]
     @movie_overview = movie_data[:overview]
     @movie_poster = movie_data[:postpath]
-    youtube_search_query = "#{@movie_title} 予告"
+    youtube_search_query = "#{@movie_title}  映画 予告"
     @video_id = YoutubeService.search_videos(youtube_search_query)
     Rails.logger.debug(@movie_title)
   end
