@@ -28,37 +28,25 @@ class TmdbService
   end
 
   def self.get_random_movie_title
-    begin
-      popular_movie_ids = get_popular_movies
-      return nil if popular_movie_ids.nil? || popular_movie_ids.empty?
+    popular_movie_ids = get_popular_movies
+    return nil if popular_movie_ids.nil? || popular_movie_ids.empty?
 
-      random_movie_id = popular_movie_ids.sample
-      response = HTTParty.get("#{BASE_URL}/movie/#{random_movie_id}", query: {
-        api_key: API_KEY,
-        language: "ja",
-      })
+    random_movie_id = popular_movie_ids.sample
+    response = HTTParty.get("#{BASE_URL}/movie/#{random_movie_id}", query: {
+      api_key: API_KEY,
+      language: "ja",
+    })
 
-      Rails.logger.debug("APIレスポンス: #{response.inspect}")
-
-      if response.nil?
-        Rails.logger.error("APIからのレスポンスがnilです")
-        return { title: nil, overview: nil, postpath: nil }
-      end
-
-      unless response.is_a?(Hash)
-        Rails.logger.error("APIレスポンスがHash形式ではありません: #{response.inspect}")
-        return { title: nil, overview: nil, postpath: nil }
-      end
-
-      if response.success?
-        return { title: response["title"], overview: response["overview"], postpath: response["postpath"] }
-      else
-        Rails.logger.error("API呼び出しに失敗しました: #{response["status_message"]}")
-        return { title: nil, overview: nil, postpath: nil }
-      end
-    rescue StandardError => e
-      Rails.logger.error("API呼び出し中にエラーが発生しました: #{e.message}")
-      return { title: nil, overview: nil, postpath: nil }
+    if response.success?
+      movie = JSON.parse(response.body)
+      {
+        title: movie['title'],
+        overview: movie['overview'],
+        postpath: movie['poster_path'],
+      }
+    else
+      Rails.logger.error("Failed to fetch TMDB data: #{response.message}")
+      nil
     end
   end
 end

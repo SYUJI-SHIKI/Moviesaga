@@ -1,10 +1,3 @@
-class MoviesController < ApplicationController
-  def index
-  end
-
-  def show
-  end
-end
 require 'httparty'
 
 class MoviesController < ApplicationController
@@ -26,7 +19,7 @@ class MoviesController < ApplicationController
     @movie_poster = movie_data[:postpath]
     youtube_search_query = "#{@movie_title} 予告"
     @video_id = YoutubeService.search_videos(youtube_search_query)
-    Rails.logger.debug(@video_id)
+    Rails.logger.debug(@movie_title)
   end
   
   private
