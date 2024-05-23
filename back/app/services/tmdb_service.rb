@@ -37,14 +37,23 @@ class TmdbService
         api_key: API_KEY,
         language: "ja",
       })
+
+      Rails.logger.debug("APIレスポンス: #{response.inspect}")
+
       if response.nil?
         Rails.logger.error("APIからのレスポンスがnilです")
         return { title: nil, overview: nil, postpath: nil }
       end
+
+      unless response.is_a?(Hash)
+        Rails.logger.error("APIレスポンスがHash形式ではありません: #{response.inspect}")
+        return { title: nil, overview: nil, postpath: nil }
+      end
+
       if response.success?
-        return { title: response[:title], overview: response[:overview], postpath: response[:postpath] }
+        return { title: response["title"], overview: response["overview"], postpath: response["postpath"] }
       else
-        Rails.logger.error("API呼び出しに失敗しました: #{response.error_message}")
+        Rails.logger.error("API呼び出しに失敗しました: #{response["status_message"]}")
         return { title: nil, overview: nil, postpath: nil }
       end
     rescue StandardError => e
