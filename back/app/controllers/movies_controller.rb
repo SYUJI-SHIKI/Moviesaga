@@ -25,7 +25,7 @@ class MoviesController < ApplicationController
   private
 
   def fetch_movies(endpoint, params = {})
-    api_key = '3fcb672a51132297c0a824fb0fd41232'
+    api_key = ENV['TMDB_API']
     language = "ja"
     base_url = "https://api.themoviedb.org/3"
     
@@ -38,7 +38,7 @@ class MoviesController < ApplicationController
   end
   
   def fetch_movie_details(movie_id)
-    api_key = '3fcb672a51132297c0a824fb0fd41232'
+    api_key = ENV['TMDB_API']
     language = "ja"
     base_url = "https://api.themoviedb.org/3"
   
@@ -59,7 +59,7 @@ class MoviesController < ApplicationController
   end
   
   def get_movie_trailers(movie_id)
-    api_key = '3fcb672a51132297c0a824fb0fd41232'
+    api_key = ENV['TMDB_API']
     url = "https://api.themoviedb.org/3/movie/#{movie_id}/videos?api_key=#{api_key}"
     response = HTTParty.get(url)
     trailers = JSON.parse(response.body)['results']
