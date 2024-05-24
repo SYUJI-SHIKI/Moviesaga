@@ -1,7 +1,7 @@
 require 'httparty'
 
 class MoviesController < ApplicationController
-  before_action :set_movie, only: %i[show]
+  # before_action :set_movie, only: %i[show]
   def index
     if params[:looking_for]
       @movies = fetch_movies("/search/movie", query: params[:looking_for])
@@ -14,9 +14,12 @@ class MoviesController < ApplicationController
   end
 
   def show
-    @video_id = fetch_youtube_video(@movie.title)
+    movie_data = JSON.parse(params[:id])
+    Rails.logger.debug(movie_data)
+    @movie = Movie.find_or_initialize_by(title: movie_data['title'])
 
-    save_movie(@movie)
+    @video_id = fetch_youtube_video(@movie.title)
+    @movie = MovieSaverService.save_movie(@movie_data, @video_id)
   end
 
   def random

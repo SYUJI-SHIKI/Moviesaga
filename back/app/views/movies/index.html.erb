@@ -9,7 +9,8 @@
             <p><%= image_tag 'https://image.tmdb.org/t/p/w200' + movie['poster_path'], class: "card-img" %></p>
           <% end %>
         <% end %>
-        <p><%= link_to "詳細へ", random_movies_path(movie['id']) %></p>
+        <p><%= link_to "ランダム", random_movies_path(movie['id']) %></p>
+        <p><%= link_to "詳細へ", movie_path(movie['id']), data: { movie: movie.to_json } %></p>
       </div>
     <% end %>
   <% else %>
