@@ -21,9 +21,10 @@ class MoviesController < ApplicationController
 
   def random
     @movie_data = TmdbService.get_random_movie
-    youtube_search_query = "#{@movie_data[:title]}  映画 予告"
-    @video_id = YoutubeService.search_videos(youtube_search_query)
+    @video_id = fetch_youtube_video(@movie_data[:title])
     Rails.logger.debug(@movie_data)
+
+    MovieSaverService.save_movie(@movie_data, @video_id)
   end
   
   private
@@ -67,5 +68,11 @@ class MoviesController < ApplicationController
     url = "https://api.themoviedb.org/3/movie/#{movie_id}/videos?api_key=#{api_key}"
     response = HTTParty.get(url)
     trailers = JSON.parse(response.body)['results']
+  end
+
+  def fetch_youtube_video(title)
+    youtube_search_query = "#{title} 映画 予告"
+    YoutubeService.search_videos(youtube_search_query)
+    
   end
 end
