@@ -12,5 +12,6 @@ class MovieSaverService
     else
       Rails.logger.debug("Movie already exists: #{movie.inspect}")
     end
+    movie
   end
 end

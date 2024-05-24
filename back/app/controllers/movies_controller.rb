@@ -24,9 +24,9 @@ class MoviesController < ApplicationController
     @video_id = fetch_youtube_video(@movie_data[:title])
     Rails.logger.debug(@movie_data)
 
-    MovieSaverService.save_movie(@movie_data, @video_id)
+    @movie = MovieSaverService.save_movie(@movie_data, @video_id)
   end
-  
+
   private
 
   def fetch_movies(endpoint, params = {})
@@ -41,14 +41,14 @@ class MoviesController < ApplicationController
     response = HTTParty.get(url)
     JSON.parse(response.body)
   end
-  
+
   def fetch_movie_details(movie_id)
     api_key = ENV['TMDB_API']
     language = "ja"
     base_url = "https://api.themoviedb.org/3"
-  
+
     url = "#{base_url}/movie/#{movie_id}?api_key=#{api_key}&language=#{language}"
-  
+
     begin
       response = HTTParty.get(url)
       if response.success?
@@ -62,7 +62,7 @@ class MoviesController < ApplicationController
       nil
     end
   end
-  
+
   def get_movie_trailers(movie_id)
     api_key = ENV['TMDB_API']
     url = "https://api.themoviedb.org/3/movie/#{movie_id}/videos?api_key=#{api_key}"
@@ -73,6 +73,5 @@ class MoviesController < ApplicationController
   def fetch_youtube_video(title)
     youtube_search_query = "#{title} 映画 予告"
     YoutubeService.search_videos(youtube_search_query)
-    
   end
 end
