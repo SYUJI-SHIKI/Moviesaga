@@ -27,7 +27,7 @@ class TmdbService
     movie_ids.take(limit)
   end
 
-  def self.get_random_movie_title
+  def self.get_random_movie
     popular_movie_ids = get_popular_movies
     return nil if popular_movie_ids.nil? || popular_movie_ids.empty?
 
@@ -39,11 +39,16 @@ class TmdbService
 
     if response.success?
       movie = JSON.parse(response.body)
-      {
+      movie_data = {
         title: movie['title'],
         overview: movie['overview'],
         postpath: movie['poster_path'],
-      }
+        runtime: movie['runtime'],
+        language: movie['original_language'],
+        status: movie['status'],
+        release_date: movie['release_date'],
+        genres: movie['genres'],
+      } 
     else
       Rails.logger.error("Failed to fetch TMDB data: #{response.message}")
       nil

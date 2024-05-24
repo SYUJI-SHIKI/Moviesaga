@@ -1,6 +1,7 @@
 require 'httparty'
 
 class MoviesController < ApplicationController
+  before_action :set_movie, only: %i[show]
   def index
     if params[:looking_for]
       @movies = fetch_movies("/search/movie", query: params[:looking_for])
@@ -12,14 +13,17 @@ class MoviesController < ApplicationController
     render 'index'
   end
 
+  def show
+    @video_id = fetch_youtube_video(@movie.title)
+
+    save_movie(@movie)
+  end
+
   def random
-    movie_data = TmdbService.get_random_movie_title
-    @movie_title = movie_data[:title]
-    @movie_overview = movie_data[:overview]
-    @movie_poster = movie_data[:postpath]
-    youtube_search_query = "#{@movie_title}  映画 予告"
+    @movie_data = TmdbService.get_random_movie
+    youtube_search_query = "#{@movie_data[:title]}  映画 予告"
     @video_id = YoutubeService.search_videos(youtube_search_query)
-    Rails.logger.debug(@movie_title)
+    Rails.logger.debug(@movie_data)
   end
   
   private
