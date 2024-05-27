@@ -14,12 +14,11 @@ class MoviesController < ApplicationController
   end
 
   def show
-    movie_data = JSON.parse(params[:id])
+    movie_data = fetch_movie_details(params[:id])
     Rails.logger.debug(movie_data)
-    @movie = Movie.find_or_initialize_by(title: movie_data['title'])
 
-    @video_id = fetch_youtube_video(@movie.title)
-    @movie = MovieSaverService.save_movie(@movie_data, @video_id)
+    @video_id = fetch_youtube_video(movie_data['title'])
+    @movie = MovieSaverService.save_movie(movie_data, @video_id)
   end
 
   def random

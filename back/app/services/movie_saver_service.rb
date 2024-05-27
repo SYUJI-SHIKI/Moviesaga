@@ -1,6 +1,7 @@
 class MovieSaverService
   def self.save_movie(movie_data, video_id)
     Rails.logger.debug("Received movie_data: #{movie_data.inspect}")
+    movie_data = movie_data.transform_keys(&:to_sym)
     movie = Movie.find_or_initialize_by(title: movie_data[:title])
 
     if movie.new_record?
