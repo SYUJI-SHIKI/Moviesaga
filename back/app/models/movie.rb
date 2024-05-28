@@ -1,4 +1,9 @@
 class Movie < ApplicationRecord
+  has_many :favorites
+  has_many :users, through: :favorites
+  has_many :movies_collections
+  has_many :collections, through: :movies_collections
+
   serialize :keywords, JSON
 
   def save_with_data(movie_data, video_id, keywords)
