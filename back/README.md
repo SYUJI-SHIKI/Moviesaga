@@ -107,7 +107,6 @@ API| TMDB API <br> Youtube Data API <br> Google Translate API(未定) <br> wikip
 英文のあらすじしかない場合があるのでGoogle Translate APIを使って翻訳するか
 Wikipedia apiを使ってあらすじを抽出するか悩み中（技術検証してない）
 - 映画のあらすじと事象を紐づける際のWikipediaのapi
-
 - 関連映画のレコメンドを取得する機能(
 Google認証するためにGoogle Identity Platformの機能
 
