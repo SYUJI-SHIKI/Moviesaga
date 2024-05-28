@@ -1,6 +1,6 @@
-<h2>Sign up</h2>
+<h2 class="center-form">Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "center-form" }) do |f| %>
   <%= render "users/shared/error_messages", resource: resource %>
 
 
@@ -32,4 +32,4 @@
   </div>
 <% end %>
 
-<%= render "users/shared/links" %>
+<%= render "users/shared/links", class: "center-form" %>

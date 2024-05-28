@@ -75,3 +75,7 @@ gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'devise'
+group :development do
+  gem 'letter_opener'
+  gem 'letter_opener_web'
+end

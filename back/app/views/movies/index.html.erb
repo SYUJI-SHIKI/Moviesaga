@@ -1,3 +1,4 @@
+<%= button_to 'Delete', destroy_user_session_path, :method => :delete %>
 <div class="movies-container">
   <% if @movies.present? %>
     <% @movies['results'].each do |movie| %>
