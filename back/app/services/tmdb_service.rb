@@ -40,6 +40,7 @@ class TmdbService
     if response.success?
       movie = JSON.parse(response.body)
       movie_data = {
+        id: movie['id'],
         title: movie['title'],
         overview: movie['overview'],
         postpath: movie['poster_path'],

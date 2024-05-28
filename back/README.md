@@ -111,7 +111,4 @@ Wikipedia apiを使ってあらすじを抽出するか悩み中（技術検証�
 Google認証するためにGoogle Identity Platformの機能
 
 ### 画面遷移図
-https://www.figma.com/file/hbWFX3mRKDMfnq9PeNncPE/卒業制作?type=design&node-id=0%3A1&mode=design&t=uwKESXvV3XSOxXFJ-1
-
-### ER図
-[![Image from Gyazo](https://i.gyazo.com/fd9e5237f44d3a7c4bee826d2ad8056a.png)](https://gyazo.com/fd9e5237f44d3a7c4bee826d2ad8056a)
+https://www.figma.com/design/hbWFX3mRKDMfnq9PeNncPE/%E5%8D%92%E6%A5%AD%E5%88%B6%E4%BD%9C?node-id=0-1&t=tCQQwauOn3ctIvJm-1

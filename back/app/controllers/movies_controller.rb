@@ -15,18 +15,22 @@ class MoviesController < ApplicationController
 
   def show
     movie_data = fetch_movie_details(params[:id])
+    Rails.logger.debug("ここに注目！！！！#{movie_data['title']}")
     Rails.logger.debug(movie_data)
 
     @video_id = fetch_youtube_video(movie_data['title'])
-    @movie = MovieSaverService.save_movie(movie_data, @video_id)
+    @keywords = get_keywords(movie_data['id'])
+    @movie = MovieSaverService.save_movie(movie_data, @video_id,@keywords)
+    
   end
 
   def random
     @movie_data = TmdbService.get_random_movie
-    @video_id = fetch_youtube_video(@movie_data[:title])
+    @video_id = fetch_youtube_video(@movie_data['title'])
     Rails.logger.debug(@movie_data)
-
-    @movie = MovieSaverService.save_movie(@movie_data, @video_id)
+    @keywords = get_keywords(@movie_data[:id])
+    Rails.logger.debug("注目して！！！！#{@movie_data[:id]}")
+    @movie = MovieSaverService.save_movie(@movie_data, @video_id, @keywords)
   end
 
   private
@@ -65,11 +69,13 @@ class MoviesController < ApplicationController
     end
   end
 
-  def get_movie_trailers(movie_id)
+  def get_keywords(movie_id)
     api_key = ENV['TMDB_API']
-    url = "https://api.themoviedb.org/3/movie/#{movie_id}/videos?api_key=#{api_key}"
+    url = "https://api.themoviedb.org/3/movie/#{movie_id}/keywords?api_key=#{api_key}"
     response = HTTParty.get(url)
-    trailers = JSON.parse(response.body)['results']
+    keywords = JSON.parse(response.body)['keywords']
+    Rails.logger.debug("ここみてよ！#{keywords}")
+    keywords
   end
 
   def fetch_youtube_video(title)
