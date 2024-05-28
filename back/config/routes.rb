@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'collections/index'
+  get 'collections/create'
+  get 'collections/update'
+  get 'collections/destroy'
   root 'movies#index'
   resources :movies do
     collection do
