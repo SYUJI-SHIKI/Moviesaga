@@ -2,26 +2,28 @@ require 'httparty'
 
 class MoviesController < ApplicationController
   # before_action :set_movie, only: %i[show]
-  def index
-    if params[:looking_for]
-      @movies = fetch_movies("/search/movie", query: params[:looking_for])
+  def index ;
+    # if params[:looking_for]
+    #   @movies = fetch_movies("/search/movie", query: params[:looking_for])
 
-    else
-      @movies = fetch_movies("/movie/popular")
-    end
-    Rails.logger.debug(@movies.inspect)
-    render 'index'
+    # else
+    #   @movies = fetch_movies("/movie/popular")
+    # end
+    # Rails.logger.debug(@movies.inspect)
+    # render 'index'
   end
 
   def show
     movie_data = MovieFetcher.fetch_movie_details(params[:id])
-    Rails.logger.debug("ここに注目！！！！#{movie_data['title']}")
     Rails.logger.debug(movie_data)
-
     @video_id = fetch_youtube_video(movie_data['title'])
     @keywords = get_keywords(movie_data['id'])
-    @movie = MovieSaverService.save_movie(movie_data, @video_id,@keywords)
     
+    unless @video_id.nil?
+      @movie = MovieSaverService.save_movie(movie_data, @video_id,@keywords)
+    else
+      @movie = movie_data
+    end
   end
 
   def random
@@ -29,7 +31,8 @@ class MoviesController < ApplicationController
     @video_id = fetch_youtube_video(@movie_data['title'])
     Rails.logger.debug(@movie_data)
     @keywords = get_keywords(@movie_data[:id])
-    Rails.logger.debug("注目して！！！！#{@movie_data[:id]}")
+
+    @movie = Movie.all.sample if @video_id.nil?
     @movie = MovieSaverService.save_movie(@movie_data, @video_id, @keywords)
   end
 

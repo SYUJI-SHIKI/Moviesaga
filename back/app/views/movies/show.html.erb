@@ -1,19 +1,15 @@
-<% if @movie.title %>
 <h2><%= @movie.title %></h2>
 <% if @movie.postpath %>
   <p><%= image_tag 'https://image.tmdb.org/t/p/w200' + @movie.postpath, class: "card-img" %></p>
-<% end %>
-<div id='player'></div>
+<% end %><div id='player'></div>
 <p><%= @movie.overview %></p>
-<% @keywords.each do |k| %>
-  <p><%= k['name'] %></p>
-<% end %>
-<iframe id="player" width="640" height="360" 
-  src="https://www.youtube.com/embed/<%= @movie.youtube_trailer_id %>
-  ?autoplay=1&mute=1&loop=1&playlist=<%= @movie.youtube_trailer_id %>&rel=0" 
-  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-  allowfullscreen>
-</iframe>
+<% if @video_id.nil? %>
+  <p>予告がございません</p>
 <% else %>
-<p>映画情報を取得できませんでした。</p>
+  <iframe id="player" width="640" height="360" 
+    src="https://www.youtube.com/embed/<%= @movie.youtube_trailer_id %>
+    ?autoplay=1&mute=1&loop=1&playlist=<%= @movie.youtube_trailer_id %>&rel=0" 
+    frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+</iframe>
 <% end %>
