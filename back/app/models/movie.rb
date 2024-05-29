@@ -11,15 +11,15 @@ class Movie < ApplicationRecord
 
   def save_with_data(movie_data, video_id, keywords)
     self.assign_attributes(
-      title: movie_data[:title],
+      original_title: movie_data[:original_title],
       overview: movie_data[:overview],
-      postpath: movie_data[:postpath],
+      poster_path: movie_data[:poster_path],
       runtime: movie_data[:runtime],
-      language: movie_data[:language],
+      original_language: movie_data[:original_language],
       status: movie_data[:status],
       release_date: movie_data[:release_date],
       genres: movie_data[:genres],
-      youtube_trailer_id: video_id["id"]["videoId"],
+      youtube_trailer_id: video_id.dig("id", "videoId"),
       keywords: keywords
     )
     save!

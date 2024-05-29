@@ -7,9 +7,11 @@
 <% end %>
 
 <% unless @movies.nil? %>
-  <ul>
+<ul>
     <% @movies.each do |movie| %>
-      <li><%= movie.title %> (<%= movie.release_date %>)</li>
+        <%= link_to movie_path(movie["id"]) do %>
+          <%= image_tag("https://image.tmdb.org/t/p/w200#{movie['poster_path']}", alt: movie['original_title']) %>
+        <% end %>
     <% end %>
   </ul>
 <% else %>

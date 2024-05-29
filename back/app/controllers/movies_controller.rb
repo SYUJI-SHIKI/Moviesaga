@@ -16,7 +16,7 @@ class MoviesController < ApplicationController
   def show
     movie_data = MovieFetcher.fetch_movie_details(params[:id])
     Rails.logger.debug(movie_data)
-    @video_id = fetch_youtube_video(movie_data['title'])
+    @video_id = fetch_youtube_video(movie_data['original_title'])
     @keywords = get_keywords(movie_data['id'])
     
     unless @video_id.nil?
@@ -28,7 +28,8 @@ class MoviesController < ApplicationController
 
   def search
     if params[:query].present?
-      @movies = Tmdb::Search.movie(params[:query]).results
+      search = fetch_tmdb_search(params[:query])
+      @movies = search["results"]
     else
       movie = []
     end
@@ -36,7 +37,7 @@ class MoviesController < ApplicationController
 
   def random
     @movie_data = TmdbService.get_random_movie
-    @video_id = fetch_youtube_video(@movie_data[:title])
+    @video_id = fetch_youtube_video(@movie_data[:original_title])
     @keywords = get_keywords(@movie_data[:id])
 
     Rails.logger.debug("ここを見てくれ！#{@video_id}")
@@ -74,5 +75,20 @@ class MoviesController < ApplicationController
   def fetch_youtube_video(title)
     youtube_search_query = "#{title} 映画 予告"
     YoutubeService.search_videos(youtube_search_query)
+  end
+    BASE_URL = "https://api.themoviedb.org/3"
+    API_KEY = ENV['TMDB_API']
+  def fetch_tmdb_search(query)
+
+    
+    language = "ja"
+    base_url = "https://api.themoviedb.org/3"
+    response = HTTParty.get("#{BASE_URL}/search/movie", query: {
+      api_key: API_KEY,
+      language: 'ja',
+      query: query,
+    })
+
+    JSON.parse(response.body)
   end
 end

@@ -1,21 +1,21 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
+  original_title: MyString
   overview: MyText
-  postpath: MyString
+  poster_path: MyString
   runtime: 1
-  language: MyString
+  original_language: MyString
   status: MyString
   release_date: 2024-05-24
   genres: 
 
 two:
-  title: MyString
+  original_title: MyString
   overview: MyText
-  postpath: MyString
+  poster_path: MyString
   runtime: 1
-  language: MyString
+  original_language: MyString
   status: MyString
   release_date: 2024-05-24
   genres: 

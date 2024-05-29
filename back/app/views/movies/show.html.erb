@@ -1,8 +1,8 @@
-<h2><%= @movie.title %></h2>
-<% if @movie.postpath %>
-  <p><%= image_tag 'https://image.tmdb.org/t/p/w200' + @movie.postpath, class: "card-img" %></p>
+<h2><%= @movie["original_title"] %></h2>
+<% if @movie["poster_path"] %>
+  <p><%= image_tag 'https://image.tmdb.org/t/p/w200' + @movie["poster_path"], class: "card-img" %></p>
 <% end %><div id='player'></div>
-<p><%= @movie.overview %></p>
+<p><%= @movie["overview"] %></p>
 <% if @video_id.nil? %>
   <p>予告がございません</p>
 <% else %>

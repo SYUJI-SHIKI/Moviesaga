@@ -47,11 +47,11 @@ class TmdbService
       movie = JSON.parse(response.body)
       movie_data = {
         id: movie['id'],
-        title: movie['title'],
+        original_title: movie['original_title'],
         overview: movie['overview'],
-        postpath: movie['poster_path'],
+        poster_path: movie['poster_path'],
         runtime: movie['runtime'],
-        language: movie['original_language'],
+        original_language: movie['original_language'],
         status: movie['status'],
         release_date: movie['release_date'],
         genres: movie['genres'],
