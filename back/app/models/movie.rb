@@ -6,6 +6,9 @@ class Movie < ApplicationRecord
 
   serialize :keywords, JSON
 
+  # TMDB APIの規約により六か月以上キャッシュの保存ができないため
+  scope :older_than_six_months, -> { where('created_at < ?', 6.months.ago) }
+
   def save_with_data(movie_data, video_id, keywords)
     self.assign_attributes(
       title: movie_data[:title],
