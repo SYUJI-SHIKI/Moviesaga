@@ -27,14 +27,20 @@ class TmdbService
     movie_ids.take(limit)
   end
 
-  def self.get_random_movie
-    popular_movie_ids = get_popular_movies
-    return nil if popular_movie_ids.nil? || popular_movie_ids.empty?
+  def self.fetch_movie_data(movie_id)
+    movie_data = fetch_movie_language_change(movie_id, "ja")
 
-    random_movie_id = popular_movie_ids.sample
-    response = HTTParty.get("#{BASE_URL}/movie/#{random_movie_id}", query: {
+    if movie_data[:overview].nil? || movie_data[:overview].empty?
+      movie_data = fetch_movie_language_change(movie_id, "en")
+    end
+
+    movie_data
+  end
+
+  def self.fetch_movie_language_change(movie_id, language)
+    response = HTTParty.get("#{BASE_URL}/movie/#{movie_id}", query: {
       api_key: API_KEY,
-      language: "ja",
+      language: language,
     })
 
     if response.success?
@@ -54,5 +60,13 @@ class TmdbService
       Rails.logger.error("Failed to fetch TMDB data: #{response.message}")
       nil
     end
+  end
+
+  def self.get_random_movie
+    popular_movie_ids = get_popular_movies
+    return nil if popular_movie_ids.nil? || popular_movie_ids.empty?
+
+    random_movie_id = popular_movie_ids.sample
+    fetch_movie_data(random_movie_id)
   end
 end

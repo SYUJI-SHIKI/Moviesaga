@@ -14,7 +14,7 @@ class MoviesController < ApplicationController
   end
 
   def show
-    movie_data = fetch_movie_details(params[:id])
+    movie_data = MovieFetcher.fetch_movie_details(params[:id])
     Rails.logger.debug("ここに注目！！！！#{movie_data['title']}")
     Rails.logger.debug(movie_data)
 
@@ -46,27 +46,6 @@ class MoviesController < ApplicationController
 
     response = HTTParty.get(url)
     JSON.parse(response.body)
-  end
-
-  def fetch_movie_details(movie_id)
-    api_key = ENV['TMDB_API']
-    language = "ja"
-    base_url = "https://api.themoviedb.org/3"
-
-    url = "#{base_url}/movie/#{movie_id}?api_key=#{api_key}&language=#{language}"
-
-    begin
-      response = HTTParty.get(url)
-      if response.success?
-        JSON.parse(response.body)
-      else
-        Rails.logger.error("Failed to fetch movie details: #{response.message}")
-        nil
-      end
-    rescue StandardError => e
-      Rails.logger.error("Error fetching movie details: #{e.message}")
-      nil
-    end
   end
 
   def get_keywords(movie_id)
