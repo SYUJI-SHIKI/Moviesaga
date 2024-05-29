@@ -11,7 +11,16 @@
   </head>
 
   <body>
+    <% if user_signed_in? %>
+      <%= render 'shared/header' %>
+    <% else %>
+      <%= render 'shared/before_login_header' %>
+    <% end %>
+    <%= render 'shared/flash_message' %>
     <%= yield %>
     <script src="https://www.youtube.com/iframe_api"></script>
+    <%= render 'shared/footer' %>
   </body>
+
 </html>
+

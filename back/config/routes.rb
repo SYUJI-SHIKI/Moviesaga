@@ -1,14 +1,11 @@
 Rails.application.routes.draw do
-  get 'collections/index'
-  get 'collections/create'
-  get 'collections/update'
-  get 'collections/destroy'
-  root 'movies#index'
+  root "static_pages#top"
   resources :movies do
     collection do
       get 'random'
     end
   end
+  resources :collections
   devise_for :users, controllers: { registrations: 'users/registrations' }
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
