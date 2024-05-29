@@ -26,14 +26,26 @@ class MoviesController < ApplicationController
     end
   end
 
+  def search
+    if params[:query].present?
+      @movies = Tmdb::Search.movie(params[:query]).results
+    else
+      movie = []
+    end
+  end
+
   def random
     @movie_data = TmdbService.get_random_movie
-    @video_id = fetch_youtube_video(@movie_data['title'])
-    Rails.logger.debug(@movie_data)
+    @video_id = fetch_youtube_video(@movie_data[:title])
     @keywords = get_keywords(@movie_data[:id])
 
-    @movie = Movie.all.sample if @video_id.nil?
-    @movie = MovieSaverService.save_movie(@movie_data, @video_id, @keywords)
+    Rails.logger.debug("ここを見てくれ！#{@video_id}")
+    if @video_id.nil?
+      @movie = Movie.all.sample
+      @video_id = @movie.youtube_trailer_id
+    else
+      @movie = MovieSaverService.save_movie(@movie_data, @video_id, @keywords)
+    end
   end
 
   private
@@ -56,7 +68,6 @@ class MoviesController < ApplicationController
     url = "https://api.themoviedb.org/3/movie/#{movie_id}/keywords?api_key=#{api_key}"
     response = HTTParty.get(url)
     keywords = JSON.parse(response.body)['keywords']
-    Rails.logger.debug("ここみてよ！#{keywords}")
     keywords
   end
 

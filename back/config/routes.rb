@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :movies do
     collection do
       get 'random'
+      get 'search'
     end
   end
   resources :collections
