@@ -5,9 +5,6 @@
 <% end %>
 <div id='player'></div>
 <p><%= @movie.overview %></p>
-<% @keywords.each do |k| %>
-  <p><%= k['name'] %></p>
-<% end %>
 <iframe id="player" width="640" height="360" 
   src="https://www.youtube.com/embed/<%= @movie.youtube_trailer_id %>
   ?autoplay=1&mute=1&loop=1&playlist=<%= @movie.youtube_trailer_id %>&rel=0" 

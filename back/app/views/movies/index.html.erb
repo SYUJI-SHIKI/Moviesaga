@@ -1,20 +1,3 @@
-<%= button_to 'Delete', destroy_user_session_path, :method => :delete %>
 <div class="movies-container">
-  <% if @movies.present? %>
-    <% @movies['results'].each do |movie| %>
-      <div class="movie-data">
-        <p><%= movie['title'] %></p>
-        <p><%= movie['overview'] %></p>
-        <%= link_to movie_path(movie['id']) do %>
-          <% if movie['poster_path'] %>
-            <p><%= image_tag 'https://image.tmdb.org/t/p/w200' + movie['poster_path'], class: "card-img" %></p>
-          <% end %>
-        <% end %>
-        <p><%= link_to "ランダム", random_movies_path(movie['id']) %></p>
-        <p><%= link_to "詳細へ", movie_path(movie['id']), data: { movie: movie.to_json } %></p>
-      </div>
-    <% end %>
-  <% else %>
-    <p>No movies found.</p>
-  <% end %>
+  <p><%= link_to "ランダム", random_movies_path %></p>
 </div>
