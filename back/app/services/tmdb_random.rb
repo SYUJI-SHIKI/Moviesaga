@@ -1,8 +1,10 @@
 require 'httparty'
+require "google/cloud/translate/v2"
 
-class TmdbService
+class TmdbRandom
   BASE_URL = "https://api.themoviedb.org/3"
   API_KEY = ENV['TMDB_API']
+  
 
   def self.get_popular_movies(limit = 500)
     movie_ids = []
@@ -27,17 +29,29 @@ class TmdbService
     movie_ids.take(limit)
   end
 
-  def self.fetch_movie_data(movie_id)
-    movie_data = fetch_movie_language_change(movie_id, "ja")
+  def self.translate_text(text, change_language)
+    translate = Google::Cloud::Translate::V2.new(
+      project_id: ENV['GOOGLE_PROJECT_ID'],
+      credentials: ENV['GOOGLE_API'],
+    )
+
+    translation = translate.translate text, to: change_language
+    translation.text
+  end
+
+  def self.fetch_movie_data_translation(movie_id)
+    movie_data = fetch_movie_data(movie_id, "ja")
 
     if movie_data[:overview].nil? || movie_data[:overview].empty?
-      movie_data = fetch_movie_language_change(movie_id, "en")
+      movie_data = fetch_movie_data(movie_id, "en")
+      translated_overview = translate_text(movie_data[:overview], "ja")
+      movie_data[:overview] = "#{translated_overview}(＊英文を翻訳した内容なので表現に誤りがある場合があります)"
     end
 
     movie_data
   end
 
-  def self.fetch_movie_language_change(movie_id, language)
+  def self.fetch_movie_data(movie_id, language)
     response = HTTParty.get("#{BASE_URL}/movie/#{movie_id}", query: {
       api_key: API_KEY,
       language: language,
@@ -67,6 +81,7 @@ class TmdbService
     return nil if popular_movie_ids.nil? || popular_movie_ids.empty?
 
     random_movie_id = popular_movie_ids.sample
-    fetch_movie_data(random_movie_id)
+    fetch_movie_data_translation(random_movie_id)
   end
+
 end

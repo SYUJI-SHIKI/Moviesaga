@@ -2,7 +2,7 @@ require 'httparty'
 
 class YoutubeService
   BASE_URL = "https://www.googleapis.com/youtube/v3/search"
-  API_KEY = ENV['YouTube_API']
+  API_KEY = ENV['YOUTUBE_API']
 
   def self.search_videos(query)
     response = HTTParty.get(BASE_URL, query: {
