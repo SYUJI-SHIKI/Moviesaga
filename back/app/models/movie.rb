@@ -19,7 +19,7 @@ class Movie < ApplicationRecord
       status: movie_data[:status],
       release_date: movie_data[:release_date],
       genres: movie_data[:genres],
-      youtube_trailer_id: video_id.dig("id", "videoId"),
+      # youtube_trailer_id: video_id.dig("id", "videoId"),
       keywords: keywords
     )
     save!

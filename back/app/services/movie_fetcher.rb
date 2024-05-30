@@ -1,5 +1,17 @@
+require "google/cloud/translate/v2"
+
 class MovieFetcher
   BASE_URL = "https://api.themoviedb.org/3"
+
+  def self.translate_text(text, change_language)
+    translate = Google::Cloud::Translate::V2.new(
+    project_id: ENV['GOOGLE_PROJECT_ID'],
+    credentials: ENV['GOOGLE_API'],
+    )
+
+    translation = translate.translate text, to: change_language
+    translation.text
+  end
 
   def self.fetch_movie_details(movie_id)
     api_key = ENV['TMDB_API']
@@ -15,6 +27,8 @@ class MovieFetcher
           url_en = "#{BASE_URL}/movie/#{movie_id}?api_key=#{api_key}&language=en"
           response_en = HTTParty.get(url_en)
           movie = JSON.parse(response_en.body) if response_en.success?
+          translated_overview = translate_text(movie['overview'], "ja")
+          movie['overview'] = "#{translated_overview}(＊英文を翻訳した内容なので表現に誤りがある場合があります)"    
         end
 
         movie
