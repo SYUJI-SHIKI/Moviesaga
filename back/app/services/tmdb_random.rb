@@ -3,7 +3,7 @@ require "google/cloud/translate/v2"
 
 class TmdbRandom
   BASE_URL = "https://api.themoviedb.org/3"
-  API_KEY = ENV['TMDB_API']
+  API_KEY =  Rails.application.credentials.api_key[:tmdb]
   
 
   def self.get_popular_movies(limit = 500)
@@ -32,7 +32,7 @@ class TmdbRandom
   def self.translate_text(text, change_language)
     translate = Google::Cloud::Translate::V2.new(
       project_id: ENV['GOOGLE_PROJECT_ID'],
-      credentials: ENV['GOOGLE_API'],
+      credentials:  Rails.application.credentials.api_key[:google],
     )
 
     translation = translate.translate text, to: change_language

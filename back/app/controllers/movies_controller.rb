@@ -15,14 +15,14 @@ class MoviesController < ApplicationController
 
   def show
     movie_data = MovieFetcher.fetch_movie_details(params[:id])
-    Rails.logger.debug("kkkkkkkk#{params[:id]}")
     @video_id = fetch_youtube_video(movie_data['original_title'])
     @keywords = get_keywords(movie_data['id'])
-    
-    unless @video_id.nil?
-      @movie = MovieSaverService.save_movie(movie_data, @video_id,@keywords)
-    else
+    Rails.logger.debug("kkkkkkkk#{movie_data}")
+    if @video_id.nil?
       @movie = movie_data
+    else
+      @movie = MovieSaverService.save_movie(movie_data, @video_id,@keywords)
+      Rails.logger.debug("dddddddd#{@movie}")
     end
   end
 
@@ -40,19 +40,21 @@ class MoviesController < ApplicationController
     @video_id = fetch_youtube_video(@movie_data[:original_title])
     @keywords = get_keywords(@movie_data[:id])
 
-    Rails.logger.debug("ここを見てくれ！#{@video_id}")
+    Rails.logger.debug("ここを見てくれ！#{@movie_data}")
     if @video_id.nil?
       @movie = Movie.all.sample
       @video_id = @movie.youtube_trailer_id
+      Rails.logger.debug("ここを見てくれ！#{@movie}")
     else
       @movie = MovieSaverService.save_movie(@movie_data, @video_id, @keywords)
+      Rails.logger.debug("ここを見てくれ！#{@movie}")
     end
   end
 
   private
 
   def fetch_movies(endpoint, params = {})
-    api_key = ENV['TMDB_API']
+    api_key =  Rails.application.credentials.api_key[:tmdb]
     language = "ja"
     base_url = "https://api.themoviedb.org/3"
     
@@ -65,7 +67,7 @@ class MoviesController < ApplicationController
   end
 
   def get_keywords(movie_id)
-    api_key = ENV['TMDB_API']
+    api_key =  Rails.application.credentials.api_key[:tmdb]
     url = "https://api.themoviedb.org/3/movie/#{movie_id}/keywords?api_key=#{api_key}"
     response = HTTParty.get(url)
     keywords = JSON.parse(response.body)['keywords']
@@ -77,7 +79,7 @@ class MoviesController < ApplicationController
     YoutubeService.search_videos(youtube_search_query)
   end
     BASE_URL = "https://api.themoviedb.org/3"
-    API_KEY = ENV['TMDB_API']
+    API_KEY =  Rails.application.credentials.api_key[:tmdb]
   def fetch_tmdb_search(query)
     language = "ja"
     base_url = "https://api.themoviedb.org/3"
