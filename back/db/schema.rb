@@ -15,7 +15,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_220109) do
   enable_extension "plpgsql"
 
   create_table "collections", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.text "description"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
@@ -29,6 +29,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_220109) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["movie_id"], name: "index_favorites_on_movie_id"
+    t.index ["user_id", "movie_id"], name: "index_favorites_on_user_id_and_movie_id", unique: true
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
@@ -52,6 +53,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_220109) do
     t.bigint "movie_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["collection_id", "movie_id"], name: "index_movies_collections_on_collection_id_and_movie_id", unique: true
     t.index ["collection_id"], name: "index_movies_collections_on_collection_id"
     t.index ["movie_id"], name: "index_movies_collections_on_movie_id"
   end
