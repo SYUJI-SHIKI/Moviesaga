@@ -41,12 +41,12 @@ class MoviesController < ApplicationController
     @keywords = get_keywords(@movie_data[:id])
 
     Rails.logger.debug("ここを見てくれ！#{@video_id}")
-    # if @video_id.nil?
-    #   @movie = Movie.all.sample
-    #   @video_id = @movie.youtube_trailer_id
-    # else
+    if @video_id.nil?
+      @movie = Movie.all.sample
+      @video_id = @movie.youtube_trailer_id
+    else
       @movie = MovieSaverService.save_movie(@movie_data, @video_id, @keywords)
-    # end
+    end
   end
 
   private

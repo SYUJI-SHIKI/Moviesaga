@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   root "static_pages#top"
+  resource :profile, only: %i[show edit update]
+  resolve('Profile') { [:profile] }
   resources :movies do
     collection do
       get 'random'
