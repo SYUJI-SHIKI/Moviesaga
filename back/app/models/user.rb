@@ -25,4 +25,5 @@ class User < ApplicationRecord
   def favorite?(movie)
     movie.favorites.pluck(:user_id).include?(id)
   end
+  
 end
