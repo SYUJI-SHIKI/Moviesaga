@@ -1,0 +1,13 @@
+<h1><%= @collection.title %></h1>
+<p><%= @collection.description %></p>
+<% link_to "編集", edit_collection_path(@collection) %>
+<% link_to "削除", collection_path(@collection),
+data: { turbo_method: :delete, turbo_confirm: "消しますか？" } %>
+<% @movies.each do |movie| %>
+  <div>
+    <h3><%= movie.original_title %></h3>
+    <%= link_to movie_path(movie.tmdb_id) do %>
+      <%= image_tag("https://image.tmdb.org/t/p/w200#{movie['poster_path']}", alt: movie['original_title']) %>
+    <% end %>
+  </div>
+<% end %>

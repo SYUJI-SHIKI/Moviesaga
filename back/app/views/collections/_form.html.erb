@@ -1,0 +1,20 @@
+<%= form_with(model: @collection, local: true) do |form| %>
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :movies %>
+    <%= form.collection_check_boxes :movie_ids, @movies, :id, :original_title %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit '作成する' %>
+  </div>
+<% end %>
