@@ -10,4 +10,19 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorites_movies, through: :favorites, source: :movie
 
+  def own?(object)
+    object&.user_id == id
+  end
+
+  def favorite(movie)
+    favorites_movies << movie
+  end
+
+  def unfavorite(movie)
+    favorites_movies.destroy(movie)
+  end
+
+  def favorite?(movie)
+    movie.favorites.pluck(:user_id).include?(id)
+  end
 end
