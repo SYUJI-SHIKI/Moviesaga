@@ -1,8 +1,8 @@
 class Movie < ApplicationRecord
-  has_many :favorites
-  has_many :users, through: :favorites
-  has_many :movies_collections
-  has_many :collections, through: :movies_collections
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_by_user, through: :favorites, source: :user, dependent: :destroy
+  has_many :movies_collections, dependent: :destroy
+  has_many :collections, through: :movies_collections, dependent: :destroy
 
   serialize :keywords, JSON
 
@@ -11,6 +11,7 @@ class Movie < ApplicationRecord
 
   def save_with_data(movie_data, video_id, keywords)
     self.assign_attributes(
+      tmdb_id: movie_data[:id],
       original_title: movie_data[:original_title],
       overview: movie_data[:overview],
       poster_path: movie_data[:poster_path],

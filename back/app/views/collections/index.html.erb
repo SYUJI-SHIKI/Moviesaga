@@ -1,2 +1,8 @@
-<h1>Collections#index</h1>
-<p>Find me in app/views/collections/index.html.erb</p>
+<h1>特集一覧</h1>
+<% @collections.each do |collection| %>
+  <div>
+    <h2><%= link_to collection.title, collection_path(collection) %></h2>
+    <p><%= collection.description %></p>
+  </div>
+<% end %>
+
