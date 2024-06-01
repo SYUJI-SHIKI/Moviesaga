@@ -1,0 +1,16 @@
+<h2><%= @movie.original_title %></h2>
+<% if @movie.poster_path %>
+  <p><%= image_tag 'https://image.tmdb.org/t/p/w200' + @movie["poster_path"], class: "card-img" %></p>
+  <%= render 'favorites/favorite_button', movie: @movie %>
+<% end %><div id='player'></div>
+<p><%= @movie.overview %></p>
+<% if @movie.youtube_trailer_id.nil? %>
+  <p>予告がございません</p>
+<% else %>
+  <iframe id="player" width="640" height="360" 
+    src="https://www.youtube.com/embed/<%= @movie.youtube_trailer_id %>
+    ?autoplay=1&mute=1&loop=1&playlist=<%= @movie.youtube_trailer_id %>&rel=0" 
+    frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+</iframe>
+<% end %>
