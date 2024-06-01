@@ -1,9 +1,9 @@
-<h2><%= @movie["original_title"] %></h2>
-<% if @movie["poster_path"] %>
+<h2><%= @movie.original_title %></h2>
+<% if @movie.poster_path %>
   <p><%= image_tag 'https://image.tmdb.org/t/p/w200' + @movie["poster_path"], class: "card-img" %></p>
 <% end %><div id='player'></div>
-<p><%= @movie["overview"] %></p>
-<% if @video_id.nil? %>
+<p><%= @movie.overview %></p>
+<% if @movie.youtube_trailer_id.nil? %>
   <p>予告がございません</p>
 <% else %>
   <iframe id="player" width="640" height="360" 

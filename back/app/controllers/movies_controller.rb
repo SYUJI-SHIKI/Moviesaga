@@ -14,16 +14,13 @@ class MoviesController < ApplicationController
   end
 
   def show
-    movie_data = MovieFetcher.fetch_movie_details(params[:id])
-    @video_id = fetch_youtube_video(movie_data['original_title'])
-    @keywords = get_keywords(movie_data['id'])
+    movie_data = MovieFetcher.movie_data_detail(params[:id])
     Rails.logger.debug("kkkkkkkk#{movie_data}")
-    if @video_id.nil?
-      @movie = movie_data
-    else
-      @movie = MovieSaverService.save_movie(movie_data, @video_id,@keywords)
-      Rails.logger.debug("dddddddd#{@movie}")
-    end
+    @video_id = fetch_youtube_video(movie_data["original_title"])
+    @keywords = get_keywords(movie_data["id"])
+
+    @movie = MovieSaverService.save_movie(movie_data, @video_id,@keywords)
+    Rails.logger.debug("dddddddd#{@movie}")
   end
 
   def search
@@ -36,9 +33,9 @@ class MoviesController < ApplicationController
   end
 
   def random
-    @movie_data = TmdbRandom.get_random_movie
-    @video_id = fetch_youtube_video(@movie_data[:original_title])
-    @keywords = get_keywords(@movie_data[:id])
+    @movie_data = MovieRandom.get_random_movie
+    @video_id = fetch_youtube_video(@movie_data["original_title"])
+    @keywords = get_keywords(@movie_data["id"])
 
     Rails.logger.debug("ここを見てくれ！#{@movie_data}")
     if @video_id.nil?
@@ -75,9 +72,11 @@ class MoviesController < ApplicationController
   end
 
   def fetch_youtube_video(title)
+    Rails.logger.debug(title)
     youtube_search_query = "#{title} 映画 予告"
     YoutubeService.search_videos(youtube_search_query)
   end
+
     BASE_URL = "https://api.themoviedb.org/3"
     API_KEY =  Rails.application.credentials.api_key[:tmdb]
   def fetch_tmdb_search(query)
