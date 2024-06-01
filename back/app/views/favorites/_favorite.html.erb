@@ -1,0 +1,3 @@
+<%= link_to favorites_path(movie_id: movie.id), id: "favorite-button-for-movie-#{movie.id}", data: { turbo_method: :post } do %>
+  <i class="fas fa-heart"></i>
+<% end %>

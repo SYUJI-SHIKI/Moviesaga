@@ -1,0 +1,5 @@
+<% if current_user.favorite?(movie) %>
+  <%= render "favorites/unfavorite", movie: movie %>
+<% else %>
+  <%= render "favorites/favorite", movie: movie %>
+<% end %>
