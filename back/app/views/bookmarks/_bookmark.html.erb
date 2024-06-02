@@ -1,0 +1,3 @@
+<%= link_to bookmarks_path(collection_id: collection.id), id: "bookmark-button-for-collection-#{collection.id}", data: { turbo_method: :post } do %>
+  <i class="fas fa-heart"></i>
+<% end %>

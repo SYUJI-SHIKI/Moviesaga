@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_02_004850) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_02_120051) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "collection_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["collection_id"], name: "index_bookmarks_on_collection_id"
+    t.index ["user_id", "collection_id"], name: "index_bookmarks_on_user_id_and_collection_id", unique: true
+    t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
 
   create_table "collections", force: :cascade do |t|
     t.string "title", null: false
@@ -26,9 +36,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_02_004850) do
 
   create_table "favorites", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "movie_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "movie_id", null: false
     t.index ["movie_id"], name: "index_favorites_on_movie_id"
     t.index ["user_id", "movie_id"], name: "index_favorites_on_user_id_and_movie_id", unique: true
     t.index ["user_id"], name: "index_favorites_on_user_id"
@@ -74,8 +84,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_02_004850) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bookmarks", "collections"
+  add_foreign_key "bookmarks", "users"
   add_foreign_key "collections", "users"
-  add_foreign_key "favorites", "movies"
   add_foreign_key "favorites", "users"
   add_foreign_key "movies_collections", "collections"
   add_foreign_key "movies_collections", "movies"

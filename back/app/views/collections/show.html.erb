@@ -5,6 +5,7 @@
   <%= link_to "削除", collection_path(@collection),
   data: { turbo_method: :delete, turbo_confirm: "消しますか？" } %>
 <% end %>
+<%= render 'bookmarks/bookmark_button', collection: @collection %>
 <div class="movies-container">
   <% @movies.each do |movie| %>
     <div class="movie-item">
