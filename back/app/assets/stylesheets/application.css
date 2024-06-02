@@ -136,3 +136,14 @@ header {
     margin: 0.5rem 0;
   }
 }
+
+.movies-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* アイテム間のスペースを設定 */
+}
+
+.movie-item {
+  flex: 0 1 200px; /* 各アイテムの幅を固定 */
+  text-align: center;
+}

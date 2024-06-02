@@ -1,7 +1,7 @@
 class Movie < ApplicationRecord
   has_many :favorites, dependent: :destroy
-  has_many :favorited_by_user, through: :favorites, source: :user, dependent: :destroy
-  has_many :movies_collections, dependent: :destroy
+  has_many :favorited_by_user, through: :favorites, source: :user
+  has_many :movies_collections
   has_many :collections, through: :movies_collections, dependent: :destroy
 
   serialize :keywords, JSON

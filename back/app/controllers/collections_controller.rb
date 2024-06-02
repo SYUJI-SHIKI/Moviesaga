@@ -14,7 +14,8 @@ class CollectionsController < ApplicationController
       redirect_to collections_path, notice: '特集記事が作成されました。'
     else
       @movies = current_user.favorite_movies
-      render :new
+      flash.now[:alert] = '映画は1本以上選択してください'
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -26,13 +27,16 @@ class CollectionsController < ApplicationController
   def edit
     @collection = current_user.collections.find(params[:id])
     @movies = @collection.movies
+    @add_movies = current_user.favorite_movies.where.not(id: @movies.pluck(:id))
   end
 
   def update
     @collection = current_user.collections.find(params[:id])
+    @movies = current_user.favorite_movies
     if @collection.update(collection_params)
       redirect_to collection_path(@collection), notice: '特集記事を更新しました'
     else
+      flash.now[:alert] = '映画は1本以上選択してください'
       render :edit, status: :unprocessable_entity
     end
   end
@@ -41,6 +45,10 @@ class CollectionsController < ApplicationController
     collection = current_user.collections.find(params[:id])
     collection.destroy!
     redirect_to collections_path, status: :see_other
+  end
+
+  def my_lists
+    @collections = current_user.collections
   end
 
   private

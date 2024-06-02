@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   has_many :collections, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  has_many :favorite_movies, through: :favorites, source: :movie, dependent: :destroy
+  has_many :favorite_movies, through: :favorites, source: :movie
 
   def own?(object)
     object&.user_id == id

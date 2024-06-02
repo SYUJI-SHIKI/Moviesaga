@@ -10,7 +10,11 @@ Rails.application.routes.draw do
       get 'favorites'
     end
   end
-  resources :collections
+  resources :collections do
+    collection do
+      get 'my_lists'
+    end
+  end
   resources :favorites, only: %i[create destroy]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
