@@ -3,10 +3,9 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations' }
   resource :profile, only: %i[show edit update]
   resolve('Profile') { [:profile] }
-  resources :movies do
+  resources :movies, only: %i[index show] do
     collection do
       get 'random'
-      get 'search'
       get 'favorites'
     end
   end
@@ -15,6 +14,7 @@ Rails.application.routes.draw do
       get 'my_lists'
     end
   end
+  get 'search', to: 'searches#search'
   resources :favorites, only: %i[create destroy]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
