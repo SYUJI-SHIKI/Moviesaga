@@ -1,6 +1,7 @@
 class ProfilesController < ApplicationController
   def show
     @movies = current_user.favorite_movies
+    @collections = current_user.bookmark_collections
   end
 
   def edit

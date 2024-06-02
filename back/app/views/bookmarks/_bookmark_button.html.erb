@@ -1,0 +1,5 @@
+<% if current_user.bookmark?(collection) %>
+  <%= render "bookmarks/unbookmark", collection: collection %>
+<% else %>
+  <%= render "bookmarks/bookmark", collection: collection %>
+<% end %>

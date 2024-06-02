@@ -1,5 +1,6 @@
 class Collection < ApplicationRecord
-  belongs_to :user
+  has_many :bookmarked_users, through: :bookmarks, source: :user
+  has_many :bookmarks, dependent: :destroy, class_name: 'Bookmark'
   has_many :movies_collections
   has_many :movies, through: :movies_collections, dependent: :destroy
 
