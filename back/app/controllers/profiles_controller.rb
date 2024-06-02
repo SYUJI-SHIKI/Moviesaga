@@ -1,5 +1,7 @@
 class ProfilesController < ApplicationController
-  def show; end
+  def show
+    @movies = current_user.favorite_movies
+  end
 
   def edit
     @user = User.find(current_user.id)

@@ -11,8 +11,31 @@
 
   <div class="field">
     <%= form.label :movies %>
-    <%= form.collection_check_boxes :movie_ids, @movies, :id, :original_title %>
+    <div class="movies-container">
+      <% @movies.each do |movie| %>
+        <div class="movie-item">
+          <%= image_tag("https://image.tmdb.org/t/p/w200#{movie['poster_path']}", alt: movie.original_title, class: 'movie-image') %>
+          <%= form.check_box :movie_ids, { multiple: true }, movie.id, nil %>
+          <%= movie.original_title %>
+        </div>
+      <% end %>
+    </div>
   </div>
+
+  <% if @add_movies.present? %>
+    <div class="field">
+      <%= form.label :movies %>
+      <div class="movies-container">
+        <% @add_movies.each do |movie| %>
+          <div class="movie-item">
+            <%= image_tag("https://image.tmdb.org/t/p/w200#{movie['poster_path']}", alt: movie.original_title, class: 'movie-image') %>
+            <%= form.check_box :movie_ids, { multiple: true }, movie.id, nil %>
+            <%= movie.original_title %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 
   <div class="actions">
     <%= form.submit '作成する' %>
