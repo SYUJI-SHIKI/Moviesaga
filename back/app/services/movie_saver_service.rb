@@ -2,7 +2,7 @@ class MovieSaverService
   def self.save_movie(movie_data, video_id, keywords)
     movie_data = movie_data.transform_keys(&:to_sym)
     movie = Movie.find_or_initialize_by(original_title: movie_data[:original_title])
-
+    Rails.logger.debug("yameteeeeeeeee #{video_id}")
     if movie.new_record?
       handle_new_record(movie, movie_data, video_id, keywords)
     else

@@ -18,18 +18,8 @@ class MoviesController < ApplicationController
     Rails.logger.debug("kkkkkkkk#{movie_data}")
     @video_id = fetch_youtube_video(movie_data["original_title"])
     @keywords = get_keywords(movie_data["id"])
-
+    Rails.logger.debug("dddddddd#{@video_id}")
     @movie = MovieSaverService.save_movie(movie_data, @video_id,@keywords)
-    Rails.logger.debug("dddddddd#{@movie}")
-  end
-
-  def search
-    if params[:query].present?
-      search = fetch_tmdb_search(params[:query])
-      @movies = search["results"]
-    else
-      movie = []
-    end
   end
 
   def random
@@ -75,19 +65,5 @@ class MoviesController < ApplicationController
     Rails.logger.debug(title)
     youtube_search_query = "#{title} 映画 予告"
     YoutubeService.search_videos(youtube_search_query)
-  end
-
-    BASE_URL = "https://api.themoviedb.org/3"
-    API_KEY =  Rails.application.credentials.api_key[:tmdb]
-  def fetch_tmdb_search(query)
-    language = "ja"
-    base_url = "https://api.themoviedb.org/3"
-    response = HTTParty.get("#{BASE_URL}/search/movie", query: {
-      api_key: API_KEY,
-      language: 'ja',
-      query: query,
-    })
-
-    JSON.parse(response.body)
   end
 end
