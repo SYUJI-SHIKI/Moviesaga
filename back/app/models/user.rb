@@ -9,6 +9,7 @@ class User < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 20 }
 
+  has_many :collections
   has_many :bookmarks, dependent: :destroy
   has_many :bookmark_collections, through: :bookmarks, source: :collection
   has_many :favorites, dependent: :destroy
