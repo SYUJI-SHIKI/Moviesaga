@@ -1,5 +1,4 @@
 require 'httparty'
-require "google/cloud/translate/v2"
 
 class MovieRandom
   BASE_URL = "https://api.themoviedb.org/3"

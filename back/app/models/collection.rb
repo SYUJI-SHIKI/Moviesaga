@@ -1,8 +1,9 @@
 class Collection < ApplicationRecord
-  has_many :bookmarked_users, through: :bookmarks, source: :user
-  has_many :bookmarks, dependent: :destroy, class_name: 'Bookmark'
-  has_many :movies_collections
-  has_many :movies, through: :movies_collections, dependent: :destroy
+  belongs_to :user
+  has_many :bookmarked_users, through: :bookmarks, source: :user, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
+  has_many :movies_collections, dependent: :destroy
+  has_many :movies, through: :movies_collections
 
   validates :title, presence: true, uniqueness: true
   validate :must_one_movie
