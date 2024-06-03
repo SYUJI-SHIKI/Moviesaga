@@ -31,9 +31,10 @@ class MovieFetcher
   end
 
   def self.translate_text(text, change_language)
+    google_credentials = Rails.application.credentials.api_key[:google]
     translate = Google::Cloud::Translate::V2.new(
-      project_id: ENV['GOOGLE_PROJECT_ID'],
-      credentials: JSON.parse(File.read(ENV['GOOGLE_API'])),
+      project_id: google_credentials[:project_id],
+      credentials: google_credentials,
     )
 
     translation = translate.translate text, to: change_language
