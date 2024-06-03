@@ -10,6 +10,7 @@ class Movie < ApplicationRecord
   scope :older_than_six_months, -> { where('created_at < ?', 6.months.ago) }
 
   def save_with_data(movie_data, video_id, keywords)
+    Rails.logger.debug "Saving movie data: #{movie_data[:original_title]}"
     self.assign_attributes(
       tmdb_id: movie_data[:id],
       original_title: movie_data[:original_title],

@@ -54,7 +54,7 @@ class MoviesController < ApplicationController
   end
 
   def get_keywords(movie_id)
-    api_key =  Rails.application.credentials.api_key[:tmdb]
+    api_key = Rails.application.credentials.api_key[:tmdb]
     url = "https://api.themoviedb.org/3/movie/#{movie_id}/keywords?api_key=#{api_key}"
     response = HTTParty.get(url)
     keywords = JSON.parse(response.body)['keywords']
