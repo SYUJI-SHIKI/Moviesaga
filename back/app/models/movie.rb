@@ -25,4 +25,8 @@ class Movie < ApplicationRecord
     )
     save!
   end
+
+  def nil_or_zero?(value)
+    value.nil? || value == 0
+  end
 end

@@ -1,3 +1,23 @@
 <div class="movies-container">
-  <p><%= link_to "ランダム", random_movies_path %></p>
+  <%= form_with url: random_movies_path, method: :get, local: true do %>
+    <div>
+      <label>公開中のみにするか</label>
+      <%= check_box_tag :now_playing %>
+    </div>
+    <div>
+      <label>日本の映画かそれ以外か</label>
+      <%= select_tag :language, options_for_select([['日本', 'ja'], ['それ以外', nil]]) %>
+    </div>
+    <div>
+      <label>ランタイム</label>
+      <div class="form-group">
+        <label for="selected_runtime">時間指定</label>
+        <select id="selected_runtime" name="selected_runtime" class="form-control">
+          <option value="">指定なし</option>
+          <option value="under_110">110分以内</option>
+          <option value="over_111">111分以上</option>
+        </select>
+    </div>    </div>
+    <%= submit_tag '絞り込み' %>
+  <% end %>
 </div>
