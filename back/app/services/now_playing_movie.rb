@@ -21,7 +21,7 @@ class NowPlayingMovie
   end
 
   def self.language_filter(language, selected_runtime)
-    Rails.cache.fetch("language_filters_#{language}", expires_in: 1.day) do
+    # Rails.cache.fetch("language_filters_#{language}", expires_in: 1.day) do
       page = 1
       movies = []
       max_pages = 4
@@ -58,15 +58,14 @@ class NowPlayingMovie
 
       movies.map { |movie| movie[:id] }
     end
-  end
+  # end
 
   # 時間指定がある場合、先ほどのレスポンスではruntimeが含まれないので必要
   def self.runtime_filter(movie_ids, selected_runtime)
+    movie_data = nil
     loop do
-      Rails.logger.debug("はなしきこか#{movie_ids}")
       movie_id = movie_ids.sample
       movie_data = fetch_movie_data(movie_id, "ja")
-      Rails.logger.debug("はなしきこか２#{movie_id}")
       if movie_data && match_runtime?(movie_data['runtime'], selected_runtime) == true        
         return movie_data
       else
