@@ -1,6 +1,8 @@
 require 'httparty'
 
 class SearchesController < ApplicationController
+  skip_before_action :authenticate_user!
+
   def search
     if params[:query].present?
       search = fetch_tmdb_search(params[:query])

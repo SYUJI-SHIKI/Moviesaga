@@ -1,7 +1,8 @@
 require 'httparty'
 
 class MoviesController < ApplicationController
-  # before_action :set_movie, only: %i[show]
+  skip_before_action :authenticate_user!
+
   def index ;end
 
   def show
