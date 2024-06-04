@@ -2,16 +2,7 @@ require 'httparty'
 
 class MoviesController < ApplicationController
   # before_action :set_movie, only: %i[show]
-  def index ;
-    # if params[:looking_for]
-    #   @movies = fetch_movies("/search/movie", query: params[:looking_for])
-
-    # else
-    #   @movies = fetch_movies("/movie/popular")
-    # end
-    # Rails.logger.debug(@movies.inspect)
-    # render 'index'
-  end
+  def index ;end
 
   def show
     movie_data = MovieFetcher.movie_data_detail(params[:id])
@@ -23,35 +14,31 @@ class MoviesController < ApplicationController
   end
 
   def random
-    @movie_data = MovieRandom.get_random_movie
-    @video_id = fetch_youtube_video(@movie_data["original_title"])
-    @keywords = get_keywords(@movie_data["id"])
+    language = params[:language]
+    selected_runtime = params[:selected_runtime]
 
-    Rails.logger.debug("ここを見てくれ！#{@movie_data}")
-    if @video_id.nil?
-      @movie = Movie.all.sample
-      @video_id = @movie.youtube_trailer_id
-      Rails.logger.debug("ここを見てくれ！#{@movie}")
+    if params[:now_playing].present?
+      @movie_data = NowPlayingMovie.random_playing_movie(language: language,selected_runtime: selected_runtime)
+    elsif params[:language].present? || params[:selected_runtime].present?
+      Rails.logger.debug("ここを見てくれ！！！！！！#{selected_runtime}")
+      @movie_data = SelectRandomMovie.select_random_movie(language, selected_runtime)
     else
-      @movie = MovieSaverService.save_movie(@movie_data, @video_id, @keywords)
-      Rails.logger.debug("ここを見てくれ！#{@movie}")
+      @movie_data = MovieRandom.get_random_movie
     end
+
+    if @movie_data.present?
+      @video_id = fetch_youtube_video(@movie_data["original_title"])
+      @keywords = get_keywords(@movie_data["id"])
+    else
+      flash[:notice] = "見つかりませんでした"
+      redirect_to movies_path and return
+    end
+
+    @movie = MovieSaverService.save_movie(@movie_data, @video_id, @keywords)
+    Rails.logger.debug("ここを見てくれ！#{@movie}")
   end
 
   private
-
-  def fetch_movies(endpoint, params = {})
-    api_key =  Rails.application.credentials.api_key[:tmdb]
-    language = "ja"
-    base_url = "https://api.themoviedb.org/3"
-    
-    query_params = params.merge({ api_key: api_key, language: language })
-    query_string = query_params.to_query
-    url = "#{base_url}#{endpoint}?#{query_string}"
-
-    response = HTTParty.get(url)
-    JSON.parse(response.body)
-  end
 
   def get_keywords(movie_id)
     api_key = Rails.application.credentials.api_key[:tmdb]

@@ -1,1 +1,5 @@
-<%= render partial: 'movie', locals: { title: "ランダム" } %>
+<% if @movie.present? %>
+  <%= render partial: 'movie', locals: { title: "ランダム" } %>
+<% else %>
+  <p><%= flash[:notice] %></p>
+<% end %>
