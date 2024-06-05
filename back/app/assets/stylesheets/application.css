@@ -12,13 +12,17 @@
  *
  *= require_tree .
  *= require_self
+ *= require movies
+ *= require profiles
  */
+
 body, html {
   margin: 0;
   padding: 0;
-  background-color: rgba(8, 41, 80, 1);
+  background-color: black;
   color:aliceblue
 }
+
 
 .center-form {
   display: flex;
@@ -58,12 +62,6 @@ a:active {
   color: white;
 }
 
-header {
-  background-color: rgb(72,132,158);
-  color: rgb(21, 21, 24) !important;
-  margin: 0;
-  padding: 0;
-}
 
 .navbar {
   margin: 0;
@@ -72,7 +70,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: rgb(72,132,158);
+  background-color: rgb(4, 18, 34);
 }
 
 .navbar-brand img {
@@ -111,7 +109,6 @@ header {
 
 .nav-link {
   text-decoration: none;
-  color: #007bff;
 }
 
 .nav-link:hover {
@@ -137,13 +134,27 @@ header {
   }
 }
 
-.movies-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px; /* アイテム間のスペースを設定 */
+footer {
+  background-color: rgb(72,132,158);
 }
 
-.movie-item {
-  flex: 0 1 200px; /* 各アイテムの幅を固定 */
-  text-align: center;
+a {
+  color: #ded9d9e8; /* ここでリンクの色を設定します */
+  text-decoration: none; /* 下線を取り除く場合 */
+}
+
+a:hover {
+  color: #ded9d9e8;
+}
+
+a:active {
+  color: #ded9d9e8;
+}
+
+a:focus {
+  color: #ded9d9e8;
+}
+
+.btn {
+  margin: 10px 10px;
 }

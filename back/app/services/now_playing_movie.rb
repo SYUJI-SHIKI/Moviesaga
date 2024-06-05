@@ -13,6 +13,7 @@ class NowPlayingMovie
 
     # 日本版あらすじがないと空の文字列が来ることがあるのでこの仕組みが必要
     if movie_data["overview"].nil? || movie_data["overview"].empty?
+      movie_id = movie_data["id"]
       movie_data = fetch_movie_data(movie_id, "en")
       translated_overview = translate_text(movie_data["overview"], "ja")
       movie_data["overview"] = "#{translated_overview}(＊英文を翻訳した内容なので表現に誤りがある場合があります)"

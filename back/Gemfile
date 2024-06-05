@@ -77,6 +77,7 @@ gem 'uglifier'
 gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
+gem 'bootstrap', '~> 5.3.3'
 #認証
 gem 'devise'
 #パスワードリセット関連

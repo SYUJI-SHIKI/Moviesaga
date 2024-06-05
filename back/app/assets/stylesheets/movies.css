@@ -1,0 +1,68 @@
+.movie-item {
+    flex: 0 0 auto;
+text-align: center;
+}
+
+.movie-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: black;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.movie-container h2 {
+    text-align: center;
+    color: #333;
+}
+
+.poster-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.poster-container img {
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.poster-container img:hover {
+    transform: scale(1.05);
+}
+
+.overview-container {
+    margin-bottom: 20px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+}
+
+.trailer-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.runtime-container {
+    text-align: center;
+    font-size: 14px;
+    color: #777;
+}
+
+.runtime-container p {
+    margin: 0;
+}
+
+.movies-index {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.movie-item {
+    flex: 1 0 200px; /* アイテムの幅を200pxに設定します。必要に応じて調整してください */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+

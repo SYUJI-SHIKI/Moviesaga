@@ -1,20 +1,41 @@
 <h2><%= @movie.original_title %></h2>
-<% if @movie.poster_path %>
-  <p><%= image_tag 'https://image.tmdb.org/t/p/w200' + @movie["poster_path"], class: "card-img" %></p>
+<div class="d-flex movie-container">
+  <div class="col-md-4">
+    <% if @movie.poster_path %>
+      <div class="poster-container flex-column">
+        <%= image_tag 'https://image.tmdb.org/t/p/w200' + @movie["poster_path"], class: "img-thumbnail" %>
+      </div>
+    <% end %>
+  </div>
+    
+  <div class="col-md-8">
+    <div class="trailer-container">
+      <% if @movie.youtube_trailer_id.nil? %>
+        <p>予告がございません</p>
+      <% else %>
+        <iframe id="player" width="100%" height="360" 
+          src="https://www.youtube.com/embed/<%= @movie.youtube_trailer_id %>?autoplay=1&mute=1&loop=1&playlist=<%= @movie.youtube_trailer_id %>&rel=0" 
+          frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% if user_signed_in? %>
   <%= render 'favorites/favorite_button', movie: @movie %>
-<% end %><div id='player'></div>
-<p><%= @movie.overview %></p>
-<% if @movie.youtube_trailer_id.nil? %>
-  <p>予告がございません</p>
-<% else %>
-  <iframe id="player" width="640" height="360" 
-    src="https://www.youtube.com/embed/<%= @movie.youtube_trailer_id %>?autoplay=1&mute=1&loop=1&playlist=<%= @movie.youtube_trailer_id %>&rel=0" 
-    frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-    allowfullscreen>
-</iframe>
 <% end %>
-<% if @movie.nil_or_zero?(@movie.runtime) %>
-  <p>すみません！時間がわかりませんでした！</p>
-<% else %>
-  <p><%= @movie.runtime %></p>
-<% end %>
+  <div class="overview-container">
+    <p><%= @movie.overview %></p>
+  </div>
+  
+
+  
+  <div class="runtime-container">
+    <% if @movie.nil_or_zero?(@movie.runtime) %>
+      <p>すみません！時間がわかりませんでした！</p>
+    <% else %>
+      <p>Runtime: <%= @movie.runtime %> minutes</p>
+    <% end %>
+  </div>
+</div>
