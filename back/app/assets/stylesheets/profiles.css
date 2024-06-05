@@ -1,0 +1,19 @@
+
+.btn-logout {
+  background-color: #ff000090; /* ボタンの背景色を設定 */
+  color: #ffffffd5; /* ボタンの文字色を設定 */
+}
+
+.btn-logout:hover {
+  background-color: #cc0000; /* ホバー時の背景色を設定 */
+}
+
+.btn-edit {
+  background-color: #599a84;
+  color: #ffffffd5;
+}
+
+.btn-edit:hover {
+  background-color: #6cb79e;
+  color: #ffffffd5;
+}

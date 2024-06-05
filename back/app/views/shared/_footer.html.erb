@@ -1,11 +1,17 @@
-<footer id='footer' class='footer-bottom'>
+<footer id='footer' class='fixed-bottom'>
   <div class='container'>
     <div class='row'>
       <div class='col-sm-6 col-12'>
-        <div class='copyright'>
-          <p>利用規約</p>
-          <p>プライバシーポリシー</p>
-          <p>お問い合わせ</p>
+        <div class='d-flex justify-content-center'>
+          <li class="list-inline-item">
+            <%= link_to "利用規約", "#", class: "footer-link" %>
+          </li>
+          <li class="list-inline-item">
+            <%= link_to "お問い合わせ", "#", class: "footer-link" %>
+          </li>
+          <li class="list-inline-item">
+            <%= link_to "プライバシーポリシー", "#", class: "footer-link" %>
+          </li>
         </div>
       </div>
     </div>
