@@ -1,4 +1,4 @@
-module Bookmarkable
+module BookmarkableMethods
   extend ActiveSupport::Concern
 
   def bookmark(collection)

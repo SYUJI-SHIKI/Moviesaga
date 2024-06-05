@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :movies, only: %i[index show] do
     collection do
       get 'random'
-      get 'favorites'
+      get 'favorite'
     end
   end
   resources :collections do
