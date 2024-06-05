@@ -11,7 +11,7 @@
     <div class="movie-item">
       <h3><%= movie.original_title %></h3>
       <%= link_to movie_path(movie.tmdb_id) do %>
-        <%= image_tag("https://image.tmdb.org/t/p/w200#{movie['poster_path']}", alt: movie['original_title']) %>
+        <%= image_tag("https://image.tmdb.org/t/p/w200#{movie.poster_path}", alt: movie['original_title']) %>
       <% end %>
     </div>
   <% end %>

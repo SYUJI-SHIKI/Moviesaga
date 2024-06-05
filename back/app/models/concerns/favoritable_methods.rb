@@ -1,4 +1,4 @@
-module Favoritable
+module FavoritableMethods
   extend ActiveSupport::Concern
 
   def favorite(movie)

@@ -1,15 +1,14 @@
-<h2><%= @movie.original_title %></h2>
-<div class="d-flex movie-container">
-  <div class="col-md-4">
+<div class="d-flex flex-column flex-md-row movie-container">
+  <div>
     <% if @movie.poster_path %>
       <div class="poster-container flex-column">
-        <%= image_tag 'https://image.tmdb.org/t/p/w200' + @movie["poster_path"], class: "img-thumbnail" %>
+        <%= image_tag 'https://image.tmdb.org/t/p/w400' + @movie.poster_path, class: "img-thumbnail float-left" %>
       </div>
     <% end %>
   </div>
     
   <div class="col-md-8">
-    <div class="trailer-container">
+    <div class="mb-3 trailer-container">
       <% if @movie.youtube_trailer_id.nil? %>
         <p>予告がございません</p>
       <% else %>
@@ -20,22 +19,23 @@
         </iframe>
       <% end %>
     </div>
-  </div>
-</div>
-<% if user_signed_in? %>
-  <%= render 'favorites/favorite_button', movie: @movie %>
-<% end %>
-  <div class="overview-container">
-    <p><%= @movie.overview %></p>
-  </div>
-  
-
-  
-  <div class="runtime-container">
-    <% if @movie.nil_or_zero?(@movie.runtime) %>
-      <p>すみません！時間がわかりませんでした！</p>
-    <% else %>
-      <p>Runtime: <%= @movie.runtime %> minutes</p>
+    <div class="mb-3">
+      <h2><%= @movie.original_title %></h2>
+    </div>
+    <div class="mb-3 overview-container">
+      <p><%= @movie.overview %></p>
+    </div>
+    <div class="mb-3 runtime-container">
+      <% if @movie.nil_or_zero?(@movie.runtime) %>
+        <p>すみません！時間がわかりませんでした！</p>
+      <% else %>
+        <p>Runtime: <%= @movie.runtime %> minutes</p>
+      <% end %>
+    </div>
+    <% if user_signed_in? %>
+      <div class="mb-3">
+        <%= render 'favorites/favorite_button', movie: @movie %>
+      </div>
     <% end %>
   </div>
 </div>

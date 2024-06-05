@@ -79,4 +79,10 @@ Rails.application.configure do
   # パスワードリセット機能の確認
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.delivery_method = :letter_opener
+
+  # Do not fallback to assets pipeline if a precompiled asset is missed.
+  config.assets.compile = true
+
+  # Enable serving of images, stylesheets, and JavaScripts from an asset server.
+  config.assets.debug = true
 end

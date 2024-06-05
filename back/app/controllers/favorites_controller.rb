@@ -5,7 +5,7 @@ class FavoritesController < ApplicationController
   end
 
   def destroy
-    @movie = current_user.favorites.find(params[:id]).movie
+    @movie = current_user.favorites.find_by(params[:id]).movie
     current_user.unfavorite(@movie)
   end
 end
