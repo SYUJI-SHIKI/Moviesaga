@@ -1,0 +1,309 @@
+.movie-item {
+    flex: 0 0 auto;
+text-align: center;
+}
+
+.movie-container {
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgb(0, 2, 11);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.movie-container h2 {
+    text-align: center;
+    color: #e9e4e4;
+}
+
+.poster-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.poster-container img {
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.poster-container img:hover {
+    transform: scale(1.05);
+}
+
+.overview-container {
+    margin-bottom: 20px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #e9e4e4;
+}
+
+.trailer-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.runtime-container {
+    text-align: left;
+}
+
+.runtime-container p {
+    margin: 0;
+    font-size: 20px;
+    color: #e9e4e4;
+}
+
+.movies-index {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.movie-item {
+    flex: 1 0 200px; /* アイテムの幅を200pxに設定します。必要に応じて調整してください */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-container {
+    margin-top: 32rem;
+}
+
+.movie-title {
+    font-size: 1.5em; /* デフォルトのフォントサイズ */
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+@media (max-width: 768px) {
+.movie-title {
+    font-size: 1.5em; /* 画面が小さい場合のフォントサイズ */
+}
+}
+
+.genre-item {
+	display: inline-block;
+	margin: 0 .1em .6em 0;
+	padding: .6em;
+	line-height: 1;
+	color: #fff;
+	text-decoration: none;
+	background-color: rgb(32, 28, 71);
+}
+
+.btn-logout {
+  background-color: #ff000090; /* ボタンの背景色を設定 */
+  color: #ffffffd5; /* ボタンの文字色を設定 */
+}
+
+.btn-logout:hover {
+  background-color: #cc0000; /* ホバー時の背景色を設定 */
+}
+
+.btn-edit {
+  background-color: #599a84;
+  color: #ffffffd5;
+}
+
+.btn-edit:hover {
+  background-color: #6cb79e;
+  color: #ffffffd5;
+}
+.search-title {
+  font-size: 25px;
+  margin-left: 10px;
+}
+
+.search-field{
+  margin-left: 10px;
+}
+
+
+.movie-list {
+  list-style: none; /* リストのマーカーを消す */
+  display: flex; /* 横並びにする */
+  flex-wrap: wrap; /* 折り返しを許可 */
+  gap: 20px; /* 要素間のスペースを設定 */
+  padding: 0; /* パディングをリセット */
+  margin-top: 30px;
+  margin-left: 15px;
+}
+
+/* 各映画アイテムのスタイル */
+.movie-item {
+  margin-bottom: 15px;
+  max-width: 180px;
+  box-sizing: border-box; /* パディングとボーダーを含めたサイズ計算 */
+  transition: transform 0.3s; /* ホバー時のアニメーション */
+}
+
+/* 画像のスタイル */
+.movie-item img {
+  width: 180px; /* 幅を親要素に合わせる */
+  height: 250px; /* 高さを自動調整 */
+  border-radius: 10px; /* 角を丸くする */
+}
+
+/* ホバー時の効果 */
+.movie-item:hover {
+  transform: scale(1.05); /* 少し拡大 */
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+
+
+ */
+
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  color:aliceblue
+}
+
+
+.center-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.center-form .field,
+.center-form .actions {
+  width: 100%;
+  max-width: 400px; /* フォームの最大幅を設定 */
+}
+
+.center-form .field label,
+.center-form .field input,
+.center-form .field em,
+.center-form .actions input {
+  color: white;
+}
+
+.center-form .field input,
+.center-form .actions input {
+  background-color: transparent;
+  border: 1px solid white;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.center-form .actions input {
+  cursor: pointer;
+}
+
+a:visited,
+a:hover,
+a:active {
+  color: white;
+}
+
+
+.navbar {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(9, 6, 43);
+}
+
+.navbar-brand img {
+  height: 40px;
+}
+
+.navbar-toggler {
+  display: none;
+  cursor: pointer;
+}
+
+.navbar-toggler-icon {
+  width: 30px;
+  height: 3px;
+  background-color: #333;
+  display: block;
+  margin: 5px 0;
+}
+
+.navbar-collapse {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.navbar-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.nav-item {
+  margin-left: 1rem;
+}
+
+.nav-link {
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .navbar-toggler {
+    display: block;
+  }
+
+  .navbar-collapse {
+    display: none;
+  }
+
+  .navbar-toggler[aria-expanded="true"] + .navbar-collapse {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-item {
+    margin: 0.5rem 0;
+  }
+}
+
+footer {
+  background-color: rgb(72,132,158);
+}
+
+a {
+  color: #ded9d9e8; /* ここでリンクの色を設定します */
+  text-decoration: none; /* 下線を取り除く場合 */
+}
+
+a:hover {
+  color: #ded9d9e8;
+}
+
+a:active {
+  color: #ded9d9e8;
+}
+
+a:focus {
+  color: #ded9d9e8;
+}
+
+.btn {
+  margin: 10px 10px;
+}

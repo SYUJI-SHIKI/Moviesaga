@@ -1,0 +1,39 @@
+.search-title {
+  font-size: 25px;
+  margin-left: 10px;
+}
+
+.search-field{
+  margin-left: 10px;
+}
+
+
+.movie-list {
+  list-style: none; /* リストのマーカーを消す */
+  display: flex; /* 横並びにする */
+  flex-wrap: wrap; /* 折り返しを許可 */
+  gap: 20px; /* 要素間のスペースを設定 */
+  padding: 0; /* パディングをリセット */
+  margin-top: 30px;
+  margin-left: 15px;
+}
+
+/* 各映画アイテムのスタイル */
+.movie-item {
+  margin-bottom: 15px;
+  max-width: 180px;
+  box-sizing: border-box; /* パディングとボーダーを含めたサイズ計算 */
+  transition: transform 0.3s; /* ホバー時のアニメーション */
+}
+
+/* 画像のスタイル */
+.movie-item img {
+  width: 180px; /* 幅を親要素に合わせる */
+  height: 250px; /* 高さを自動調整 */
+  border-radius: 10px; /* 角を丸くする */
+}
+
+/* ホバー時の効果 */
+.movie-item:hover {
+  transform: scale(1.05); /* 少し拡大 */
+}
