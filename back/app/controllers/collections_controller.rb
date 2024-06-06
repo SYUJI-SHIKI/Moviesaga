@@ -1,6 +1,6 @@
 class CollectionsController < ApplicationController
   def index
-    @collections = Collection.all
+    @collections = Collection.includes(:movies)
   end
 
   def new

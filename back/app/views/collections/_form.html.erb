@@ -1,43 +1,43 @@
-<%= form_with(model: @collection, local: true) do |form| %>
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :movies %>
-    <div class="movies-container">
-      <% @movies.each do |movie| %>
-        <div class="movie-item">
-          <%= image_tag("https://image.tmdb.org/t/p/w200#{movie['poster_path']}", alt: movie.original_title, class: 'movie-image') %>
-          <%= form.check_box :movie_ids, { multiple: true }, movie.id, nil %>
-          <%= movie.original_title %>
-        </div>
-      <% end %>
+<div class="collection-container">
+  <%= form_with(model: @collection, local: true) do |form| %>
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title %>
     </div>
-  </div>
 
-  <% if @add_movies.present? %>
+    <div class="field">
+      <%= form.label :description %>
+      <%= form.text_area :description %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit '作成する' %>
+    </div>
+
     <div class="field">
       <%= form.label :movies %>
-      <div class="movies-container">
-        <% @add_movies.each do |movie| %>
-          <div class="movie-item">
-            <%= image_tag("https://image.tmdb.org/t/p/w200#{movie['poster_path']}", alt: movie.original_title, class: 'movie-image') %>
+      <div class="collection-movies-container">
+        <% @movies.each do |movie| %>
+          <div class="collection-movie-item">
+            <%= image_tag("https://image.tmdb.org/t/p/w200#{movie['poster_path']}", alt: movie.original_title, class: 'collection-movie-image') %>
             <%= form.check_box :movie_ids, { multiple: true }, movie.id, nil %>
-            <%= movie.original_title %>
           </div>
         <% end %>
       </div>
     </div>
-  <% end %>
 
-  <div class="actions">
-    <%= form.submit '作成する' %>
-  </div>
-<% end %>
+    <% if @add_movies.present? %>
+      <div class="field">
+        <%= form.label :movies %>
+        <div class="collection-movies-container">
+          <% @add_movies.each do |movie| %>
+            <div class="collection-movie-item">
+              <%= image_tag("https://image.tmdb.org/t/p/w200#{movie['poster_path']}", alt: movie.original_title, class: 'collection-movie-image') %>
+              <%= form.check_box :movie_ids, { multiple: true }, movie.id, nil %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

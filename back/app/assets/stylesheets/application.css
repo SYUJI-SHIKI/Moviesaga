@@ -20,7 +20,8 @@ body, html {
   margin: 0;
   padding: 0;
   background-color: black;
-  color:aliceblue
+  color:aliceblue;
+  padding-bottom: 50px;
 }
 
 
@@ -112,25 +113,6 @@ a:active {
 
 .nav-link:hover {
   text-decoration: underline;
-}
-
-@media (max-width: 768px) {
-  .navbar-toggler {
-    display: block;
-  }
-
-  .navbar-collapse {
-    display: none;
-  }
-
-  .navbar-toggler[aria-expanded="true"] + .navbar-collapse {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .nav-item {
-    margin: 0.5rem 0;
-  }
 }
 
 footer {
