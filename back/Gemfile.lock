@@ -88,6 +88,9 @@ GEM
     bootstrap (5.3.3)
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 2.11.8, < 3)
+    bootstrap5-kaminari-views (0.0.1)
+      kaminari (>= 0.13)
+      rails (>= 3.1)
     builder (3.2.4)
     capybara (3.40.0)
       addressable
@@ -402,6 +405,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   bootstrap (~> 5.3.3)
+  bootstrap5-kaminari-views (~> 0.0.1)
   capybara
   carrierwave (~> 3.0, >= 3.0.7)
   coffee-rails
@@ -413,7 +417,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   jquery-rails
-  kaminari
+  kaminari (~> 1.2.1)
   letter_opener
   letter_opener_web
   mini_magick (~> 4.12)
