@@ -1,9 +1,22 @@
 <h1><%= link_to "特集作成", new_collection_path %></h1>
 <h1>特集一覧</h1>
-<% @collections.each do |collection| %>
-  <div>
-    <h2><%= link_to collection.title, collection_path(collection) %></h2>
-    <p><%= collection.description %></p>
-  </div>
-<% end %>
-
+<div class="collection-container">
+  <% @collections.each do |collection| %>
+    <div class="collection-item">
+      <h2><%= link_to collection.title, collection_path(collection) %></h2>
+      <p><%= collection.description %></p>
+      
+      <% if collection.movies.any? %>
+        <div class="movies-images">
+          <% collection.movies.each do |movie| %>
+            <% if movie.poster_path %>
+              <%= image_tag("https://image.tmdb.org/t/p/w400#{movie.poster_path}", alt: movie.original_title, class: 'img-thumbnail') %>
+            <% end %>
+          <% end %>
+        </div>
+      <% else %>
+        <p>No movies in this collection.</p>
+      <% end %>
+    </div>
+  <% end %>
+</div>

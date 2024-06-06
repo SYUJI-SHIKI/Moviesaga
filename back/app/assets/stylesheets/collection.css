@@ -1,0 +1,44 @@
+.collection-container {
+  overflow-y: auto;
+  padding-bottom: 50px;
+}
+
+.collection-movie-item {
+  position: relative;
+  display: inline-block;
+  margin: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.collection-movie-item:hover {
+  transform: scale(1.05);
+}
+
+.collection-movies-container {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.collection-movie-image {
+  border-radius: 5px;
+  width: 150px;
+  height: 220px;
+}
+
+.collection-movie-item.checked .collection-movie-image {
+  filter: brightness(0.8);
+}
+
+.collection-movie-item input[type="checkbox"] {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  transform: scale(1.5);
+}
+
+.movie-items {
+  height: 200px;
+}
