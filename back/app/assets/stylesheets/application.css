@@ -57,13 +57,6 @@ body, html {
   cursor: pointer;
 }
 
-a:visited,
-a:hover,
-a:active {
-  color: white;
-}
-
-
 .navbar {
   margin: 0;
   padding: 0;
@@ -119,20 +112,20 @@ footer {
   background-color: rgb(72,132,158);
 }
 
-a {
+.navbar a {
   color: #ded9d9e8; /* ここでリンクの色を設定します */
   text-decoration: none; /* 下線を取り除く場合 */
 }
 
-a:hover {
+.navbar a:hover {
   color: #ded9d9e8;
 }
 
-a:active {
+.navbar a:active {
   color: #ded9d9e8;
 }
 
-a:focus {
+.navbar a:focus {
   color: #ded9d9e8;
 }
 

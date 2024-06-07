@@ -1,0 +1,17 @@
+<div class="collection-container">
+  <% collections.each do |collection| %>
+    <div class="collection-item">
+      <div class="collection-content">
+        <h2><%= link_to collection.title, collection_path(collection) %></h2>
+        <p><%= collection.description %></p>
+      </div>
+      <div class="collection-movies-container">
+        <% collection.movies.each do |movie| %>
+          <% if movie.poster_path %>
+            <%= image_tag("https://image.tmdb.org/t/p/w400#{movie.poster_path}", alt: movie.original_title, class: 'collection-movie-image') %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,18 +1,29 @@
-<div>
-  <h1><%= @collection.title %></h1>
-  <p><%= @collection.description %></p>
+<div class="show-collection-container">
+  <div class="title-and-bookmark">
+    <h1><%= @collection.title %></h1>
+    <%= render 'bookmarks/bookmark_button', collection: @collection %>
+  </div>
   <% if current_user.own?(@collection) %>
     <%= link_to "編集", edit_collection_path(@collection) %>
     <%= link_to "削除", collection_path(@collection),
     data: { turbo_method: :delete, turbo_confirm: "消しますか？" } %>
   <% end %>
-  <%= render 'bookmarks/bookmark_button', collection: @collection %>
-  <div class="movies-container">
-    <div class="collection-movies-container">
-    <% @movies.each do |movie| %>
-      <%= link_to movie_path(movie.tmdb_id), class: "collection-movie-item" do %>
-        <%= image_tag("https://image.tmdb.org/t/p/w200#{movie['poster_path']}", alt: movie.original_title, class: 'collection-movie-image') %>
-      <% end %>
-    <% end %>
+  
+  <div class="show-main-content">
+    <div class="video-player" id="video-player">
+      <iframe id="youtube-iframe" width="560" height="315" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="show-movies-container">
+      <div class="show-collection-movies-container">
+        <% @movies.each do |movie| %>
+          <div class="show-collection-movie-item">
+            <%= link_to movie_path(movie.tmdb_id) do %>
+              <%= image_tag("https://image.tmdb.org/t/p/w200#{movie['poster_path']}", alt: movie.original_title, class: 'show-collection-movie-image', data: { youtube_id: movie.youtube_trailer_id }) %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <p><%= @collection.description %></p>
   </div>
 </div>

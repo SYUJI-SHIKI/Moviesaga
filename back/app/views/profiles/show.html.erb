@@ -8,20 +8,13 @@
         <div><%= "#{current_user.name}" %></div>
       </div>
       <%= link_to '自分の特集一覧', my_lists_collections_path %>
+      <%= link_to 'ブックマーク一覧', bookmark_collections_path %>
       <h3>お気に入り一覧</h3>
       <div class="collection-movies-container">
         <% @movies.each do |movie| %>
           <%= link_to movie_path(movie.tmdb_id), class: "collection-movie-item" do %>
             <%= image_tag("https://image.tmdb.org/t/p/w200#{movie['poster_path']}", alt: movie.original_title, class: 'collection-movie-image') %>
           <% end %>
-        <% end %>
-      </div>
-      <h3>ブックマーク一覧</h3>
-      <div class="movies-index">
-        <% @collections.each do |collection| %>
-          <div class="movie-item">
-            <h3><%= collection.title %></h3>
-          </div>
         <% end %>
       </div>
     </div>

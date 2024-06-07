@@ -2,7 +2,8 @@
   <div class="search-title">映画検索</div>
   <div class="search-field">
     <%= form_with url: search_path, method: :get, local: true do %>
-      <%= text_field_tag :query, params[:query], placeholder: "タイトル名", style: "width: 300px;" %>
+      <%= text_field_tag :query, params[:query], style: "width: 300px;" %>
+      <%= select_tag :category, options_for_select([["タイトル名","movie"], ["人物","person"]], selected: params[:category]) %>
       <%= submit_tag "検索" %>
     <% end %>
   </div>
