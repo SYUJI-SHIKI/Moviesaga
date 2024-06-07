@@ -44,11 +44,8 @@ text-align: center;
 
 .runtime-container {
     text-align: left;
-}
-
-.runtime-container p {
-    margin: 0;
     font-size: 20px;
+    margin: 7px;
     color: #e9e4e4;
 }
 
@@ -67,6 +64,7 @@ text-align: center;
 
 .info-container {
     margin-top: 25rem;
+    margin-left: 3rem;
 }
 
 .movie-title {
@@ -93,7 +91,7 @@ text-align: center;
 
 .show-movie-image{
     padding: .25rem;
-    background-color: #fff;
+    background-color: #d3d6d9;
     border: 1px solid #dee2e6;
     border-radius: .25rem;
     max-width: 80%;

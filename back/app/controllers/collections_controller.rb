@@ -1,6 +1,6 @@
 class CollectionsController < ApplicationController
   def index
-    @collections = Collection.includes(:movies)
+    @collections = Collection.includes(:movies).order(created_at: :desc)
   end
 
   def new
@@ -48,11 +48,11 @@ class CollectionsController < ApplicationController
   end
 
   def my_lists
-    @collections = current_user.collections
+    @collections = current_user.collections.order(created_at: :desc)
   end
 
   def bookmark
-    @collections = current_user.bookmarks.includes(:collection).map(&:collection)
+    @collections = current_user.bookmarks.includes(:collection).map(&:collection).order(created_at: :desc)
   end
 
   private

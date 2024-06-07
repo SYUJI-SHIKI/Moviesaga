@@ -1,3 +1,15 @@
+.profile-container {
+  margin: 30px;
+}
+
+.profile-leftside {
+  margin-top: 10px;
+}
+
+.favorites-section {
+  margin-top: 5rem;
+  font-size: 20px;
+}
 
 .btn-logout {
   background-color: #ff000090; /* ボタンの背景色を設定 */
@@ -16,4 +28,24 @@
 .btn-edit:hover {
   background-color: #6cb79e;
   color: #ffffffd5;
+}
+
+.movie-profile-container {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.new-collection-movie-item {
+  flex: 0 0 auto;
+  margin-right: 10px; /* 各画像間のスペースを確保 */
+}
+
+.link-container {
+  margin-top: 2rem; /* 上部に2remのマージンを追加 */
+  text-align: center; /* リンクを中央寄せ */
+}
+
+.link-container div {
+  margin-bottom: 1rem; /* 各リンクの下に1remのマージンを追加 */
 }
