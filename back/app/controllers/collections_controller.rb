@@ -51,6 +51,10 @@ class CollectionsController < ApplicationController
     @collections = current_user.collections
   end
 
+  def bookmark
+    @collections = current_user.bookmarks.includes(:collection).map(&:collection)
+  end
+
   private
 
   def collection_params

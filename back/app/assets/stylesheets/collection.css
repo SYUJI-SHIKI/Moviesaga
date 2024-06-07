@@ -1,6 +1,7 @@
 .collection-container {
-  overflow-y: auto;
-  padding-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .collection-movie-item {
@@ -20,12 +21,15 @@
   display: flex;
   overflow-x: auto;
   white-space: nowrap;
+  width: 40%;
+  gap: 10px;
 }
 
 .collection-movie-image {
-  border-radius: 5px;
-  width: 150px;
-  height: 220px;
+  max-width: 100px;
+  height: auto;
+  flex: 0 0 auto;
+  border-radius: 15px;
 }
 
 .collection-movie-item.checked .collection-movie-image {
@@ -41,4 +45,89 @@
 
 .movie-items {
   height: 200px;
+}
+
+.collection-item {
+  display: flex;
+  align-items: center;
+  border: 1px solid #fff;
+  padding: 20px;
+  background-color: #f8f9fa; 
+  margin: 5px 20px;
+  border-radius: 15px;
+}
+
+.collection-content {
+  flex: 1;
+  overflow-x: auto;
+  padding-right: 20px;
+  width: 50%;
+  color: black;
+  text-align: left; /* 左詰めにするためのスタイル */
+}
+
+.collection-content h2 {
+  margin: 0; /* 上下の余白を調整する */
+  padding: 0;
+}
+
+.collection-content p {
+  margin: 0;
+  padding-top: 10px; /* タイトルと説明文の間に適度な余白を追加 */
+  text-align: left; /* 左詰めにするためのスタイル */
+}
+
+.collection-content a {
+  color: black; /* リンクの色を黒に設定 */
+  text-decoration: none; /* リンクの下線を消す（必要に応じて） */
+}
+
+.show-collection-container {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 15px;
+  color: black;
+  text-align: center;
+}
+
+.title-and-bookmark {
+  display: flex;
+  align-items: center;
+}
+
+.title-and-bookmark h1 {
+  margin-right: 20px;
+}
+
+.show-movies-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 10px 0;
+  margin-top: 20px;
+}
+
+.show-collection-movies-container {
+  display: flex;
+}
+
+.show-collection-movie-item {
+  flex: 0 0 auto;
+  margin-right: 10px;
+  scroll-snap-align: start;
+}
+
+.show-collection-movie-image {
+  max-width: 100px;
+  height: auto;
+}
+
+.show-collection-movie-image:hover {
+  transform: scale(1.1);
+}
+
+.video-player {
+  flex: 0 0 60%;
+  justify-content: center;
+  margin-bottom: 20px;
 }

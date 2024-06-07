@@ -1,8 +1,2 @@
 <h1>自分の特集一覧</h1>
-
-<% @collections.each do |collection| %>
-  <div class="collection-item">
-    <h2><%= link_to collection.title, collection_path(collection) %></h2>
-    <p><%= collection.description %></p>
-  </div>
-<% end %>
+<%= render "collections", collections: @collections %>

@@ -2,7 +2,7 @@
   <div class="poster-side">
     <% if @movie.poster_path %>
       <div class="poster-container flex-column">
-        <%= image_tag 'https://image.tmdb.org/t/p/w400' + @movie.poster_path, class: "img-thumbnail float-left" %>
+        <%= image_tag 'https://image.tmdb.org/t/p/w400' + @movie.poster_path, class: "show-movie-image float-left" %>
       </div>
     <% end %>
 

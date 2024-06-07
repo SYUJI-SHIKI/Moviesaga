@@ -5,7 +5,8 @@ class Collection < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
   has_many :bookmarked_users, through: :bookmarks, source: :user
 
-  validates :title, presence: true, uniqueness: true
+  validates :title, presence: true, uniqueness: true, length: { maximum: 15 }
+  validates :description, length: { maximum: 130 }
   validate :must_one_movie
 
   private
