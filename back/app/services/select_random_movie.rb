@@ -26,6 +26,17 @@ class SelectRandomMovie
     movies = []
     max_pages = 50
 
+    # if language == "ja"
+    #   loop do
+    #     response = HTTParty.get("#{BASE_URL}/discover/movie", query: {
+    #       api_key: API_KEY,
+    #       include_adult: false,
+    #       sort_by: popularity.desc,
+    #       language: 'ja',
+    #       with_original_language: 'ja'
+    #       page: page,
+    #     })
+
     loop do
       response = HTTParty.get("#{BASE_URL}/movie/popular", query: {
         api_key: API_KEY,
@@ -52,7 +63,7 @@ class SelectRandomMovie
     if language == "ja"
       movies = movies.select! { |movie| movie[:original_language] == "ja" }
       Rails.logger.debug("時間かかってるねぇそうだよね#{movies}")
-    else
+    elsif language == "foreign"
       movies = movies.reject! { |movie| movie[:original_language] == "ja" }
     end
 

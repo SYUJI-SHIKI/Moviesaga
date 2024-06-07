@@ -1,7 +1,7 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 //= require rails-ujs
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("turbo:load", () => {
   document.querySelectorAll('.collection-movie-item').forEach(item => {
     item.addEventListener('click', () => {
       const checkbox = item.querySelector('input[type="checkbox"]');
@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('turbo:load', function () {
   const movieItems = document.querySelectorAll('.show-collection-movie-item');
 
   movieItems.forEach(item => {

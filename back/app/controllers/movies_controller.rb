@@ -30,13 +30,12 @@ class MoviesController < ApplicationController
     if @movie_data.present?
       @video_id = fetch_youtube_video(@movie_data["original_title"])
       @keywords = get_keywords(@movie_data["id"])
+
+      @movie = MovieSaverService.save_movie(@movie_data, @video_id, @keywords)
     else
       flash[:notice] = "見つかりませんでした"
       redirect_to movies_path and return
     end
-
-    @movie = MovieSaverService.save_movie(@movie_data, @video_id, @keywords)
-    Rails.logger.debug("ここを見てくれ！#{@movie}")
   end
 
   private
