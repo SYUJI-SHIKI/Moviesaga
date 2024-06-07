@@ -21,7 +21,7 @@ body, html {
   padding: 0;
   background-color: black;
   color:aliceblue;
-  padding-bottom: 50px;
+  padding-bottom: 60px;
 }
 
 
@@ -57,6 +57,19 @@ body, html {
   cursor: pointer;
 }
 
+.form-control{
+  align-items: center;
+  width: 50%; /* 必要に応じて幅を調整 */
+  margin: 0 auto;
+}
+
+.text-field {
+  margin-top: 20px;
+}
+
+.actions {
+    text-align: center;
+}
 .navbar {
   margin: 0;
   padding: 0;
@@ -67,7 +80,7 @@ body, html {
 }
 
 .navbar-brand img {
-  height: 40px;
+  height: 60px;
 }
 
 .navbar-toggler {
@@ -112,23 +125,27 @@ footer {
   background-color: rgb(72,132,158);
 }
 
-.navbar a {
+.navbar .footer, a {
   color: #ded9d9e8; /* ここでリンクの色を設定します */
   text-decoration: none; /* 下線を取り除く場合 */
 }
 
-.navbar a:hover {
+.navbar .footer, a:hover {
   color: #ded9d9e8;
 }
 
-.navbar a:active {
+.navbar .footer, a:active {
   color: #ded9d9e8;
 }
 
-.navbar a:focus {
+.navbar .footer, a:focus {
   color: #ded9d9e8;
 }
 
 .btn {
   margin: 10px 10px;
+}
+
+.favorite-button{
+  color: red
 }

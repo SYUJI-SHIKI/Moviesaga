@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const iframe = document.getElementById('youtube-iframe');
 
     item.addEventListener('mouseover', () => {
-      iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1`;
+      iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1&rel=0`;
     });
 
   });

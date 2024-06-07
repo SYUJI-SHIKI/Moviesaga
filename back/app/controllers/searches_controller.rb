@@ -16,7 +16,7 @@ class SearchesController < ApplicationController
         end
       end
       @movies = Kaminari.paginate_array(movie_ids).page(params[:page]).per(20)
-      Rails.logger.debug("Movies: #{@movies.inspect}")
+      Rails.logger.debug("Movies: #{movie_ids}")
     else
       @movies = Kaminari.paginate_array([]).page(params[:page]).per(20)  # 空の配列にもページネーションを追加
     end

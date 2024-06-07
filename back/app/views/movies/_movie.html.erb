@@ -9,15 +9,9 @@
     <div class="info-container">
       <div class="runtime-container">
         <% if @movie.nil_or_zero?(@movie.runtime) %>
-          <p>上映時間: 不明</p>
+          上映時間: 不明
         <% else %>
-          <p>上映時間: <%= @movie.runtime %> 分</p>
-        <% end %>
-            
-        <% if user_signed_in? %>
-          <div class="ms-3">
-            <%= render 'favorites/favorite_button', movie: @movie %>
-          </div>
+          上映時間: <%= @movie.runtime %> 分
         <% end %>
       </div>
 
@@ -42,7 +36,12 @@
       <% end %>
     </div>
     <div class="mb-3 d-flex align-items-center">
-      <div class="movie-title me-3"><%= @movie.original_title %></div>
+      <div class="movie-title me-3">
+        <%= @movie.original_title %>
+        <% if user_signed_in? %>
+            <%= render 'favorites/favorite_button', movie: @movie %>
+        <% end %>
+      </div>
     </div>
 
     <div class="mb-3 overview-container">
