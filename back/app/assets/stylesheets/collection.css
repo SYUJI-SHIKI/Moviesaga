@@ -92,6 +92,7 @@
 .title-and-bookmark {
   display: flex;
   align-items: center;
+  font-size: 30px
 }
 
 .title-and-bookmark h1 {

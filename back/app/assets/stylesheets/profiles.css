@@ -11,12 +11,12 @@
   font-size: 20px;
 }
 
-.btn-logout {
+.btn-delete {
   background-color: #ff000090; /* ボタンの背景色を設定 */
   color: #ffffffd5; /* ボタンの文字色を設定 */
 }
 
-.btn-logout:hover {
+.btn-delete:hover {
   background-color: #cc0000; /* ホバー時の背景色を設定 */
 }
 
