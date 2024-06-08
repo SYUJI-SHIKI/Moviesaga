@@ -5,100 +5,79 @@ class SelectRandomMovie
   BASE_URL = "https://api.themoviedb.org/3"
   API_KEY = Rails.application.credentials.api_key[:tmdb]
 
-  def self.select_random_movie(language, selected_runtime)
-    movie_ids = language_filter(language, selected_runtime)
+  def self.select_random_movie(language, selected_runtime, keyword, genre)
+    movie_ids = language_filter(language, selected_runtime, keyword, genre)
     return nil if movie_ids.empty? || movie_ids.nil?
-    movie_data = runtime_filter(movie_ids, selected_runtime)
-    return nil if movie_data.empty? || movie_data.nil?
 
-    # 日本版あらすじがないと空の文字列が来ることがあるのでこの仕組みが必要
-    if movie_data["overview"].nil? || movie_data["overview"].empty?
-      movie_id = movie_data["id"]
-      movie_data = fetch_movie_data(movie_id, "en")
-      translated_overview = translate_text(movie_data["overview"], "ja")
-      movie_data["overview"] = "#{translated_overview}(＊英文を翻訳した内容なので表現に誤りがある場合があります)"
-    end
-    movie_data
+    movie_id = movie_ids.sample
+
+    movie_id
   end
 
-  def self.language_filter(language, selected_runtime)
+  def self.language_filter(language, selected_runtime, keyword, genre)
     page = 1
     movies = []
-    max_pages = 50
+    max_pages = 30
 
-    # if language == "ja"
-    #   loop do
-    #     response = HTTParty.get("#{BASE_URL}/discover/movie", query: {
-    #       api_key: API_KEY,
-    #       include_adult: false,
-    #       sort_by: popularity.desc,
-    #       language: 'ja',
-    #       with_original_language: 'ja'
-    #       page: page,
-    #     })
+    query_params = {
+      api_key: API_KEY,
+      include_adult: false,
+      language: 'ja',
+      sort_by: "popularity.desc",
+    }
+    if language == "ja"
+      query_params[:'with_original_language'] = 'ja'
+    end
+    Rails.logger.debug("Language: #{language}, Selected Runtime: #{selected_runtime}, Keyword: #{keyword}")
 
-    loop do
-      response = HTTParty.get("#{BASE_URL}/movie/popular", query: {
-        api_key: API_KEY,
-        language: 'ja',
-        page: page,
-      })
-
-      if response.success?
-        new_movies = response.parsed_response['results'].map do |movie|
-          {
-            id: movie['id'],
-            original_language: movie['original_language'],
-          }
-        end
-        movies.concat(new_movies)
-        page += 1
-        Rails.logger.debug("時間かかってるねぇ#{movies}")
-        break if page > max_pages
-      else
-        break
-      end
+    case selected_runtime
+    when "under_110" then query_params[:'with_runtime.lte'] = 110
+    when "over_111" then query_params[:'with_runtime.gte'] = 111
+    else true
     end
 
-    if language == "ja"
-      movies = movies.select! { |movie| movie[:original_language] == "ja" }
-      Rails.logger.debug("時間かかってるねぇそうだよね#{movies}")
-    elsif language == "foreign"
+    case keyword
+    when "true_story" then query_params[:'with_keywords'] = 9672
+    when "animation" then query_params[:'with_keywords'] = 210024
+    else true
+    end
+
+    case genre
+    when "action" then query_params[:'with_genres'] = 28
+    when "comedy" then query_params[:'with_genres'] = 35
+    when "mystery" then query_params[:'with_genres'] = 9648
+    when "horror" then query_params[:'with_genres'] = 27
+    when "romance" then query_params[:'with_genres'] = 10749
+    else true
+    end
+
+      loop do
+        query_params[:page] = page
+        response = HTTParty.get("#{BASE_URL}/discover/movie", query: query_params)
+
+        if response.success? 
+          total_pages = response.parsed_response['total_pages']
+          if language == "foreign"
+            new_movies = response.parsed_response['results'].map do |movie|
+              { id: movie['id'], original_language: movie['original_language'], }
+            end
+          else 
+            new_movies = response.parsed_response['results'].map do |movie|
+              { id: movie['id'] }
+            end
+          end
+          movies.concat(new_movies)
+          page += 1
+          Rails.logger.debug("邦画はどうよ#{movies}")
+          break if page > max_pages || page > total_pages
+        else
+          break
+        end
+      end
+
+    if language == "foreign"
       movies = movies.reject! { |movie| movie[:original_language] == "ja" }
     end
-
     movies.map { |movie| movie[:id] }
-  end
-
-
-  # 時間指定がある場合、先ほどのレスポンスではruntimeが含まれないので必要
-  def self.runtime_filter(movie_ids, selected_runtime)
-    loop do
-      Rails.logger.debug("はなしきこか#{movie_ids}")
-      movie_id = movie_ids.sample
-      movie_data = fetch_movie_data(movie_id, "ja")
-      Rails.logger.debug("はなしきこか２#{movie_id}")
-      if movie_data && match_runtime?(movie_data['runtime'], selected_runtime) == true        
-        return movie_data
-      else
-        movie_ids.delete(movie_id)
-        break if movie_ids.empty?
-      end
-    end
-    movie_data
-  end
-
-  def self.match_runtime?(runtime, selected_runtime)
-    Rails.logger.debug("ここに注目！！#{selected_runtime}")
-    Rails.logger.debug("ここに注目！！#{runtime} (データ型: #{runtime.class})")
-    case selected_runtime
-    when "under_110"
-      return runtime && runtime <= 110
-      Rails.logger.debug("ここに注目#{runtime && runtime <= 110}")
-    when "over_111"
-      return runtime && runtime >= 111
-    else
-      true
-    end
   end
 end

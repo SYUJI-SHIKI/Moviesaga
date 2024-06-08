@@ -76,7 +76,6 @@ gem 'sass-rails'
 gem 'uglifier'
 gem 'coffee-rails'
 gem 'jquery-rails'
-gem 'turbolinks'
 gem 'bootstrap', '~> 5.3.3'
 #認証
 gem 'devise'
@@ -92,5 +91,3 @@ gem 'mini_magick', '~> 4.12'
 #ページネーション
 gem 'kaminari','~> 1.2.1'
 gem 'bootstrap5-kaminari-views', '~> 0.0.1'
-#キャッシュ#
-gem 'redis'

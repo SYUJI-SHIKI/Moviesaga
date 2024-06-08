@@ -11,21 +11,13 @@ class NowPlayingMovie
     movie_data = runtime_filter(movie_ids, selected_runtime)
     return nil if movie_data.empty? || movie_data.nil?
 
-    # 日本版あらすじがないと空の文字列が来ることがあるのでこの仕組みが必要
-    if movie_data["overview"].nil? || movie_data["overview"].empty?
-      movie_id = movie_data["id"]
-      movie_data = fetch_movie_data(movie_id, "en")
-      translated_overview = translate_text(movie_data["overview"], "ja")
-      movie_data["overview"] = "#{translated_overview}(＊英文を翻訳した内容なので表現に誤りがある場合があります)"
-    end
-    movie_data
+    movie_data["id"]
   end
 
   def self.language_filter(language, selected_runtime)
     # Rails.cache.fetch("language_filters_#{language}", expires_in: 1.day) do
       page = 1
       movies = []
-      max_pages = 4
 
       loop do
         response = HTTParty.get("#{BASE_URL}/movie/now_playing", query: {
@@ -36,6 +28,7 @@ class NowPlayingMovie
         })
 
         if response.success?
+          total_pages = response.parsed_response['total_pages']
           new_movies = response.parsed_response['results'].map do |movie|
             {
               id: movie['id'],
@@ -45,7 +38,7 @@ class NowPlayingMovie
           movies.concat(new_movies)
           page += 1
           Rails.logger.debug("時間かかってるねぇ#{movies}")
-          break if page > max_pages
+          break if page > total_pages
         else
           break
         end
