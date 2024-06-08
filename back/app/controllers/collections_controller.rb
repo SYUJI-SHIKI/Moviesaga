@@ -48,11 +48,11 @@ class CollectionsController < ApplicationController
   end
 
   def my_lists
-    @collections = current_user.collections.order(created_at: :desc)
+    @collections = current_user.collections.includes(:user).order(created_at: :desc)
   end
 
   def bookmark
-    @collections = current_user.bookmarks.includes(:collection).map(&:collection).order(created_at: :desc)
+    @collections = current_user.bookmark_collections.includes(:user).order(created_at: :desc)
   end
 
   private

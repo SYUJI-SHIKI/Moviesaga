@@ -17,24 +17,24 @@ class MoviesController < ApplicationController
   def random
     language = params[:language]
     selected_runtime = params[:selected_runtime]
+    keyword = params[:keyword]
+    genre = params[:genre]
 
-    if params[:now_playing].present?
+    if keyword == "now_playing"
       @movie_data = NowPlayingMovie.random_playing_movie(language: language,selected_runtime: selected_runtime)
-    elsif params[:language].present? || params[:selected_runtime].present?
-      Rails.logger.debug("ここを見てくれ！！！！！！#{selected_runtime}")
-      @movie_data = SelectRandomMovie.select_random_movie(language, selected_runtime)
-    else
+    elsif params.empty? || params.nil?
       @movie_data = MovieRandom.get_random_movie
+    else
+      Rails.logger.debug("ここを見てくれ！！！！！！#{selected_runtime}")
+      @movie_data = SelectRandomMovie.select_random_movie(language, selected_runtime, keyword, genre)
     end
 
+    Rails.logger.debug("ここを見てくれ！！！！！！#{@movie_data}")
     if @movie_data.present?
-      @video_id = fetch_youtube_video(@movie_data["original_title"])
-      @keywords = get_keywords(@movie_data["id"])
-
-      @movie = MovieSaverService.save_movie(@movie_data, @video_id, @keywords)
+      redirect_to movie_path(@movie_data)
     else
-      flash[:notice] = "見つかりませんでした"
-      redirect_to movies_path and return
+      flash.now[:alert] = '条件に合う映画が見つかりませんでした。'
+      redirect_to movies_path
     end
   end
 

@@ -98,3 +98,38 @@ text-align: center;
     height: auto;
     margin: 5px 15px;
 }
+
+.movies-container {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    height: 40%;
+    margin: auto;
+}
+
+.form-group {
+    width: 45%;
+    height: 55%;
+    margin: 20px 10px 3px 10px;
+    display: inline-block;
+    vertical-align: top;
+    background-color: #d3d6d9;
+    border: 1px solid #dee2e6;
+    border-radius: .25rem;
+    color: rgb(62, 59, 59);
+}
+
+.form-group input {
+    margin-left: 20px;
+}
+
+.form-group label {
+    text-align: center;
+    display: inline;
+}
+.submit-container {
+    text-align: center;
+    margin-top: 90px;
+    margin-right: 25px;
+    justify-content: center;
+}

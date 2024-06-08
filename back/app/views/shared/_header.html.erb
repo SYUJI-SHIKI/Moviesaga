@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto main-nav align-items-center">
         <li class="nav-item">
-          <%= link_to "ランダム", movies_path %>
+          <%= link_to "ランダム", movies_path, data: {"turbolinks" => false} %>
           <%= link_to "検索", search_path %>
           <%= link_to "マイページ", profile_path %>
           <%= link_to "特集", collections_path %>
