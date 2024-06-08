@@ -1,9 +1,26 @@
-<!DOCTYPE html>
 <html>
   <div class='top-wrapper center-form'>
     <div class='top-inner-text'>
-      <h1>MovieSaga</h1>
-      <%= link_to "ランダムで選ぶ", movies_path %>
+      <div>MovieSaga</div>
     </div>
+    <%= image_tag "top.png", size: "400x200", class: "top-image" %>
+    <div class="container">
+      <div class="rounded-box">機能の説明</div>
+      <div class="image-container">
+        <%= image_tag "top_info_1.png", class: "side-image", size: "400x200" %>
+        <%= image_tag "top_info_2.png", class: "side-image", size: "400x200" %>
+      </div>
+    </div>
+    <% if user_signed_in? %>
+      <div class="top-button">
+        <%= link_to "特集", collections_path, class: "rounded-box", id: "collection-button" %>
+        <%= link_to "ランダム", movies_path, class: "rounded-box", id: "random-button" %>
+        <%= link_to "検索", search_path, class: "rounded-box", id: "search-button" %>
+      </div>
+    <% else %>
+      <div class="top-button">
+        <%= link_to "ランダム機能を試してみる", movies_path, class: "rounded-box", id: "before-login-button" %>
+      </div>
+    <% end %>
   </div>
 </html>
