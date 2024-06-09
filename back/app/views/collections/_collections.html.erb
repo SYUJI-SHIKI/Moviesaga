@@ -2,6 +2,7 @@
   <% collections.each do |collection| %>
     <div class="collection-item">
       <div class="collection-content">
+        <%= image_tag collection.user.avatar.url, alt: "sample.png", class: "avatar-image" %>
         <h2><%= link_to collection.title, collection_path(collection) %></h2>
         <p><%= collection.description %></p>
       </div>
