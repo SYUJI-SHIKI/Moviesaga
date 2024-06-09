@@ -15,7 +15,7 @@ class Movie < ApplicationRecord
       tmdb_id: movie_data[:id],
       original_title: movie_data[:original_title],
       overview: movie_data[:overview],
-      poster_path: movie_data[:poster_path],
+      poster_path: "https://image.tmdb.org/t/p/original#{movie_data[:poster_path]}",
       runtime: movie_data[:runtime],
       original_language: movie_data[:original_language],
       status: movie_data[:status],
