@@ -57,7 +57,7 @@ text-align: center;
 }
 
 .movie-item {
-    flex: 1 0 200px; /* アイテムの幅を200pxに設定します。必要に応じて調整してください */
+    flex: 1 0 200px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -65,19 +65,13 @@ text-align: center;
 
 .info-container {
     margin-top: 25rem;
-    margin-left: 3rem;
+    margin-left: 10rem;
 }
 
 .movie-title {
-    font-size: 1.5em; /* デフォルトのフォントサイズ */
+    font-size: 1.5em;
     text-overflow: ellipsis;
     max-width: 100%;
-}
-
-@media (max-width: 768px) {
-.movie-title {
-    font-size: 1.5em; /* 画面が小さい場合のフォントサイズ */
-}
 }
 
 .genre-item {
