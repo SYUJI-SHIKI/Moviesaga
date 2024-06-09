@@ -1,5 +1,5 @@
 <%= link_to bookmark_path(current_user.bookmarks.find { |b| b.user_id == current_user.id }),
   id: "unbookmark-button-for-collection-#{collection.id}",
   data: { turbo_method: :delete } do %>
-  <i class="fa-solid fa-star" style="color: yellow"></i>
+  <i class="fa-solid fa-star" style="color: yellow">ブックマークを登録する</i>
 <% end %>

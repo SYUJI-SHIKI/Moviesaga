@@ -92,11 +92,12 @@
 .title-and-bookmark {
   display: flex;
   align-items: center;
-  font-size: 30px
+  font-size: 20px
 }
 
-.title-and-bookmark h1 {
-  margin-right: 20px;
+.title-and-bookmark label {
+  margin: 0 20px;
+  font-size: 30px
 }
 
 .show-movies-container {

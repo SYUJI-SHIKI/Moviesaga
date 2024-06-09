@@ -1,5 +1,6 @@
 <div class="new-collection-container">
   <%= form_with(model: @collection, local: true) do |form| %>
+    <%= render 'shared/error_messages', object: form.object %>
     <div class="text-field">
       <%= form.text_field :title, placeholder: "タイトル名:15文字以内", class: "form-control mb-3" %>
     </div>
@@ -26,7 +27,7 @@
 
     <% if @add_movies.present? %>
       <div class="field">
-        <%= form.label :movies %>
+        <%= form.label :add_movies %>
         <div class="collection-movies-container">
           <% @add_movies.each do |movie| %>
             <div class="collection-movie-item">

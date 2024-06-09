@@ -1,4 +1,4 @@
-<h2 class="center-form">ログイン</h2>
+<h2 class="center-form"><%= t("user_sessions.new.title") %></h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "center-form" }) do |f| %>
   <div class="field">
@@ -19,7 +19,7 @@
   <% end %>
 
   <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= f.submit t("user_sessions.new.login") %>
   </div>
 <% end %>
 

@@ -33,8 +33,8 @@ class MoviesController < ApplicationController
     if @movie_data.present?
       redirect_to movie_path(@movie_data)
     else
-      flash.now[:alert] = '条件に合う映画が見つかりませんでした。'
-      redirect_to movies_path
+      flash.now[:danger] = '条件に合う映画が見つかりませんでした。'
+      render :index, status: :unprocessable_entity
     end
   end
 

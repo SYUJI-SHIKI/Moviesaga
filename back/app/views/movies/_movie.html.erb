@@ -13,6 +13,11 @@
         <% else %>
           上映時間: <%= @movie.runtime %> 分
         <% end %>
+        <div class="favorite-button">
+          <% if user_signed_in? %>
+            <%= render 'favorites/favorite_button', movie: @movie %>
+          <% end %>
+        </div>
       </div>
 
       <div class="ganres-container">
@@ -38,9 +43,6 @@
     <div class="mb-3 d-flex align-items-center">
       <div class="movie-title me-3">
         <%= @movie.original_title %>
-        <% if user_signed_in? %>
-            <%= render 'favorites/favorite_button', movie: @movie %>
-        <% end %>
       </div>
     </div>
 

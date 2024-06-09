@@ -1,4 +1,4 @@
-<h2 class="center-form">パスワードをお忘れですか？</h2>
+<div class="center-form form-title"><%= t("user_sessions.new.password_forget") %></div>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "center-form" }) do |f| %>
   <%= render "users/shared/error_messages", resource: resource %>
@@ -9,7 +9,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
+    <%= f.submit t("user_sessions.new.submit") %>
   </div>
 <% end %>
 
