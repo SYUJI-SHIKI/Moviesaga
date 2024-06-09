@@ -11,10 +11,10 @@ class CollectionsController < ApplicationController
   def create
     @collection = current_user.collections.build(collection_params)
     if @collection.save
-      redirect_to collections_path, notice: '特集記事が作成されました。'
+      redirect_to collections_path, success: t('defaults.flash_message.created', item: Collection.model_name.human)
     else
       @movies = current_user.favorite_movies
-      flash.now[:alert] = '映画は1本以上選択してください'
+      flash.now[:danger] = t('defaults.flash_message.not_created', item: Collection.model_name.human)
       render :new, status: :unprocessable_entity
     end
   end
@@ -36,7 +36,7 @@ class CollectionsController < ApplicationController
     if @collection.update(collection_params)
       redirect_to collection_path(@collection), notice: '特集記事を更新しました'
     else
-      flash.now[:alert] = '映画は1本以上選択してください'
+      flash.now[:danger] = t('defaults.flash_message.not_created', item: Collection.model_name.human)
       render :edit, status: :unprocessable_entity
     end
   end
@@ -44,7 +44,7 @@ class CollectionsController < ApplicationController
   def destroy
     collection = current_user.collections.find(params[:id])
     collection.destroy!
-    redirect_to collections_path, status: :see_other
+    redirect_to collections_path, status: :see_other,  success: t('defaults.flash_message.destroyed', item: Collection.model_name.human)
   end
 
   def my_lists

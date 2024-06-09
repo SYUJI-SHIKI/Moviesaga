@@ -2,10 +2,24 @@ ja:
   activerecord:
     models:
       user: ユーザー
+      collection: 特集
+      movie: 映画
     attributes:
       user:
         email: メールアドレス
-        last_name: 姓
-        first_name: 名
+        name: なまえ
         password: パスワード
         password_confirmation: パスワード確認
+        new_password: 新しいパスワード
+        sign_up: 登録
+        remember_me: 次回から自動ログインしますか？
+      collection:
+        title: 特集の名前
+        description: 特集の説明
+  hints:
+    minimum_password_length: (６文字以上)
+  helpers:
+    label:
+      collection:
+        movies: "映画"
+        add_movies: "追加の映画"

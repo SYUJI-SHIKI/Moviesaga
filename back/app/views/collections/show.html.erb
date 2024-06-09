@@ -5,15 +5,15 @@
       <iframe id="youtube-iframe" width="560" height="315" src="" frameborder="0" 
       allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
-    <div class="title-and-bookmark">
-      <%= @collection.title %>
-      <% if current_user.own?(@collection) %>
-        <%= link_to "編集", edit_collection_path(@collection), class: 'btn btn-edit' %>
-        <%= link_to "削除", collection_path(@collection), class: 'btn btn-delete',
-        data: { turbo_method: :delete, turbo_confirm: "消しますか？" } %>
-      <% else %>
-        <%= render 'bookmarks/bookmark_button', collection: @collection %>
-      <% end %>
+    <div class="title-and-bookmark row">
+      <label> <%= @collection.title %> </label>
+        <% if current_user.own?(@collection) %>
+          <%= link_to "編集", edit_collection_path(@collection), class: 'btn btn-edit' %>
+          <%= link_to "削除", collection_path(@collection), class: 'btn btn-delete',
+          data: { turbo_method: :delete, turbo_confirm: "消しますか？" } %>
+        <% else %>
+          <%= render 'bookmarks/bookmark_button', collection: @collection %>
+        <% end %>
     </div>
     <div class="show-movies-container">
       <div class="show-collection-movies-container">

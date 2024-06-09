@@ -1,52 +1,52 @@
 <div class="movies-container">
-  <%= form_with url: random_movies_path, method: :get, local: true, class: 'form-container' do %>
+  <%= form_with url: random_movies_path, method: :get, local: true, class: 'form-container', data: { turbo: false } do |f| %>
     <!-- 左上 -->
     <div class="form-group">
       <label>お好み</label><br>
-      <%= radio_button_tag 'keyword', 'now_playing', false, id: 'now_playing' %>
+      <%= f.radio_button 'keyword', 'now_playing', id: 'now_playing' %>
       <label for="now_playing">映画で上映中</label><br>
-      <%= radio_button_tag 'keyword', 'true_story', false, id: 'true_story' %>
+      <%= f.radio_button 'keyword', 'true_story', id: 'true_story' %>
       <label for="true_story">実話を元にした作品</label><br>
-      <%= radio_button_tag 'keyword', 'animation', false, id: 'animation' %>
+      <%= f.radio_button 'keyword', 'animation', id: 'animation' %>
       <label for="animation">アニメ作品</label>
     </div>
     <!-- 右上 -->
     <div class="form-group">
       <label>気分</label><br>
-      <%= radio_button_tag 'genre', 'action', false, id: 'action' %>
+      <%= f.radio_button 'genre', 'action', id: 'action' %>
       <label for="action">スカッとしたい</label><br>
-      <%= radio_button_tag 'genre', 'comedy', false, id: 'comedy' %>
+      <%= f.radio_button 'genre', 'comedy', id: 'comedy' %>
       <label for="comedy">笑いたい</label><br>
-      <%= radio_button_tag 'genre', 'mystery', false, id: 'mystery' %>
+      <%= f.radio_button 'genre', 'mystery', id: 'mystery' %>
       <label for="mystery">考察しながら観たい</label><br>
-      <%= radio_button_tag 'genre', 'horror', false, id: 'horror' %>
+      <%= f.radio_button 'genre', 'horror', id: 'horror' %>
       <label for="horror">ヒヤッとしたい</label><br>
-      <%= radio_button_tag 'genre', 'romance', false, id: 'romance' %>
+      <%= f.radio_button 'genre', 'romance', id: 'romance' %>
       <label for="romance">キュンとしたい</label>
     </div>
     <!-- 左下 -->
     <div class='form-group'>
       <label>言語</label><br>
-      <%= radio_button_tag 'language', 'ja', false, id: 'ja' %>
+      <%= f.radio_button 'language', 'ja', id: 'ja' %>
       <label for="ja">邦画</label><br>
-      <%= radio_button_tag 'language', 'foreign', false, id: 'foreign' %>
+      <%= f.radio_button 'language', 'foreign', id: 'foreign' %>
       <label for="foreign">海外映画</label><br>
-      <%= radio_button_tag 'language', '', false, id: 'none' %>
+      <%= f.radio_button 'language', '', id: 'none' %>
       <label for="none">指定しない</label>
     </div>
       <!-- 右下 -->
       <div class="form-group">
         <label>時間指定</label><br>
-        <%= radio_button_tag 'selected_runtime', 'under_110', false, id: 'under_110' %>
+        <%= f.radio_button 'selected_runtime', 'under_110', id: 'under_110' %>
         <label for="under_110">110分以内</label><br>
-        <%= radio_button_tag 'selected_runtime', 'over_111', false, id: 'over_111' %>
+        <%= f.radio_button 'selected_runtime', 'over_111', id: 'over_111' %>
         <label for="over_111">111分以上</label><br>
-        <%= radio_button_tag 'selected_runtime', '', false, id: 'runtime_none' %>
+        <%= f.radio_button 'selected_runtime', '', id: 'runtime_none' %>
         <label for="runtime_none">指定なし</label>
       </div>
     </div>
     <div class="submit-container">
-      <%= submit_tag '絞り込み' %>
+      <%= f.submit '絞り込み' %>
     </div>
   <% end %>
 </div>
