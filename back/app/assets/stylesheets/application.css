@@ -137,15 +137,16 @@ body, html {
   height: 30px;
   background-color: rgb(10, 1, 52);
   bottom: 0;
-}
-
-.list-inline-item {
-  margin-left: 190px;
+  width: 100%;
+  position: fixed; 
+  left: 0;
+  margin: 0;
+  padding-left: 35%;
 }
 
 .navbar .footer, a {
-  color: #ded9d9e8; /* ここでリンクの色を設定します */
-  text-decoration: none; /* 下線を取り除く場合 */
+  color: #ded9d9e8;
+  text-decoration: none;
 }
 
 .navbar .footer, a:hover {
