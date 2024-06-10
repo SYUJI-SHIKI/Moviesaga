@@ -93,3 +93,6 @@ gem 'mini_magick', '~> 4.12'
 gem 'kaminari','~> 1.2.1'
 gem 'bootstrap5-kaminari-views', '~> 0.0.1'
 gem 'rails-i18n', '~> 7.0.0'
+
+gem 'rack-cors'
+gem "solid_queue"

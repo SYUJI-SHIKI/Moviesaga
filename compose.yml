@@ -33,6 +33,19 @@ services:
     networks:
       fixed_compose_network:
         ipv4_address: 172.23.0.4
+  worker:
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    environment:
+      RAILS_ENV: development
+      TZ: Asia/Tokyo
+    command: bash -c "bundle exec rake solid_queue:start'"
+    volumes:
+      - ./back:/app
+    networks:
+      fixed_compose_network:
+        ipv4_address: 172.23.0.5
   db:
     image: postgres:16.2
     environment:
