@@ -36,9 +36,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_10_014711) do
 
   create_table "favorites", force: :cascade do |t|
     t.bigint "user_id", null: false
+    t.bigint "movie_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "movie_id", null: false
     t.index ["movie_id"], name: "index_favorites_on_movie_id"
     t.index ["user_id", "movie_id"], name: "index_favorites_on_user_id_and_movie_id", unique: true
     t.index ["user_id"], name: "index_favorites_on_user_id"
@@ -190,6 +190,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_10_014711) do
   add_foreign_key "bookmarks", "collections", on_delete: :cascade
   add_foreign_key "bookmarks", "users"
   add_foreign_key "collections", "users"
+  add_foreign_key "favorites", "movies"
   add_foreign_key "favorites", "users"
   add_foreign_key "movies_collections", "collections", on_delete: :cascade
   add_foreign_key "movies_collections", "movies", on_delete: :cascade
