@@ -10,10 +10,14 @@ module FetchMovieDataMethods
 
   class_methods do
     def fetch_movie_data(movie_id, language)
+      Rails.logger.error("Fetching movie data for ID: #{movie_id} with language: #{language}")
       response = HTTParty.get("#{BASE_URL}/movie/#{movie_id}", query: {
         api_key: TMDB_API,
         language: language,
       })
+
+      Rails.logger.error("HTTP response code: #{response.code}")
+      Rails.logger.error("HTTP response message: #{response.message}")
 
       if response.success?
         movie_data = JSON.parse(response.body)

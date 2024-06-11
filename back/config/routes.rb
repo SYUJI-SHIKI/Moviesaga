@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root "static_pages#top"
   devise_for :users, controllers: { registrations: 'users/registrations' }
   resource :profile, only: %i[show edit update]
-  resolve('Profile') { [:profile] }
+  # resolve('Profile') { [:profile] }
   resources :movies, only: %i[index show] do
     collection do
       get 'random'
@@ -29,7 +29,6 @@ Rails.application.routes.draw do
     namespace :v1 do
       devise_for :users, controllers: { registrations: 'users/registrations' }
       resource :profile, only: %i[show edit update]
-      resolve('Profile') { [:profile] }
       resources :movies, only: %i[index show] do
         collection do
           get 'random'
