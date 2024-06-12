@@ -1,5 +1,5 @@
-import FilterForm from '../../../components/FilterForm';
-import React from 'react';
+import FilterForm from "../../../components/FilterForm";
+import React from "react";
 
 const RandomMoviesPage = () => (
   <div>
@@ -7,4 +7,4 @@ const RandomMoviesPage = () => (
   </div>
 );
 
-export default RandomMoviesPage
+export default RandomMoviesPage;

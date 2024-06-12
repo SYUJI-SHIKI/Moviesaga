@@ -1,0 +1,9 @@
+.dropdown {
+  position: relative;
+}
+
+.fullScreenMenu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
