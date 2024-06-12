@@ -52,71 +52,89 @@ const FilterForm = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} className='form-container'>
-        <div className="form-group">
-          <label>お好み</label><br />
-          <input
-            type="radio"
-            id="now_playing"
-            name="keyword"
-            value="now_playing"
-            onChange={handleChange}
-          />
-          <label htmlFor="now_playing">映画で上映中</label><br />
-          <input
-            type="radio"
-            id="true_story"
-            name="keyword"
-            value="true_story"
-            onChange={handleChange}
-          />
-          <label htmlFor="true_story">実話を元にした作品</label><br />
-          <input
-            type="radio"
-            id="animation"
-            name="keyword"
-            value="animation"
-            onChange={handleChange}
-          />
-          <label htmlFor="animation">アニメ作品</label><br />
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-lg grid grid-cols-2 gap-8">
+        <div className="form-group col-span-2">
+          <label className="block text-lg font-semibold mb-2">お好み</label>
+          <div className="flex items-center mb-4">
+            <input
+              type="radio"
+              id="now_playing"
+              name="keyword"
+              value="now_playing"
+              onChange={handleChange}
+              className="mr-2"
+            />
+            <label htmlFor="now_playing">映画で上映中</label>
+          </div>
+          <div className="flex items-center mb-4">
+            <input
+              type="radio"
+              id="true_story"
+              name="keyword"
+              value="true_story"
+              onChange={handleChange}
+              className="mr-2"
+            />
+            <label htmlFor="true_story">実話を元にした作品</label>
+          </div>
+          <div className="flex items-center mb-4">
+            <input
+              type="radio"
+              id="animation"
+              name="keyword"
+              value="animation"
+              onChange={handleChange}
+              className="mr-2"
+            />
+            <label htmlFor="animation">アニメ作品</label>
+          </div>
         </div>
         <div className="form-group">
-          <label>気分</label><br />
-          <input
-            type="radio"
-            id="action"
-            name="genre"
-            value="action"
-            onChange={handleChange}
-          />
-          <label htmlFor="action">スカッとしたい</label><br />
+          <label className="block text-lg font-semibold mb-2">気分</label>
+          <div className="flex items-center mb-4">
+            <input
+              type="radio"
+              id="action"
+              name="genre"
+              value="action"
+              onChange={handleChange}
+              className="mr-2"
+            />
+            <label htmlFor="action">スカッとしたい</label>
+          </div>
         </div>
         <div className="form-group">
-          <label>言語</label><br />
-          <input
-            type="radio"
-            id="ja"
-            name="language"
-            value="ja"
-            onChange={handleChange}
-          />
-          <label htmlFor="ja">邦画</label><br />
+          <label className="block text-lg font-semibold mb-2">言語</label>
+          <div className="flex items-center mb-4">
+            <input
+              type="radio"
+              id="ja"
+              name="language"
+              value="ja"
+              onChange={handleChange}
+              className="mr-2"
+            />
+            <label htmlFor="ja">邦画</label>
+          </div>
         </div>
-        <div className="form-group">
-          <label>時間指定</label><br />
-          <input
-            type="radio"
-            id="under_110"
-            name="selected_runtime"
-            value="under_110"
-            onChange={handleChange}
-          />
-          <label htmlFor="under_110">110分以内</label><br />
+        <div className="form-group col-span-2">
+          <label className="block text-lg font-semibold mb-2">時間指定</label>
+          <div className="flex items-center mb-4">
+            <input
+              type="radio"
+              id="under_110"
+              name="selected_runtime"
+              value="under_110"
+              onChange={handleChange}
+              className="mr-2"
+            />
+            <label htmlFor="under_110">110分以内</label>
+          </div>
         </div>
-        <div className="submit-container">
-          <div>一度、リロードしてからご利用ください</div>
-          <button type="submit">絞り込み</button>
+        <div className="submit-container col-span-2">
+          <div className="text-center mb-4">一度、リロードしてからご利用ください</div>
+          <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-lg shadow-lg hover:bg-blue-600 transition duration-300">絞り込み</button>
         </div>
       </form>
     </div>

@@ -1,7 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
 import React from "react";
 
 const RootPage: React.FC = () => {
@@ -9,7 +7,6 @@ const RootPage: React.FC = () => {
 
   return (
     <>
-      <Header />
       <div className="top-wrapper center-form">
         <div className="top-inner-text">
           <div>MovieSaga</div>
@@ -48,7 +45,7 @@ const RootPage: React.FC = () => {
                   特集
                 </div>
               </Link>
-              <Link href="/movies">
+              <Link href="/movies/random">
                 <div className="rounded-box" id="random-button">
                   ランダム
                 </div>
@@ -68,7 +65,6 @@ const RootPage: React.FC = () => {
           )}
         </div>
       </div>
-      <Footer />
     </>
   );
 };

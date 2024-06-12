@@ -1,8 +1,13 @@
 import { AppProps } from 'next/app';
-import '../app/globals.css';
+import  '../app/globals.css';
+import 'tailwindcss/tailwind.css';
+import RootLayout from '../app/layout';
 
-const MyApp = ({ Component, pageProps }: AppProps) => {
-  return <Component {...pageProps} />;
+function MyApp({ Component, pageProps }: AppProps){
+  return(
+    <RootLayout>
+      <Component {...pageProps} />
+    </RootLayout>);
 };
 
 export default MyApp;
