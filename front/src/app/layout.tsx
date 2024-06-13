@@ -45,7 +45,7 @@ const RootLayout = ({
   return (
       <html lang="ja">
         <body>
-          
+          <head>${process.env.GOOGLE_HTML}</head>
           <div className={inter.className}>
             <Header />
             {/* <HotToaster position="top-center" reverseOrder={false} /> */}
