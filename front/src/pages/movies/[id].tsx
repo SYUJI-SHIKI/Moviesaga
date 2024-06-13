@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import FavoriteButton from 'components/FavoriteButton';
 import React from 'react';
 
 interface Movie {
@@ -22,6 +23,11 @@ const MovieDetail = () => {
   const [movie, setMovie] = useState<Movie | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const [isNavOpen, setIsNavOpen] = useState(false);
+  const toggleNav = () =>{
+    setIsNavOpen(!isNavOpen);
+  };
 
   console.log('Router is ready:', router.isReady);
   console.log('Movie ID:', movieId);
@@ -58,34 +64,64 @@ const MovieDetail = () => {
     fetchMovie();
   }, [movieId, router.isReady]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <div>Loading...</div>;
 
   return (
-    <div>
+    <>
       {movie && (
-        <>
-          <h1>{movie.original_title || 'Title not available'}</h1>
-          <p>Overview: {movie.overview || 'Overview not available'}</p>
-          {movie.poster_path ? (
-            <img src={movie.poster_path} alt={`${movie.original_title} poster`} />
-          ) : (
-            <p>Poster not available</p>
-          )}
-          <p>Runtime: {movie.runtime ? `${movie.runtime} minutes` : 'Runtime not available'}</p>
-          <p>Release Date: {movie.release_date || 'Release date not available'}</p>
-          {movie.youtube_trailer_id && (
-            <iframe
-              width="560"
-              height="315"
-              src={`https://www.youtube.com/embed/${movie.youtube_trailer_id}?autoplay=1&mute=1&loop=1&rel=0&playlist=${movie.youtube_trailer_id}`}
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-          )}
-        </>
-      )}
-    </div>
+        <div className='flex flex-col p-3 min-h-screen bg-gray-950 text-gray-300'>
+          <div className='flex flex-row'>
+            <div>
+              {movie.youtube_trailer_id ? (
+              <iframe
+                width="400"
+                height="315"
+                src={`https://www.youtube.com/embed/${movie.youtube_trailer_id}?autoplay=1&mute=1&loop=1&rel=0&playlist=${movie.youtube_trailer_id}`}
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+              ) : (
+                <div>
+                  <img src="/video_loading_error.png"
+                  width="400"
+                  height="315"
+                  className='' />
+                </div>
+              )}
+            </div>
+          </div>
+          <div className='flex flex-row'>
+            <div>
+              {movie.poster_path ? (
+              <img src={movie.poster_path} 
+              alt={`${movie.original_title} poster`}
+              width={180}
+              height={200}
+              className='' />
+              ) : (
+                <div>Poster not available</div>
+              )}
+            </div>
+            <div className='p-5'>
+              <h1>{movie.original_title || 'Title not available'}</h1>
+              <FavoriteButton itemId={movie.tmdb_id} />
+              <div>Runtime: {movie.runtime ? `${movie.runtime} minutes` : 'Runtime not available'}</div>
+              <div>Release Date: {movie.release_date || 'Release date not available'}</div>
+              <button onClick={toggleNav} className='absolute hidden sm:block bottom-3 z-40'>
+                {isNavOpen ? <span>あらすじ</span> : <span> close </span> }
+              </button>
+              {isNavOpen && (
+                <div>
+                  <div>あらすじ</div>
+                  <div>`${movie.overview}`</div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}  
+    </>
   );
 };
 

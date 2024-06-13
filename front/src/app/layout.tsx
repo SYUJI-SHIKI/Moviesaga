@@ -7,35 +7,35 @@ import Footer from "components/layouts/footer/Footer";
 // import { Toaster as HotToaster } from "react-hot-toast";
 const inter = Inter({ subsets: ["latin"] });
 
-const siteName = "Movie Saga";
-const description = "";
-const url = "Movie Saga";
+const siteName = "MovieSaga";
+const description = "映画";
+const url = "https://www.movie-saga-app.com/";
 
-// export const metadata: Metadata = {
-//   metadataBase: new URL(url),
-//   title: {
-//     default: siteName,
-//     template: `%s - ${siteName}`,
-//   },
-//   description,
-//   openGraph: {
-//     title: siteName,
-//     description,
-//     url,
-//     siteName,
-//     locale: "ja_JP",
-//     type: "website",
-//   },
-//   twitter: {
-//     card: "summary",
-//     title: siteName,
-//     description,
-//     creator: "@ganbaritaiman9",
-//   },
-//   alternates: {
-//     canonical: url,
-//   },
-// };
+const metadata: Metadata = {
+  metadataBase: new URL(url),
+  title: {
+    default: siteName,
+    template: `%s - ${siteName}`,
+  },
+  description,
+  openGraph: {
+    title: siteName,
+    description,
+    url,
+    siteName,
+    locale: "ja_JP",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: siteName,
+    description,
+    creator: "@ganbaritaiman9",
+  },
+  alternates: {
+    canonical: url,
+  },
+};
 
 const RootLayout = ({
   children,
@@ -43,16 +43,20 @@ const RootLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-      <html lang="ja">
-        <body>
-          <div className={inter.className}>
-            <Header />
-            {/* <HotToaster position="top-center" reverseOrder={false} /> */}
-            {children}
-            <Footer />
-          </div>
-        </body>
-      </html>
+    <html lang="ja">
+      <head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        {/* CSRF and CSP meta tags if needed */}
+        {/* <meta name="csrf-token" content={csrftoken} /> */}
+        {/* <meta httpEquiv="Content-Security-Policy" content={csp} /> */}
+      </head>
+      <body>
+          <Header />
+          {children}
+          <Footer />
+      </body>
+    </html>
   );
 };
 

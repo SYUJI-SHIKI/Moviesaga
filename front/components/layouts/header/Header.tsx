@@ -20,7 +20,7 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <header className="relative z-50 p-0 m-0">
+      <header className="relative z-40 p-0 m-0">
         <nav className="bg-gray-800 p-4 flex justify-between items-center">
           <Link href="/">
             <div>
