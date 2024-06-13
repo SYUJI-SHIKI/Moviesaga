@@ -45,6 +45,7 @@ const RootLayout = ({
   return (
       <html lang="ja">
         <body>
+          
           <div className={inter.className}>
             <Header />
             {/* <HotToaster position="top-center" reverseOrder={false} /> */}
