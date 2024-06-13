@@ -15,7 +15,7 @@ const SearchPage: React.FC = () => {
   const [totalPages, setTotalPages] = useState<number>(1);
 
   const handleSearch = async () => {
-    const response = await fetch(`/api/search?query=${query}&category=${category}&page=${page}`);
+    const response = await fetch(`/api/v1/search?query=${query}&category=${category}&page=${page}`);
     const data = await response.json();
     setMovies(data.movies);
     setTotalPages(data.total_pages);

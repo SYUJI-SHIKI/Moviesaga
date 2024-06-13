@@ -108,16 +108,17 @@ const MovieDetail = () => {
               <FavoriteButton itemId={movie.tmdb_id} />
               <div>Runtime: {movie.runtime ? `${movie.runtime} minutes` : 'Runtime not available'}</div>
               <div>Release Date: {movie.release_date || 'Release date not available'}</div>
-              <button onClick={toggleNav} className='absolute hidden sm:block bottom-3 z-40'>
-                {isNavOpen ? <span>あらすじ</span> : <span> close </span> }
-              </button>
-              {isNavOpen && (
-                <div>
-                  <div>あらすじ</div>
-                  <div>`${movie.overview}`</div>
-                </div>
-              )}
             </div>
+          </div>
+          <div>
+            <button onClick={toggleNav} className='absolute hidden sm:block bottom-3 z-40'>
+              {isNavOpen ? <span>あらすじ</span> : <span> close </span> }
+            </button>
+            {isNavOpen && (
+              <div>
+                {/* <div>`${movie.overview}`</div> */}
+              </div>
+            )}
           </div>
         </div>
       )}  
