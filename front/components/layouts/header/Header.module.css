@@ -1,9 +1,7 @@
 .dropdown {
-  position: relative;
+  @apply absolute left-1 mt-2 w-48 bg-white rounded-md shadow-lg z-20;
 }
 
 .fullScreenMenu {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @apply flex justify-center items-center;
 }

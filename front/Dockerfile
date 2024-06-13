@@ -13,4 +13,4 @@ COPY . /app
 
 RUN npm run build
 
-CMD ["yarn", "dev", "-p", "4000"]
+CMD ["npm", "dev", "-p", "4000"]
