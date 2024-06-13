@@ -43,14 +43,16 @@ const RootLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <>
-      <div className={inter.className}>
-        <Header />
-        {/* <HotToaster position="top-center" reverseOrder={false} /> */}
-        {children}
-        <Footer />
-      </div>
-    </>
+      <html lang="ja">
+        <body>
+          <div className={inter.className}>
+            <Header />
+            {/* <HotToaster position="top-center" reverseOrder={false} /> */}
+            {children}
+            <Footer />
+          </div>
+        </body>
+      </html>
   );
 };
 
