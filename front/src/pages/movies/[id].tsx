@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import FavoriteButton from 'components/FavoriteButton';
-import axios from "axios";
+import Image from 'next/image';
 import React from 'react';
 
 interface Movie {
@@ -24,11 +24,6 @@ const MovieDetail = () => {
   const [movie, setMovie] = useState<Movie | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
-  const [isNavOpen, setIsNavOpen] = useState(false);
-  const toggleNav = () =>{
-    setIsNavOpen(!isNavOpen);
-  };
 
   console.log('Router is ready:', router.isReady);
   console.log('Movie ID:', movieId);
@@ -84,7 +79,8 @@ const MovieDetail = () => {
                 ></iframe>
                 ) : (
                   <div>
-                    <img src="/video_loading_error.png"
+                    <Image src="/video_loading_error.png"
+                    alt={movie.original_title}
                     className='w-full h-auto' />
                   </div>
                 )}
@@ -93,7 +89,7 @@ const MovieDetail = () => {
             <div className='flex flex-row justify-center mb-4 items-end '>
               <div className='mr-4'>
                 {movie.poster_path ? (
-                <img src={movie.poster_path} 
+                <Image src={movie.poster_path} 
                 alt={`${movie.original_title} poster`}
                 width={300}
                 height={200}

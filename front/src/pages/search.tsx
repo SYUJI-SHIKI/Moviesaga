@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Image from 'next/image'
 import Link from 'next/link';
 import React from 'react';
 
@@ -44,9 +45,10 @@ const SearchPage: React.FC = () => {
         <Link key={movie.id} href={`/movies/${movie.id}`} passHref>
           <div className="block group">
             <div className="relative overflow-hidden rounded-lg shadow-lg transform transition duration-300 group-hover:scale-105">
-              <img
+              <Image
                 src={movie.poster_path}
                 className="w-full h-auto object-cover max-w-xs"
+                alt={'movie.id'}
               />
             </div>
           </div>
