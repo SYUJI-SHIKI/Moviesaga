@@ -70,12 +70,12 @@ const MovieDetail = () => {
     <>
       {movie && (
         <div className='flex flex-col p-3 min-h-screen bg-gray-950 text-gray-300'>
-          <div className='flex flex-row'>
-            <div className='w-full max-w-screen-md'>
+          <div className=''>
+            <div className='w-full max-w-screen-md mx-auto mb-4 mt-5'>
               <div className='relative'> 
                 {movie.youtube_trailer_id ? (
                 <iframe
-                  className='absolute top-0 left-0 w-full h-auto'
+                  className='w-full h-auto'
                   src={`https://www.youtube.com/embed/${movie.youtube_trailer_id}?autoplay=1&mute=1&loop=1&rel=0&playlist=${movie.youtube_trailer_id}`}
                   title="YouTube video player"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -84,40 +84,35 @@ const MovieDetail = () => {
                 ) : (
                   <div>
                     <img src="/video_loading_error.png"
-                    className='absolute top-0 left-0 w-full h-auto' />
+                    className='w-full h-auto' />
                   </div>
                 )}
               </div>
             </div>
-          </div>
-          <div className='flex flex-row'>
-            <div>
-              {movie.poster_path ? (
-              <img src={movie.poster_path} 
-              alt={`${movie.original_title} poster`}
-              width={180}
-              height={200}
-              className='' />
-              ) : (
-                <div>Poster not available</div>
-              )}
-            </div>
-            <div className='p-5'>
-              <h1>{movie.original_title || 'Title not available'}</h1>
-              <FavoriteButton itemId={movie.tmdb_id} />
-              <div>Runtime: {movie.runtime ? `${movie.runtime} minutes` : 'Runtime not available'}</div>
-              <div>Release Date: {movie.release_date || 'Release date not available'}</div>
-            </div>
-          </div>
-          <div>
-            <button onClick={toggleNav} className='absolute hidden sm:block bottom-3 z-40'>
-              {isNavOpen ? <span>あらすじ</span> : <span> close </span> }
-            </button>
-            {isNavOpen && (
-              <div className='w-full max-w-screen-md'>
-                <div>{movie.overview}</div>
+            <div className='flex flex-row justify-center mb-4 items-end '>
+              <div className='mr-4'>
+                {movie.poster_path ? (
+                <img src={movie.poster_path} 
+                alt={`${movie.original_title} poster`}
+                width={300}
+                height={200}
+                className='' />
+                ) : (
+                  <div>Poster not available</div>
+                )}
               </div>
-            )}
+              <div className='p-5'>
+                <div className='text-4xl mb-5'>{movie.original_title || 'Title not available'}</div>
+                <FavoriteButton itemId={movie.tmdb_id} />
+                <div className='mb-2'>上映時間: {movie.runtime ? `${movie.runtime}分` : 'Runtime not available'}</div>
+                <div className='mb-5'>上映日: {movie.release_date || 'Release date not available'}</div>
+              </div>
+            </div>
+          </div>
+          <div className='relative'>
+            <div className='w-full max-w-screen-md mx-auto bg-gray-900 p-4 mt-7'>
+              <div>{movie.overview}</div>
+            </div>
           </div>
         </div>
       )}  
