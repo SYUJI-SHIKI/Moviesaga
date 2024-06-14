@@ -21,6 +21,7 @@ class MovieRandom
     while movie_ids.size < limit
       response = HTTParty.get("#{BASE_URL}/movie/popular", query: {
         api_key: API_KEY,
+        include_adult: false,
         language: 'ja',
         page: page,
       })

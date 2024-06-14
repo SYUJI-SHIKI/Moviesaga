@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import FavoriteButton from 'components/FavoriteButton';
+import axios from "axios";
 import React from 'react';
 
 interface Movie {

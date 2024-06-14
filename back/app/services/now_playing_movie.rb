@@ -22,6 +22,7 @@ class NowPlayingMovie
       loop do
         response = HTTParty.get("#{BASE_URL}/movie/now_playing", query: {
           api_key: API_KEY,
+          include_adult: false,
           language: 'ja',
           region: 'JP',
           page: page,

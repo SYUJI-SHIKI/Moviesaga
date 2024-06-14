@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import axios from "axios";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { query, category, page } = req.query as { [key: string]: string };
