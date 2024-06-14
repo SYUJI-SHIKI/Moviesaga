@@ -71,24 +71,23 @@ const MovieDetail = () => {
       {movie && (
         <div className='flex flex-col p-3 min-h-screen bg-gray-950 text-gray-300'>
           <div className='flex flex-row'>
-            <div>
-              {movie.youtube_trailer_id ? (
-              <iframe
-                width="400"
-                height="315"
-                src={`https://www.youtube.com/embed/${movie.youtube_trailer_id}?autoplay=1&mute=1&loop=1&rel=0&playlist=${movie.youtube_trailer_id}`}
-                title="YouTube video player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-              ) : (
-                <div>
-                  <img src="/video_loading_error.png"
-                  width="400"
-                  height="315"
-                  className='' />
-                </div>
-              )}
+            <div className='w-full max-w-screen-md'>
+              <div className='relative'> 
+                {movie.youtube_trailer_id ? (
+                <iframe
+                  className='absolute top-0 left-0 w-full h-auto'
+                  src={`https://www.youtube.com/embed/${movie.youtube_trailer_id}?autoplay=1&mute=1&loop=1&rel=0&playlist=${movie.youtube_trailer_id}`}
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+                ) : (
+                  <div>
+                    <img src="/video_loading_error.png"
+                    className='absolute top-0 left-0 w-full h-auto' />
+                  </div>
+                )}
+              </div>
             </div>
           </div>
           <div className='flex flex-row'>
@@ -115,8 +114,8 @@ const MovieDetail = () => {
               {isNavOpen ? <span>あらすじ</span> : <span> close </span> }
             </button>
             {isNavOpen && (
-              <div>
-                {/* <div>`${movie.overview}`</div> */}
+              <div className='w-full max-w-screen-md'>
+                <div>{movie.overview}</div>
               </div>
             )}
           </div>

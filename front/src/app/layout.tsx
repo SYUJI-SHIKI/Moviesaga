@@ -44,13 +44,6 @@ const RootLayout = ({
 }>) => {
   return (
     <html lang="ja">
-      <head>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        {/* CSRF and CSP meta tags if needed */}
-        {/* <meta name="csrf-token" content={csrftoken} /> */}
-        {/* <meta httpEquiv="Content-Security-Policy" content={csp} /> */}
-      </head>
       <body>
           <Header />
           {children}
