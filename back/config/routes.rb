@@ -27,7 +27,9 @@ Rails.application.routes.draw do
 
   namespace :api, format: 'json' do
     namespace :v1 do
-      devise_for :users, controllers: { registrations: 'users/registrations' }
+      mount_devise_token_auth_for 'User', at: 'auth', controllers: {
+        omniauth_callbacks: 'api/v1/auth/omniauth_callbacks'
+      }
       resource :profile, only: %i[show edit update]
       resources :movies, only: %i[index show] do
         collection do

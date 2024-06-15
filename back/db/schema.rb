@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_10_014711) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_14_232204) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -68,6 +68,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_10_014711) do
     t.index ["collection_id", "movie_id"], name: "index_movies_collections_on_collection_id_and_movie_id", unique: true
     t.index ["collection_id"], name: "index_movies_collections_on_collection_id"
     t.index ["movie_id"], name: "index_movies_collections_on_movie_id"
+  end
+
+  create_table "sns_credentials", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "solid_queue_blocked_executions", force: :cascade do |t|

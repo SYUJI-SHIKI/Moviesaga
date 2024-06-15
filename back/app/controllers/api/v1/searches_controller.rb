@@ -2,7 +2,7 @@ require 'httparty'
 
 module Api
   module V1
-    class SearchesController < ApplicationController
+    class SearchesController < ApiController
       skip_before_action :authenticate_user!
 
       def search
