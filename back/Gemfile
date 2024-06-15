@@ -80,6 +80,10 @@ gem 'turbolinks'
 gem 'bootstrap', '~> 5.3.3'
 #認証
 gem 'devise'
+gem 'devise_token_auth'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem "omniauth-rails_csrf_protection"
 #パスワードリセット関連
 group :development do
   gem 'letter_opener'

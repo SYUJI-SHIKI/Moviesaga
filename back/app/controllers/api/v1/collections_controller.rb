@@ -1,6 +1,6 @@
 module Api
   module V1
-    class CollectionsController < ApplicationController
+    class CollectionsController < ApiController
       def index
         @collections = Collection.includes(:movies).order(created_at: :desc)
       end
