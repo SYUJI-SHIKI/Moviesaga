@@ -9,31 +9,38 @@ const RegisterPage = () => {
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const router = useRouter();
 
-  const handleRegister = async (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-
     try {
-      await axios.post(`${process.env.NEXT_PUBLIC_TEST_API_URL}/api/v1/auth/register`, {
-        name,
-        email,
-        password,
-        password_confirmation: passwordConfirmation,
-      });
-
-      router.push('/index');
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_TEST_API_URL}/api/v1/auth`,
+        {
+          email,
+          password,
+          name,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      if (response.status === 200) {
+        router.push('/login'); // 登録成功後にログインページへリダイレクト
+      }
     } catch (error) {
-      console.error('登録できませんでした', error);
+      console.error('登録に失敗しました', error);
     }
   };
 
   return (
     <div>
       <h1>新規登録</h1>
-      <form onSubmit={handleRegister}>
+      <form>
         <div>
           <label>Name:</label>
           <input
-            type='name'
+            type='text'
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
@@ -66,7 +73,7 @@ const RegisterPage = () => {
             required
             />
         </div>
-        <button type="submit">Sign Up</button>
+        <button type="button" onClick={handleSubmit}>Sign Up</button>
       </form>
     </div>
   )

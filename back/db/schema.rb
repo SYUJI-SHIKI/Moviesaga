@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_14_232204) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_16_071502) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -68,11 +68,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_14_232204) do
     t.index ["collection_id", "movie_id"], name: "index_movies_collections_on_collection_id_and_movie_id", unique: true
     t.index ["collection_id"], name: "index_movies_collections_on_collection_id"
     t.index ["movie_id"], name: "index_movies_collections_on_movie_id"
-  end
-
-  create_table "sns_credentials", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "solid_queue_blocked_executions", force: :cascade do |t|
@@ -188,8 +183,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_14_232204) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "avatar"
+    t.string "provider", default: "email", null: false
+    t.string "uid", default: "", null: false
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.string "nickname"
+    t.string "image"
+    t.json "tokens", default: {}
+    t.boolean "allow_password_change", default: false
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
   add_foreign_key "bookmarks", "collections", on_delete: :cascade

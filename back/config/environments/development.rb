@@ -85,4 +85,6 @@ Rails.application.configure do
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   config.assets.debug = true
+
+  config.action_controller.forgery_protection_origin_check = false
 end

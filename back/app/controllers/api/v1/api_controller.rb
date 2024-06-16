@@ -3,6 +3,7 @@ module Api
     class ApiController < ActionController::API
       # before_action :authenticate_user!
       include DeviseTokenAuth::Concerns::SetUserByToken
+      include DeviseHackSession
     end
   end
 end
