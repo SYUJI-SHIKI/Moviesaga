@@ -11,21 +11,22 @@ const LoginPage = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_TEST_API_URL}/api/v1/auth/callback`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_TEST_API_URL}/api/v1/auth/sign_in`,
+        {
           email,
           password,
-        }),
-      });
-      const { uid, client,'access-token': accessToken } = response.headers;
-
-      router.push(`/auth/callback?uid=${uid}&client=${client}&access-token=${accessToken}`)
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      const { uid, client, 'access-token': accessToken } = response.headers;
+      router.push(`/auth/callback?uid=${uid}&client=${client}&access-token=${accessToken}`);
     } catch (error) {
-      console.error('ログインできませんでした', error);
+      console.error('ログインませんでした', error);
     }
   };
 
