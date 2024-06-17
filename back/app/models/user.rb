@@ -8,6 +8,8 @@ class User < ApplicationRecord
 
   include DeviseTokenAuth::Concerns::User
 
+  before_create :skip_confirmation!
+
   mount_uploader :avatar, AvatarUploader
 
   validates :name, presence: true, length: { maximum: 20 }

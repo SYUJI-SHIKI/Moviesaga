@@ -1,6 +1,6 @@
 # module Api
 #   module V1
-#     class Users::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksController
+#     class Auth::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksController
 #       def google_oauth2
 #         redirect_to user_google_oauth2_omniauth_authorize_path
 #       end
