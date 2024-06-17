@@ -12,7 +12,7 @@ interface AuthResponse {
   };
 }
 
-const signUp = async (name:string, email:string, password: string, passwordConfirmation: string): Promise<AuthResponse> => {
+export const signUp = async (name:string, email:string, password: string, passwordConfirmation: string): Promise<AuthResponse> => {
   console.log('SignUp request:', { name, email, password, passwordConfirmation });
   const response = await authApi.post('/auth', {
     registration: {
@@ -26,13 +26,13 @@ const signUp = async (name:string, email:string, password: string, passwordConfi
   return response.data;
 };
 
-// export const signIn = async (email: string, password: string): Promise<AuthResponse> => {
-//   const response = await authApi.post('/auth/sign_in', {
-//     email,
-//     password,
-//   });
-//   return response.data;
-// };
+export const signIn = async (email: string, password: string): Promise<AuthResponse> => {
+  const response = await authApi.post('/auth/sign_in', {
+    email,
+    password,
+  });
+  return response.data;
+};
 
 // export const signOut = async (): Promise<void> => {
 //   await authApi.delete('/auth/sign_out');
@@ -40,5 +40,3 @@ const signUp = async (name:string, email:string, password: string, passwordConfi
 //   localStorage.removeItem('client');
 //   localStorage.removeItem('uid');
 // };
-
-export default signUp;

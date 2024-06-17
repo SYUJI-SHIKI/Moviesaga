@@ -4,8 +4,8 @@ module Api
       skip_before_action :authenticate_user!, only: [:create]
       skip_before_action :verify_authenticity_token, only: [:create]
       before_action :configure_permitted_parameters, if: :devise_controller? 
-      before_action :configure_sign_up_params, only: %i[create]
-      after_action :set_token_info, only: [:create]
+      # before_action :configure_sign_up_params, only: %i[create]
+      # after_action :set_token_info, only: [:create]
 
       include DeviseTokenAuth::Concerns::SetUserByToken
       include DeviseHackSession
@@ -28,6 +28,26 @@ module Api
       #   end
       # end
 
+      def create
+        Rails.logger.debug "create action called with params: #{params.inspect}"
+        
+        Rails.logger.debug "create action called with params: #{sign_up_params}"
+        @resource = resource_class.new(sign_up_params)
+        
+        # Save the resource and handle the response
+        if @resource.save
+          render json: {
+            status: 'success',
+            data: @resource
+          }, status: :created
+        else
+          render json: {
+            status: 'error',
+            errors: @resource.errors.full_messages
+          }, status: :unprocessable_entity
+        end
+      end
+
       protected
 
       def configure_permitted_parameters
@@ -44,6 +64,7 @@ module Api
 
       def configure_sign_up_params
         devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email, :password, :password_confirmation])
+        Rails.logger.debug "#{ devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email, :password, :password_confirmation])} sppppppppppp"
       end
 
       private
@@ -52,13 +73,13 @@ module Api
         params.require(:registration).permit(:name, :email, :password, :password_confirmation)
       end
 
-      def set_token_info
-        return unless @resource.persisted?
+      # def set_token_info
+      #   return unless @resource.persisted?
 
-        token = @resource.create_new_auth_token
-        response.set_header('access-token', token['access-token'])
-        response.set_header('client', token['client'])
-      end
+      #   token = @resource.create_new_auth_token
+      #   response.set_header('access-token', token['access-token'])
+      #   response.set_header('client', token['client'])
+      # end
     end
   end
 end
