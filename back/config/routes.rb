@@ -32,7 +32,8 @@ Rails.application.routes.draw do
       # end
       mount_devise_token_auth_for 'User', at: 'auth',
       skip:[:omniauth_callbacks], controllers: {
-        registrations: 'api/v1/auth/registrations'
+        registrations: 'api/v1/auth/registrations',
+        sessions: 'api/v1/auth/sessions'
       #   omniauth_callbacks: 'api/v1/users/omniauth_callbacks'
       }
       resource :profile, only: %i[show edit update]

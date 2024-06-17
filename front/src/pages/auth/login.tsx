@@ -12,7 +12,7 @@ const LoginPage = () => {
 
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_TEST_API_URL}/api/v1/auth/sign_in`,
+        `${process.env.NEXT_PUBLIC_TEST_API_URL}/auth/session`,
         {
           email,
           password,

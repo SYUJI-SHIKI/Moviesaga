@@ -3,12 +3,11 @@ class User < ApplicationRecord
   include BookmarkableMethods
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable, :trackable and :omniauthable, omniauth_providers: %i[google_oauth2]
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable,
-         :omniauthable, :confirmable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
+
 
   include DeviseTokenAuth::Concerns::User
 
-  before_create :skip_confirmation!
 
   mount_uploader :avatar, AvatarUploader
 
