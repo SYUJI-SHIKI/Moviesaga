@@ -87,4 +87,5 @@ Rails.application.configure do
   config.assets.debug = true
 
   config.action_controller.forgery_protection_origin_check = false
+  config.web_console.whitelisted_ips = '172.23.0.1'
 end

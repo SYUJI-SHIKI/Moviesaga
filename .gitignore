@@ -5,7 +5,6 @@ front/node_modules
 front/.pnp
 front/.pnp.js
 front/.yarn/install-state.gz
-front/yarn.lock
 
 # testing
 front/coverage
