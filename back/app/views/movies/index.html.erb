@@ -8,7 +8,9 @@
       <%= f.radio_button 'keyword', 'true_story', id: 'true_story' %>
       <label for="true_story">実話を元にした作品</label><br>
       <%= f.radio_button 'keyword', 'animation', id: 'animation' %>
-      <label for="animation">アニメ作品</label>
+      <label for="animation">アニメ作品</label><br>
+      <%= f.radio_button 'keyword', '', id: 'keyword_none' %>
+      <label for="keyword_none">指定しない</label>
     </div>
     <!-- 右上 -->
     <div class="form-group">
@@ -23,6 +25,8 @@
       <label for="horror">ヒヤッとしたい</label><br>
       <%= f.radio_button 'genre', 'romance', id: 'romance' %>
       <label for="romance">キュンとしたい</label>
+      <%= f.radio_button 'genre', '', id: 'genre_none' %>
+      <label for="genre_none">指定しない</label>
     </div>
     <!-- 左下 -->
     <div class='form-group'>
@@ -42,7 +46,7 @@
         <%= f.radio_button 'selected_runtime', 'over_111', id: 'over_111' %>
         <label for="over_111">111分以上</label><br>
         <%= f.radio_button 'selected_runtime', '', id: 'runtime_none' %>
-        <label for="runtime_none">指定なし</label>
+        <label for="runtime_none">指定しない</label>
       </div>
     </div>
     <div class="submit-container">
