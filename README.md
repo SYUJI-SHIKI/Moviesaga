@@ -108,8 +108,9 @@ API| TMDB API <br> Youtube Data API <br> Google Translate API(未定) <br> wikip
 Wikipedia apiを使ってあらすじを抽出するか悩み中（技術検証してない）
 - 映画のあらすじと事象を紐づける際のWikipediaのapi
 
+### 実装はしないが実装できる技術の習得はしておきたい機能
 - 関連映画のレコメンドを取得する機能(
-Google認証するためにGoogle Identity Platformの機能
+Google認証するためにGoogle Identity Platformの機能)
 
 ### 画面遷移図
 https://www.figma.com/design/hbWFX3mRKDMfnq9PeNncPE/%E5%8D%92%E6%A5%AD%E5%88%B6%E4%BD%9C?node-id=0-1&t=tCQQwauOn3ctIvJm-1
