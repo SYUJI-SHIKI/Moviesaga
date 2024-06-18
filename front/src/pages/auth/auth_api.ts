@@ -20,14 +20,23 @@ authApi.interceptors.request.use(config => {
 
 authApi.interceptors.response.use(response => {
   if (typeof window !== 'undefined') { // クライアントサイドでのみ実行
-    const token = response.headers['access-token'];
-    const client = response.headers['client'];
-    const uid = response.headers['uid'];
+    const data = response.data.data
+    const token = data['access-token'];
+    console.log("トーーーーーーくん", data)
+    console.log("データの型:", typeof data);
+    console.log("データのプロパティ:", Object.keys(data));
+
+    const client = data['client'];
+    const uid = data['uid'];
     if (token && client && uid) {
       localStorage.setItem('access-token', token);
       localStorage.setItem('client', client);
       localStorage.setItem('uid', uid);
     }
+
+    console.log('Access Token:', token);
+    console.log('Client:', client);
+    console.log('UID:', uid);
   }
   return response;
 });

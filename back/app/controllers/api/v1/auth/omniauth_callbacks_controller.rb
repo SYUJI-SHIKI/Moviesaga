@@ -32,7 +32,7 @@
 #           }
 #           authentication.save!
 
-#           redirect_to "#{ENV['LOCAL_FRONT_URL']}/auth/callback?uid=#{user.uid}&client_id=#{client_id}&access_token=#{token}"
+#           redirect_to "#{ENV['LOCAL_FRONT_URL']}/auth/callback?uid=#{user.uid}&client_id=#{client_id}&access-token=#{token}"
 #         else
 #           redirect_to "#{ENV['LOCAL_FRONT_URL']}/auth/failure"
 #         end
