@@ -1,32 +1,37 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useRouter } from "next/router";
+import { signIn } from "./auth";
+import { useEffect } from 'react';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
 
+  useEffect(() => {
+    const token = localStorage.getItem('access-token');
+    if (token && token !== '{}') {
+      router.push('/'); // 既にログインしている場合はルートページにリダイレクト
+    }
+  }, []);
+
   const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault();
 
     try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_TEST_API_URL}/auth/session`,
-        {
-          email,
-          password,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-      const { uid, client, 'access-token': accessToken } = response.headers;
-      router.push(`/auth/callback?uid=${uid}&client=${client}&access-token=${accessToken}`);
+      const response = await signIn(email, password);
+      console.log('Response:', response);
+      console.log('Headers:', response.data);
+
+      // const { uid, client, 'access-token': accessToken } = response.headers;
+      console.log('Headers:', response.headers);
+      console.log('Access Token:', localStorage.getItem('access-token'));
+      console.log('Client:', localStorage.getItem('client'));
+      console.log('UID:', localStorage.getItem('uid'));
+
+      router.push('/');
     } catch (error) {
-      console.error('ログインませんでした', error);
+      console.error('ログインできませんでした', error);
     }
   };
 
