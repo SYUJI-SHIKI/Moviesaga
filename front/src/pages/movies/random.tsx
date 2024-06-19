@@ -1,4 +1,4 @@
-import FilterForm from "../../../components/FilterForm";
+import FilterForm from "../../components/FilterForm";
 import React from "react";
 
 const RandomMoviesPage = () => (
