@@ -3,7 +3,6 @@ require 'httparty'
 module Api
   module V1
     class SearchesController < ApiController
-      skip_before_action :authenticate_user!
 
       def search
         if params[:query].present? && params[:category].present?

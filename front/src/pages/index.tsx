@@ -1,16 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 const RootPage: React.FC = () => {
-  const isUserSignedIn = true;
+  const [isUserSignedIn, setIsUserSignedIn ]= useState(false);
   const router = useRouter();
 
   useEffect(() => {
     const token = localStorage.getItem('uid');
-    console.log('Access Token:', token);})
+    console.log('Access Token:', token);
+    setIsUserSignedIn(!!token);
+  }, [router]);
 
   return (
     <>

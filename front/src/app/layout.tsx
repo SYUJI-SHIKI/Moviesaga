@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "components/layouts/header/Header";
-import Footer from "components/layouts/footer/Footer";
+import Header from "@/components/layouts/header/Header";
+import Footer from "@/components/layouts/footer/Footer";
 // import { Toaster } from "@/components/ui/toaster";
 // import { Toaster as HotToaster } from "react-hot-toast";
 const inter = Inter({ subsets: ["latin"] });
@@ -45,9 +45,9 @@ const RootLayout = ({
   return (
     <html lang="ja">
       <body>
-          <Header />
-          {children}
-          <Footer />
+        <Header />
+        {children}
+        <Footer />
       </body>
     </html>
   );

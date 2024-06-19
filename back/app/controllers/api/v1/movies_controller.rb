@@ -1,7 +1,6 @@
 module Api
   module V1
     class MoviesController < ApiController
-      skip_before_action :authenticate_user!
       def index ;end
 
       def show
