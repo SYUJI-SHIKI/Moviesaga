@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const logOut = async () => {
   if (typeof window === 'undefined') return;
@@ -10,7 +11,7 @@ const logOut = async () => {
   console.log(uid)
 
   try {
-    const response = await axios.delete(`${process.env.NEXT_PUBLIC_TEST_API_URL}/auth/sign_out`, {
+    const response = await axios.delete(`${process.env.NEXT_PUBLIC_TEST_API_URL}/api/v1/auth/sign_out`, {
       headers: {
         'client': client,
         'uid': uid,
@@ -27,6 +28,8 @@ const logOut = async () => {
       uid: localStorage.getItem('uid'),
       accessToken: localStorage.getItem('access-token')
     });
+    const router = useRouter();
+    router.push("/");
   
     return response;
   } catch (error) {

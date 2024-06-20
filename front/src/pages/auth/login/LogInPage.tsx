@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import logIn from "./logIn";
 import { useEffect } from "react";
+import GoogleLoginButton from "../Google/GoogleButton";
 
-const LoginPage = () => {
+const LogInPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
@@ -58,8 +59,9 @@ const LoginPage = () => {
         </div>
         <button type="submit">Login</button>
       </form>
+      <GoogleLoginButton/>
     </div>
   );
 };
 
-export default LoginPage;
+export default LogInPage;

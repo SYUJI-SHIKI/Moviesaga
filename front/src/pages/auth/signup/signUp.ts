@@ -26,7 +26,7 @@ const signUp = async (
   });
 
   try {
-    const response = await authApi.post("/auth", {
+    const response = await authApi.post("/api/v1/auth", {
       registration: {
         name,
         email,
