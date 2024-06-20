@@ -1,19 +1,17 @@
 "use client";
 
-import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { GiFilmProjector } from "react-icons/gi";
 import styles from "./Header.module.css";
-import logOut from "@/auth/logOut";
+import logOut from "@/pages/auth/logOut";
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     const token = localStorage.getItem(`access-token`);
@@ -24,7 +22,6 @@ const Header: React.FC = () => {
     try {
       await logOut();
       setIsLoggedIn(false);
-      router.push("/");
     } catch (error) {
       console.error("Logout failed", error);
     }
@@ -117,12 +114,12 @@ const Header: React.FC = () => {
                       ランダム機能
                     </div>
                   </Link>
-                  <Link href="/auth/LogInPage">
+                  <Link href="/auth/login/LogInPage">
                     <div className="text-white hover:text-gray-300 mb-2">
                       ログイン
                     </div>
                   </Link>
-                  <Link href="/auth/SignUp">
+                  <Link href="/auth/signup/SignUpPage">
                     <div className="text-white hover:text-gray-300 mb-2">
                       サインアップ
                     </div>
@@ -177,12 +174,12 @@ const Header: React.FC = () => {
                     ランダム機能
                   </div>
                 </Link>
-                <Link href="/auth/LogInPage">
+                <Link href="/auth/login/LogInPage">
                   <div className="text-white hover:text-gray-300 mb-2">
                     ログイン
                   </div>
                 </Link>
-                <Link href="/auth/SignUp">
+                <Link href="/auth/signup/SignUpPage">
                   <div className="text-white hover:text-gray-300 mb-2">
                     サインアップ
                   </div>

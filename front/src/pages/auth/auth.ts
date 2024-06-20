@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const authApi = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_TEST_API_URL,
+  baseURL: `${process.env.NEXT_PUBLIC_TEST_API_URL}`,
 });
 
 authApi.interceptors.request.use(config => {
@@ -39,6 +39,8 @@ authApi.interceptors.response.use(response => {
     console.log('UID:', uid);
   }
   return response;
+}, error => {
+  return Promise.reject(error);
 });
 
 export default authApi;

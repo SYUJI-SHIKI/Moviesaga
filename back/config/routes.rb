@@ -27,15 +27,16 @@ Rails.application.routes.draw do
 
   namespace :api, format: 'json' do
     namespace :v1 do
-      # devise_scope :user do
-      #   post 'auth', to: 'users/registrations#create'
-      # end
       mount_devise_token_auth_for 'User', at: 'auth',
       skip:[:omniauth_callbacks], controllers: {
         registrations: 'api/v1/auth/registrations',
-        sessions: 'api/v1/auth/sessions'
-      #   omniauth_callbacks: 'api/v1/users/omniauth_callbacks'
+        sessions: 'api/v1/auth/sessions',
+        omniauth_callbacks: 'api/v1/auth/omniauth_callbacks',
       }
+
+      # get 'auth/:provider/callback', to: 'auth/omniauth_callbacks#google_oauth2'
+      # post 'auth/:provider/callback', to: 'auth/omniauth_callbacks#google_oauth2'
+
       resource :profile, only: %i[show edit update]
       resources :movies, only: %i[index show] do
         collection do

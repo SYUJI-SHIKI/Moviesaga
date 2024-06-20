@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_16_071502) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_19_055425) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "authentications", force: :cascade do |t|
+    t.string "provider", null: false
+    t.string "uid", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["uid", "provider"], name: "index_authentications_on_uid_and_provider", unique: true
+    t.index ["user_id"], name: "index_authentications_on_user_id"
+  end
 
   create_table "bookmarks", force: :cascade do |t|
     t.bigint "user_id"
@@ -199,6 +209,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_16_071502) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "authentications", "users"
   add_foreign_key "bookmarks", "collections", on_delete: :cascade
   add_foreign_key "bookmarks", "users"
   add_foreign_key "collections", "users"
