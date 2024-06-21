@@ -64,19 +64,19 @@ Copyright © 2024 37signals, LLC
   	webdriverio: "^7.19.5"
   };
   var scripts = {
-  	"build-css": "node-sass --functions=./assets/trix/stylesheets/functions assets/trix.scss dist/trix.css",
-  	"build-js": "rollup -c",
-  	"build-assets": "cp -f assets/*.html dist/",
-  	build: "yarn run build-js && yarn run build-css && yarn run build-assets",
-  	watch: "rollup -c -w",
-  	lint: "eslint .",
-  	pretest: "yarn run lint && yarn run build",
-  	test: "karma start",
-  	prerelease: "yarn version && yarn test",
-  	release: "npm adduser && npm publish",
-  	postrelease: "git push && git push --tags",
-  	dev: "web-dev-server --app-index index.html  --root-dir dist --node-resolve --open",
-  	start: "yarn build-assets && concurrently --kill-others --names js,css,dev-server 'yarn watch' 'yarn build-css --watch' 'yarn dev'"
+    "build-css": "node-sass --functions=./assets/trix/stylesheets/functions assets/trix.scss dist/trix.css",
+    "build-js": "rollup -c",
+    "build-assets": "cp -f assets/*.html dist/",
+    "build": "npm run build-js && npm run build-css && npm run build-assets",
+    "watch": "rollup -c -w",
+    "lint": "eslint .",
+    "pretest": "npm run lint && npm run build",
+    "test": "karma start",
+    "prerelease": "npm version && npm test",
+    "release": "npm adduser && npm publish",
+    "postrelease": "git push && git push --tags",
+    "dev": "web-dev-server --app-index index.html  --root-dir dist --node-resolve --open",
+    "start": "npm run build-assets && concurrently --kill-others --names js,css,dev-server 'npm run watch' 'npm run build-css --watch' 'npm run dev'"
   };
   var _package = {
   	name: name,

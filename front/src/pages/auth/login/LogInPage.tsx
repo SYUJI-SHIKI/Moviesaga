@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import logIn from "./logIn";
+import logIn from "../../../features/api/logIn";
 import { useEffect } from "react";
 import GoogleLoginButton from "../Google/GoogleButton";
 
@@ -24,7 +24,6 @@ const LogInPage = () => {
       console.log("Response:", response);
       console.log("Headers:", response.data);
 
-      console.log("Headers:", response.headers);
       console.log("Access Token:", localStorage.getItem("access-token"));
       console.log("Client:", localStorage.getItem("client"));
       console.log("UID:", localStorage.getItem("uid"));
@@ -59,7 +58,7 @@ const LogInPage = () => {
         </div>
         <button type="submit">Login</button>
       </form>
-      <GoogleLoginButton/>
+      <GoogleLoginButton />
     </div>
   );
 };

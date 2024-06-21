@@ -6,12 +6,13 @@ import { useEffect, useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import { GiFilmProjector } from "react-icons/gi";
 import styles from "./Header.module.css";
-import logOut from "@/pages/auth/logOut";
+import useLogOut from "@/pages/auth/useLogOut";
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const logOut = useLogOut();
 
   useEffect(() => {
     const token = localStorage.getItem(`access-token`);
