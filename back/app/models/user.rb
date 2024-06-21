@@ -25,15 +25,15 @@ class User < ApplicationRecord
     object&.user_id == id
   end
 
-  def self.from_omniauth(auth)
+  def self.from_omniauth(payload, provider)
     transaction do
-      user = find_by(email: auth.info.email)
+      user = find_by(email: payload["email"])
       if user.nil?
-        user = User.new(name: auth.info.name, email: auth.info.email, provider: auth.provider, uid: auth.uid)
+        user = User.new(name: payload["name"], email: payload["email"], provider: provider, uid: payload["sub"])
         user.password = Devise.friendly_token[0, 20]
 
         if user.save
-          user.authentications.create!(provider: auth.provider, uid: auth.uid)
+          user.authentications.create!(provider: provider, uid: payload["sub"])
           user
         else
           logger.error "保存できませんでした"

@@ -1,10 +1,6 @@
 import React from "react";
 import authApi from "../../../features/api/auth";
-import {
-  GoogleOAuthProvider,
-  GoogleLogin,
-  CredentialResponse,
-} from "@react-oauth/google";
+import { GoogleOAuthProvider, GoogleLogin, CredentialResponse, } from "@react-oauth/google";
 
 const CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
 
@@ -12,23 +8,22 @@ const GoogleLoginButton: React.FC = () => {
   const handleLoginSuccess = async (credentialResponse: CredentialResponse) => {
     console.log("Googleログイン成功", credentialResponse);
     const { credential } = credentialResponse;
-
+  
     try {
       const res = await authApi.post(
-        "/api/v1/auth/google_oauth2/callback",
+        "/auth/:provider/callback", // ここがRailsのエンドポイント
         {
           token: credential,
         },
         {
           headers: {
             "Content-Type": "application/json",
-          },
+          }
         }
       );
-      const data = res.data;
-      console.log("Backend Response", data);
+      console.log("認証成功", res.data);
     } catch (error) {
-      console.error("Error sending token to backend:", error);
+      console.error("認証エラー", error);
     }
   };
 
