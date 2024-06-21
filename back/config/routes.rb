@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root "static_pages#top"
-  devise_for :users, controllers: { registrations: 'users/registrations' }
+  devise_for :users, controllers: { 
+    registrations: 'users/registrations',
+  }
   resource :profile, only: %i[show edit update]
   # resolve('Profile') { [:profile] }
   resources :movies, only: %i[index show] do
@@ -28,7 +30,7 @@ Rails.application.routes.draw do
   namespace :api, format: 'json' do
     namespace :v1 do
       mount_devise_token_auth_for 'User', at: 'auth',
-      skip:[:omniauth_callbacks], controllers: {
+      controllers: {
         registrations: 'api/v1/auth/registrations',
         sessions: 'api/v1/auth/sessions',
         omniauth_callbacks: 'api/v1/auth/omniauth_callbacks',
