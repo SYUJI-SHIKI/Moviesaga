@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import signUp from "./signUp";
+import signUp from "../../../features/api/signUp";
 
 const SignUpPage = () => {
   const [name, setName] = useState("");

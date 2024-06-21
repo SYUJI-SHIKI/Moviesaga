@@ -1,6 +1,10 @@
 import React from "react";
-import authApi from "../auth";
-import { GoogleOAuthProvider, GoogleLogin, CredentialResponse } from '@react-oauth/google';
+import authApi from "../../../features/api/auth";
+import {
+  GoogleOAuthProvider,
+  GoogleLogin,
+  CredentialResponse,
+} from "@react-oauth/google";
 
 const CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
 
@@ -10,22 +14,26 @@ const GoogleLoginButton: React.FC = () => {
     const { credential } = credentialResponse;
 
     try {
-      const res = await authApi.post('/api/v1/auth/google_oauth2/callback', {
-        token: credential
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
+      const res = await authApi.post(
+        "/api/v1/auth/google_oauth2/callback",
+        {
+          token: credential,
         },
-      });
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const data = res.data;
-      console.log('Backend Response', data);
+      console.log("Backend Response", data);
     } catch (error) {
       console.error("Error sending token to backend:", error);
     }
   };
 
   const handleLoginFailure = () => {
-    console.error('Google認証失敗しました');
+    console.error("Google認証失敗しました");
   };
 
   return (

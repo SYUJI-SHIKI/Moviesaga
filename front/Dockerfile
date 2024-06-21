@@ -11,5 +11,5 @@ RUN npm install
 COPY . /app
 
 RUN npm run build
-
-CMD ["npm", "run", "dev", "-p", "4000"]
+# CMD ["npm", "run", "dev", "-p", "4000"]に変更してね
+CMD ["sh", "-c", "while :; do npm run dev -p 4000; done"]
