@@ -9,7 +9,7 @@ const RootPage: React.FC = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const token = localStorage.getItem('uid');
+    const token = localStorage.getItem('access-token');
     console.log('Access Token:', token);
     setIsUserSignedIn(!!token);
   }, [router]);

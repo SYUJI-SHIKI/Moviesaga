@@ -1,11 +1,15 @@
 import { useRouter } from 'next/router';
+import useLoading from '@/components/elements/Loading/useLoading';
 import axios from 'axios';
 
 const useLogOut = () => {
   const router = useRouter();
+  const { loading, startLoading, stopLoading } = useLoading();
 
   const logOut = async () => {
     if (typeof window === 'undefined') return;
+
+    startLoading();
 
     const client = localStorage.getItem('client');
     const uid = localStorage.getItem('uid');
@@ -33,15 +37,17 @@ const useLogOut = () => {
         accessToken: localStorage.getItem('access-token')
       });
 
-      router.push("/");
+      window.dispatchEvent(new Event("storage"));
+      await router.push('/');
 
       return response;
     } catch (error) {
       console.error('ログアウトに失敗しました:', error);
+      stopLoading()
     }
   };
 
-  return logOut;
+  return { logOut, loading, startLoading, stopLoading };
 };
 
 export default useLogOut;

@@ -26,7 +26,7 @@ const signUp = async (
   });
 
   try {
-    const response = await authApi.post("/auth", {
+    const response = await authApi.post("api/v1/auth", {
       registration: {
         name,
         email,
@@ -35,6 +35,7 @@ const signUp = async (
       },
     });
     console.log("SignUp response:", response.data);
+
     return response.data;
   } catch (error) {
     console.error("新規登録できませんでした", error);

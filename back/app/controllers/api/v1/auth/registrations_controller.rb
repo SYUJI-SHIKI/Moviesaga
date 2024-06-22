@@ -12,20 +12,28 @@ module Api
 
       def create
 
-        @resource = resource_class.new(sign_up_params)
-
+        @user = resource_class.new(sign_up_params)
         
         # Save the resource and handle the response
-        if @resource.save
-          Rails.logger.debug { "@resource.inspect: #{@resource.inspect}" }
-          render json: {
-            status: 'success',
-            data: @resource
-          }, status: :created
+        if @user.save
+          token = @user.create_new_auth_token
+          sign_in(:user, @user)
+
+          Rails.logger.debug { "@resource.inspect: #{token.inspect}" }
+          response_data = {
+            data: @user.as_json.merge({
+              "access-token": token['access-token'],
+              client: token['client'],
+              uid: token['uid'],
+            })
+          }
+
+          Rails.logger.info "Response Data: #{response_data.to_json}"
+          render json: response_data, status: :ok
         else
           render json: {
             status: 'error',
-            errors: @resource.errors.full_messages
+            errors: @user.errors.full_messages
           }, status: :unprocessable_entity
         end
       end
@@ -33,20 +41,12 @@ module Api
       protected
 
       def configure_permitted_parameters
-        Rails.logger.debug "configure_permitted_parameters called"
-        Rails.logger.debug "#{devise_parameter_sanitizer} sssssssssssssssss"
-        
         devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
         devise_parameter_sanitizer.permit(:account_update, keys: [:name])
-      #   # Rails.logger.debug "Parameters permitted for sign_up: #{devise_parameter_sanitizer.sanitize(:sign_up).inspect}"
-      #   # # Rails.logger.debug "Parameters permitted for account_update: #{devise_parameter_sanitizer.sanitize(:account_update).inspect}"
-      #   # permitted_params = devise_parameter_sanitizer.sanitize(:sign_up)
-      #   # Rails.logger.debug "Parameters permitted for sign_up: #{permitted_params.inspect}"
       end
 
       def configure_sign_up_params
         devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email, :password, :password_confirmation])
-        Rails.logger.debug "#{ devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email, :password, :password_confirmation])} sppppppppppp"
       end
 
       private
@@ -54,14 +54,6 @@ module Api
       def sign_up_params
         params.require(:registration).permit(:name, :email, :password, :password_confirmation)
       end
-
-      # def set_token_info
-      #   return unless @resource.persisted?
-
-      #   token = @resource.create_new_auth_token
-      #   response.set_header('access-token', token['access-token'])
-      #   response.set_header('client', token['client'])
-      # end
     end
   end
 end

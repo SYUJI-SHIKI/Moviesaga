@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import signUp from "../../../features/api/signUp";
+import signUp from "@/features/auth/signUp";
+import { useRouter } from "next/router";
 
 const SignUpPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -16,6 +18,9 @@ const SignUpPage = () => {
     try {
       await signUp(name, email, password, passwordConfirmation);
       alert("Sign up successful");
+
+      window.dispatchEvent(new Event("storage"));
+      router.push('/')
     } catch (error) {
       alert("Sign up failed");
     }
