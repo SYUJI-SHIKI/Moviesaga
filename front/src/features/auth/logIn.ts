@@ -18,7 +18,7 @@ const logIn = async (
 ): Promise<AuthResponse> => {
   try {
     const response = await authApi.post<AuthResponse>(
-      "/auth/sign_in",
+      "api/v1/auth/sign_in",
       {
         email,
         password,

@@ -39,6 +39,8 @@ class User < ApplicationRecord
           logger.error "保存できませんでした"
           nil
         end
+      else
+        user
       end
     rescue => e
       logger.error e

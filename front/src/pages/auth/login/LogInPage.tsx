@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import logIn from "../../../features/api/logIn";
+import logIn from "@/features/auth/logIn";
 import { useEffect } from "react";
-import GoogleLoginButton from "../Google/GoogleButton";
+import GoogleLoginButton from "../../../features/auth/GoogleButton";
 
 const LogInPage = () => {
   const [email, setEmail] = useState("");
@@ -27,6 +27,8 @@ const LogInPage = () => {
       console.log("Access Token:", localStorage.getItem("access-token"));
       console.log("Client:", localStorage.getItem("client"));
       console.log("UID:", localStorage.getItem("uid"));
+
+      window.dispatchEvent(new Event("storage"));
 
       router.push("/");
     } catch (error) {

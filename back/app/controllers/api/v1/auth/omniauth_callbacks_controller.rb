@@ -28,6 +28,7 @@ module Api
         if @user.persisted?
           token = @user.create_new_auth_token
           @user.save
+          sign_in(:user, @user)
 
           response_data = {
             data: @user.as_json.merge({
@@ -42,27 +43,6 @@ module Api
           render json: { error: 'Invalid email or password' }, status: :unauthorized
         end
       end
-
-      private
-
-      # GoogleのOAuthトークンを検証してユーザー情報を取得するメソッド
-      # def authenticate_google_token(token)
-      #   payload = Google::Auth::IDTokens.verify_oidc(token), aud: 'Rails.application.credentials.dig(:oauth, :google, :client_id)'
-      #   client_id = Rails.application.credentials.dig(:oauth, :google, :client_id)
-      
-      #   begin
-      #     payload = validator.check(token, client_id)
-      
-      #     {
-      #       'uid' => payload['sub'],
-      #       'email' => payload['email'],
-      #       'name' => payload['name']
-      #     }
-      #   rescue GoogleIDToken::ValidationError => e
-      #     Rails.logger.error "Google token validation failed: #{e.message}"
-      #     nil
-      #   end
-      # end
     end
   end
 end
