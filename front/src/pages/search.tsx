@@ -1,61 +1,72 @@
-import { useState } from 'react';
+"use client";
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image'
 import Link from 'next/link';
 import React from 'react';
-import { useEffect, useRef } from 'react';
 import styles from  '@/features/search/search.module.css';
+import { useRouter } from 'next/router';
 
 interface Movie {
   id: number;
   poster_path: string;
 }
-
 interface Styles {
   readonly [key: string]: string;
 }
 
 const cssModuleStyles: Styles = styles;
-
 const SearchPage: React.FC = () => {
-  const [query, setQuery] = useState<string>('');
-  const [category, setCategory] = useState<string>('movie');
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [page, setPage] = useState<number>(1);
-  const [totalPages, setTotalPages] = useState<number>(1);
-  const imagesRef = useRef<HTMLDivElement[]>([]);
+const router = useRouter();
+const [query, setQuery] = useState<string>('');
+const [category, setCategory] = useState<string>('movie');
+const [movies, setMovies] = useState<Movie[]>([]);
+const [page, setPage] = useState<number>(1);
+const [totalPages, setTotalPages] = useState<number>(1);
+const imagesRef = useRef<HTMLDivElement[]>([]);
+const handleSearch = async () => {
+const response = await fetch(`/api/v1/search?query=${query}&category=${category}&page=${page}`);
+const data = await response.json();
 
-  const handleSearch = async () => {
-    const response = await fetch(`/api/v1/search?query=${query}&category=${category}&page=${page}`);
-    const data = await response.json();
-    setMovies(data.movies);
-    setTotalPages(data.total_pages);
-  };
+setMovies(data.movies);
+setTotalPages(data.total_pages);
 
-  const handlePageChange = (newPage: number) => {
-    setPage(newPage);
-    handleSearch();
-  };
+const queryString = `?query=${query}&category=${category}&page=${page}`;
+router.push(`/search/search${queryString}`, undefined, { shallow: true });
+};
 
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add(styles['animation-slide-in']);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
+const handlePageChange = (newPage: number) => {
+  setPage(newPage);
+  handleSearch();
+};
 
-    imagesRef.current.forEach((image) => {
-      observer.observe(image);
+useEffect(() => {
+const { query: queryParam, category: categoryParam, page: pageParam } = router.query;
+  if (!queryParam && !categoryParam && !pageParam) return;
+
+  if (queryParam) setQuery(queryParam as string);
+  if (categoryParam) setCategory(categoryParam as string);
+  if (pageParam) setPage(Number(pageParam));
+  handleSearch();
+}, [router.query]);
+
+useEffect(() => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+      entry.target.classList.add(styles['animation-slide-in']);
+      observer.unobserve(entry.target);
+      }
     });
-
-    return () => {
-      imagesRef.current.forEach((image) => {
-        observer.unobserve(image);
-      });
-    };
-  }, []);
+  }, { threshold: 0.1 });
+  imagesRef.current.forEach((image) => {
+  observer.observe(image);
+  });
+  return () => {
+    imagesRef.current.forEach((image) => {
+    observer.unobserve(image);
+    });
+  };
+}, []);
 
   return (
     <>

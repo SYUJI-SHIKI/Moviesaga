@@ -8,8 +8,8 @@ module Api
         Rails.logger.debug("kkkkkkkk#{movie_data}")
         @video_id = fetch_youtube_video(movie_data["original_title"])
         @keywords = get_keywords(movie_data["id"])
-        Rails.logger.debug("dddddddd#{@video_id}")
         @movie = MovieSaverService.save_movie(movie_data, @video_id,@keywords)
+        Rails.logger.debug("dddddddd#{@movie.poster_path}")
 
         render json: {
           movie: {

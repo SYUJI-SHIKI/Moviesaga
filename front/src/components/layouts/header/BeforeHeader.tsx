@@ -35,59 +35,37 @@ const BeforeHeader: React.FC = () => {
   };
 
   return (
-      <header className="relative z-40 p-0 m-0">
-        <nav className="bg-gray-800 p-4 flex justify-between items-center">
-          <Link href="/">
-            <div>
-              <Image src="/logo.png" alt="Logo" width={100} height={30} />{" "}
-            </div>
-          </Link>
-          <div className="lg:hidden">
-            <button
-              onClick={toggleMenu}
-              className="text-white focus:outline-none"
-            >
-              {isOpen ? <FaTimes size={24} /> : <GiFilmProjector size={24} />}
-            </button>
+    <header className="fixed top-0 left-0 z-40 p-0 m-0 bg-transparent">
+      <nav className="flex justify-between items-center">
+        <Link href="/">
+          <div>
+            <Image src="/logo.png" alt="Logo" width={100} height={30} />{" "}
           </div>
+        </Link>
+        <div className="lg:hidden">
           <button
-            onClick={toggleNav}
-            className="hidden lg:block fixed right-4 text-white focus:outline-none z-50"
+            onClick={toggleMenu}
+            className="text-white focus:outline-none"
           >
-            {isNavOpen ? <FaTimes size={24} /> : <GiFilmProjector size={24} />}
+            {isOpen ? <FaTimes size={24} /> : <GiFilmProjector size={24} />}
           </button>
-        </nav>
-        {isOpen && (
-          <>
-            <div className={`lg:hidden fixed inset-0 bg-gray-800 bg-opacity-75 z-40 ${styles.fullScreenMenu}`}>
-              <div className="flex flex-col items-center justify-center h-full space-y-6">
-                <button
-                  onClick={toggleMenu}
-                  className="text-white absolute top-4 right-4 focus:outline-none">
-                  <FaTimes size={24} />
-                </button>
-                <Link href="/movies/random">
-                  <div className="text-white hover:text-gray-300 mb-2">
-                    ランダム機能
-                  </div>
-                </Link>
-                <Link href="/auth/login/LogInPage">
-                  <div className="text-white hover:text-gray-300 mb-2">
-                    ログイン
-                  </div>
-                </Link>
-                <Link href="/auth/signup/SignUpPage">
-                  <div className="text-white hover:text-gray-300 mb-2">
-                    サインアップ
-                  </div>
-                </Link>
-              </div>
-            </div>
-          </>
-        )}
-        {isNavOpen && (
-          <>
-            <div className="fixed top-0 right-0 h-full w-40 bg-gray-500 z-40 flex flex-col items-center justify-center">
+        </div>
+        <button
+          onClick={toggleNav}
+          className="hidden lg:block fixed right-4 text-white focus:outline-none z-50"
+        >
+          {isNavOpen ? <FaTimes size={24} /> : <GiFilmProjector size={24} />}
+        </button>
+      </nav>
+      {isOpen && (
+        <>
+          <div className={`lg:hidden fixed inset-0 bg-gray-800 bg-opacity-75 z-40 ${styles.fullScreenMenu}`}>
+            <div className="flex flex-col items-center justify-center h-full space-y-6">
+              <button
+                onClick={toggleMenu}
+                className="text-white absolute top-4 right-4 focus:outline-none">
+                <FaTimes size={24} />
+              </button>
               <Link href="/movies/random">
                 <div className="text-white hover:text-gray-300 mb-2">
                   ランダム機能
@@ -104,9 +82,31 @@ const BeforeHeader: React.FC = () => {
                 </div>
               </Link>
             </div>
-          </>
-        )}
-      </header>
+          </div>
+        </>
+      )}
+      {isNavOpen && (
+        <>
+          <div className="fixed top-0 right-0 h-full w-40 bg-gray-500 z-40 flex flex-col items-center justify-center">
+            <Link href="/movies/random">
+              <div className="text-white hover:text-gray-300 mb-2">
+                ランダム機能
+              </div>
+            </Link>
+            <Link href="/auth/login/LogInPage">
+              <div className="text-white hover:text-gray-300 mb-2">
+                ログイン
+              </div>
+            </Link>
+            <Link href="/auth/signup/SignUpPage">
+              <div className="text-white hover:text-gray-300 mb-2">
+                サインアップ
+              </div>
+            </Link>
+          </div>
+        </>
+      )}
+    </header>
   )
 }
 
