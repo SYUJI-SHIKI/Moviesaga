@@ -37,25 +37,25 @@ const AfterHeader: React.FC = () => {
 
   return (
     <>
-      <header className="relative z-40 p-0 m-0">
-        <nav className="bg-gray-800 p-4 flex justify-between items-center">
+      <header className="fixed top-0 left-0 z-40 p-0 m-0 bg-transparent">
+        <nav className="flex justify-between items-center">
           <Link href="/">
-            <div>
-              <Image src="/logo.png" alt="Logo" width={100} height={30} />{" "}
+            <div className="m-5">
+              <Image src="/logo.png" alt="Logo" width={120} height={50} />{" "}
               {/* ロゴのサイズは適宜調整してね */}
             </div>
           </Link>
           <div className="lg:hidden">
             <button
               onClick={toggleMenu}
-              className="text-white focus:outline-none">
-              {isOpen ? <FaTimes size={24} /> : <GiFilmProjector size={24} />}
+              className=" fixed right-4 top-5 text-white focus:outline-none z-50">
+              {isOpen ? <FaTimes size={35} /> : <GiFilmProjector size={35} />}
             </button>
           </div>
           <button
             onClick={toggleNav}
-            className="hidden lg:block fixed right-4 text-white focus:outline-none z-50">
-            {isNavOpen ? <FaTimes size={24} /> : <GiFilmProjector size={24} />}
+            className="hidden lg:block fixed right-4 top-5 text-white focus:outline-none z-50">
+            {isNavOpen ? <FaTimes size={24} /> : <GiFilmProjector size={40} />}
           </button>
         </nav>
         {isOpen && (
@@ -87,7 +87,7 @@ const AfterHeader: React.FC = () => {
                     マイページ
                   </div>
                 </Link>
-                <Link href="/search/searchPage">
+                <Link href="/search">
                   <div className="text-white hover:text-gray-300 mb-2">
                     映画検索
                   </div>
@@ -120,7 +120,7 @@ const AfterHeader: React.FC = () => {
                   マイページ
                 </div>
               </Link>
-              <Link href="/search/searchPage">
+              <Link href="/search">
                 <div className="text-white hover:text-gray-300 mb-2">
                   映画検索
                 </div>
