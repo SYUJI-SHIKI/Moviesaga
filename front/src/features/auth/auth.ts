@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const authApi = axios.create({
-  baseURL: `${process.env.NEXT_PUBLIC_API_URL}`,
+  baseURL: `${process.env.NEXT_PUBLIC_TEST_API_URL}`,
 });
 
 authApi.interceptors.request.use(config => {
@@ -34,6 +34,7 @@ authApi.interceptors.response.use(response => {
       localStorage.setItem('uid', uid);
     }
 
+    console.log('保存したトークン:', localStorage.getItem('access-token'));
     console.log('Access Token:', token);
     console.log('Client:', client);
     console.log('UID:', uid);

@@ -1,9 +1,9 @@
 class Movie < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorited_by_user, through: :favorites, source: :user
-  has_many :movies_collections, dependent: :destroy, dependent: :destroy
+  has_many :movies_collections, dependent: :destroy
   has_many :collections, through: :movies_collections
-  
+
   serialize :keywords, JSON
 
   # TMDB APIの規約により六か月以上キャッシュの保存ができないため

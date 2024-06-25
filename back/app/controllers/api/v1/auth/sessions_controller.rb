@@ -33,7 +33,7 @@ module Api
         client = request.headers['client']
         uid = request.headers['uid']
         token = request.headers['access-token']
-      
+
         Rails.logger.debug("クライアント: #{client}, UID: #{uid}, トークン: #{token}")
       
         user = User.find_by(uid: uid)

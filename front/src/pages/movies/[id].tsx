@@ -5,6 +5,7 @@ import Image from "next/image";
 import React from "react";
 
 interface Movie {
+  id: number;
   tmdb_id: number;
   original_title: string;
   overview: string;
@@ -27,7 +28,7 @@ const MovieDetail = () => {
 
   console.log("Router is ready:", router.isReady);
   console.log("Movie ID:", movieId);
-  console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
+  console.log("API URL:", process.env.NEXT_PUBLIC_TEST_API_URL);
   useEffect(() => {
     if (!router.isReady) return;
 
@@ -41,7 +42,7 @@ const MovieDetail = () => {
       try {
         console.log("Fetching movie with id:", movieId); // 追加
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/v1/movies/${movieId}`
+          `${process.env.NEXT_PUBLIC_TEST_API_URL}/api/v1/movies/${movieId}`
         );
         console.log("Response:", response);
         if (!response.ok) {
@@ -111,7 +112,7 @@ const MovieDetail = () => {
                 <div className="text-4xl mb-5">
                   {movie.original_title || "Title not available"}
                 </div>
-                <FavoriteButton itemId={movie.tmdb_id} />
+                <FavoriteButton movieId={Number(movieId)} />
                 <div className="mb-2">
                   上映時間:{" "}
                   {movie.runtime

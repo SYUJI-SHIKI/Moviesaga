@@ -8,7 +8,7 @@ const searchHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     // 環境変数のチェック
     const apiUrl = process.env.NEXT_PUBLIC_SEARCH_API_URL;
     if (!apiUrl) {
-      throw new Error('NEXT_PUBLIC_API_URL is not defined');
+      throw new Error('NEXT_PUBLIC_TEST_API_URL is not defined');
     }
 
     const response = await fetch(`${apiUrl}/api/v1/search?query=${query}&category=${category}&page=${page}`);
