@@ -1,20 +1,37 @@
 module Api
   module V1
     class ApiController < ActionController::API
-      # before_action :authenticate_user!
-      # protect_from_forgery with: :null_session
-      # before_action :configure_permitted_parameters, if: :devise_controller?
-      # include DeviseTokenAuth::Concerns::SetUserByToken
-      # include DeviseHackSession
+      before_action :authenticate_user!
 
-      # protected
+      private
 
-      # def configure_permitted_parameters
-      #   Rails.logger.debug "configure_permitted_parameters called"
-      #   Rails.logger.debug "#{devise_parameter_sanitizer} sssssssssssssssss"
-      #   devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
-      #   devise_parameter_sanitizer.permit(:account_update, keys: [:name])
-      # end
+      def authenticate_user!
+        token = request.headers['Authorization']
+        if token.present?
+          # トークンを解析して対応するユーザーを見つける
+          user = User.find_by("tokens @> ?::jsonb", { token => { "token" => token } }.to_json)
+          if user
+            # トークンが有効かどうか確認する
+            token_data = user.tokens[token]
+            if token_data && token_data["token"] == token
+              # トークンが有効であれば、ユーザーをログインさせる
+              sign_in(user)
+            else
+              Rails.logger.error "トークンが無効です: #{token}"
+              render json: { error: 'Invalid token' }, status: :unauthorized
+            end
+          else
+            Rails.logger.error "トークンに対応するユーザーが見つかりません: #{token}"
+            render json: { error: 'User not found' }, status: :unauthorized
+          end
+        else
+          Rails.logger.error "トークンが見つかりません"
+          render json: { error: 'Token missing' }, status: :unauthorized
+        end
+      rescue JSON::ParserError
+        Rails.logger.error "トークンの解析に失敗しました: #{token}"
+        render json: { error: 'Invalid token' }, status: :unauthorized
+      end
     end
   end
 end

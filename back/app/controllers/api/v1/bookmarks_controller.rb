@@ -8,6 +8,7 @@ module Api
           render json: { success: true }
         else
           render json: { error: 'Movie not found' }, status: :not_found
+        end
       end
     
       def destroy

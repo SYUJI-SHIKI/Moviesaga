@@ -1,6 +1,8 @@
 module Api
   module V1
     class MoviesController < ApiController
+      skip_before_action :authenticate_user!
+
       def index ;end
 
       def show
@@ -9,10 +11,11 @@ module Api
         @video_id = fetch_youtube_video(movie_data["original_title"])
         @keywords = get_keywords(movie_data["id"])
         @movie = MovieSaverService.save_movie(movie_data, @video_id,@keywords)
-        Rails.logger.debug("dddddddd#{@movie.poster_path}")
+        Rails.logger.debug("dddddddd#{@movie.inspect}")
 
         render json: {
           movie: {
+            id: @movie.id,
             tmdb_id: @movie.tmdb_id,
             original_title: @movie.original_title,
             overview: @movie.overview,
