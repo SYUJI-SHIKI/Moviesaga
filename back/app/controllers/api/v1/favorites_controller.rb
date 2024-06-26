@@ -2,7 +2,7 @@ module Api
   module V1
     class FavoritesController < ApiController
       include FavoritableMethods
-      skip_before_action :authenticate_user!
+      # skip_before_action :authenticate_user!
 
       def index
         favorite = Favorite.find_by(movie_id: params[:movie_id], user_id: params[:user_id])
