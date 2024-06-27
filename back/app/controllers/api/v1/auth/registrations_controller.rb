@@ -13,10 +13,14 @@ module Api
       def create
 
         @user = resource_class.new(sign_up_params)
+
+        @user.uuid = SecureRandom.uuid
+        token = @user.create_new_auth_token
+        @user.client = token['client']
         
         # Save the resource and handle the response
         if @user.save
-          token = @user.create_new_auth_token
+
           sign_in(:user, @user)
 
           Rails.logger.debug { "@resource.inspect: #{token.inspect}" }
@@ -24,7 +28,7 @@ module Api
             data: @user.as_json.merge({
               "access-token": token['access-token'],
               client: token['client'],
-              uid: token['uid'],
+              uuid: @user.uuid,
             })
           }
 

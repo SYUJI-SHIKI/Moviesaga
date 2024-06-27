@@ -15,7 +15,7 @@ module Api
             data: user.as_json.merge({
               "access-token": token['access-token'],
               client: token['client'],
-              uid: token['uid'],
+              uuid: user.uuid,
             })
           }
       
@@ -31,12 +31,12 @@ module Api
       def destroy
         Rails.logger.debug("リクエストヘッダー: #{request.headers.inspect}")
         client = request.headers['client']
-        uid = request.headers['uid']
+        uuid = request.headers['uuid']
         token = request.headers['access-token']
 
-        Rails.logger.debug("クライアント: #{client}, UID: #{uid}, トークン: #{token}")
+        Rails.logger.debug("クライアント: #{client}, UID: #{uuid}, トークン: #{token}")
       
-        user = User.find_by(uid: uid)
+        user = User.find_by(uuid: uuid)
         if user
           Rails.logger.debug("ユーザーが見つかりました: #{user.inspect}")
           Rails.logger.debug("ユーザーのトークン情報: #{user.tokens.inspect}")

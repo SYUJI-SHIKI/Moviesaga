@@ -8,11 +8,11 @@ authApi.interceptors.request.use(config => {
   if (typeof window !== 'undefined') { // クライアントサイドでのみ実行
     const token = localStorage.getItem('access-token');
     const client = localStorage.getItem('client');
-    const uid = localStorage.getItem('uid');
-    if (token && client && uid) {
+    const uuid = localStorage.getItem('uuid');
+    if (token && client && uuid) {
       config.headers['access-token'] = token;
       config.headers['client'] = client;
-      config.headers['uid'] = uid;
+      config.headers['uuid'] = uuid;
     }
   }
   return config;
@@ -27,17 +27,17 @@ authApi.interceptors.response.use(response => {
     console.log("データのプロパティ:", Object.keys(data));
 
     const client = data['client'];
-    const uid = data['uid'];
-    if (token && client && uid) {
+    const uuid = data['uuid'];
+    if (token && client && uuid) {
       localStorage.setItem('access-token', token);
       localStorage.setItem('client', client);
-      localStorage.setItem('uid', uid);
+      localStorage.setItem('uuid', uuid);
     }
 
     console.log('保存したトークン:', localStorage.getItem('access-token'));
     console.log('Access Token:', token);
     console.log('Client:', client);
-    console.log('UID:', uid);
+    console.log('UUID:', uuid);
   }
   return response;
 }, error => {

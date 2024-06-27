@@ -26,12 +26,10 @@ module Api
         @user = User.from_omniauth(payload, provider)
 
         if @user.persisted?
-          Rails.logger.debug("sssssssssssssssssssssssssss, #{token.inspect}")
+          @user.tokens.clear
           token = @user.create_new_auth_token
-          Rails.logger.debug("sssssssssssssssssssssssssss, #{token.inspect}")
+          @user.client = token['client']
 
-          # @user.tokens = token['access-token']
-          # Rails.logger.debug("sssssssssssssssssssssssssss, #{token['access-token'].inspect}")
           @user.save
           sign_in(:user, @user)
 
@@ -40,7 +38,7 @@ module Api
             data: @user.as_json.merge({
               "access-token": token["access-token"],
               client: token['client'],
-              uid: token['uid'],
+              uuid: @user.uuid,
             })
           }
           Rails.logger.info "Response Data: #{response_data.to_json}"

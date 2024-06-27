@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_21_213855) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_27_133200) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -203,18 +203,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_21_213855) do
     t.string "image"
     t.json "tokens", default: {}
     t.boolean "allow_password_change", default: false
+    t.string "client"
+    t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
+    t.index ["uuid"], name: "index_users_on_uuid", unique: true
   end
 
   add_foreign_key "authentications", "users", on_delete: :cascade
   add_foreign_key "bookmarks", "collections", on_delete: :cascade
-  add_foreign_key "bookmarks", "users"
-  add_foreign_key "collections", "users"
-  add_foreign_key "favorites", "movies"
-  add_foreign_key "favorites", "users"
+  add_foreign_key "bookmarks", "users", on_delete: :cascade
+  add_foreign_key "collections", "users", on_delete: :cascade
+  add_foreign_key "favorites", "movies", on_delete: :cascade
+  add_foreign_key "favorites", "users", on_delete: :cascade
   add_foreign_key "movies_collections", "collections", on_delete: :cascade
   add_foreign_key "movies_collections", "movies", on_delete: :cascade
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

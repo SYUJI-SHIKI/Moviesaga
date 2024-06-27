@@ -29,7 +29,13 @@ class User < ApplicationRecord
     transaction do
       user = find_by(email: payload["email"])
       if user.nil?
-        user = User.new(name: payload["name"], email: payload["email"], provider: provider, uid: payload["sub"])
+        user = User.new(
+          name: payload["name"],
+          email: payload["email"],
+          provider: provider,
+          uid: payload["sub"],
+          uuid: SecureRandom.uuid
+          )
         user.password = Devise.friendly_token[0, 20]
 
         if user.save

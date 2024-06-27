@@ -26,7 +26,7 @@ const LogInPage = () => {
 
       console.log("Access Token:", localStorage.getItem("access-token"));
       console.log("Client:", localStorage.getItem("client"));
-      console.log("UID:", localStorage.getItem("uid"));
+      console.log("UID:", localStorage.getItem("uuid"));
 
       window.dispatchEvent(new Event("storage"));
 
