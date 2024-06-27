@@ -10,7 +10,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
   const [error, setError] = useState<string | null>(null);
 
   // ロルストレージから userId を取得
-  const userId = localStorage.getItem('uid');
+  const userId = localStorage.getItem('uuid');
 
   useEffect(() => {
     const fetchFavoriteStatus = async () => {

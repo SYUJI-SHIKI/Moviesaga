@@ -10,7 +10,7 @@ module Api
       end
 
       def create
-        user = User.find_by(uid: params[:user_id].to_s)
+        user = User.find_by(uuid: params[:user_id].to_s)
         user_id = user.id
 
         movie = Movie.find_by(tmdb_id: params[:movie_id].to_s)
@@ -26,7 +26,7 @@ module Api
       end
 
       def destroy
-        user = User.find_by(uid: params[:user_id].to_s)
+        user = User.find_by(uuid: params[:user_id].to_s)
         user_id = user.id
 
         movie = Movie.find_by(tmdb_id: params[:movie_id].to_s)

@@ -5,7 +5,7 @@ interface AuthResponse {
     id: number;
     email: string;
     provider: string;
-    uid: string;
+    uuid: string;
     allow_password_change: boolean;
     name: string;
     nickname: string;
