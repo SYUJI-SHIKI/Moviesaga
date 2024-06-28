@@ -1,8 +1,14 @@
 import api from "lib/api";
 
-export const createCollection = async ( data: { title: string; descroption: string; movieId: number[] }) => {
+export const createCollection = async ( data: { title: string; description: string; movieIds: number[] }) => {
   try {
-    const response = await api.post('/collections', { collection: data });
+    const transformedData = {
+      title: data.title,
+      description: data.description,
+      movie_ids: data.movieIds,
+    };
+
+    const response = await api.post('/collections', { collection: transformedData });
     return response.data;
   } catch (error) {
     console.error('Error', error);

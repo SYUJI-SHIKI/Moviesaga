@@ -11,6 +11,8 @@ module Api
           token = user.create_new_auth_token
           Rails.logger.info "Response Data: #{token}"
 
+          sign_in(:user, user)
+
           response_data = {
             data: user.as_json.merge({
               "access-token": token['access-token'],

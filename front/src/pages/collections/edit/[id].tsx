@@ -45,11 +45,16 @@ const CollectionEdit: React.FC<{ id: number }> = ({ id }) => {
   return (
     <div>
       {collectionData && (
-        <CollectionForm
-          movies={collectionData.movies}
-          addMovies={collectionData.addMovies}
-          onSubmit={handleSubmit}
-        />
+        <>
+          <div className="flex items-center justify-center bg-black">
+            <div className="text-3xl text-white font-bold mb-4 mt-6">特集作成</div>
+          </div>
+          <CollectionForm
+            movies={collectionData.movies}
+            addMovies={collectionData.addMovies}
+            onSubmit={handleSubmit}
+          />
+        </>
       )}
     </div>
   );

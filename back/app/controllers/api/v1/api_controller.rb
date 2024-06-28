@@ -1,36 +1,35 @@
 module Api
   module V1
     class ApiController < ActionController::API
-      # before_action :authenticate_user!
+      before_action :authenticate_user!
 
-      private
+      protected
 
       def authenticate_user!
-        token = request.headers['Authorization']
-        if token.present?
-          # トークンを解析して対応するユーザーを見つける
-          user = User.find_by("tokens @> ?::jsonb", { token => { "token" => token } }.to_json)
-          if user
-            # トークンが有効かどうか確認する
-            token_data = user.tokens[token]
-            if token_data && token_data["token"] == token
-              # トークンが有効であれば、ユーザーをログインさせる
+        client = request.headers['client']
+        uuid = request.headers['uuid']
+        token = request.headers['access-token']
+
+        user = User.find_by(uuid: uuid)
+      
+        if user
+          begin
+            stored_token_hash = user.tokens[client]['token']
+            if BCrypt::Password.new(stored_token_hash) == token
               sign_in(user)
+              Rails.logger.debug("User signed in: #{user.inspect}")
             else
-              Rails.logger.error "トークンが無効です: #{token}"
-              render json: { error: 'Invalid token' }, status: :unauthorized
+              Rails.logger.debug("トークンが一致しません")
+              render json: { errors: ['ログアウトに失敗しました。'] }, status: :unprocessable_entity
             end
-          else
-            Rails.logger.error "トークンに対応するユーザーが見つかりません: #{token}"
-            render json: { error: 'User not found' }, status: :unauthorized
+          rescue JSON::ParserError => e
+            Rails.logger.error "トークンの解析に失敗しました: #{token}, エラー: #{e.message}"
+            render json: { error: 'Invalid token' }, status: :unauthorized
           end
         else
           Rails.logger.error "トークンが見つかりません"
           render json: { error: 'Token missing' }, status: :unauthorized
         end
-      rescue JSON::ParserError
-        Rails.logger.error "トークンの解析に失敗しました: #{token}"
-        render json: { error: 'Invalid token' }, status: :unauthorized
       end
     end
   end

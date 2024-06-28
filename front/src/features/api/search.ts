@@ -6,7 +6,7 @@ const searchHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     const { query, category, page } = req.query as { query: string; category: string; page: string };
     
     // 環境変数のチェック
-    const apiUrl = process.env.NEXT_PUBLIC_SEARCH_API_URL;
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
     if (!apiUrl) {
       throw new Error('NEXT_PUBLIC_TEST_API_URL is not defined');
     }

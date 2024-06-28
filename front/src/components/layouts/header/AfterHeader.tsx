@@ -77,7 +77,7 @@ const AfterHeader: React.FC = () => {
                     特集一覧
                   </div>
                 </Link>
-                <Link href="/collections/create">
+                <Link href="/collections/createCollection">
                   <div className="text-white hover:text-gray-300 mb-2">
                     特集作成
                   </div>
@@ -110,7 +110,7 @@ const AfterHeader: React.FC = () => {
                   特集一覧
                 </div>
               </Link>
-              <Link href="/collections/create">
+              <Link href="/collections/createCollection">
                 <div className="text-white hover:text-gray-300 mb-2">
                   特集作成
                 </div>

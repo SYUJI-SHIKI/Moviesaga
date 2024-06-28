@@ -25,8 +25,10 @@ const CollectionsIndex: React.FC = () => {
   return (
     <>
       {collections.length > 0 && (
-        <div className="container bg-gray-950 mx-auto p-4 mt-5 mb-10">
-          <h1 className="text-3xl font-bold mb-4">Collections</h1>
+        <div className="container bg-gray-950 mx-auto p-4 mb-10">
+          <div className="flex items-center justify-center">
+            <div className="text-3xl text-white font-bold mb-4 mt-4">Collections</div>
+          </div>
           <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {collections.map(collection => (
               <CollectionCard

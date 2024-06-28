@@ -11,8 +11,15 @@ module Api
 
       def new
         @collection = Collection.new
-        @movies = current_user.favorite_movies
-        render json: { collection: @collection, movies: @movies }
+        Rails.logger.debug("current_user: #{current_user.inspect}")
+        if current_user.present?
+          Rails.logger.debug('いるよ')
+          @movies = current_user.favorite_movies
+          render json: { collection: @collection, movies: @movies }
+        else
+          Rails.logger.debug('current_userがいません')
+          render json: { error: 'User not authenticated' }, status: :unauthorized
+        end
       end
 
       def create
