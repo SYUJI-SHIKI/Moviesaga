@@ -39,7 +39,7 @@ const LogInPage = () => {
   return (
     <div>
       <h1>ログイン</h1>
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleLogin} className='mt-10'>
         <div>
           <label>Email:</label>
           <input

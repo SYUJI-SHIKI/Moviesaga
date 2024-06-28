@@ -38,11 +38,16 @@ const CollectionCreate: React.FC = () => {
   return (
     <div>
       {movies.length > 0 && (
-        <CollectionForm
-          movies={movies}
-          addMovies={addMovies}
-          onSubmit={handleSubmit}
-        />
+        <>
+          <div className="flex items-center justify-center bg-black">
+            <div className="text-3xl text-white font-bold mb-4 mt-6">特集作成</div>
+          </div>
+          <CollectionForm
+            movies={movies}
+            addMovies={addMovies}
+            onSubmit={handleSubmit}
+          />
+        </>
       )}
     </div>
   );
