@@ -33,6 +33,22 @@ const CollectionShow: React.FC = () => {
     }
   }, [id]);
 
+  const handleEdit = () => {
+    router.push(`/collections/edit/${id}`);
+  };
+
+  const handleDelete = async () => {
+    const confirmed = window.confirm('本当にこの特集を削除しますか？');
+    if (confirmed) {
+      try {
+        await api.delete(`/collections/${id}`);
+        router.push('/collections');
+      } catch (error) {
+        console.error('There was an error deleting the collection!', error);
+      }
+    }
+  };
+
   if (!collection) return <p>Loading...</p>;
 
   return (
@@ -40,6 +56,10 @@ const CollectionShow: React.FC = () => {
       {collection && (
         <div className="container mx-auto p-4">
           <h1 className="text-3xl font-bold mb-4">{collection.title}</h1>
+          <div>
+            <button onClick={handleEdit} className="bg-blue-500 text-white px-4 py-2 rounded mr-2">編集</button>
+            <button onClick={handleDelete} className="bg-red-500 text-white px-4 py-2 rounded">削除</button>
+          </div>
           <p className="text-gray-700 mb-6">{collection.description}</p>
           <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {collection.movies.map(movie => (

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchCollection, updateCollection } from 'lib/CollectionApi';
 import CollectionForm from '@/components/elements/Collection/CollectionForm';
+import { useRouter } from 'next/router';
 
 interface Movie {
   id: number;
@@ -9,34 +10,48 @@ interface Movie {
 }
 
 interface CollectionData {
-  collection: {
-    id: number;
-    title: string;
-    description: string;
-  };
+  id: number;
+  title: string;
+  description: string;
   movies: Movie[];
   addMovies: Movie[];
 }
 
-const CollectionEdit: React.FC<{ id: number }> = ({ id }) => {
+const CollectionEdit: React.FC =() => {
   const [collectionData, setCollectionData] = useState<CollectionData | null>(null);
+  const router = useRouter();
+  const { id } = router.query;
+
+  console.log(`kokomite, ${id}`)
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const data = await fetchCollection(id);
+        const data = await fetchCollection(Number(id));
+        console.log("Fetched data:", data);
         setCollectionData(data);
       } catch (error) {
         console.error('Error fetching collection data', error);
       }
     };
 
-    getData();
+    if (id) {
+      getData();
+    }
   }, [id]);
+
+  useEffect(() => {
+    if (collectionData) {
+      console.log("Title:", collectionData.title);
+      console.log("Description:", collectionData.description);
+      console.log("Movies:", collectionData.movies);
+      console.log("AddMovies:", collectionData.addMovies);
+    }
+  }, [collectionData]);
 
   const handleSubmit = async (data: { title: string; description: string; movieIds: number[] }) => {
     try {
-      await updateCollection(id, data);
+      await updateCollection(Number(id), data);
     } catch (error) {
       console.error('Error submitting collection form', error);
     }
@@ -47,9 +62,12 @@ const CollectionEdit: React.FC<{ id: number }> = ({ id }) => {
       {collectionData && (
         <>
           <div className="flex items-center justify-center bg-black">
-            <div className="text-3xl text-white font-bold mb-4 mt-6">特集作成</div>
+            <div className="text-3xl text-white font-bold mb-4 mt-6">特集編集</div>
           </div>
+          {console.log("CollectionForm props:", collectionData)}
           <CollectionForm
+            title={collectionData.title}
+            description={collectionData.description}
             movies={collectionData.movies}
             addMovies={collectionData.addMovies}
             onSubmit={handleSubmit}
