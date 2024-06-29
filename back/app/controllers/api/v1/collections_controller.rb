@@ -15,7 +15,7 @@ module Api
         if current_user.present?
           Rails.logger.debug('いるよ')
           @movies = current_user.favorite_movies
-          render json: { collection: @collection, movies: @movies }
+          render json: { collection: @collection, addMovies: @movies }
         else
           Rails.logger.debug('current_userがいません')
           render json: { error: 'User not authenticated' }, status: :unauthorized
@@ -41,7 +41,7 @@ module Api
         @collection = current_user.collections.find(params[:id])
         @movies = @collection.movies
         @add_movies = current_user.favorite_movies.where.not(id: @movies.pluck(:id))
-        render json: { collection: @collection, movies: @movies, add_movies: @add_movies }
+        render json: { title: @collection.title, description: @collection.description, movies: @movies, addMovies: @add_movies }
       end
 
       def update
