@@ -12,7 +12,7 @@ if (typeof window !== "undefined") {
 }
 
 const api = axios.create({
-  baseURL: `${process.env.NEXT_PUBLIC_TEST_API_URL}/api/v1`,
+  baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api/v1`,
   headers: {
     'client': client,
     'uuid': uuid,

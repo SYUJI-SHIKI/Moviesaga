@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from "next/router";
-import { DndContext, closestCenter, useDroppable, useDraggable } from '@dnd-kit/core';
+// import { DndContext, closestCenter, useDroppable, useDraggable } from '@dnd-kit/core';
 
 interface Movie {
   id: number;

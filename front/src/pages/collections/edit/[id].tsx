@@ -22,8 +22,6 @@ const CollectionEdit: React.FC =() => {
   const router = useRouter();
   const { id } = router.query;
 
-  console.log(`kokomite, ${id}`)
-
   useEffect(() => {
     const getData = async () => {
       try {
@@ -36,6 +34,8 @@ const CollectionEdit: React.FC =() => {
     };
 
     if (id) {
+      console.log("Router ID:", id);
+      console.log("Converted ID:", Number(id));
       getData();
     }
   }, [id]);

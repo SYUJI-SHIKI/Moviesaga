@@ -26,9 +26,8 @@ const CollectionCard: React.FC<CollectionCardProps> = ({ id, title, description,
           <Image
             src={imageUrl}
             alt={title}
-            layout="fill"
-            objectFit="cover"
-            className={`transition-transform ${styles.customPosition} md:object-center`}
+            fill
+            className={`transition-transform ${styles.customPosition} md:object-center object-cover`}
             style={{ transition: 'transform calc(var(--d) * 1.5) var(--e)' }}
           />
           <div className="absolute top-0 left-0 w-full h-full bg-slate-100 transition-opacity group-hover:opacity-50 .bg-gradient-to-b from-transparent to-bg-slate-200 opacity-20"></div>
