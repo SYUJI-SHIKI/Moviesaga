@@ -1,0 +1,18 @@
+.imageContainer {
+  position: relative;
+  overflow: hidden;
+}
+
+.imageReflection {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  transform: scaleY(-1);
+  filter: blur(8px);
+  opacity: 0.5;
+  border-radius: inherit; /* 反射部分も画像の形に合わせる */
+}

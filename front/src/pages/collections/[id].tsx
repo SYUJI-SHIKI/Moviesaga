@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import api from 'lib/api';
+import CollectionCarousel from '@/components/elements/Collection/CollectionCarousel';
 
 interface Movie {
   id: number;
-  title: string;
+  original_title: string;
   poster_path: string;
 }
 
@@ -54,26 +55,14 @@ const CollectionShow: React.FC = () => {
   return (
     <>
       {collection && (
-        <div className="container mx-auto p-4">
+        <div className="mx-auto p-4 mb-20 overflow-auto bg-black">
           <h1 className="text-3xl font-bold mb-4">{collection.title}</h1>
           <div>
             <button onClick={handleEdit} className="bg-blue-500 text-white px-4 py-2 rounded mr-2">編集</button>
             <button onClick={handleDelete} className="bg-red-500 text-white px-4 py-2 rounded">削除</button>
           </div>
           <p className="text-gray-700 mb-6">{collection.description}</p>
-          <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {collection.movies.map(movie => (
-              <div key={movie.id} className="bg-white shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow duration-300">
-                <Image
-                    src={movie.poster_path}
-                    alt={movie.title}
-                    className="collection-movie-image rounded"
-                    height={80}
-                    width={80}
-                  />
-              </div>
-            ))}
-          </div>
+          <CollectionCarousel movies={collection.movies} />
         </div>
       )}
     </>
