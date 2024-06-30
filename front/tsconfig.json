@@ -30,6 +30,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/pages/movies/[id].tsx"
-  ],
+, "node_modules/@types/radix-ui__react-slot.d.ts"  ],
   "exclude": ["node_modules"]
 }
