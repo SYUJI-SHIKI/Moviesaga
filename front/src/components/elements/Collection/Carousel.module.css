@@ -3,16 +3,17 @@
   overflow: hidden;
 }
 
+.hoverEffect {
+  transition: transform 0.3s ease-in-out;
+  filter: contrast(.5);
+}
+
+.hoverShadowEffect {
+  display: hidden
+}
+
 .imageReflection {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: inherit;
   transform: scaleY(-1);
-  filter: blur(8px);
   opacity: 0.5;
-  border-radius: inherit; /* 反射部分も画像の形に合わせる */
+  margin-top: -10px; /* 画像と反転画像の間に少し余白を追加 */
 }

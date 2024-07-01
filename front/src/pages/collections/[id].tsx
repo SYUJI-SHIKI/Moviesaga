@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
 import api from 'lib/api';
 import CollectionCarousel from '@/components/elements/Collection/CollectionCarousel';
 
@@ -8,6 +7,7 @@ interface Movie {
   id: number;
   original_title: string;
   poster_path: string;
+  youtube_trailer_id: string;
 }
 
 interface Collection {
@@ -55,14 +55,18 @@ const CollectionShow: React.FC = () => {
   return (
     <>
       {collection && (
-        <div className="mx-auto p-4 mb-20 overflow-auto bg-black">
-          <h1 className="text-3xl font-bold mb-4">{collection.title}</h1>
-          <div>
-            <button onClick={handleEdit} className="bg-blue-500 text-white px-4 py-2 rounded mr-2">編集</button>
-            <button onClick={handleDelete} className="bg-red-500 text-white px-4 py-2 rounded">削除</button>
+        <div className="flex flex-col items-center min-h-screen bg-black">
+          <div className="flex flex-row my-20 lg:my-10 items-center justify-center w-full max-w-4xl mx-auto text-white">
+            <div className='text-3xl lg:text-5xl font-bold'>{collection.title}</div>
+            <div className="flex flex-row space-x-2 ml-2">
+              <button onClick={handleEdit} className="bg-blue-500 text-white px-2 py-1 text-sm mt-7 rounded shadow-md hover:bg-blue-600 transition duration-300">編集</button>
+              <button onClick={handleDelete} className="bg-red-500 text-white px-2 py-1 text-sm mt-7 rounded shadow-md hover:bg-red-600 transition duration-300">削除</button>
+            </div>
           </div>
-          <p className="text-gray-700 mb-6">{collection.description}</p>
-          <CollectionCarousel movies={collection.movies} />
+          <p className="text-gray-400 mb-6 max-w-4xl mx-auto text-xl">{collection.description}</p>
+          <div className="w-full h-full">
+            <CollectionCarousel movies={collection.movies} />
+          </div>
         </div>
       )}
     </>
