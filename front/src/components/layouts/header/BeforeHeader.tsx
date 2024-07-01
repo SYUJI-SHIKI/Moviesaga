@@ -11,7 +11,16 @@ import styles from "./Header.module.css";
 const BeforeHeader: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
 
   useEffect(() => {
     const handleRouteChange = () => {

@@ -56,7 +56,10 @@ Rails.application.routes.draw do
       resources :favorites, only: %i[create destroy index] do
         delete '', to: 'favorites#destroy', on: :collection
       end
-      resources :bookmarks, only: %i[create destroy index]
+
+      resources :bookmarks, only: %i[create destroy index] do
+        delete '', to: 'bookmarks#destroy', on: :collection
+      end
     
       get "up" => "rails/health#show", as: :rails_health_check
     

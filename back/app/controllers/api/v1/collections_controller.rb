@@ -61,12 +61,18 @@ module Api
 
       def my_lists
         @collections = current_user.collections.includes(:user).order(created_at: :desc)
-        render json: @collections, include: :user
+        collection_card = @collections.map do |collection|
+          collection.as_json(include: :movies).merge(Image: collection.movies.first&.poster_path)
+        end
+        render json: collection_card
       end
 
       def bookmark
         @collections = current_user.bookmark_collections.includes(:user).order(created_at: :desc)
-        render json: @collections, include: :user
+        collection_card = @collections.map do |collection|
+          collection.as_json(include: :movies).merge(Image: collection.movies.first&.poster_path)
+        end
+        render json: collection_card
       end
 
       private
