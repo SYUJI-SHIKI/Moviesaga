@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import api from 'lib/api';
+import BookmarkButton from '@/components/elements/Bookmark/BookmarkButton';
 import CollectionCarousel from '@/components/elements/Collection/CollectionCarousel';
 
 interface Movie {
@@ -59,6 +60,7 @@ const CollectionShow: React.FC = () => {
           <div className="flex flex-row my-20 lg:my-10 items-center justify-center w-full max-w-4xl mx-auto text-white">
             <div className='text-3xl lg:text-5xl font-bold'>{collection.title}</div>
             <div className="flex flex-row space-x-2 ml-2">
+              <BookmarkButton collectionId={Number(id)} />
               <button onClick={handleEdit} className="bg-blue-500 text-white px-2 py-1 text-sm mt-7 rounded shadow-md hover:bg-blue-600 transition duration-300">編集</button>
               <button onClick={handleDelete} className="bg-red-500 text-white px-2 py-1 text-sm mt-7 rounded shadow-md hover:bg-red-600 transition duration-300">削除</button>
             </div>
