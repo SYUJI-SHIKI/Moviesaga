@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchProfile, updateProfile } from "lib/ProfileApi";
+import { fetchProfile, updateProfile } from "@/features/api/ProfileApi";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -91,20 +91,11 @@ const ProfilePage: React.FC<ProfileProps> = ({ user, movies, collections }) => {
 
             <div className="favorites-section">
               <h2>Favorites</h2>
-              <div className="movie-profile-container pt-3">
-                <div className="show-collection-movies-container">
-                  {moviesData.map(movie => (
-                    <div key={movie.id} className="show-collection-movie-item">
-                      <h3>{movie.original_title}</h3>
-                      {/* <img
-                        src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-                        alt={movie.poster_path}
-                        className="show-collection-movie-image"
-                      /> */}
-                    </div>
-                  ))}
+              <Link href="/movies/favorites">
+                <div>
+                  いいねした映画
                 </div>
-              </div>
+              </Link>
             </div>
           </div>
         </div>

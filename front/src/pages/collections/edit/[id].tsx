@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { fetchCollection, updateCollection } from 'lib/CollectionApi';
-import CollectionForm from '@/components/elements/Collection/CollectionForm';
-import { useRouter } from 'next/router';
+import React, { useEffect, useState } from "react";
+import {
+  fetchCollection,
+  updateCollection,
+} from "@/features/api/CollectionApi";
+import CollectionForm from "@/components/elements/Collection/CollectionForm";
+import { useRouter } from "next/router";
 
 interface Movie {
   id: number;
@@ -17,8 +20,10 @@ interface CollectionData {
   addMovies: Movie[];
 }
 
-const CollectionEdit: React.FC =() => {
-  const [collectionData, setCollectionData] = useState<CollectionData | null>(null);
+const CollectionEdit: React.FC = () => {
+  const [collectionData, setCollectionData] = useState<CollectionData | null>(
+    null
+  );
   const router = useRouter();
   const { id } = router.query;
 
@@ -29,7 +34,7 @@ const CollectionEdit: React.FC =() => {
         console.log("Fetched data:", data);
         setCollectionData(data);
       } catch (error) {
-        console.error('Error fetching collection data', error);
+        console.error("Error fetching collection data", error);
       }
     };
 
@@ -49,11 +54,15 @@ const CollectionEdit: React.FC =() => {
     }
   }, [collectionData]);
 
-  const handleSubmit = async (data: { title: string; description: string; movieIds: number[] }) => {
+  const handleSubmit = async (data: {
+    title: string;
+    description: string;
+    movieIds: number[];
+  }) => {
     try {
       await updateCollection(Number(id), data);
     } catch (error) {
-      console.error('Error submitting collection form', error);
+      console.error("Error submitting collection form", error);
     }
   };
 
@@ -62,7 +71,9 @@ const CollectionEdit: React.FC =() => {
       {collectionData && (
         <>
           <div className="flex items-center justify-center bg-black">
-            <div className="text-3xl text-white font-bold mb-4 mt-6">特集編集</div>
+            <div className="text-3xl text-white font-bold mb-4 mt-6">
+              特集編集
+            </div>
           </div>
           {console.log("CollectionForm props:", collectionData)}
           <CollectionForm

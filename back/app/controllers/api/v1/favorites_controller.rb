@@ -4,8 +4,14 @@ module Api
       include FavoritableMethods
 
       def index
-        favorite = Favorite.find_by(movie_id: params[:movie_id], user_id: params[:user_id])
-        render json: { isFavorite: favorite.present? }
+        @movies = current_user.favorite_movies
+        Rails.logger.debug(@movies)
+  
+        if @movies
+          render json: { movies: @movies }, status: :ok
+        else
+          render json: { message: 'Favorite not found' }, status: :not_found
+        end
       end
 
       def create
