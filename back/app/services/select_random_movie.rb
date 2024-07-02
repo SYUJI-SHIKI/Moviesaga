@@ -76,7 +76,7 @@ class SelectRandomMovie
       end
 
     if language == "foreign"
-      movies = movies.reject! { |movie| movie[:original_language] == "ja" }
+      movies = movies.reject { |movie| movie[:original_language] == "ja" } || movies
     end
     movies.map { |movie| movie[:id] }
   end

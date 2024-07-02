@@ -1,0 +1,13 @@
+.customRadioButton {
+  display: flex;
+  align-items: center;
+}
+
+.radioInput {
+  display: none;
+}
+
+.icon {
+  font-size: 24px;
+  cursor: pointer;
+}

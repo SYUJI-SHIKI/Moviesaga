@@ -1,0 +1,34 @@
+.select-card {
+  background-color: rgba(102, 82, 51, 0.3); /* 透明度50%の深いセピア色 */
+  color: rgb(180 83 9);
+  font-size: 1.25rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  transition: background-color 500ms ease;
+}
+
+.select-card:hover {
+  background-color: rgba(102, 82, 51, 0.7);
+}
+
+.select-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
+
+.select-card label {
+  color: #f5e6c6;
+}
+
+.select-card .custom-radio-label {
+  color: rgb(180 83 9);
+}
