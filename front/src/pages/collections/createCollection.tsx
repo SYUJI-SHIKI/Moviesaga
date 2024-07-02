@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import api from 'lib/api';
-import { createCollection } from 'lib/CollectionApi';
-import CollectionForm from '@/components/elements/Collection/CollectionForm';
+import React, { useEffect, useState } from "react";
+import api from "lib/api";
+import { createCollection } from "@/features/api/CollectionApi";
+import CollectionForm from "@/components/elements/Collection/CollectionForm";
 
 interface Movie {
   id: number;
@@ -17,15 +17,15 @@ const CollectionCreate: React.FC = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await api.get('/collections/new');
-        console.log('API response:', response.data);
+        const response = await api.get("/collections/new");
+        console.log("API response:", response.data);
         if (response.data && response.data.addMovies) {
           setAddMovies(response.data.addMovies);
         } else {
-          setError('Movies data is not in expected format.');
+          setError("Movies data is not in expected format.");
         }
       } catch (error) {
-        setError('Error fetching movies data: ');
+        setError("Error fetching movies data: ");
       } finally {
         setLoading(false);
       }
@@ -42,11 +42,15 @@ const CollectionCreate: React.FC = () => {
     return <div>{error}</div>;
   }
 
-  const handleSubmit = async (data: { title: string; description: string; movieIds: number[] }) => {
+  const handleSubmit = async (data: {
+    title: string;
+    description: string;
+    movieIds: number[];
+  }) => {
     try {
       await createCollection(data);
     } catch (error) {
-      console.error('Error submitting collection form', error);
+      console.error("Error submitting collection form", error);
     }
   };
 
@@ -55,13 +59,12 @@ const CollectionCreate: React.FC = () => {
       {addMovies.length > 0 ? (
         <>
           <div className="flex items-center justify-center bg-black">
-            <div className="text-3xl text-white font-bold mb-4 mt-6">特集作成</div>
+            <div className="text-3xl text-white font-bold mb-4 mt-6">
+              特集作成
+            </div>
           </div>
           {console.log("CollectionForm props:", addMovies)}
-          <CollectionForm
-            addMovies={addMovies}
-            onSubmit={handleSubmit}
-          />
+          <CollectionForm addMovies={addMovies} onSubmit={handleSubmit} />
         </>
       ) : (
         <div>No movies available to add.</div>
