@@ -6,10 +6,13 @@ export const fetchProfile = async () => {
 }
 
 export const updateProfile = async (formData: FormData) => {
-  console.log(FormData.name);
   console.log(formData);
 
-  const response = await api.put('/profile', formData)
+  const response = await api.put('/profile', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
   return response.data;
 }
 

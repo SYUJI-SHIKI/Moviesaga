@@ -3,8 +3,6 @@ import Image from "next/image";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -12,6 +10,8 @@ import {
   DialogPortal,
   DialogClose
 } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button"
+import { FaTimes } from "react-icons/fa";
 
 interface User {
   id: number;
@@ -49,37 +49,44 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({ user, onSave }) =
       formData.append("avatar", avatar);
     }
 
+    console.log(formData)
+
     onSave(formData)
   };
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="px-4 py-2 bg-blue-600 rounded text-white">
+        <Button className="p-2 rounded text-white outline">
           プロフィール編集
-        </button>
+        </Button>
       </DialogTrigger>
       <DialogPortal>
-        <DialogOverlay className="fixed inset-0 bg-black bg-opacity-50" />
-        <DialogContent className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-800 p-6 rounded-lg w-96">
+        <DialogOverlay className="fixed inset-0 bg-black bg-opacity-50 " />
+        <DialogContent className="max-w-md rounded-md">
           <DialogHeader>
-            <DialogTitle className="text-2xl mb-4 text-white">プロフィール編集</DialogTitle>
+            <DialogTitle className="text-white">プロフィール編集</DialogTitle>
           </DialogHeader>
           <form onSubmit={handleSubmit}>
-            <div className="mb-4">
-              <label className="block mb-2 text-white">アバター</label>
-              <div className="flex items-center">
+            <div className="">
+              <div className="flex items-end">
                 <Image
+                // これ後で入れるよ
                   src={previewUrl || '/avatar_sample.png'}
                   alt="Avatar Preview"
-                  width={80}
+                  width={100}
                   height={80}
                   className="rounded-full mr-4"
                 />
-                <input type="file" onChange={handleFileChange} accept="image/*" className="text-white" />
+                <input 
+                  type="file"
+                  onChange={handleFileChange}
+                  accept="image/*" 
+                  className="text-white"
+                />
               </div>
             </div>
-            <div className="mb-4">
+            <div className="m-4">
               <label className="block mb-2 text-white">名前</label>
               <input
                 type="text"
@@ -88,7 +95,7 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({ user, onSave }) =
                 className="w-full p-2 bg-gray-700 rounded text-white"
               />
             </div>
-            <div className="mb-4">
+            <div className="m-4">
               <label className="block mb-2 text-white">メールアドレス</label>
               <input
                 type="email"
@@ -97,20 +104,20 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({ user, onSave }) =
                 className="w-full p-2 bg-gray-700 rounded text-white"
               />
             </div>
-            <div className="flex justify-end">
+            <div className="flex justify-end mt-5">
               <DialogClose asChild>
-                <button type="button" className="mr-2 px-4 py-2 bg-gray-600 rounded text-white">
+                <button type="button" className="mr-2 px-4 py-2 outline-2 outline rounded text-white">
                   キャンセル
                 </button>
               </DialogClose>
-              <button type="submit" className="px-4 py-2 bg-blue-600 rounded text-white">
+              <button type="submit" className="px-4 py-2 outline rounded text-white">
                 保存
               </button>
             </div>
           </form>
           <DialogClose asChild>
             <button className="absolute top-2 right-2 text-white" aria-label="Close">
-              X
+              <FaTimes />
             </button>
           </DialogClose>
         </DialogContent>

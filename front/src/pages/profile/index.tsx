@@ -24,7 +24,7 @@ interface ProfileProps {
   movies: Movies[];
 }
 
-const ProfilePage: React.FC<ProfileProps> = ({ user, movies, collections }) => {
+const ProfilePage: React.FC<ProfileProps> = ({ user, movies }) => {
   const [userData, setUserData] = useState<User | null>(null);
   const [moviesData, setMoviesData] = useState<Movies[]>([]);
   const [isMounted, setIsMounted] = useState(false);
@@ -77,7 +77,7 @@ const ProfilePage: React.FC<ProfileProps> = ({ user, movies, collections }) => {
         <div className="bg-black h-full min-h-screen text-gray-200">
           <div className="flex flex-col items-center h-full w-full justify-center">
             <div className="flex flex-col lg:flex-row mt-20 items-center lg:items-end">
-              <div className="float-center">
+              <div className="relative inline-block lg:mb-2">
                 <Image
                   src="/avatar_sample.png"
                   alt="User Avatar"
@@ -85,9 +85,11 @@ const ProfilePage: React.FC<ProfileProps> = ({ user, movies, collections }) => {
                   height={200}
                   className="rounded-full border-2  border-white"
                 />
+                <div className="absolute bottom-0 right-0 transform translate-x-1/4 translate-y-1/4">
+                  <EditProfileDialog user={userData} onSave={handleEditProfile} />
+                </div>
               </div>
-              <div className="text-xl mt-5 lg:ml-3">
-                <EditProfileDialog user={userData} onSave={handleEditProfile} />
+              <div className="text-xl mt-7 lg:ml-16">
                 <div>{userData.name}</div>
                 <div>{userData.email}</div>
               </div>
