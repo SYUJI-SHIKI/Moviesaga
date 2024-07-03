@@ -5,8 +5,14 @@ export const fetchProfile = async () => {
   return response.data;
 }
 
-export const updateProfile = async () => {
-  const response = await api.post('/profile')
+export const updateProfile = async (formData: FormData) => {
+  console.log(formData);
+
+  const response = await api.put('/profile', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
   return response.data;
 }
 
