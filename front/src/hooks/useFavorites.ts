@@ -7,7 +7,7 @@ interface Movie {
   original_title: string;
 }
 
-export const userFavorites = () => { // useFavoritesに変更
+export const useFavorites = () => { // useFavoritesに変更
   const [favoriteMovies, setFavoriteMovies] = useState<Movie[]>([]);
 
   const fetchFavorites = useCallback(async () => {

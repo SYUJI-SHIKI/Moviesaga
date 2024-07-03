@@ -1,11 +1,11 @@
 import React from "react";
 import MovieIndex from "@/components/elements/Movie/MovieIndex";
-import { userFavorites } from "@/hooks/userFavorites";
+import { useFavorites } from "@/hooks/useFavorites";
 
 
 const FavoritesPage: React.FC = () => {
-  const { favoriteMovies } = userFavorites();
-  console.log(`kookokokokokoko, ${userFavorites()}`)
+  const { favoriteMovies } = useFavorites();
+  console.log(`kookokokokokoko, ${useFavorites()}`)
 
   return (
     <div className='min-h-screen bg-black flex flex-col justify-center'>
