@@ -26,7 +26,7 @@ const FilterForm = () => {
     console.log('Query string:', query);
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_TEST_API_URL}/api/v1/movies/random?${query}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/movies/random?${query}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
