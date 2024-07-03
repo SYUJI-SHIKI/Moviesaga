@@ -5,8 +5,11 @@ export const fetchProfile = async () => {
   return response.data;
 }
 
-export const updateProfile = async () => {
-  const response = await api.post('/profile')
+export const updateProfile = async (formData: FormData) => {
+  console.log(FormData.name);
+  console.log(formData);
+
+  const response = await api.put('/profile', formData)
   return response.data;
 }
 
