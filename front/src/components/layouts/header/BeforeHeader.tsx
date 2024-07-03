@@ -71,12 +71,12 @@ const BeforeHeader: React.FC = () => {
                   ランダム機能
                 </div>
               </Link>
-              <Link href="/auth/login/LogInPage">
+              <Link href="/auth/login">
                 <div className="text-white hover:text-gray-300 mb-2">
                   ログイン
                 </div>
               </Link>
-              <Link href="/auth/signup/SignUpPage">
+              <Link href="/auth/signup">
                 <div className="text-white hover:text-gray-300 mb-2">
                   サインアップ
                 </div>
@@ -93,12 +93,12 @@ const BeforeHeader: React.FC = () => {
                 ランダム機能
               </div>
             </Link>
-            <Link href="/auth/login/LogInPage">
+            <Link href="/auth/login">
               <div className="text-white hover:text-gray-300 mb-2">
                 ログイン
               </div>
             </Link>
-            <Link href="/auth/signup/SignUpPage">
+            <Link href="/auth/signup">
               <div className="text-white hover:text-gray-300 mb-2">
                 サインアップ
               </div>

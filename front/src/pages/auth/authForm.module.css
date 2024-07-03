@@ -1,0 +1,22 @@
+.or-divider {
+  position: relative;
+}
+
+.or-divider::before,
+.or-divider::after {
+  content: "";
+  position: absolute;
+  width: 8rem;
+  top: 30%;
+  height: 1px;
+  background: rgb(75 85 99);
+  z-index: -1;
+}
+
+.or-divider::before {
+  right: 100%;
+}
+
+.or-divider::after {
+  left: 100%;
+}
