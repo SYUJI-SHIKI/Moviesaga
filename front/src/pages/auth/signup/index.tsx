@@ -6,6 +6,7 @@ import styles from "../authForm.module.css"
 import { FaRegUser } from "react-icons/fa";
 import { MdOutlineEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
+import { ErrorMessage } from "@/components/elements/Alert/Alert";
 
 const SignUpPage = () => {
   const [name, setName] = useState("");
@@ -13,21 +14,57 @@ const SignUpPage = () => {
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const router = useRouter();
+  const [error, setError] = useState<string>("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (password !== passwordConfirmation) {
-      alert("Passwords do not match");
+
+    if (name.trim() === "") {
+      setError("名前が空欄です");
       return;
     }
+
+    if (name.length > 20) {
+      setError("名前は20文字以内でお願いします");
+      return;
+    }
+
+    if (email.trim() === "") {
+      setError("メールアドレスが空欄です");
+      return;
+    }
+
+    if (password.trim() === "") {
+      setError("パスワードが空欄です");
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("パスワードは6文字以上でお願いします");
+      return;
+    }
+
+    if (password !== passwordConfirmation) {
+      setError("パスワードが確認用と一致しません");
+      return;
+    }
+    if (password !== passwordConfirmation) {
+      setError("パスワードが確認用と一致しません");
+      return;
+    }
+
     try {
       await signUp(name, email, password, passwordConfirmation);
       alert("Sign up successful");
 
       window.dispatchEvent(new Event("storage"));
       router.push('/')
-    } catch (error) {
-      alert("Sign up failed");
+    } catch (error){
+      if (error instanceof Error) {
+        alert(`${error.message}`);
+      } else {
+        alert("Sign up failed");
+      }
     }
   };
 
@@ -36,6 +73,7 @@ const SignUpPage = () => {
       <div className="bg-white/10 backdrop-blur-md rounded-xl shadow-lg w-[450px] p-8 my-10 mb-20 border border-white/20 hover:shadow-2xl transition-all duration-300 ease-in-out">
         <div className="text-2xl text-center mb-6 font-museo-slab">新規登録</div>
         <form onSubmit={handleSubmit} className="space-y-6">
+          {error && <ErrorMessage message={error} />}
           <div className="flex rounded-md overflow-hidden">
             <label htmlFor="name" className="bg-[#222222] px-4 py-3 flex items-center">
               <FaRegUser />
@@ -46,7 +84,7 @@ const SignUpPage = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="flex-1 px-4 py-3 bg-white text-[#3A3F44] focus:bg-gray-100 transition duration-300"
-              placeholder="なまえ"
+              placeholder="名前"
               required
             />
           </div>

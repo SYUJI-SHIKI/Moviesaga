@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import EditProfileDialog from "@/components/elements/Dialog/EditProfileDialog";
 import { useRouter } from "next/router";
-import useLoading from "@/components/elements/Loading/useLoading";
 
 interface User {
   id: number;
@@ -30,14 +29,13 @@ const ProfilePage: React.FC<ProfileProps> = ({ user, movies }) => {
   const [isMounted, setIsMounted] = useState(false);
   const avatarSrc = userData && userData.avatar ? userData.avatar : '/avatar_sample.png';
   const router = useRouter();
-  const { loading, startLoading, stopLoading } = useLoading();
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
   useEffect(() => {
-    if (isMounted){
+    if (isMounted) {
       const getData = async () => {
         const data = await fetchProfile();
         setUserData(data.user);
@@ -50,15 +48,12 @@ const ProfilePage: React.FC<ProfileProps> = ({ user, movies }) => {
 
   const handleEditProfile = async (formData: FormData) => {
     try {
-      startLoading();
       const response = await updateProfile(formData);
       setUserData(response.user);
-      router.push('/profile')
+      router.replace('/profile')
     } catch (error) {
       console.error("更新失敗", error);
-    } finally {
-      stopLoading();
-    }
+    } 
   };
 
 
@@ -66,10 +61,6 @@ const ProfilePage: React.FC<ProfileProps> = ({ user, movies }) => {
   if (!isMounted || !userData) {
     return null;
   }  
-
-  if (loading) {
-    return <div>ロード中</div>
-  }
 
   return (
     <>

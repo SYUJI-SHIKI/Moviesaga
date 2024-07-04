@@ -24,8 +24,13 @@ const CollectionCreate: React.FC = () => {
         } else {
           setError("Movies data is not in expected format.");
         }
-      } catch (error) {
-        setError("Error fetching movies data: ");
+      } catch (error){
+        if (error instanceof Error) {
+          alert(`${error.message}`);
+          return;
+        } else {
+          alert("Sign up failed");
+        }
       } finally {
         setLoading(false);
       }
@@ -62,6 +67,7 @@ const CollectionCreate: React.FC = () => {
             <div className="text-3xl text-white font-bold mb-4 mt-6">
               特集作成
             </div>
+
           </div>
           {console.log("CollectionForm props:", addMovies)}
           <CollectionForm addMovies={addMovies} onSubmit={handleSubmit} />

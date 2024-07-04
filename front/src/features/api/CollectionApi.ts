@@ -10,9 +10,9 @@ export const createCollection = async ( data: { title: string; description: stri
 
     const response = await api.post('/collections', { collection: transformedData });
     return response.data;
-  } catch (error) {
-    console.error('Error', error);
-    throw error;
+  } catch (error:any) {
+    console.error("保存できませんでした", error);
+    throw new Error(error.response.data.message);
   }
 };
 
@@ -36,8 +36,8 @@ export const updateCollection = async (id: number, data: { title: string; descri
 
     const response = await api.put(`/collections/${id}`, { collection: transformedData });
     return response.data;
-  } catch (error) {
-    console.error('Error', error);
-    throw error;
+  } catch (error:any) {
+    console.error("更新できませんでした", error);
+    throw new Error(error.response.data.message);
   }
 };

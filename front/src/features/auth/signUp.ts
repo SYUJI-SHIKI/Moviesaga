@@ -10,6 +10,7 @@ interface AuthResponse {
     name: string;
     nickname: string;
   };
+  errors?: string[];
 }
 
 const signUp = async (
@@ -37,9 +38,9 @@ const signUp = async (
     console.log("SignUp response:", response.data);
 
     return response.data;
-  } catch (error) {
-    console.error("新規登録できませんでした", error);
-    throw error;
+  } catch (error:any) {
+      console.error("新規登録できませんでした", error);
+      throw new Error(error.response.data.message);
   }
 };
 

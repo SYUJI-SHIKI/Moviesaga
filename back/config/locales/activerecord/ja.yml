@@ -7,7 +7,7 @@ ja:
     attributes:
       user:
         email: メールアドレス
-        name: なまえ
+        name: 名前
         password: パスワード
         password_confirmation: パスワード確認
         new_password: 新しいパスワード
