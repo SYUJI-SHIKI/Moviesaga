@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from "next/router";
 // import { DndContext, closestCenter, useDroppable, useDraggable } from '@dnd-kit/core';
+import { ErrorMessage } from '../Alert/Alert';
 
 interface Movie {
   id: number;
@@ -28,6 +29,7 @@ const CollectionForm: React.FC<CollectionFormProps> = ({
   const [formDescription, setFormDescription] = useState(description);
   const [movieIds, setMovieIds] = useState<number[]>([]);
   const router = useRouter();
+  const [error, setError] = useState("");
 
   console.log("Movies:", movies);
   console.log("AddMovies:", addMovies);
@@ -48,11 +50,33 @@ const CollectionForm: React.FC<CollectionFormProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (formTitle.trim() === ""){
+      setError("タイトル名を入れてください");
+      return;
+    }
+
+    if (formTitle.length > 15){
+      setError("タイトル名は15文字以下でお願いします");
+      return;
+    }
+    if (formDescription.length > 130){
+      setError("投稿内容は130文字以内にしてください");
+      return;
+    }
+    if (movieIds.length === 0){
+      setError("映画が選択されていません");
+      return;
+    }
+
+
     try {
       await onSubmit({ title: formTitle, description: formDescription, movieIds });
+      alert("特集が作成されました");
       router.push('/collections');
     } catch (error) {
       console.error('Error submitting', error);
+      setError('エラーが発生しました')
     }
     
   };
@@ -61,6 +85,7 @@ const CollectionForm: React.FC<CollectionFormProps> = ({
     <>
       <div className="new-collection-container min-h-screen flex flex-col items-center pt-8 bg-black">
         <form onSubmit={handleSubmit} className='flex flex-col items-center w-full mb-20'>
+          {error && <ErrorMessage message={error} />}
           <div className="text-field mb-4 w-80">
             <input
               type="text"

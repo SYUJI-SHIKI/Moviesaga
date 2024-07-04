@@ -22,6 +22,8 @@ module Api
         else
           render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
         end
+      rescue ActiveRecord::RecordInvalid => e
+        render json: { status: 'error', message: e.message }, status: :unprocessable_entity
       end
   
       private

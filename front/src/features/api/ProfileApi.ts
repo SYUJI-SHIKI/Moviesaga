@@ -6,13 +6,15 @@ export const fetchProfile = async () => {
 }
 
 export const updateProfile = async (formData: FormData) => {
-  console.log(formData);
-
-  const response = await api.put('/profile', formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  });
-  return response.data;
+  try {
+    const response = await api.put('/profile', formData, {
+      headers: {
+        'Content-Type': "application/json",
+      },
+    });
+    return response.data;
+  } catch (error:any) {
+    console.error("更新できませんでした", error);
+    throw new Error(error.response.data.message);
+  }
 }
-

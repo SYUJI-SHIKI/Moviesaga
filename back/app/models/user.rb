@@ -12,7 +12,8 @@ class User < ApplicationRecord
 
   mount_uploader :avatar, AvatarUploader
 
-  validates :name, presence: true, length: { maximum: 20 }
+  validates :name, presence: true, length: { maximum: 20 }, uniqueness: true
+  validates :email, presence: true, uniqueness: true
 
   has_many :authentications, dependent: :destroy
   has_many :favorites, dependent: :destroy

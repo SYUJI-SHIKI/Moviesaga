@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button"
 import { FaTimes } from "react-icons/fa";
+import { ErrorMessage } from '../Alert/Alert';
 
 interface User {
   id: number;
@@ -30,6 +31,7 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({ user, onSave }) =
   const [email, setEmail] = useState(user.email);
   const [avatar, setAvatar] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState(user.avatar);
+  const [error, setError] = useState<string>();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -42,6 +44,16 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({ user, onSave }) =
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (name.length > 20){
+      setError("名前は20文字以下でお願いします");
+      return;
+    }
+
+    if (name.trim() === ""){
+      setError("名前がありません");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("name", name);
     formData.append("email", email);
@@ -49,7 +61,7 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({ user, onSave }) =
       formData.append("avatar", avatar);
     }
 
-    console.log(formData)
+    
 
     onSave(formData)
   };
@@ -71,27 +83,32 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({ user, onSave }) =
             <div className="">
               <div className="flex items-end">
                 <Image
-                // これ後で入れるよ
-                  src={previewUrl || '/avatar_sample.png'}
+                // previewUrl || これ後で入れるよ
+                  src={'/avatar_sample.png'}
                   alt="Avatar Preview"
                   width={100}
                   height={80}
                   className="rounded-full mr-4"
                 />
-                <input 
+                <div className="text-white">
+                  アバター画像機能はまだ未実装です
+                </div>
+                {/* <input 
                   type="file"
                   onChange={handleFileChange}
                   accept="image/*" 
                   className="text-white"
-                />
+                /> */}
               </div>
             </div>
+            { error && <ErrorMessage message={error} />}
             <div className="m-4">
               <label className="block mb-2 text-white">名前</label>
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                placeholder="(20文字以内)"
                 className="w-full p-2 bg-gray-700 rounded text-white"
               />
             </div>

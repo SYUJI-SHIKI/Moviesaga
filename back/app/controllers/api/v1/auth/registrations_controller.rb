@@ -35,11 +35,15 @@ module Api
           Rails.logger.info "Response Data: #{response_data.to_json}"
           render json: response_data, status: :ok
         else
-          render json: {
+          response_data = {
             status: 'error',
             errors: @user.errors.full_messages
-          }, status: :unprocessable_entity
+          }
+          Rails.logger.debug(response_data)
+          render json: response_data, status: :unprocessable_entity
         end
+      rescue ActiveRecord::RecordInvalid => e
+        render json: { status: 'error', message: e.message }, status: :unprocessable_entity
       end
 
       protected
