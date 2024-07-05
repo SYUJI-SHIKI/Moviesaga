@@ -1,0 +1,11 @@
+.bg-half-repeat {
+  background-image: radial-gradient(circle, #ffff55 0%, #fbbf24 50%, #220000 100%);
+  background-size: 100% 33%;
+  background-repeat: repeat-y;
+}
+
+.bg-lg-half-repeat {
+  background-image: radial-gradient(circle, #ffff55 0%, #fbbf24 50%, #220000 100%);
+  background-size: 100% 40%;
+  background-repeat: repeat-y;
+}
