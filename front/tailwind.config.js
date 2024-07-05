@@ -9,10 +9,15 @@ module.exports = {
   ],
   prefix: "",
   theme: {
+    fontFamily: {
+      Anton: ['Anton', 'sans-serif'],
+    },
     container: {
       center: true,
       padding: "2rem",
       screens: {
+        'sm': '640px',
+        'md': '768px',
         "2xl": "1400px",
       },
     },

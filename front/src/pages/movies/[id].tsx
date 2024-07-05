@@ -40,7 +40,7 @@ const MovieDetail = () => {
 
     const fetchMovie = async () => {
       try {
-        console.log("Fetching movie with id:", movieId); // 追加
+        console.log("Fetching movie with id:", movieId);
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_TEST_API_URL}/api/v1/movies/${movieId}`
         );
@@ -49,15 +49,15 @@ const MovieDetail = () => {
           throw new Error("Failed to fetch movie");
         }
         const data = await response.json();
-        console.log("Response data: data.movie"); // 追加 
+        console.log("Response data: data.movie"); 
         setMovie(data.movie);
-        console.log("Movie set:", data.movie); // 追加
+        console.log("Movie set:", data.movie);
       } catch (error: any) {
-        console.error("Fetch error:", error.message); // 追加
+        console.error("Fetch error:", error.message);
         setError(error.message);
       } finally {
         setLoading(false);
-        console.log("Loading finished"); // 追加
+        console.log("Loading finished");
       }
     };
     fetchMovie();
