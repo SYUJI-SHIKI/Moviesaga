@@ -54,7 +54,7 @@ const BeforeHeader: React.FC = () => {
           onClick={toggleNav}
           className="hidden lg:block fixed right-4 text-white focus:outline-none z-50"
         >
-          {isNavOpen ? <FaTimes size={24} /> : <GiFilmProjector size={24} />}
+          {isNavOpen ? <FaTimes size={40} /> : <GiFilmProjector size={40} />}
         </button>
       </nav>
       {isOpen && (
