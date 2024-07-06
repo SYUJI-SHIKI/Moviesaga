@@ -16,7 +16,7 @@ module.exports = {
       center: true,
       padding: "2rem",
       screens: {
-        'sm': '640px',
+        'sm': '375px',
         'md': '768px',
         "2xl": "1400px",
       },
@@ -43,6 +43,8 @@ module.exports = {
         spin: 'spin 10s linear infinite',
         'spin-slow': 'spin 15s linear infinite',
         radialShine: 'radialShine 1s linear infinite',
+        'slide-out-left': 'slide-out-left 0.5s forwards',
+        'slide-out-right': 'slide-out-right 0.5s forwards',
       },
     },
   },
