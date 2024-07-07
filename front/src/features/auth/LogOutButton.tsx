@@ -1,6 +1,7 @@
 import React from "react";
 import useLogOut from "./useLogOut";
 import AuthLoadingScreen from "@/components/elements/Loading/AuthLoadingScreen";
+import { Button } from "@/components/ui/button";
 
 const LogOutButton: React.FC = () => {
   const { logOut, loading } = useLogOut();
@@ -10,8 +11,12 @@ const LogOutButton: React.FC = () => {
       {loading ? (
         <AuthLoadingScreen />
       ) : (
-        <div className="text-red-400 hover:text-gray-300 mb-2 ">
-          <button onClick={logOut}>ログアウト</button>
+        <div className="text-rose-700 text-3xl font-bold hover:text-gray-300 mb-2 ">
+          <Button onClick={logOut}
+            className="bg-rose-600 border-white p-5 w-24 h-12"
+          >
+              ログアウト
+          </Button>
         </div>
       )}
     </div>
