@@ -1,5 +1,3 @@
-import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
@@ -8,9 +6,9 @@ import ProjectorGif from "@/components/layouts/HomePage/ProjectorGif";
 import CollectionButton from "@/components/elements/Buttons/Collection";
 import RandomButton from "@/components/elements/Buttons/RandomButton";
 import SearchButton from "@/components/elements/Buttons/SearchButton";
-import { BsCollectionPlay } from "react-icons/bs";
-import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi";
-import { TbDeviceIpadHorizontalSearch } from "react-icons/tb";
+import AppInfo from "@/components/layouts/HomePage/AppInfo";
+import CollectionInfo from "@/components/layouts/HomePage/CollectionInfo";
+import RandomInfo from "@/components/layouts/HomePage/RandomInfo";
 import styles from "@/components/layouts/HomePage/HomePage.module.css";
 
 
@@ -43,24 +41,12 @@ const RootPage: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col justify-center items-center mt-8 md:mx-3">
-            <div className="w-2/3 md:w-3/4 lg:w-full h-[400px] md:h-[400px] rounded-xl shadow-lg ">
+          <div className="flex flex-col md:justify-center md:items-center mt-8 md:mx-3">
+            <div className="w-full  md:w-3/4 lg:w-full h-[400px] md:h-[400px] rounded-xl shadow-lg ">
               <div className="flex flex-col md:flex-row h-full">
-                <div className="flex-1 mb-5 bg-gray-700 mx-2 p-3 rounded-xl h-full">
-                  <div className="mb-2 mx-5 h-full rounded-lg">
-                    <TbDeviceIpadHorizontalSearch className="h-16 w-24" />
-                  </div>
-                </div>
-                <div className="flex-1 mb-5 bg-gray-700 mx-2 p-3 rounded-xl h-full">
-                  <div className="mb-2 mx-5 h-full rounded-lg">
-                    <GiPerspectiveDiceSixFacesRandom className="h-16 w-24" />
-                  </div>
-                </div>
-                <div className="flex-1 mb-5 bg-gray-700 mx-2 p-3 rounded-xl h-full">
-                  <div className="mb-2 mx-5 h-full rounded-lg">
-                  <BsCollectionPlay className="h-16 w-24" />
-                  </div>
-                </div>
+                <AppInfo />
+                <RandomInfo />
+                <CollectionInfo />
               </div>
             </div>
           </div>
