@@ -34,7 +34,13 @@ module Api
 
       def show
         @collection = Collection.find(params[:id])
-        render json: @collection, include: :movies
+        bookmarked = current_user.bookmark_collections.exists?(@collection.id)
+        is_creator = @collection.user_id == current_user.id
+        render json: {
+          collection: @collection.as_json(include: :movies),
+          bookmarked: bookmarked,
+          is_creator: is_creator,
+        }
       end
 
       def edit

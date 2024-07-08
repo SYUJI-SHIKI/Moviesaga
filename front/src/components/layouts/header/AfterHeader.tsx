@@ -43,7 +43,7 @@ const AfterHeader: React.FC = () => {
           <Link href="/">
             <div>
               <Image src="/logo.png" alt="Logo" width={130} height={50}
-                className="ml-20 mt-7 lg:w-[180px]" /> 
+                className="md:ml-20 ml-5 mt-8 lg:w-[180px]" /> 
             </div>
           </Link>
           <div className="lg:hidden flex">

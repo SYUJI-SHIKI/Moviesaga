@@ -15,35 +15,23 @@ module Api
       end
 
       def create
-        user = User.find_by(uuid: params[:user_id].to_s)
-        user_id = user.id
-
-        movie = Movie.find_by(tmdb_id: params[:movie_id].to_s)
-        movie_id = movie.id
-
-        favorite = Favorite.new(movie_id: movie_id, user_id: user_id)
-        
-        if favorite.save
-          puts "Favorite saved successfully"
+        @movie = Movie.find(params[:movie_id])
+        @favorite = current_user.favorites.build(movie: @movie)
+        if @favorite.save
+          render json: { message: 'Favorited successfully' }, status: :created
         else
-          puts "Failed to save favorite: #{favorite.errors.full_messages.join(", ")}"
+          render json: { errors: @favorite.errors.full_messages }, status: :unprocessable_entity
         end
       end
-
+    
       def destroy
-        user = User.find_by(uuid: params[:user_id].to_s)
-        user_id = user.id
-
-        movie = Movie.find_by(tmdb_id: params[:movie_id].to_s)
-        movie_id = movie.id
-
-        favorite = Favorite.find_by(movie_id: movie_id, user_id: user_id)
-        if favorite.destroy
-          render json: { success: true }
+        @favorite = current_user.favorites.find_by(movie_id: params[:id])
+        if @favorite&.destroy
+          render json: { message: 'Unfavorited successfully' }, status: :ok
         else
-          render json: { error: 'Movie not found' }, status: :not_found
+          render json: { error: 'Favorite not found' }, status: :not_found
         end
-      end
+      end    
     end
   end
 end

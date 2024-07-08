@@ -9,38 +9,23 @@ module Api
       end
 
       def create
-        user = User.find_by(uuid: params[:user_id].to_s)
-        collection = Collection.find_by(id: params[:collection_id].to_s)
-
-        if user && collection
-          bookmark = Bookmark.new(collection_id: collection.id, user_id: user.id)
-
-          if bookmark.save
-            render json: { success: true }
-          else
-            render json: { error: 'Failed to save bookmark', messages: bookmark.errors.full_messages }, status: :unprocessable_entity
-          end
+        @collection = Collection.find(params[:collection_id])
+        @bookmark = current_user.bookmarks.build(collection: @collection)
+        if @bookmark.save
+          render json: { message: 'bookmarkd successfully' }, status: :created
         else
-          render json: { error: 'User or Collection not found' }, status: :not_found
+          render json: { errors: @bookmark.errors.full_messages }, status: :unprocessable_entity
         end
       end
-
+    
       def destroy
-        user = User.find_by(uuid: params[:user_id].to_s)
-        collection = Collection.find_by(id: params[:collection_id].to_s)
-
-        if user && collection
-          bookmark = Bookmark.find_by(collection_id: collection.id, user_id: user.id)
-
-          if bookmark && bookmark.destroy
-            render json: { success: true }
-          else
-            render json: { error: 'Bookmark not found or failed to destroy' }, status: :not_found
-          end
+        @bookmark = current_user.bookmarks.find_by(collection_id: params[:id])
+        if @bookmark&.destroy
+          render json: { message: 'Unbookmarkd successfully' }, status: :ok
         else
-          render json: { error: 'User or Collection not found' }, status: :not_found
+          render json: { error: 'bookmark not found' }, status: :not_found
         end
-      end
+      end  
     end
   end
 end

@@ -14,13 +14,6 @@ interface MovieIndexProps {
 }
 
 const MovieIndex: React.FC<MovieIndexProps> = ({movies}) => {
-  // const cleanedMovies = movies.map(({ id, poster_path, original_title }) => ({
-  //   id,
-  //   poster_path,
-  //   original_title
-  // }));
-  console.log(`kssssssookokokokokoko, ${JSON.stringify(movies, null, 2)}`)
-  console.log(`kssssssookokokokokoko, ${movies}`)
   return (
     <>
       <div className="flex flex-wrap justify-center p-4">

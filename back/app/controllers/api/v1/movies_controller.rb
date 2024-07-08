@@ -8,10 +8,18 @@ module Api
       def show
         movie_data = MovieFetcher.movie_data_detail(params[:id])
         Rails.logger.debug("kkkkkkkk#{movie_data}")
+
         @video_id = fetch_youtube_video(movie_data["original_title"])
         @keywords = get_keywords(movie_data["id"])
         @movie = MovieSaverService.save_movie(movie_data, @video_id,@keywords)
         Rails.logger.debug("dddddddd#{@movie.inspect}")
+
+        favorited = false
+        
+        if request.headers["access-token"].present?
+          authenticate_user! 
+          favorited = current_user.favorite_movies.exists?(@movie.id)
+        end
 
         render json: {
           movie: {
@@ -27,6 +35,7 @@ module Api
             genres: @movie.genres.map { |genre| { id: genre["id"], name: genre["name"] } },
             youtube_trailer_id: @movie.youtube_trailer_id,
           },
+          favorited: favorited
         }
       end
 
