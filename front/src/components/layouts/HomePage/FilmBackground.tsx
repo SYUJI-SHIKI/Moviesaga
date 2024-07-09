@@ -20,10 +20,6 @@ const FilmBackground: React.FC<FilmBackgroundProps> = ({ children }) => {
         </div>
       </div>
       <div className="flex flex-col items-center h-full w-full z-20">
-        <div className="lg:backdrop-blur-3xl rounded-3xl z-30 mt-20 flex flex-col items-center">
-          <div className="lg:m-7 m-2 mt-14 lg:17 opacity-90 lg:text-9xl text-6xl font-Anton ">MovieSaga</div>
-          <div className="lg:text-4xl mb-7">人生の１本の映画をさがす旅へ</div>
-        </div>
         {children}
       </div>
       <div className="flex flex-col items-end bg-black ">

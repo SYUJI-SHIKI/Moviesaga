@@ -7,4 +7,6 @@ const RandomMoviesPage = () => (
   </div>
 );
 
+RandomMoviesPage.noFilmBackground = true;
+
 export default RandomMoviesPage;

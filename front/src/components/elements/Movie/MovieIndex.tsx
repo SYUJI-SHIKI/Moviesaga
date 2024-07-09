@@ -16,9 +16,9 @@ interface MovieIndexProps {
 const MovieIndex: React.FC<MovieIndexProps> = ({movies}) => {
   return (
     <>
-      <div className="flex flex-wrap justify-center p-4">
+      <div className="p-4 grid grid-cols-5 gap-4">
         {movies.map((movie) => (
-          <div key={movie.id} className="relative m-2">
+          <div key={movie.id} className="relative m-2 ">
             <Link href={`/movies/${movie.id}`} passHref>
               <div className="border-2 border-gray-600/50">
                 <div className="block group cursor-pointer">

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api from 'lib/api';
+import PaginationStyle from '../Pagination/PaginationStyle';
 import CollectionCard from '@/components/elements/Collection/CollectionCard';
 
 interface Collection {
@@ -15,21 +16,38 @@ interface CollectionIndexFormProps {
 
 const CollectionIndexForm: React.FC<CollectionIndexFormProps> = ({ apiEndpoint }) => {
   const [collections, setCollections] = useState<Collection[]>([]);
+  const [page, setPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(1);
+  const [itemsPerPage, setItemsPerPage] = useState<number>(8);
 
   useEffect(() => {
-    api.get(apiEndpoint)
+    const updateItemsPerPage = () => {
+      if (window.innerWidth < 640 ) {
+        setItemsPerPage(6);
+      } else {
+        setItemsPerPage(8);
+      }
+    };  
+    window.addEventListener("resize", updateItemsPerPage);
+    updateItemsPerPage();
+    return () => window.removeEventListener("resize", updateItemsPerPage);
+  }, []);
+
+  useEffect(() => {
+    api.get(`${apiEndpoint}?page=${page}&per=${itemsPerPage}`)
       .then(response => {
-        setCollections(response.data as Collection[]);
+        setCollections(response.data.collections as Collection[]);
+        setTotalPages(response.data.total_pages)
       })
       .catch(error => {
         console.error("There was an error fetching the collections!", error);
       });
-  }, [apiEndpoint]);
+  }, [apiEndpoint, page, itemsPerPage]);
 
   return (
-    <>
+    <div className='flex flex-col items-center justify-center'>
       {collections.length > 0 && (
-        <div className="container bg-gray-950 mx-auto p-4 mb-10">
+        <div className=" bg-gray-950 mt- md:mt-32">
           <div className="flex items-center justify-center">
             <div className="text-3xl text-white font-bold mb-4 mt-4">Collections</div>
           </div>
@@ -46,7 +64,17 @@ const CollectionIndexForm: React.FC<CollectionIndexFormProps> = ({ apiEndpoint }
           </div>
         </div>
       )}
-    </>
+
+      <div className='fixed bottom-36 mr-6'>
+        <PaginationStyle
+          currentPage={page}
+          totalPages={totalPages}
+          onPageChange={(newPage) => {
+            setPage(newPage);
+          }}
+          />
+      </div>
+    </div>
   );
 };
 

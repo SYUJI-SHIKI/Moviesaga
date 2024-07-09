@@ -2,31 +2,31 @@ import React from "react";
 
 interface SearchFormProps {
   query: string;
+  setQuery: (query: string) => void;
   category: string;
-  onQueryChange: (query: string) => void;
-  onCategoryChange: (category: string) => void;
+  setCategory: (category: string) => void;
   onSearch: () => void;
 }
 
 const SearchForm: React.FC<SearchFormProps> = ({
   query,
+  setQuery,
   category,
-  onQueryChange,
-  onCategoryChange,
+  setCategory,
   onSearch
 }) => {
   return (
-    <div className="flex justify-center m-4">
+    <div className="flex justify-center z-30 mt-20">
       <input
         type='text'
         value={query}
-        onChange={(e) => onQueryChange(e.target.value)}
+        onChange={(e) => setQuery(e.target.value)}
         placeholder="Search..."
         className="p-2 border rounded-md w-full max-w-xs"
       />
       <select
         value={category}
-        onChange={(e) => onCategoryChange(e.target.value)}
+        onChange={(e) => setCategory(e.target.value)}
         className="ml-2 p-2 border rounded-md"
       >
         <option value='movie'>タイトル名</option>

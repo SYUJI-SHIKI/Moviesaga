@@ -1,8 +1,8 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import SearchForm from "@/components/elements/Search/searchForm";
 import MovieIndex from "@/components/elements/Movie/MovieIndex";
-import Pagination from "@/components/elements/Pagination/Pagination";
+import PaginationStyle from "@/components/elements/Pagination/PaginationStyle";
 import api from "lib/api";
 
 interface Movie {
@@ -11,58 +11,89 @@ interface Movie {
   poster_path: string;
 }
 
+interface SearchState {
+  query: string;
+  category: string;
+  movies: Movie[];
+  page: number;
+  totalPages: number;
+}
+
 const SearchPage: React.FC = () => {
   const router = useRouter();
-  const [query, setQuery] = useState<string>('');
-  const [category, setCategory] = useState<string>('movie');
+  const [query, setQuery] = useState('');
+  const [category, setCategory] = useState('movie');
   const [movies, setMovies] = useState<Movie[]>([]);
-  const [page, setPage] = useState<number>(1);
-  const [totalPages, setTotalPages] = useState<number>(1);
-
-  const handleSearch = useCallback(async () => {
-    const response = await api(`/search?query=${query}&category=${category}&page=${page}`)
-    const data = await response.data;
-    setMovies(data.movies);
-    setTotalPages(data.total_pages);
-    const queryString = `?query=${query}&category=${category}&page=${page}`;
-    router.push(`/search${queryString}`, undefined, { shallow: true });
-  }, [query, category, page]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
-    const { query: queryParam, category: categoryParam, page: pageParam } = router.query;
-    if (queryParam) setQuery(queryParam as string);
-    if (categoryParam) setCategory(categoryParam as string);
-    if (pageParam) setPage(Number(pageParam));
-    if (queryParam || categoryParam || pageParam) handleSearch();
-  }, []);
+    const savedState = localStorage.getItem('searchState');
+    if (savedState && !isInitialized) {
+      const parsedState: SearchState = JSON.parse(savedState);
+      setQuery(parsedState.query);
+      setCategory(parsedState.category);
+      setMovies(parsedState.movies);
+      setPage(parsedState.page);
+      setTotalPages(parsedState.totalPages);
+      setIsInitialized(true);
+    }
+  }, [isInitialized]);
 
-  // useEffect(() => {
-  //   if (query || category || page) {
-  //     handleSearch();
-  //   }
-  // }, [query, category, page, handleSearch]);
+  const performSearch = async (searchQuery: string, searchCategory: string, searchPage: number) => {
+    let itemsPerPage;
+    if (window.innerWidth < 640) {
+      itemsPerPage = 10;
+    } else {
+      itemsPerPage = 20;
+    }
+
+    const response = await api(`/search?query=${searchQuery}&category=${searchCategory}&page=${searchPage}&per=${itemsPerPage}`);
+    const data = response.data;
+    setMovies(data.movies);
+    setTotalPages(data.total_pages);
+    
+    const queryString = `?query=${searchQuery}&category=${searchCategory}&page=${searchPage}`;
+    router.push(`/search${queryString}`, undefined, { shallow: true });
+
+    // 検索結果をローカルストレージに保存
+    const searchState: SearchState = {
+      query: searchQuery,
+      category: searchCategory,
+      movies: data.movies,
+      page: searchPage,
+      totalPages: data.total_pages
+    };
+    localStorage.setItem('searchState', JSON.stringify(searchState));
+  };
+
+  const handleSearch = () => {
+    performSearch(query, category, 1);
+    setPage(1);
+  };
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+    performSearch(query, category, newPage);
+  };
 
   return (
-    <div className="min-h-screen bg-black flex flex-col justify-center">
-      <div className="container mx-auto p-4 bg-black">
-        <SearchForm
-          query={query}
-          category={category}
-          onQueryChange={setQuery}
-          onCategoryChange={setCategory}
-          onSearch={handleSearch}
-        />
-        <MovieIndex movies={movies} />
-        <Pagination
-          currentPage={page}
-          totalPages={totalPages}
-          onPageChange={(newPage) => {
-            setPage(newPage);
-
-          }}
-        />
-      </div>
-    </div>
+    <>
+      <SearchForm
+        query={query}
+        setQuery={setQuery}
+        category={category}
+        setCategory={setCategory}
+        onSearch={handleSearch}
+      />
+      <MovieIndex movies={movies} />
+      <PaginationStyle
+        currentPage={page}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
+    </>
   );
 };
 

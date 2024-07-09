@@ -1,11 +1,19 @@
 import { AppProps } from 'next/app';
+import { NextComponentType, NextPageContext } from 'next';
 import  '../app/globals.css';
 import 'tailwindcss/tailwind.css';
 import RootLayout from '../app/layout';
 import Head from 'next/head';
 import Link from 'next/link'
+import FilmBackground from '@/components/layouts/HomePage/FilmBackground';
 
-function MyApp({ Component, pageProps }: AppProps){
+type MyAppProps = AppProps & {
+  Component: NextComponentType<NextPageContext, any, any> & {
+    noFilmBackground?: boolean;
+  };
+};
+
+function MyApp({ Component, pageProps }: MyAppProps){
   return(
     <>
       <Head>
@@ -14,7 +22,13 @@ function MyApp({ Component, pageProps }: AppProps){
         <Link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet" />
       </Head>
       <RootLayout>
-        <Component {...pageProps} />
+        {Component.noFilmBackground ? (
+          <Component {...pageProps} />
+        ) : (
+          <FilmBackground>
+            <Component {...pageProps} />
+          </FilmBackground>
+        )}
       </RootLayout>  
     </>
   );
