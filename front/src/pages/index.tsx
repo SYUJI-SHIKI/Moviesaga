@@ -75,7 +75,7 @@ const RootPage: React.FC = () => {
       </div>
       <div className="flex text-white w-full bg-gray-950 md:min-h-36 min-h-52 px-4 justify-center text-center">
         <div className="mt-10">
-        "This [website, program, service, application, product] uses TMDB and the TMDB APIs but is not endorsed, certified, or otherwise approved by TMDB."
+        This [website, program, service, application, product] uses TMDB and the TMDB APIs but is not endorsed, certified, or otherwise approved by TMDB.
         </div>
       </div>
     </>
