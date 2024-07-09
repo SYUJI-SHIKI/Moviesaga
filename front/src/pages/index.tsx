@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import ProjectorGif from "@/components/layouts/HomePage/ProjectorGif";
-import CollectionButton from "@/components/elements/Buttons/Collection";
+import CollectionButton from "@/components/elements/Buttons/CollectionButton";
 import RandomButton from "@/components/elements/Buttons/RandomButton";
 import SearchButton from "@/components/elements/Buttons/SearchButton";
 import AppInfo from "@/components/layouts/HomePage/AppInfo";

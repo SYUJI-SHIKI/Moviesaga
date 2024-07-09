@@ -8,5 +8,6 @@ const RandomMoviesPage = () => (
 );
 
 RandomMoviesPage.noFilmBackground = true;
+RandomMoviesPage.animationType = 'fadeIn';
 
 export default RandomMoviesPage;
