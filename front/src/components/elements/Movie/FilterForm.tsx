@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import CustomRadioButton from './CustomRadioButton';
+import CustomRadioButton from '../Buttons/CustomRadioButton';
 import api from 'lib/api';
 import Loading from '../Loading/Loading';
 import styles from './FilterForm.module.css'
