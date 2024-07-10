@@ -26,12 +26,3 @@ export const useFavorites = () => { // useFavoritesに変更
 
   return { favoriteMovies };
 }
-//   const removeFavorite = useCallback(async (movieId: number) => {
-//     try {
-//       await api.delete(`/favorites/${movieId}`);
-//       setFavoriteMovies(prevMovies => prevMovies.filter(movie => movie.id !== movieId));
-//     } catch (error) {
-
-//     }
-//   })
-// }

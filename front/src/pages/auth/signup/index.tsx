@@ -6,6 +6,7 @@ import styles from "../authForm.module.css"
 import { FaRegUser } from "react-icons/fa";
 import { MdOutlineEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
+import WeakGrain from "@/components/elements/Grain/WeakGrain";
 import { ErrorMessage } from "@/components/elements/Alert/Alert";
 
 const SignUpPage = () => {
@@ -69,13 +70,16 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-[#dde3e6] via-[#518698] to-[#2c5364] text-white animate-gradient-flow bg-[length:400%_400%]">
-      <div className="bg-white/10 backdrop-blur-md rounded-xl shadow-lg w-[450px] p-8 my-10 mb-20 border border-white/20 hover:shadow-2xl transition-all duration-300 ease-in-out">
-        <div className="text-2xl text-center mb-6 font-museo-slab">新規登録</div>
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-[#d2b48c] via-[#8b4513] to-[#654321] text-[#f4e1d2] animate-gradient-flow bg-[length:400%_400%]">
+      <div className="fixed inset-0 z-20 overflow-x-hidden">
+        <WeakGrain />
+      </div>
+      <div className="bg-[#f4e1d2]/10 backdrop-blur-md rounded-xl shadow-lg w-[450px] p-8 z-30 my-10 mb-20 border border-[#d2b48c]/20 hover:shadow-2xl transition-all duration-300 ease-in-out">
+        <div className="text-2xl text-center mb-6 font-serif text-[#f4e1d2]">新規登録</div>
         <form onSubmit={handleSubmit} className="space-y-6">
           {error && <ErrorMessage message={error} />}
           <div className="flex rounded-md overflow-hidden">
-            <label htmlFor="name" className="bg-[#222222] px-4 py-3 flex items-center">
+            <label htmlFor="name" className="bg-[#8b4513] px-4 py-3 flex items-center text-[#f4e1d2]">
               <FaRegUser />
             </label>
             <input
@@ -83,13 +87,13 @@ const SignUpPage = () => {
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="flex-1 px-4 py-3 bg-white text-[#3A3F44] focus:bg-gray-100 transition duration-300"
+              className="flex-1 px-4 py-3 bg-[#f4e1d2] text-[#4a3728] focus:bg-[#e6ccb2] transition duration-300"
               placeholder="名前"
               required
             />
           </div>
           <div className="flex rounded-md overflow-hidden">
-            <label htmlFor="email" className="bg-[#222222] px-4 py-3 flex items-center">
+            <label htmlFor="email" className="bg-[#8b4513] px-4 py-3 flex items-center text-[#f4e1d2]">
               <MdOutlineEmail />
             </label>
             <input
@@ -97,13 +101,13 @@ const SignUpPage = () => {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="flex-1 px-4 py-3 bg-white text-[#3A3F44] focus:bg-gray-100 transition duration-300"
+              className="flex-1 px-4 py-3 bg-[#f4e1d2] text-[#4a3728] focus:bg-[#e6ccb2] transition duration-300"
               placeholder="メールアドレス"
               required
             />
           </div>
           <div className="flex rounded-md overflow-hidden">
-            <label htmlFor="password" className="bg-[#222222] px-4 py-3 flex items-center">
+            <label htmlFor="password" className="bg-[#8b4513] px-4 py-3 flex items-center text-[#f4e1d2]">
               <RiLockPasswordLine />
             </label>
             <input
@@ -111,43 +115,45 @@ const SignUpPage = () => {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="flex-1 px-4 py-3 bg-white text-[#3A3F44] focus:bg-gray-100 transition duration-300"
+              className="flex-1 px-4 py-3 bg-[#f4e1d2] text-[#4a3728] focus:bg-[#e6ccb2] transition duration-300"
               placeholder="パスワード(6文字以上)"
               required
             />
           </div>
           <div className="flex rounded-md overflow-hidden">
-            <label htmlFor="passwordConfirmation" className="bg-[#222222] px-4 py-3 flex items-center">
+            <label htmlFor="passwordConfirmation" className="bg-[#8b4513] px-4 py-3 flex items-center text-[#f4e1d2]">
               <RiLockPasswordLine />
-            </label>          
+            </label>
             <input
               type="password"
               id="passwordConfirmation"
               value={passwordConfirmation}
               onChange={(e) => setPasswordConfirmation(e.target.value)}
-              className="flex-1 px-4 py-3 bg-white text-[#3A3F44] focus:bg-gray-100 transition duration-300"
+              className="flex-1 px-4 py-3 bg-[#f4e1d2] text-[#4a3728] focus:bg-[#e6ccb2] transition duration-300"
               placeholder="パスワード(確認用)"
               required
             />
           </div>
           <button
-          type="submit"
-          className="w-full bg-[#00B9BC] text-white font-bold uppercase py-3 rounded-md hover:bg-[#197071] transition duration-300"
+            type="submit"
+            className="w-full bg-[#8b4513] text-[#f4e1d2] font-bold uppercase py-3 rounded-md hover:bg-[#a0522d] transition duration-300"
           >
             Sign Up
           </button>
         </form>
-        <div className={`bg-gray-600 z-30 mx-auto my-8 w-10 h-10 uppercase rounded-full ${styles['or-divider']}`}>
-            <div className="p-2 font-medium">
-              OR
-            </div>
+        <div className={`bg-[#a0522d] z-30 mx-auto my-8 w-10 h-10 uppercase rounded-full ${styles['or-divider']}`}>
+          <div className="p-2 font-medium text-[#f4e1d2]">
+            OR
+          </div>
         </div>
-        <div className="flex justify-center items-center w-full-screen">
+        <div className="flex justify-center items-center md:m-0 ml-10 mb-3">
           <GoogleLoginButton />
         </div>
       </div>
     </div>
   );
 };
+
+SignUpPage.noFilmBackground = true;
 
 export default SignUpPage;

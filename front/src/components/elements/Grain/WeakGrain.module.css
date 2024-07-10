@@ -1,0 +1,32 @@
+.grain {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.grain::after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  top: -5%;
+  opacity: .25;
+  background-image: 
+    /* repeating-conic-gradient(var(--black) 0%, transparent .00003%, transparent .0005%, transparent .00095%), */
+    repeating-conic-gradient(var(--black) 0%, transparent .00005%, transparent 0.00015%, transparent 0.0009%);
+    /* repeating-linear-gradient(var(--black) 0%, transparent 0.0001%, transparent 0.001%, transparent 0.01%); */
+  animation: grain 1.5s steps(1) infinite;
+  position: absolute;
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+
+  20% { transform: translate(1%, 1%); }
+
+  40% { transform: translate(3%, 3%); }
+
+  60% { transform: translate(4%, 4%); }
+
+  80% { transform: translate(2%, 2%); }
+
+}

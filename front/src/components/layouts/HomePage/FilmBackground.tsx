@@ -4,11 +4,13 @@ import styles from "./HomePage.module.css"
 
 interface FilmBackgroundProps {
   children: ReactNode;
+  className?: string;
 }
 
-const FilmBackground: React.FC<FilmBackgroundProps> = ({ children }) => {
+const FilmBackground: React.FC<FilmBackgroundProps> = ({ children, className }) => {
   return (
-    <div className={`relative flex flex-row contrast-75 min-h-screen max-w-full z-10 m-0 p-0 overflow-x-hidden ${styles["bg-half-repeat"]}`}>
+    //relativeにするかfixedにするか迷い中 
+    <div className={`fixed inset-0 flex flex-row contrast-75 min-h-screen max-w-full z-10 m-0 p-0 overflow-x-hidden ${className} ${styles["bg-half-repeat"]}`}>
       <div className="fixed inset-0 z-20 overflow-x-hidden">
         <Grain />
       </div>
