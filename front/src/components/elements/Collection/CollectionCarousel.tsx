@@ -20,7 +20,7 @@ const CollectionCarousel: React.FC<CarouselProps> = ({ movies }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-black w-full h-full">
+    <div className="min-h-screen bg-black w-full h-full">
       <div className="w-full max-w-sm h-full overflow: visible">
         <Carousel className="w-full h-full">
           <CarouselContent className="-ml-1">

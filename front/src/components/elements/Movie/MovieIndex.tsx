@@ -5,6 +5,7 @@ import styles from '@/features/search/search.module.css';
 
 interface Movie {
   id: number;
+  tmdb_id?: number;
   poster_path: string;
   original_title: string;
 }
@@ -19,7 +20,7 @@ const MovieIndex: React.FC<MovieIndexProps> = ({movies}) => {
       <div className="p-4 grid grid-cols-5 gap-4">
         {movies.map((movie) => (
           <div key={movie.id} className="relative m-2 ">
-            <Link href={`/movies/${movie.id}`} passHref>
+            <Link href={`/movies/${movie.tmdb_id ? movie.tmdb_id : movie.id}`} passHref>
               <div className="border-2 border-gray-600/50">
                 <div className="block group cursor-pointer">
                   <div className={`relative overflow-hidden rounded-lg shadow-lg transform transition duration-300 group-hover:scale-105 ${styles['animate-slide-in']}`}>

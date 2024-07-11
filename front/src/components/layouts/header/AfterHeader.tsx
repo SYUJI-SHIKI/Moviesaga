@@ -41,9 +41,8 @@ const AfterHeader: React.FC = () => {
       <header className="fixed top-0 left-0 z-40 p-0 m-0 w-full bg-transparent">
         <div className="flex items-center">
           <Link href="/">
-            <div>
-              <Image src="/logo.png" alt="Logo" width={130} height={50}
-                className="md:ml-20 ml-5 mt-8 lg:w-[180px]" /> 
+            <div　className="ml-20 mt-7 font-Anton md:text-5xl text-2xl text-amber-100">
+              MovieSaga
             </div>
           </Link>
           <div className="lg:hidden flex">
