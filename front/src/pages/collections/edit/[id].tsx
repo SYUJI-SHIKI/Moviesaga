@@ -79,8 +79,8 @@ const CollectionEdit: React.FC = () => {
           <CollectionForm
             title={collectionData.title}
             description={collectionData.description}
-            movies={collectionData.movies}
-            addMovies={collectionData.addMovies}
+            // movies={collectionData.movies}
+            // addMovies={collectionData.addMovies}
             onSubmit={handleSubmit}
           />
         </>
