@@ -69,19 +69,23 @@ module Api
       end
 
       def my_lists
-        @collections = current_user.collections.includes(:user).order(created_at: :desc)
+        items_per_page = params[:per] || 8
+
+        @collections = current_user.collections.includes(:user).order(created_at: :desc).page(params[:page]).per(items_per_page)
         collection_card = @collections.map do |collection|
           collection.as_json(include: :movies).merge(Image: collection.movies.first&.poster_path)
         end
-        render json: collection_card
+        render json: { collections: collection_card, total_pages: @collections.total_pages }
       end
 
       def bookmark
-        @collections = current_user.bookmark_collections.includes(:user).order(created_at: :desc)
+        items_per_page = params[:per] || 8
+
+        @collections = current_user.bookmark_collections.includes(:user).order(created_at: :desc).page(params[:page]).per(items_per_page)
         collection_card = @collections.map do |collection|
           collection.as_json(include: :movies).merge(Image: collection.movies.first&.poster_path)
         end
-        render json: collection_card
+        render json: { collections: collection_card, total_pages: @collections.total_pages }
       end
 
       private

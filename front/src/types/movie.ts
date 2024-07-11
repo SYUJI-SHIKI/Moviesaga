@@ -12,6 +12,13 @@ export interface Movie {
   youtube_trailer_id: string;
 }
 
+export interface SimpleMovie {
+  id: number;
+  tmdb_id: number;
+  original_title: string;
+  poster_path: string;
+}
+
 export interface MovieResponse {
   movie: Movie;
   favorited: boolean;

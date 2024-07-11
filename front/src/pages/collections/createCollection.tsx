@@ -2,15 +2,12 @@ import React, { useEffect, useState } from "react";
 import api from "lib/api";
 import { createCollection } from "@/features/api/CollectionApi";
 import CollectionForm from "@/components/elements/Collection/CollectionForm";
+import { SimpleMovie } from "@/types/movie";
+import { CustomNextPage } from "@/types/next-page";
+// import { ErrorMessage } from '@/components/Alert/Alert';
 
-interface Movie {
-  id: number;
-  original_title: string;
-  poster_path: string;
-}
-
-const CollectionCreate: React.FC = () => {
-  const [addMovies, setAddMovies] = useState<Movie[]>([]);
+const CollectionCreate: CustomNextPage = () => {
+  const [availableMovies, setAvailableMovies] = useState<SimpleMovie[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -20,16 +17,15 @@ const CollectionCreate: React.FC = () => {
         const response = await api.get("/collections/new");
         console.log("API response:", response.data);
         if (response.data && response.data.addMovies) {
-          setAddMovies(response.data.addMovies);
+          setAvailableMovies(response.data.addMovies);
         } else {
-          setError("Movies data is not in expected format.");
+          setError("映画データが期待された形式ではありません。");
         }
-      } catch (error){
+      } catch (error) {
         if (error instanceof Error) {
-          alert(`${error.message}`);
-          return;
+          setError(`エラーが発生しました: ${error.message}`);
         } else {
-          alert("Sign up failed");
+          setError("未知のエラーが発生しました。");
         }
       } finally {
         setLoading(false);
@@ -39,14 +35,6 @@ const CollectionCreate: React.FC = () => {
     getData();
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
-
   const handleSubmit = async (data: {
     title: string;
     description: string;
@@ -54,29 +42,48 @@ const CollectionCreate: React.FC = () => {
   }) => {
     try {
       await createCollection(data);
+      // 成功時の処理（例：成功メッセージの表示やリダイレクト）
     } catch (error) {
-      console.error("Error submitting collection form", error);
+      console.error("特集の作成中にエラーが発生しました", error);
+      setError("特集の作成に失敗しました。もう一度お試しください。");
     }
   };
 
-  return (
-    <div>
-      {addMovies.length > 0 ? (
-        <>
-          <div className="flex items-center justify-center bg-black">
-            <div className="text-3xl text-white font-bold mb-4 mt-6">
-              特集作成
-            </div>
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
+      </div>
+    );
+  }
 
+  // if (error) {
+  //   return <ErrorMessage message={error} />;
+  // }
+
+  return (
+    <div className="container mx-auto px-4 py-8">
+      {availableMovies.length > 0 ? (
+        <>
+          <div className="bg-black py-6 mb-8">
+            <h1 className="text-3xl text-white font-bold text-center">
+              特集作成
+            </h1>
           </div>
-          {console.log("CollectionForm props:", addMovies)}
-          <CollectionForm addMovies={addMovies} onSubmit={handleSubmit} />
+          <CollectionForm
+            addMovies={availableMovies}
+            onSubmit={handleSubmit}
+          />
         </>
       ) : (
-        <div>No movies available to add.</div>
+        <div className="text-center text-xl text-gray-600">
+          追加可能な映画がありません。
+        </div>
       )}
     </div>
   );
 };
+
+CollectionCreate.noFilmBackground = true;
 
 export default CollectionCreate;
