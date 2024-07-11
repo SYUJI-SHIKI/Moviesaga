@@ -23,9 +23,9 @@ const RootPage: React.FC = () => {
 
   return (
     <>
-      <div className="text-amber-50 flex flex-col w-full">
-        <div className=" w-full md:h-2/5 h-1/4  flex flex-col sepia items-center">
-          <div className="lg:backdrop-blur-3xl md:px-10 py-7 opacity-80  bg-black rounded-3xl z-30 mt-20 flex flex-col items-center justify-center">
+      <div className="text-amber-50 flex flex-col w-full max-sm:bg-black max-sm:items-center">
+        <div className=" w-full md:h-2/5 h-1/4  flex flex-col sepia md:items-center">
+          <div className="lg:backdrop-blur-3xl md:px-10 py-7 opacity-80 bg-black rounded-3xl z-30 mt-20 flex flex-col items-center justify-center">
             <div className="lg:m-7 m-2  lg:17 opacity-90  md:text-9xl text-5xl font-Anton">MovieSaga</div>
             <div className="lg:text-4xl">人生の１本の映画をさがす旅へ</div>
           </div>

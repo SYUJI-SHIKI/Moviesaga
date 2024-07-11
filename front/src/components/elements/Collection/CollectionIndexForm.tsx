@@ -45,6 +45,7 @@ const CollectionIndexForm: React.FC<CollectionIndexFormProps> = ({ apiEndpoint }
   }, [apiEndpoint, page, itemsPerPage]);
 
   return (
+    <>
     <div className='flex flex-col items-center justify-center'>
       {collections.length > 0 && (
         <div className=" bg-gray-950 mt- md:mt-32">
@@ -64,8 +65,8 @@ const CollectionIndexForm: React.FC<CollectionIndexFormProps> = ({ apiEndpoint }
           </div>
         </div>
       )}
-
-      <div className='fixed bottom-36 mr-6'>
+      </div>
+      <div className='bottom-1 mr-6'>
         <PaginationStyle
           currentPage={page}
           totalPages={totalPages}
@@ -74,7 +75,7 @@ const CollectionIndexForm: React.FC<CollectionIndexFormProps> = ({ apiEndpoint }
           }}
           />
       </div>
-    </div>
+    </>
   );
 };
 
