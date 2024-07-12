@@ -3,12 +3,16 @@ import { useRouter } from 'next/router';
 import api from 'lib/api';
 import BookmarkButton from '@/components/elements/Bookmark/BookmarkButton';
 import CollectionCarousel from '@/components/elements/Collection/CollectionCarousel';
+import YouTube from 'react-youtube';
+import Link from 'next/link';
 
 interface Movie {
   id: number;
+  tmdb_id: number;
   original_title: string;
   poster_path: string;
   youtube_trailer_id: string;
+  release_date: string;
 }
 
 interface Collection {
@@ -28,6 +32,8 @@ const CollectionShow: React.FC = () => {
   const router = useRouter();
   const { id } = router.query;
   const [collectionData, setCollectionData] = useState<CollectionResponse | null>(null);
+  const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -59,11 +65,9 @@ const CollectionShow: React.FC = () => {
 
   const handleBookmarkToggle = async () => {
     if (!collectionData) return;
-
     try {
       const newBookmarkStatus = !collectionData.bookmarked;
       if (newBookmarkStatus) {
-
         await api.post(`/bookmarks`, { collection_id: collectionData.collection.id })
       } else {
         await api.delete(`bookmarks/${collectionData.collection.id}`);
@@ -76,26 +80,68 @@ const CollectionShow: React.FC = () => {
 
   if (!collectionData) return <p>Loading...</p>;
 
+  const currentMovie = collectionData.collection.movies[currentMovieIndex];
+
+  const onReady = (event: string) => {
+    setIsReady(true);
+  };
+
   return (
-    <div className="flex flex-col items-center min-h-screen bg-black">
-      <div className="flex flex-col my-20 md:my-10 items-center justify-center w-full max-w-4xl mx-auto text-white">
-        <div className='text-3xl flex flex-col items-center justify-center lg:text-5xl font-bold'>{collectionData.collection.title}</div>
-          { collectionData.is_creator ? (
-            <div className="flex flex-row space-x-2">
-                <button onClick={handleEdit} className="bg-blue-500 text-white px-2 py-1 text-sm mt-7 rounded shadow-md hover:bg-blue-600 transition duration-300 z-30">編集</button>
-                <button onClick={handleDelete} className="bg-red-500 text-white px-2 py-1 text-sm mt-7 rounded shadow-md hover:bg-red-600 transition duration-300">削除</button>
+    <div className='w-full min-h-screen'>
+      <div className="bg-black text-white ">
+        <div className=" px-10 md:py-8 overflow-hidden">
+          <div className="relative md:mt-14 mb-12 rounded-lg shadow-2xl">
+            <YouTube
+              videoId={currentMovie.youtube_trailer_id}
+              opts={{
+                height: '500',
+                width: '100%',
+                playerVars: {
+                  autoplay: 1,
+                  controls: 0,
+                  modestbranding: 1,
+                  loop: 1,
+                  rel: 0,
+                  playlist: currentMovie.youtube_trailer_id,
+                },
+              }}
+              onReady={onReady}
+              className="w-full"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+            <div className="absolute bottom-0 left-0 p-8">
+              <h2 className="text-3xl font-bold mb-2">{currentMovie.original_title}</h2>
+              <p className="text-gray-300 mb-4">{currentMovie.release_date}</p>
             </div>
-          ) : (
-            <div className="flex flex-row">
-              <BookmarkButton isBookmarked={collectionData.bookmarked}
-                onToggle={handleBookmarkToggle}
-              />
+          </div>
+          <div className="mb-12">
+            <h1 className="text-4xl md:text-6xl text-white font-bold mb-4">{collectionData.collection.title}</h1>
+            <p className="text-xl text-gray-300 mb-6">{collectionData.collection.description}</p>
+            <div className="flex items-center space-x-4">
+              {collectionData.is_creator ? (
+                <>
+                  <button onClick={handleEdit} className="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">編集</button>
+                  <button onClick={handleDelete} className="bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 transition duration-300">削除</button>
+                </>
+              ) : (
+                <BookmarkButton isBookmarked={collectionData.bookmarked} onToggle={handleBookmarkToggle} />
+              )}
             </div>
-          )}
+          </div>
+
+          <div className=' flex items-center justify-center'>
+            <CollectionCarousel
+              movies={collectionData.collection.movies}
+              currentIndex={currentMovieIndex}
+              onSelectMovie={setCurrentMovieIndex}
+            />
+          </div>
+          <Link href={`/movies/${currentMovie.tmdb_id}`}>
+            <div className='text-2xl font-bold flex items-center justify-center mt-10 max-sm:mb-20 mb-14 hover:text-blue-500'>
+              「{currentMovie.original_title}」の詳細はこちら
+            </div>
+          </Link>
         </div>
-      <p className="text-gray-400 mb-6 max-w-4xl mx-auto text-xl">{collectionData.collection.description}</p>
-      <div className="w-full h-full">
-        <CollectionCarousel movies={collectionData.collection.movies} />
       </div>
     </div>
   );

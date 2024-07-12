@@ -29,7 +29,7 @@ const MovieDetail: CustomNextPage = () => {
     if (bgLoaded) {
       const timer = setTimeout(() => {
         setContentVisible(true);
-      }, 2000);
+      }, 1200);
   
       return () => clearTimeout(timer);
     }
@@ -58,7 +58,7 @@ const MovieDetail: CustomNextPage = () => {
                 <Trailer movieData={movieData} />
               </div>
               <div className="flex flex-col items-center justify-center">
-                <div className="lg:w-4/5 w-full">
+                <div className="lg:w-4/5 w-full max-sm:mb-12">
                   <MovieInfo 
                     movieData={movieData} 
                     isAuthenticated={isAuthenticated}

@@ -9,7 +9,7 @@ const ProjectorGif = () => {
         alt="projector" 
         width={250} 
         height={50}
-        className="lg:w-[500px] lg:h-[350px] md:w-[450px] md:h-[350px]"
+        className="lg:w-[350px] lg:h-[250px] md:w-[450px] md:h-[350px]"
         unoptimized
       />
     </div>

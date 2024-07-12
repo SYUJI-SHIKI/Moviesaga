@@ -9,9 +9,11 @@ import AppInfo from "@/components/layouts/HomePage/AppInfo";
 import CollectionInfo from "@/components/layouts/HomePage/CollectionInfo";
 import RandomInfo from "@/components/layouts/HomePage/RandomInfo";
 import styles from "@/components/layouts/HomePage/HomePage.module.css";
+import { CustomNextPage } from "@/types/next-page";
+import FilmBackground from "@/components/layouts/HomePage/FilmBackground";
 
 
-const RootPage: React.FC = () => {
+const RootPage: CustomNextPage= () => {
   const [isUserSignedIn, setIsUserSignedIn ]= useState(false);
   const router = useRouter();
 
@@ -22,7 +24,7 @@ const RootPage: React.FC = () => {
   }, [router]);
 
   return (
-    <>
+    <FilmBackground className="max-sm:hidden" length={31}>
       <div className="text-amber-50 flex flex-col w-full max-sm:bg-black max-sm:items-center">
         <div className=" w-full md:h-2/5 h-1/4  flex flex-col sepia md:items-center">
           <div className="lg:backdrop-blur-3xl md:px-10 py-7 opacity-80 bg-black rounded-3xl z-30 mt-20 flex flex-col items-center justify-center">
@@ -78,8 +80,10 @@ const RootPage: React.FC = () => {
         This [website, program, service, application, product] uses TMDB and the TMDB APIs but is not endorsed, certified, or otherwise approved by TMDB.
         </div>
       </div>
-    </>
+    </FilmBackground>
   );
 };
+
+RootPage.noFilmBackground = true;
 
 export default RootPage;

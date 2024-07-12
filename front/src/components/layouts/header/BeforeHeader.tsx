@@ -49,7 +49,7 @@ const BeforeHeader: React.FC = () => {
             onClick={toggleMenu}
             className="fixed text-white focus:outline-none right-20 z-50"
           >
-            {isOpen ? null : <GiFilmProjector size={40} className="rounded-full border-4 border-white" />}
+            {isOpen ? null : <GiFilmProjector size={40} className="rounded-full border-4 bg-black border-white" />}
           </button>
         </div>
         {isOpen && (
@@ -65,7 +65,7 @@ const BeforeHeader: React.FC = () => {
               <button
                 onClick={toggleNav}
               >
-                {isNavOpen ? null : <GiFilmProjector size={60} className="rounded-full border-4 border-white" />}
+                {isNavOpen ? null : <GiFilmProjector size={60} className="rounded-full bg-black border-4 border-white" />}
               </button>
             </SheetTrigger>
             <SheetContent className="bg-[url('/navbar.jpg')] bg-cover shadow-inner opacity-70 border-amber-950">
