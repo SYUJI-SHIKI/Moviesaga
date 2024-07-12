@@ -1,4 +1,5 @@
 import React from "react";
+import { IoSearchCircleSharp } from "react-icons/io5";
 
 interface SearchFormProps {
   query: string;
@@ -33,7 +34,7 @@ const SearchForm: React.FC<SearchFormProps> = ({
         <option value='person'>役者名</option>
       </select>
       <button onClick={onSearch} className="ml-2 p-2 bg-blue-500 text-white rounded-md">
-        検索
+        <IoSearchCircleSharp />
       </button>
     </div>
   );
