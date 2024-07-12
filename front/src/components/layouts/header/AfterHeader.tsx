@@ -48,9 +48,9 @@ const AfterHeader: React.FC = () => {
           <div className="lg:hidden flex">
             <button
               onClick={toggleMenu}
-              className="fixed text-white focus:outline-none right-20 z-50"
+              className="fixed text-white focus:outline-none right-20 mt-5 z-50"
             >
-              {isOpen ?  null : <GiFilmProjector size={40} className="rounded-full border-4 border-white" />}
+              {isOpen ?  null : <GiFilmProjector size={40} className="rounded-full bg-black border-4 border-white" />}
             </button>
           </div>
           {isOpen && (
@@ -60,13 +60,13 @@ const AfterHeader: React.FC = () => {
               </div>
             </div>
           )}
-          <div className="hidden lg:block fixed right-20 text-white focus:outline-none z-30">
+          <div className="hidden lg:block fixed right-20 text-white mt-7 focus:outline-none z-30">
             <Sheet open={isNavOpen} onOpenChange={setIsNavOpen}>
               <SheetTrigger asChild>
                 <button
                   onClick={toggleNav}
                 >
-                  {isNavOpen ? null : <GiFilmProjector size={60} className="rounded-full border-4 border-white" />}
+                  {isNavOpen ? null : <GiFilmProjector size={60} className="rounded-full bg-black border-4 border-white" />}
                 </button>
               </SheetTrigger>
               <SheetContent className="bg-[url('/navbar.jpg')] bg-cover shadow-inner opacity-80 border-amber-950">
