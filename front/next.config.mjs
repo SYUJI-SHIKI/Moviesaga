@@ -11,6 +11,9 @@ const nextConfig = {
   images: {
     domains: ['image.tmdb.org'],
   },
+  env: {
+    NEXT_PUBLIC_GOOGLE_CLIENT_ID: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+  },
 };
 
 export default nextConfig;
