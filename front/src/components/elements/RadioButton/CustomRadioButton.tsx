@@ -4,16 +4,18 @@ import { GiFilmSpool } from "react-icons/gi";
 import styles from "./CustomRadioButton.module.css";
 
 interface CustomRadioButtonProps {
+  id: string;
   name: string;
   value: string;
   checked: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const CustomRadioButton: React.FC<CustomRadioButtonProps> = ({ name, value, checked, onChange }) => {
+const CustomRadioButton: React.FC<CustomRadioButtonProps> = ({ id, name, value, checked, onChange }) => {
   return (
     <label className={styles.customRadioButton}>
       <input
+        id={id}
         type='radio'
         name={name}
         value={value}

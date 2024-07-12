@@ -24,7 +24,7 @@ const RootPage: CustomNextPage= () => {
   }, [router]);
 
   return (
-    <FilmBackground className="max-sm:hidden" length={31}>
+    <FilmBackground length={31}>
       <div className="text-amber-50 flex flex-col w-full max-sm:bg-black max-sm:items-center">
         <div className=" w-full md:h-2/5 h-1/4  flex flex-col sepia md:items-center">
           <div className="lg:backdrop-blur-3xl md:px-10 py-7 opacity-80 bg-black rounded-3xl z-30 mt-20 flex flex-col items-center justify-center">
@@ -53,10 +53,10 @@ const RootPage: CustomNextPage= () => {
             </div>
           </div>
         </div>
-            <div className="bg-black h-14 z-10 md:h-20 w-full mt-6 text-white font-bold text-2xl flex justify-center items-center">
+            <div className="bg-black h-14 z-10 md:h-20 w-full lg:mt-6 mt-48 text-white font-bold text-2xl flex justify-center items-center">
                 MovieSagaを使う
             </div>
-        <div className={`flex-grow h-52 flex flex-col justify-start ${styles["bg-homepage-end"]}`}>
+        <div className={`flex-grow md:h-52 h-36 flex flex-col justify-start ${styles["bg-homepage-end"]}`}>
           <div className="flex flex-row justify-center mt-14 flex-nowrap z-30">
             {isUserSignedIn ? (
               <>
@@ -76,7 +76,7 @@ const RootPage: CustomNextPage= () => {
         </div>
       </div>
       <div className="flex text-white w-full bg-gray-950 md:min-h-36 min-h-52 px-4 justify-center text-center">
-        <div className="mt-10">
+        <div className="md:mt-10">
         This [website, program, service, application, product] uses TMDB and the TMDB APIs but is not endorsed, certified, or otherwise approved by TMDB.
         </div>
       </div>
