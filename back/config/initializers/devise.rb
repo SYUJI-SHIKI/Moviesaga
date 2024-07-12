@@ -273,7 +273,7 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   config.omniauth :google_oauth2, Rails.application.credentials.dig(:oauth, :google, :client_id), Rails.application.credentials.dig(:oauth, :google, :client_secret_id), {
-    redirect_uri: 'http://localhost:3000/api/v1/auth/google_oauth2/callback'
+    redirect_uri: 'https://moviesaga-susc.onrender.com/api/v1/auth/google_oauth2/callback'
   }
 
   # ==> Warden configuration
