@@ -15,6 +15,7 @@ front/out/
 
 # production
 front/build
+front/.env.production
 
 # misc
 front/.DS_Store
