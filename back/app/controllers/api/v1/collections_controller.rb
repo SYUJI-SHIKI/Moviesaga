@@ -16,9 +16,14 @@ module Api
         @collection = Collection.new
         Rails.logger.debug("current_user: #{current_user.inspect}")
         if current_user.present?
-          Rails.logger.debug('いるよ')
-          @movies = current_user.favorite_movies
-          render json: { collection: @collection, addMovies: @movies }
+          @movies = current_user.favorite_movies.page(params[:page]).per(9)
+          Rails.logger.debug(@movies.count)
+          render json: {
+            collection: @collection,
+            addMovies: @movies,
+            total_pages: @movies.total_pages,
+            current_page: @movies.current_page,
+          }
         else
           Rails.logger.debug('current_userがいません')
           render json: { error: 'User not authenticated' }, status: :unauthorized
@@ -48,9 +53,18 @@ module Api
 
       def edit
         @collection = current_user.collections.find(params[:id])
-        @movies = @collection.movies
-        @add_movies = current_user.favorite_movies.where.not(id: @movies.pluck(:id))
-        render json: { title: @collection.title, description: @collection.description, movies: @movies, addMovies: @add_movies }
+        @selected_movies = @collection.movies
+        @all_available_movies = current_user.favorite_movies.page(params[:page]).per(9)
+        
+        render json: {
+          title: @collection.title,
+          description: @collection.description,
+          selectedMovies: @selected_movies,
+          allAvailableMovies: @all_available_movies,
+          selectedMovieIds: @selected_movies.pluck(:id),
+          total_pages: @all_available_movies.total_pages,
+          current_page: @all_available_movies.current_page,
+        }
       end
 
       def update

@@ -22,27 +22,36 @@ const SortableMovie: React.FC<SortableMovieProps> = ({ movie }) => {
     transition,
   };
 
+  const truncateTitle = (text: string) => {
+    return text.length > 7 ? text.substring(0, 7) + '...' : text;
+  };
+
   return (
-    <li 
+    <li
       ref={setNodeRef}
       style={style}
       {...attributes}
       {...listeners}
-      className="flex items-center bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-move"
+      className="inline-block m-1"
       aria-label={`${movie.original_title}をドラッグして並べ替え`}
     >
-      <div className="flex flex-col items-center">
-        <Image
-          src={movie.poster_path}
-          alt={movie.original_title}
-          width={60}
-          height={90}
-          className="rounded-md"
-          onError={(e) => {
-            e.currentTarget.src = "/path/to/fallback-image.jpg";
-          }}
-        />
-        <span className="mt-2 text-sm text-center">{movie.original_title}</span>
+      <div className="items-center">
+        <div className="md:w-[120px] md:h-[120px] w-[90px] h-[90px] relative aspect-square grid grid-cols-3">
+          <Image
+            src={movie.poster_path}
+            alt={movie.original_title}
+            fill
+            priority
+            sizes="120px"
+            className="rounded-md object-cover border-2"
+            onError={(e) => {
+              e.currentTarget.src = "/path/to/fallback-image.jpg";
+            }}
+          />
+        </div>
+        <span className="mt-1 text-xs text-center w-full overflow-hidden text-ellipsis whitespace-nowrap">
+          {truncateTitle(movie.original_title)}
+        </span>
       </div>
     </li>
   );

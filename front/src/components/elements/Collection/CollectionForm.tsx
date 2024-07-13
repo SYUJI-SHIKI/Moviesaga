@@ -5,26 +5,33 @@ import { SortableContext, sortableKeyboardCoordinates, verticalListSortingStrate
 import { SimpleMovie } from '@/types/movie';
 import MovieList from './MovieList';
 import { ErrorMessage } from '../Alert/Alert';
+import PaginationStyle from '../Pagination/PaginationStyle';
 
 interface CollectionFormProps {
   title?: string;
   description?: string;
-  movies?: SimpleMovie[];
-  addMovies?: SimpleMovie[];
+  availableMovies: SimpleMovie[];
+  selectedMovies: SimpleMovie[];
+  onMovieSelection: (movie: SimpleMovie, isSelected: boolean) => void;
   onSubmit: (data: { title: string; description: string; movieIds: number[] }) => void;
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (newPage: number) => void;
 }
 
 const CollectionForm: React.FC<CollectionFormProps> = ({
   title = '',
   description = '',
-  movies = [],
-  addMovies = [],
+  availableMovies,
+  selectedMovies,
+  onMovieSelection,
   onSubmit,
+  currentPage,
+  totalPages,
+  onPageChange,
 }) => {
   const [formTitle, setFormTitle] = useState(title);
   const [formDescription, setFormDescription] = useState(description);
-  const [selectedMovies, setSelectedMovies] = useState<SimpleMovie[]>(movies);
-  const [availableMovies, setAvailableMovies] = useState<SimpleMovie[]>(addMovies);
   const router = useRouter();
   const [error, setError] = useState("");
 
@@ -35,9 +42,9 @@ const CollectionForm: React.FC<CollectionFormProps> = ({
     })
   );
 
-  const reorderSelectedMovies = (oldIndex: number, newIndex: number) => {
-    setSelectedMovies((prev) => arrayMove(prev, oldIndex, newIndex));
-  };
+  // const reorderSelectedMovies = (oldIndex: number, newIndex: number) => {
+  //   setSelectedMovies((prev) => arrayMove(prev, oldIndex, newIndex));
+  // };
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -48,11 +55,9 @@ const CollectionForm: React.FC<CollectionFormProps> = ({
     const overMovie = selectedMovies.find(movie => movie.id === over.id);
 
     if (activeMovie) {
-      setSelectedMovies(prev => [...prev, activeMovie]);
-      setAvailableMovies(prev => prev.filter(m => m.id !== active.id));
+      onMovieSelection(activeMovie, true);
     } else if (overMovie) {
-      setAvailableMovies(prev => [...prev, overMovie]);
-      setSelectedMovies(prev => prev.filter(m => m.id !== over.id));
+      onMovieSelection(overMovie, false);
     }
   };
 
@@ -77,6 +82,11 @@ const CollectionForm: React.FC<CollectionFormProps> = ({
       return;
     }
 
+    if (selectedMovies.length > 9) {
+      setError("特集を組めるのは最大9タイトルです");
+      return;
+    }
+
     try {
       await onSubmit({
         title: formTitle,
@@ -91,16 +101,20 @@ const CollectionForm: React.FC<CollectionFormProps> = ({
     }
   };
 
+  // useEffect(() => {
+  //   setAvailableMovies(addMovies);
+  // }, [addMovies]);
+
   return (
     <DndContext 
       sensors={sensors}
       collisionDetection={closestCenter}
       onDragEnd={handleDragEnd}
     >
-      <form onSubmit={handleSubmit} className="p-6 bg-gray-100 rounded-lg shadow-md">
+      <form onSubmit={handleSubmit} className="p-6 bg-black rounded-lg shadow-md h-full mb-16 text-gray-100 min-w-full">
         {error && <ErrorMessage message={error} />}
         <div className="mb-4">
-          <label htmlFor="title" className="block text-sm font-medium text-gray-700">タイトル</label>
+          <label htmlFor="title" className="block text-sm font-medium text-gray-100">タイトル</label>
           <input
             type="text"
             id="title"
@@ -110,7 +124,7 @@ const CollectionForm: React.FC<CollectionFormProps> = ({
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="description" className="block text-sm font-medium text-gray-700">説明</label>
+          <label htmlFor="description" className="block text-sm font-medium text-gray-100">説明</label>
           <textarea
             id="description"
             value={formDescription}
@@ -118,23 +132,35 @@ const CollectionForm: React.FC<CollectionFormProps> = ({
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
         </div>
-        <div className="flex flex-col md:flex-row gap-6">
-          <div className="w-full md:w-1/2">
-            <h3 className="text-xl font-semibold mb-4">利用可能な映画</h3>
+        <div className="flex flex-col md:flex-row">
+          <div className="w-full md:w-1/2 flex flex-col items-center">
+            <div className='flex flex-col'>
+              <h3 className="text-xl font-semibold mb-4">利用可能な映画</h3>
+              <PaginationStyle
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={onPageChange}
+              />
+            </div>
             <SortableContext items={availableMovies.map(m => m.id)} strategy={verticalListSortingStrategy}>
               <MovieList movies={availableMovies} />
             </SortableContext>
           </div>
-          <div className="w-full md:w-1/2">
-            <h3 className="text-xl font-semibold mb-4">選択された映画</h3>
+          <div className="w-full md:w-1/2 flex flex-col items-center top-0">
+            <h3 className="text-xl font-semibold mb-4 space-y-3">
+              <p>選択された映画</p>
+              <p>(９タイトルまで)</p>
+            </h3>
             <SortableContext items={selectedMovies.map(m => m.id)} strategy={verticalListSortingStrategy}>
               <MovieList movies={selectedMovies} />
             </SortableContext>
           </div>
         </div>
-        <button type="submit" className="mt-6 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
-          作成する
-        </button>
+        <div className='flex justify-center items-center'>
+          <button type="submit" className="mt-6 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
+            作成する
+          </button>
+        </div>
       </form>
     </DndContext>
   );

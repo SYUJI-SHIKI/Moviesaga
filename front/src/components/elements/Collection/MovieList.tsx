@@ -8,7 +8,7 @@ interface MovieListProps {
 
 const MovieList: React.FC<MovieListProps> = ({ movies }) => {
   return (
-    <ul className="space-y-4">
+    <ul className="grid grid-cols-3">
       {movies.map((movie) => (
         <SortableMovie key={movie.id} movie={movie} />
       ))}
