@@ -31,8 +31,8 @@ const CollectionCarousel: React.FC<CarouselProps> = ({ movies, currentIndex, onS
                 src={movie.poster_path}
                 alt={movie.original_title}
                 width={200}
-                height={300}
-                className="rounded-lg object-cover"
+                height={200}
+                className="rounded-2xl object-cover p-2"
               />
             </div>
           </CarouselItem>

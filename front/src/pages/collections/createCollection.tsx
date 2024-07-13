@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import api from "lib/api";
 import { createCollection } from "@/features/api/CollectionApi";
 import CollectionForm from "@/components/elements/Collection/CollectionForm";
@@ -7,33 +7,48 @@ import { CustomNextPage } from "@/types/next-page";
 // import { ErrorMessage } from '@/components/Alert/Alert';
 
 const CollectionCreate: CustomNextPage = () => {
-  const [availableMovies, setAvailableMovies] = useState<SimpleMovie[]>([]);
+  const [movieCache, setMovieCache] = useState<{ [page: number]: SimpleMovie[] }>({});
+  const [selectedMovies, setSelectedMovies] = useState<SimpleMovie[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  const getData = useCallback(async (page: number, isLoading = false) => {
+    if (isLoading) {
+      setLoading(true);
+    }
+    if (movieCache[page]) {
+      setLoading(false);
+      return;
+    }
+    try {
+      const response = await api.get(`/collections/new?page=${page}`);
+      if (response.data && response.data.addMovies) {
+        setMovieCache(prev => ({ ...prev, [page]: response.data.addMovies }));
+        setTotalPages(response.data.total_pages);
+        setCurrentPage(response.data.current_page);
+      } else {
+        setError("映画データが期待された形式ではありません。");
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(`エラーが発生しました: ${error.message}`);
+      } else {
+        setError("未知のエラーが発生しました。");
+      }
+    } finally {
+      setLoading(false);
+    }
+  }, [movieCache]);
 
   useEffect(() => {
-    const getData = async () => {
-      try {
-        const response = await api.get("/collections/new");
-        console.log("API response:", response.data);
-        if (response.data && response.data.addMovies) {
-          setAvailableMovies(response.data.addMovies);
-        } else {
-          setError("映画データが期待された形式ではありません。");
-        }
-      } catch (error) {
-        if (error instanceof Error) {
-          setError(`エラーが発生しました: ${error.message}`);
-        } else {
-          setError("未知のエラーが発生しました。");
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
+    getData(currentPage, loading);
+  }, [currentPage, loading, getData]);
 
-    getData();
-  }, []);
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+  };
 
   const handleSubmit = async (data: {
     title: string;
@@ -49,6 +64,14 @@ const CollectionCreate: CustomNextPage = () => {
     }
   };
 
+  const handleMovieSelection = (movie: SimpleMovie, isSelected: boolean) => {
+    if (isSelected) {
+      setSelectedMovies(prev => [...prev, movie]);
+    } else {
+      setSelectedMovies(prev => prev.filter(m => m.id !== movie.id));
+    }
+  };
+
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -61,23 +84,30 @@ const CollectionCreate: CustomNextPage = () => {
   //   return <ErrorMessage message={error} />;
   // }
 
+  const availableMovies = (movieCache[currentPage] || []).filter(
+    movie => !selectedMovies.some(selected => selected.id === movie.id)
+  );
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      {availableMovies.length > 0 ? (
-        <>
-          <div className="bg-black py-6 mb-8">
-            <h1 className="text-3xl text-white font-bold text-center">
-              特集作成
-            </h1>
-          </div>
-          <CollectionForm
-            addMovies={availableMovies}
-            onSubmit={handleSubmit}
-          />
-        </>
+    <div className="w-full mx-auto px-4 py-8">
+      <div className="bg-black py-6 mb-8">
+        <h1 className="text-3xl text-white font-bold text-center">
+          特集作成
+        </h1>
+      </div>
+      {availableMovies.length > 0 || selectedMovies.length > 0 ? (
+        <CollectionForm
+          availableMovies={availableMovies}
+          selectedMovies={selectedMovies}
+          onMovieSelection={handleMovieSelection}
+          onSubmit={handleSubmit}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
       ) : (
         <div className="text-center text-xl text-gray-600">
-          追加可能な映画がありません。
+          いいねした映画がありません。
         </div>
       )}
     </div>
