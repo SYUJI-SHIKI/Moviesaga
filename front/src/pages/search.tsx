@@ -44,9 +44,11 @@ const SearchPage: React.FC = () => {
   const performSearch = async (searchQuery: string, searchCategory: string, searchPage: number) => {
     let itemsPerPage;
     if (window.innerWidth < 640) {
-      itemsPerPage = 10;
+      itemsPerPage = 12;
+    } else if (window.innerWidth >= 640 && window.innerWidth < 1024) {
+      itemsPerPage = 16;
     } else {
-      itemsPerPage = 20;
+      itemsPerPage = 18;
     }
 
     const response = await api(`/search?query=${searchQuery}&category=${searchCategory}&page=${searchPage}&per=${itemsPerPage}`);
@@ -79,7 +81,7 @@ const SearchPage: React.FC = () => {
   };
 
   return (
-    <>
+    <div className="max-sm:mt-5 text-white w-full">
       <SearchForm
         query={query}
         setQuery={setQuery}
@@ -87,13 +89,17 @@ const SearchPage: React.FC = () => {
         setCategory={setCategory}
         onSearch={handleSearch}
       />
-      <MovieIndex movies={movies} />
-      <PaginationStyle
-        currentPage={page}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-      />
-    </>
+      <div className="mt-2">
+        <MovieIndex movies={movies} />
+      </div>
+      <div className="max-sm:mb-14 mb-12 mt-2 md:mt-4 md:mb-16">        
+        <PaginationStyle
+          currentPage={page}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+      </div>
+    </div>
   );
 };
 

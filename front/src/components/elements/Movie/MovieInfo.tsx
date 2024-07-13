@@ -38,9 +38,9 @@ const MovieInfo: React.FC<MovieInfoProps> = ({ movieData, isAuthenticated, handl
           alt={`${movieData.movie.original_title} poster`}
           width={400}
           height={750}
-          className="rounded-lg shadow-md md:m-16"
+          className="rounded-lg shadow-md md:m-6"
         />
-        <div className="w-full lg:w-1/3">
+        <div className="w-full lg:w-2/5">
           <MovieOverview movieData={movieData} contentVisible={contentVisible} />
         </div>
       </div>

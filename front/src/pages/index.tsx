@@ -53,9 +53,9 @@ const RootPage: CustomNextPage= () => {
             </div>
           </div>
         </div>
-            <div className="bg-black h-14 z-10 md:h-20 w-full lg:mt-6 mt-48 text-white font-bold text-2xl flex justify-center items-center">
-                MovieSagaを使う
-            </div>
+          <div className="bg-black h-14 z-10 md:h-20 w-full lg:mt-6 mt-36 md:mt-48 text-white font-bold text-2xl flex justify-center items-center">
+              MovieSagaを使う
+          </div>
         <div className={`flex-grow md:h-52 h-36 flex flex-col justify-start ${styles["bg-homepage-end"]}`}>
           <div className="flex flex-row justify-center mt-14 flex-nowrap z-30">
             {isUserSignedIn ? (
@@ -66,7 +66,7 @@ const RootPage: CustomNextPage= () => {
               </>
             ) : (
               <div className="flex flex-col items-center">
-                <div className="mt-5 mx-1 md:mx-7  flex-shrink-0"><RandomButton/></div>
+                <div className="md:mt-2 mx-1 md:mx-7  flex-shrink-0"><RandomButton/></div>
                 <div className="mt-2" id="before-login-button">
                   ランダム機能を試してみる
                 </div>
@@ -76,7 +76,7 @@ const RootPage: CustomNextPage= () => {
         </div>
       </div>
       <div className="flex text-white w-full bg-gray-950 md:min-h-36 min-h-52 px-4 justify-center text-center">
-        <div className="md:mt-10">
+        <div className="mt-10">
         This [website, program, service, application, product] uses TMDB and the TMDB APIs but is not endorsed, certified, or otherwise approved by TMDB.
         </div>
       </div>

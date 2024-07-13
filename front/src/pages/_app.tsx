@@ -34,7 +34,11 @@ function MyApp({ Component, pageProps }: CustomAppProps) {
 
   const ContentWrapper = ({ children }: { children: React.ReactNode }) => {
     if (Component.noFilmBackground || isMobile) {
-      return <>{children}</>
+      return (
+        <div className='bg-black min-h-screen flex flex-col justify-between'>
+          <div className="flex-grow">{children}</div>
+        </div>
+      );
     }
     return <FilmBackground>{children}</FilmBackground>
   }

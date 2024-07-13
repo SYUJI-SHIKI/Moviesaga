@@ -5,6 +5,7 @@ import BookmarkButton from '@/components/elements/Bookmark/BookmarkButton';
 import CollectionCarousel from '@/components/elements/Collection/CollectionCarousel';
 import YouTube from 'react-youtube';
 import Link from 'next/link';
+import { CustomNextPage } from '@/types/next-page';
 
 interface Movie {
   id: number;
@@ -28,7 +29,7 @@ interface CollectionResponse {
   is_creator: boolean;
 }
 
-const CollectionShow: React.FC = () => {
+const CollectionShow: CustomNextPage = () => {
   const router = useRouter();
   const { id } = router.query;
   const [collectionData, setCollectionData] = useState<CollectionResponse | null>(null);
@@ -137,7 +138,7 @@ const CollectionShow: React.FC = () => {
             />
           </div>
           <Link href={`/movies/${currentMovie.tmdb_id}`}>
-            <div className='text-2xl font-bold flex items-center justify-center mt-10 max-sm:mb-20 mb-14 hover:text-blue-500'>
+            <div className='text-2xl max-sm:text-xl font-bold flex items-center justify-center mt-10 max-sm:mb-20 mb-14 hover:text-blue-500'>
               「{currentMovie.original_title}」の詳細はこちら
             </div>
           </Link>
@@ -146,5 +147,7 @@ const CollectionShow: React.FC = () => {
     </div>
   );
 };
+
+CollectionShow.noFilmBackground = true
 
 export default CollectionShow;

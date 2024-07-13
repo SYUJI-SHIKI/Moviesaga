@@ -8,7 +8,7 @@ interface FilmBackgroundProps {
   length?: number;
 }
 
-const FilmBackground: React.FC<FilmBackgroundProps> = ({ children, className, length = 27 }) => {
+const FilmBackground: React.FC<FilmBackgroundProps> = ({ children, className, length = 22 }) => {
   return (
     //relativeにするかfixedにするか迷い中 
     <div className={`flex flex-row contrast-75 min-h-screen max-w-full z-10 m-0 p-0 overflow-x-hidden ${className} ${styles["bg-half-repeat"]}`}>

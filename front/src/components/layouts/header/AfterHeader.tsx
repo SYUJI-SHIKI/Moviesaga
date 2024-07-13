@@ -39,41 +39,43 @@ const AfterHeader: React.FC = () => {
   return (
     <>
       <header className="fixed top-0 left-0 z-40 p-0 m-0 w-full bg-transparent">
-          <div　className="flex flex-row items-center md:ml-20 mt-7 font-Anton md:text-5xl text-2xl text-amber-100">
-            <Link href="/">
+        <div　className="flex flex-row items-center ml-2 mt-7 font-Anton md:text-3xl text-2xl text-amber-100">
+          <Link href="/">
+            <div className="bg-black rounded-3xl border-2 border-white p-2 md:p-3">
               MovieSaga
-            </Link>
-            <div className="lg:hidden">
-              <button
-                onClick={toggleMenu}
-                className="fixed text-white focus:outline-none top-6 right-5 z-50"
-              >
-                {isOpen ?  null : <GiFilmProjector size={40} className="rounded-full bg-black border-4 border-white" />}
-              </button>
             </div>
-            {isOpen && (
-              <div className={`lg:hidden fixed inset-0 bg-gray-800 bg-opacity-90 z-40 flex justify-center items-center`}>
-                <div className="flex flex-col items-center justify-center h-full space-y-6">
-                <AfterLoginNav onClose = {toggleMenu} />
-                </div>
-              </div>
-            )}
-            <div className="hidden lg:block fixed right-20 text-white mt-7 focus:outline-none z-30">
-              <Sheet open={isNavOpen} onOpenChange={setIsNavOpen}>
-                <SheetTrigger asChild>
-                  <button
-                    onClick={toggleNav}
-                  >
-                    {isNavOpen ? null : <GiFilmProjector size={60} className="rounded-full bg-black border-4 border-white" />}
-                  </button>
-                </SheetTrigger>
-                <SheetContent className="bg-[url('/navbar.jpg')] bg-cover shadow-inner opacity-80 border-amber-950">
-                  <SheetTitle></SheetTitle>
-                    <AfterLoginNav onClose = {toggleNav} />
-                </SheetContent>
-              </Sheet>
-            </div>
+          </Link>
+          <div className="lg:hidden">
+            <button
+              onClick={toggleMenu}
+              className="fixed text-white focus:outline-none top-9 right-5 z-50"
+            >
+              {isOpen ?  null : <GiFilmProjector size={40} className="rounded-full bg-black border-4 border-white" />}
+            </button>
           </div>
+          {isOpen && (
+            <div className={`lg:hidden fixed inset-0 bg-gray-800 bg-opacity-90 z-40 flex justify-center items-center`}>
+              <div className="flex flex-col items-center justify-center h-full space-y-6">
+              <AfterLoginNav onClose = {toggleMenu} />
+              </div>
+            </div>
+          )}
+          <div className="hidden lg:block fixed right-5 text-white mt-7 focus:outline-none z-30">
+            <Sheet open={isNavOpen} onOpenChange={setIsNavOpen}>
+              <SheetTrigger asChild>
+                <button
+                  onClick={toggleNav}
+                >
+                  {isNavOpen ? null : <GiFilmProjector size={60} className="rounded-full bg-black border-4 border-white" />}
+                </button>
+              </SheetTrigger>
+              <SheetContent className="bg-[url('/navbar.jpg')] bg-cover shadow-inner opacity-80 border-amber-950">
+                <SheetTitle></SheetTitle>
+                  <AfterLoginNav onClose = {toggleNav} />
+              </SheetContent>
+            </Sheet>
+          </div>
+        </div>
       </header>
     </>
   )

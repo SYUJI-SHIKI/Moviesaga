@@ -23,7 +23,7 @@ const PaginationStyle: React.FC<PaginationProps> = ({ totalPages, currentPage, o
 
   const renderPageNumbers = () => {
     const pages = [];
-    const pageRange = 2; // 現在のページの前後に表示するページ数
+    const pageRange = 1; 
 
     let startPage = Math.max(1, currentPage - pageRange);
     let endPage = Math.min(totalPages, currentPage + pageRange);
@@ -45,8 +45,8 @@ const PaginationStyle: React.FC<PaginationProps> = ({ totalPages, currentPage, o
           <PaginationLink
             href="#"
             onClick={(e) => handlePageClick(e, i)}
-            className={`p-8 text-2xl rounded-md ${
-              i === currentPage ? 'bg-blue-500 text-white' : 'bg-transparent text-blue-500 hover:bg-gray-200'
+            className={`p-4 text-2xl rounded-md  ${
+              i === currentPage ? 'bg-black  border-white border-2 text-white' : 'bg-transparent text-gray-50 hover:bg-gray-200'
             }`}
           >
             {i}
@@ -70,7 +70,7 @@ const PaginationStyle: React.FC<PaginationProps> = ({ totalPages, currentPage, o
   };
 
   return (
-    <Pagination>
+    <Pagination className="rounded-3xl bg-opacity-70 backdrop-blur-sm w-full">
       <PaginationContent>
         {currentPage > 1 && (
           <PaginationItem>

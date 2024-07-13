@@ -16,6 +16,9 @@ module Api
               credits["cast"].map { |movie| { id: movie["id"], poster_path: "https://image.tmdb.org/t/p/original#{movie['poster_path']}" } }
             end
           end
+
+          movie_ids.select! { |movie| movie[:poster_path] =~ /\.(jpg|png)$/ }
+
           @movies = Kaminari.paginate_array(movie_ids).page(params[:page]).per(items_per_page)
           Rails.logger.debug("Movies: #{@movies.total_pages}")
           render json: { movies: @movies, total_pages: @movies.total_pages }, status: :ok
