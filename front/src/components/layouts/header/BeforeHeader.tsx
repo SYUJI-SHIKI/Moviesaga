@@ -38,17 +38,17 @@ const BeforeHeader: React.FC = () => {
 
   return (
     <header className="fixed top-0 left-0 z-50 p-0 m-0 w-full bg-transparent">
-      <div className="flex items-center">
+      <div　className="flex flex-row items-center ml-2 mt-7 font-Anton md:text-5xl text-2xl text-amber-100">
         <Link href="/">
-          <div　className="ml-20 mt-7 font-Anton md:text-5xl text-2xl text-amber-100">
+          <div className="bg-black rounded-3xl border-2 border-white p-2 md:p-3">
             MovieSaga
           </div>
         </Link>
-        <div className="lg:hidden flex">
+        <div className="lg:hidden">
           <button
             onClick={toggleMenu}
-            className="fixed text-white focus:outline-none right-20 z-50"
-          >
+            className="fixed text-white focus:outline-none top-6 right-5 z-50"
+            >
             {isOpen ? null : <GiFilmProjector size={40} className="rounded-full border-4 bg-black border-white" />}
           </button>
         </div>
@@ -59,7 +59,7 @@ const BeforeHeader: React.FC = () => {
             </div>
           </div>
         )}
-        <div className="hidden lg:block fixed right-20 text-white md:mt-10 focus:outline-none z-30">
+        <div className="hidden lg:block fixed right-5 text-white focus:outline-none z-30">
           <Sheet open={isNavOpen} onOpenChange={setIsNavOpen}>
             <SheetTrigger asChild>
               <button

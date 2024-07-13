@@ -15,15 +15,17 @@ interface MovieIndexProps {
 }
 
 const MovieIndex: React.FC<MovieIndexProps> = ({movies}) => {
+
+  
   return (
     <>
-      <div className="p-4 grid grid-cols-5 gap-4">
+      <div className="p-4 grid lg:grid-cols-6 md:grid-cols-4 grid-cols-3 gap-4 max-sm:gap-1 rounded-3xl bg-opacity-30 backdrop-blur-sm">
         {movies.map((movie) => (
           <div key={movie.id} className="relative m-2 ">
             <Link href={`/movies/${movie.tmdb_id ? movie.tmdb_id : movie.id}`} passHref>
-              <div className="border-2 border-gray-600/50">
+              <div className="">
                 <div className="block group cursor-pointer">
-                  <div className={`relative overflow-hidden rounded-lg shadow-lg transform transition duration-300 group-hover:scale-105 ${styles['animate-slide-in']}`}>
+                  <div className={`relative overflow-hidden rounded-lg shadow-2xl transform transition duration-300 group-hover:scale-105 ${styles['animate-slide-in']}`}>
                     <Image
                       src={movie.poster_path}
                       className="w-full h-auto object-cover"
