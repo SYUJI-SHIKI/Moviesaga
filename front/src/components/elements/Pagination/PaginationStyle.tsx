@@ -70,17 +70,17 @@ const PaginationStyle: React.FC<PaginationProps> = ({ totalPages, currentPage, o
   };
 
   return (
-    <Pagination className="rounded-3xl bg-opacity-70 backdrop-blur-sm w-full">
+    <Pagination className="rounded-3xl bg-opacity-70 backdrop-blur-sm w-full lg:w-2/5 p-2 bg-black">
       <PaginationContent>
         {currentPage > 1 && (
           <PaginationItem>
-            <PaginationPrevious onClick={(e) => handlePageClick(e, currentPage - 1)} href="#" />
+            <PaginationPrevious onClick={(e) => handlePageClick(e, currentPage - 1)} href="#" className="p-3" />
           </PaginationItem>
         )}
         {renderPageNumbers()}
         {currentPage < totalPages && (
           <PaginationItem>
-            <PaginationNext onClick={(e) => handlePageClick(e, currentPage + 1)} href="#" />
+            <PaginationNext onClick={(e) => handlePageClick(e, currentPage + 1)} href="#" className="p-3" />
           </PaginationItem>
         )}
       </PaginationContent>

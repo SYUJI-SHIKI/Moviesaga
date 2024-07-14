@@ -7,22 +7,24 @@ interface Movie {
   original_title: string;
 }
 
-export const useFavorites = () => { // useFavoritesに変更
+export const useFavorites = () => {
   const [favoriteMovies, setFavoriteMovies] = useState<Movie[]>([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
-  const fetchFavorites = useCallback(async () => {
+  const fetchFavorites = useCallback(async (pageNum: number) => {
     try {
-      const response = await api.get('/favorites');
-      setFavoriteMovies(response.data.movies); // ここでresponse.data.moviesを設定
-      console.log(`wwwwwwwww,${JSON.stringify(response.data.movies, null, 2)}`);
+      const response = await api.get(`/favorites?page=${pageNum}`);
+      setFavoriteMovies(response.data.movies);
+      setTotalPages(response.data.total_pages);
     } catch (error) {
       console.error('Failed to fetch favorites:', error);
     }
   }, []);
 
   useEffect(() => {
-    fetchFavorites();
-  }, [fetchFavorites]);
+    fetchFavorites(page);
+  }, [fetchFavorites, page]);
 
-  return { favoriteMovies };
+  return { favoriteMovies, page, setPage, totalPages };
 }

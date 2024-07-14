@@ -20,12 +20,16 @@ const FavoriteMoviesCarousel: React.FC<FavoriteMoviesCarouselProps> = ({ movies 
   const [visibleRange, setVisibleRange] = useState({ start: 0, end: 10 });
 
   useEffect(() => {
-    setDisplayMovies([...movies, ...movies]);
+    if (movies.length > 1) {
+      setDisplayMovies([...movies, ...movies]);
+    } else {
+      setDisplayMovies(movies);
+    }
   }, [movies]);
 
   useEffect(() => {
     const carousel = carouselRef.current;
-    if (!carousel || displayMovies.length === 0) return;
+    if (!carousel || displayMovies.length <= 2) return;
 
     const scrollStep = 1;
     const scrollInterval = 30;

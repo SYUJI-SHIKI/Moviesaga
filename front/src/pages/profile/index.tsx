@@ -63,10 +63,9 @@ const ProfilePage: React.FC<ProfileProps> = ({ user, movies }) => {
   }
 
   return (
-    <div className="bg-black w-full min-h-screen text-gray-200">
-      {/* ヒーローセクション */}
+    <div className="bg-black w-full  text-gray-200 min-h-screen md:h-[180vh]">
       <div className="relative h-64 md:h-96 bg-cover bg-top" style={{backgroundImage: `url(${lastMoviePoster})`}}>
-        <div className="absolute inset-0 bg-black opacity-50"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
         <div className="absolute bottom-0 left-0 right-0 p-8">
           <div className="mx-auto flex items-end space-x-8">
             <Image
@@ -74,11 +73,11 @@ const ProfilePage: React.FC<ProfileProps> = ({ user, movies }) => {
               alt="User Avatar"
               width={150}
               height={150}
+              priority
               className="rounded-full border-4 border-white shadow-lg"
             />
             <div>
               <h1 className="text-4xl max-sm:text-xl font-bold text-white">{userData.name}</h1>
-              <p className="text-xl max-sm:text-lg text-gray-300">{userData.email}</p>
               <div className="mt-4">
                 <EditProfileDialog user={userData} onSave={handleEditProfile} />
               </div>
@@ -88,11 +87,14 @@ const ProfilePage: React.FC<ProfileProps> = ({ user, movies }) => {
       </div>
 
       <div className="container mx-auto px-4 py-8 mt-5 mb-12 max-sm:mt-0">
-        <section className="mb-16 max-sm:mb-6">
-          <h2 className="text-3xl font-bold mb-6 text-gray-100">お気に入りの映画</h2>
-          <FavoriteMoviesCarousel movies={moviesData} />
-        </section>
-
+        {moviesData.length　> 0 ? (
+          <section className="mb-16 max-sm:mb-6">
+            <h2 className="text-3xl font-bold mb-6 text-gray-100">「いいね」した映画</h2>
+            <FavoriteMoviesCarousel movies={moviesData} />
+          </section>
+        ):(
+          <h2 className="text-3xl font-bold text-gray-100 mb-10">「いいね」した映画がありません</h2>
+        )}
         <div className="grid md:grid-cols-2 gap-8">
           <section className="bg-gray-800 rounded-lg p-6 shadow-lg">
             <h2 className="text-2xl font-bold mb-4 text-gray-100">コレクション</h2>
