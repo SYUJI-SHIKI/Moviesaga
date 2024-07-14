@@ -70,7 +70,7 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-[#d2b48c] via-[#8b4513] to-[#654321] text-[#f4e1d2] animate-gradient-flow bg-[length:400%_400%]">
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-[#e9adad] via-[#fdf4f3] to-[#ea4a4a] text-[#f4e1d2] animate-gradient-flow bg-[length:400%_400%]">
       <div className="fixed inset-0 z-20 overflow-x-hidden">
         <WeakGrain />
       </div>
@@ -141,12 +141,12 @@ const SignUpPage = () => {
             Sign Up
           </button>
         </form>
-        <div className={`bg-[#a0522d] z-30 mx-auto my-8 w-10 h-10 uppercase rounded-full ${styles['or-divider']}`}>
+        <div className={`bg-[#cf6325] z-30 mx-auto my-8 w-10 h-10 uppercase rounded-full ${styles['or-divider']}`}>
           <div className="p-2 font-medium text-[#f4e1d2]">
             OR
           </div>
         </div>
-        <div className="flex justify-center items-center md:m-0 ml-10 mb-3">
+        <div className="flex justify-center items-center mb-3">
           <GoogleLoginButton />
         </div>
       </div>

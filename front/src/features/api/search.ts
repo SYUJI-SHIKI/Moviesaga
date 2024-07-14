@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 const searchHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { query, category, page } = req.query as { query: string; category: string; page: string };
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    const apiUrl = process.env.NEXT_PUBLIC_TEST_API_URL;
     if (!apiUrl) {
       throw new Error('NEXT_PUBLIC_TEST_API_URL is not defined');
     }

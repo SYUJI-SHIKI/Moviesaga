@@ -18,7 +18,7 @@ const useLogOut = () => {
     console.log(uuid);
 
     try {
-      const response = await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/sign_out`, {
+      const response = await axios.delete(`${process.env.NEXT_PUBLIC_TEST_API_URL}/api/v1/auth/sign_out`, {
         headers: {
           'client': client,
           'uuid': uuid,
