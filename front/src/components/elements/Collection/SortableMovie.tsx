@@ -49,7 +49,7 @@ const SortableMovie: React.FC<SortableMovieProps> = ({ movie }) => {
             }}
           />
         </div>
-        <span className="mt-1 text-xs text-center w-full overflow-hidden text-ellipsis whitespace-nowrap">
+        <span className="mt-1 text-lg text-center w-full overflow-hidden text-ellipsis whitespace-nowrap">
           {truncateTitle(movie.original_title)}
         </span>
       </div>

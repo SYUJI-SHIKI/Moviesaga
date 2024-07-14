@@ -90,7 +90,7 @@ const CollectionCreate: CustomNextPage = () => {
 
   return (
     <div className="w-full mx-auto px-4 py-8">
-      <div className="bg-black py-6 mb-8">
+      <div className="bg-black py-6">
         <h1 className="text-3xl text-white font-bold text-center">
           特集作成
         </h1>
