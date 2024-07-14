@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Movie } from "@/types/movie";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import YouTube from 'react-youtube';
+import YouTube, { YouTubeEvent } from 'react-youtube';
 
 interface TrailerProps {
   movieData: {
@@ -27,7 +27,7 @@ const Trailer: React.FC<TrailerProps> = ({ movieData }) => {
     },
   };
 
-  const onReady = (event: string) => {
+  const onReady = (event: YouTubeEvent) => {
     setIsReady(true);
     // 必要に応じて追加の初期化を行うことができます
   };

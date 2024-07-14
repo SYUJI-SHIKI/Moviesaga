@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import api from 'lib/api';
 import BookmarkButton from '@/components/elements/Buttons/BookmarkButton';
 import CollectionCarousel from '@/components/elements/Collection/CollectionCarousel';
-import YouTube from 'react-youtube';
+import YouTube, { YouTubeEvent } from 'react-youtube';
 import Link from 'next/link';
 import { CustomNextPage } from '@/types/next-page';
 
@@ -83,7 +83,7 @@ const CollectionShow: CustomNextPage = () => {
 
   const currentMovie = collectionData.collection.movies[currentMovieIndex];
 
-  const onReady = (event: string) => {
+  const onReady = (event: YouTubeEvent) => {
     setIsReady(true);
   };
 
