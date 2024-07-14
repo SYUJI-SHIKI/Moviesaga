@@ -21,6 +21,8 @@ const Trailer: React.FC<TrailerProps> = ({ movieData }) => {
       mute: 1,
       loop: 1,
       rel: 0,
+      modestbranding: 1,
+      showinfo: 0,
       playlist: movieData.movie.youtube_trailer_id,
     },
   };

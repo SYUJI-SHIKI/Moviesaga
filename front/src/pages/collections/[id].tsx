@@ -101,6 +101,7 @@ const CollectionShow: CustomNextPage = () => {
                   autoplay: 1,
                   controls: 0,
                   modestbranding: 1,
+                  showinfo: 0,
                   loop: 1,
                   rel: 0,
                   playlist: currentMovie.youtube_trailer_id,

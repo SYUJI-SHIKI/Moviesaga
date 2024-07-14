@@ -111,31 +111,43 @@ const CollectionForm: React.FC<CollectionFormProps> = ({
       collisionDetection={closestCenter}
       onDragEnd={handleDragEnd}
     >
-      <form onSubmit={handleSubmit} className="p-6 bg-black rounded-lg shadow-md h-full mb-16 text-gray-100 min-w-full">
-        {error && <ErrorMessage message={error} />}
-        <div className="mb-4">
-          <label htmlFor="title" className="block text-sm font-medium text-gray-100">タイトル</label>
-          <input
-            type="text"
-            id="title"
-            value={formTitle}
-            onChange={(e) => setFormTitle(e.target.value)}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-          />
+      <form onSubmit={handleSubmit} className="p-6 bg-black rounded-lg shadow-md h-full mb-16 font-bold text-2xl text-gray-100 min-w-full">
+        <div className='flex flex-col lg:flex-row'>
+          <div className='w-full mb-4'>
+            <div className="mb-4 lg:ml-2 w-full lg:w-4/5">
+              <label htmlFor="title" className="block text-lg font-medium text-gray-100">タイトル(15文字以内)</label>
+              <input
+                type="text"
+                id="title"
+                value={formTitle}
+                onChange={(e) => setFormTitle(e.target.value)}
+                className="block w-full h-16 mt-1 p-2 rounded-md border-gray-300 text-xl font-bold text-gray-800  focus:ring focus:ring-indigo-200"
+              />
+            </div>
+            <div className="mb-4 lg:ml-2 w-full lg:w-11/12">
+              <label htmlFor="description" className="block text-lg font-medium text-gray-100">特集の説明(130文字以内)</label>
+              <textarea
+                id="description"
+                value={formDescription}
+                onChange={(e) => setFormDescription(e.target.value)}
+                className="block w-full h-32 mt-1 p-2 rounded-md border-gray-300 text-xl font-bold text-gray-800  focus:ring focus:ring-indigo-200 "
+              />
+            </div>
+          </div>
+          <div className='w-full lg:w-11/12 p-3 lg:relative mb-5 max-sm:text-lg'>
+            <div className='lg:absolute lg:bottom-0 tracking-wider'>
+              <p className='my-2'>いいねした映画から特集を作って</p>
+              <p className='my-2 mb-4'>あなたの好きな映画をみんなに広げよう！</p>
+              <p className='my-2'>利用可能な映画をタッチすると</p>
+              <p className='my-2'>特集に組む映画を選択できます。</p>
+            </div>
+          </div>
         </div>
-        <div className="mb-4">
-          <label htmlFor="description" className="block text-sm font-medium text-gray-100">説明</label>
-          <textarea
-            id="description"
-            value={formDescription}
-            onChange={(e) => setFormDescription(e.target.value)}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-          />
-        </div>
-        <div className="flex flex-col md:flex-row">
-          <div className="w-full md:w-1/2 flex flex-col items-center">
-            <div className='flex flex-col'>
-              <h3 className="text-xl font-semibold mb-4">利用可能な映画</h3>
+
+        <div className="flex flex-col lg:flex-row">
+          <div className="w-full lg:w-1/2 lg:mx-2 p-2 flex flex-col items-center rounded-3xl border-4 max-sm:h-[60vh] h-[65vh] lg:h-[85vh]">
+            <div className='flex flex-col mb-4'>
+              <h3 className="font-bold my-4">利用可能な映画</h3>
               <PaginationStyle
                 currentPage={currentPage}
                 totalPages={totalPages}
@@ -146,18 +158,21 @@ const CollectionForm: React.FC<CollectionFormProps> = ({
               <MovieList movies={availableMovies} />
             </SortableContext>
           </div>
-          <div className="w-full md:w-1/2 flex flex-col items-center top-0">
-            <h3 className="text-xl font-semibold mb-4 space-y-3">
+          <div className="w-full lg:w-1/2 lg:mx-2 p-2 flex flex-col items-center rounded-3xl border-4 max-sm:h-[60vh] h-[65vh] lg:h-[85vh] max-md:mt-5">
+            <h3 className="font-bold mt-4 mb-7 space-y-3">
               <p>選択された映画</p>
               <p>(９タイトルまで)</p>
             </h3>
-            <SortableContext items={selectedMovies.map(m => m.id)} strategy={verticalListSortingStrategy}>
-              <MovieList movies={selectedMovies} />
-            </SortableContext>
+            <div className='overflow-y-auto'>
+              <SortableContext items={selectedMovies.map(m => m.id)} strategy={verticalListSortingStrategy}>
+                <MovieList movies={selectedMovies} />
+              </SortableContext>
+            </div>
           </div>
         </div>
-        <div className='flex justify-center items-center'>
-          <button type="submit" className="mt-6 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
+        <div className='flex flex-col justify-center items-center mt-3'>
+          {error && <ErrorMessage message={error} />}
+          <button type="submit" className=" px-4 py-2 mt-4 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
             作成する
           </button>
         </div>

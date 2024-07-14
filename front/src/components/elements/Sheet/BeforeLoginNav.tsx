@@ -11,6 +11,11 @@ const BeforeLoginNav: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         <FaTimes size={24} />
       </button>
       <div className="mt-10 ml-3">
+        <Link href="/">
+          <div className="text-white hover:text-gray-300 mb-2">
+            ホーム
+          </div>
+        </Link> 
         <Link href="/movies/random">
           <div className="text-white hover:text-gray-300 mb-5">
             ランダム機能

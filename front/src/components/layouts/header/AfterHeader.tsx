@@ -40,11 +40,11 @@ const AfterHeader: React.FC = () => {
     <>
       <header className="fixed top-0 left-0 z-40 p-0 m-0 w-full bg-transparent">
         <div　className="flex flex-row items-center ml-2 mt-7 font-Anton md:text-3xl text-2xl text-amber-100">
-          <Link href="/">
+          {/* <Link href="/">
             <div className="bg-black rounded-3xl border-2 border-white p-2 md:p-3">
               MovieSaga
             </div>
-          </Link>
+          </Link> */}
           <div className="lg:hidden">
             <button
               onClick={toggleMenu}

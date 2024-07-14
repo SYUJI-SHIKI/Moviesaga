@@ -8,6 +8,7 @@ interface Collection {
   title: string;
   description: string;
   Image: string;
+  userName: string;
 }
 
 interface CollectionIndexFormProps {
@@ -46,13 +47,13 @@ const CollectionIndexForm: React.FC<CollectionIndexFormProps> = ({ apiEndpoint }
 
   return (
     <>
-    <div className='flex flex-col items-center justify-center'>
+    <div className='flex bg-gray-950 flex-col items-center w-full h-[180vh]'>
       {collections && collections.length > 0 ? (
-        <div className=" bg-gray-950 mt- md:mt-32">
-          <div className="flex items-center justify-center">
-            <div className="text-3xl text-white font-bold mb-4 mt-4">Collections</div>
+        <>
+          <div className="flex items-center justify-center mt-10">
+            <div className="text-3xl text-white font-bold mb-4">Collections</div>
           </div>
-          <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:grid-rows-2 mt-16">
             {collections.map(collection => (
               <CollectionCard
                 id = {collection.id}
@@ -60,22 +61,23 @@ const CollectionIndexForm: React.FC<CollectionIndexFormProps> = ({ apiEndpoint }
                 title={collection.title}
                 description={collection.description}
                 imageUrl={`${collection.Image}?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ`}
+                userName={collection.userName}
               />
             ))}
           </div>
-        </div>
+        </>
       ) : (
         <div className="text-3xl text-white font-bold mb-4 mt-4">特集がありません</div>
       )}
-      </div>
-      <div className='bottom-1 mr-6'>
-        <PaginationStyle
-          currentPage={page}
-          totalPages={totalPages}
-          onPageChange={(newPage) => {
-            setPage(newPage);
-          }}
-          />
+        <div className='mt-14 fixed bottom-32'>
+          <PaginationStyle
+            currentPage={page}
+            totalPages={totalPages}
+            onPageChange={(newPage) => {
+              setPage(newPage);
+            }}
+            />
+        </div>
       </div>
     </>
   );

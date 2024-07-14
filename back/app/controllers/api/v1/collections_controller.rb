@@ -7,7 +7,11 @@ module Api
         Rails.logger.debug(@collections.total_pages)
 
         collection_card = @collections.map do |collection|
-          collection.as_json(include: :movies).merge(Image: collection.movies.first&.poster_path)
+          collection.as_json(include: :movies).merge({
+            Image: collection.movies.first&.poster_path,
+            userName: collection.user.name
+          })
+
         end
         render json: { collections: collection_card, total_pages: @collections.total_pages }
       end
