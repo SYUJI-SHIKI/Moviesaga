@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import api from 'lib/api';
-import BookmarkButton from '@/components/elements/Bookmark/BookmarkButton';
+import BookmarkButton from '@/components/elements/Buttons/BookmarkButton';
 import CollectionCarousel from '@/components/elements/Collection/CollectionCarousel';
 import YouTube from 'react-youtube';
 import Link from 'next/link';
@@ -91,7 +91,7 @@ const CollectionShow: CustomNextPage = () => {
     <div className='w-full min-h-screen'>
       <div className="bg-black text-white ">
         <div className=" px-10 md:py-8 overflow-hidden">
-          <div className="relative md:mt-14 mb-12 rounded-lg shadow-2xl">
+          <div className="relative md:mt-14  lg:mb-12 rounded-lg shadow-3xl">
             <YouTube
               videoId={currentMovie.youtube_trailer_id}
               opts={{
@@ -111,24 +111,26 @@ const CollectionShow: CustomNextPage = () => {
               className="w-full"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-            <div className="absolute bottom-0 left-0 p-8">
-              <h2 className="text-3xl font-bold mb-2">{currentMovie.original_title}</h2>
-              <p className="text-gray-300 mb-4">{currentMovie.release_date}</p>
+            <div className="absolute lg:bottom-0 bottom-12  lg:left-0 md:left-[-20px] left-[-30px]  p-8">
+              <h2 className="text-4xl text-slate-300 font-bold text-opacity-80 mb-2 ">{currentMovie.original_title}</h2>
+              <p className="text-gray-300 text-xl mb-4">{currentMovie.release_date}</p>
             </div>
           </div>
           <div className="mb-12">
-            <h1 className="text-4xl md:text-6xl text-white font-bold mb-4">{collectionData.collection.title}</h1>
-            <p className="text-xl text-gray-300 mb-6">{collectionData.collection.description}</p>
-            <div className="flex items-center space-x-4">
-              {collectionData.is_creator ? (
-                <>
-                  <button onClick={handleEdit} className="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">編集</button>
-                  <button onClick={handleDelete} className="bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 transition duration-300">削除</button>
-                </>
-              ) : (
-                <BookmarkButton isBookmarked={collectionData.bookmarked} onToggle={handleBookmarkToggle} />
-              )}
+            <div className='flex lg:items-end flex-col lg:flex-row'>
+              <h1 className="text-4xl md:text-6xl text-white font-bold mb-4">{collectionData.collection.title}</h1>
+              <div className="flex items-center space-x-4 lg:ml-6 mb-4">
+                {collectionData.is_creator ? (
+                  <>
+                    <button onClick={handleEdit} className="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">編集</button>
+                    <button onClick={handleDelete} className="bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 transition duration-300">削除</button>
+                  </>
+                ) : (
+                  <BookmarkButton isBookmarked={collectionData.bookmarked} onToggle={handleBookmarkToggle} />
+                )}
+              </div>
             </div>
+            <p className="text-xl text-gray-300 mb-6">{collectionData.collection.description}</p>
           </div>
 
           <div className=' flex items-center justify-center'>

@@ -53,7 +53,7 @@ const CollectionIndexForm: React.FC<CollectionIndexFormProps> = ({ apiEndpoint }
           <div className="flex items-center justify-center mt-10">
             <div className="text-3xl text-white font-bold mb-4">Collections</div>
           </div>
-          <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:grid-rows-2 mt-16">
+          <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:grid-rows-2 mt-5 md:mt-16">
             {collections.map(collection => (
               <CollectionCard
                 id = {collection.id}

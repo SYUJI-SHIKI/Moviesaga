@@ -15,8 +15,6 @@ interface MovieIndexProps {
 }
 
 const MovieIndex: React.FC<MovieIndexProps> = ({movies}) => {
-
-  
   return (
     <>
       <div className="p-4 grid lg:grid-cols-6 md:grid-cols-4 grid-cols-3 gap-4 max-sm:gap-1 rounded-3xl bg-opacity-30 backdrop-blur-sm">

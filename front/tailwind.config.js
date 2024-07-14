@@ -39,6 +39,16 @@ module.exports = {
           '0%': { transform: 'translateX(0)' },
           '100%': { transform: 'translateX(-100%)' },
         },
+        "scale-out-center": {
+          "0%": {
+              transform: "scale(1)",
+              opacity: "1"
+          },
+          to: {
+              transform: "scale(0)",
+              opacity: "1"
+          }
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -50,6 +60,7 @@ module.exports = {
         'slide-out-left': 'slide-out-left 0.5s forwards',
         'slide-out-right': 'slide-out-right 0.5s forwards',
         scroll: 'scroll 20s linear infinite',
+        "scale-out-center": "scale-out-center 30s cubic-bezier(0.550, 0.085, 0.680, 0.530)   both",
       },
     },
   },

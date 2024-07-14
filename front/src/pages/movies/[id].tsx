@@ -7,7 +7,6 @@ import { motion } from "framer-motion";
 import Trailer from "@/components/elements/Movie/MovieTrailer";
 import MovieInfo from "@/components/elements/Movie/MovieInfo";
 import Link from "next/link";
-import api from "lib/api";
 
 const MovieDetail: CustomNextPage = () => {
   const router = useRouter();

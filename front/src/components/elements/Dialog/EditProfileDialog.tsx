@@ -8,7 +8,8 @@ import {
   DialogTrigger,
   DialogOverlay,
   DialogPortal,
-  DialogClose
+  DialogClose,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button"
 import { FaTimes } from "react-icons/fa";
@@ -79,6 +80,7 @@ const EditProfileDialog: React.FC<EditProfileDialogProps> = ({ user, onSave }) =
           <DialogHeader>
             <DialogTitle className="text-white">プロフィール編集</DialogTitle>
           </DialogHeader>
+          <DialogDescription></DialogDescription>
           <form onSubmit={handleSubmit}>
             <div className="">
               <div className="flex items-end">

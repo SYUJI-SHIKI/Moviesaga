@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
-import FavoriteButton from "@/components/elements/Favorite/FavoriteButton";
+import FavoriteButton from "@/components/elements/Buttons/FavoriteButton";
 import { MovieResponse } from "@/types/movie";
 import MovieOverview from "@/components/elements/Movie/MovieOverview";
 
@@ -26,7 +26,7 @@ const MovieInfo: React.FC<MovieInfoProps> = ({ movieData, isAuthenticated, handl
           onToggle={handleFavoriteToggle}
         />
       )}
-      <p className="text-xl mb-2">
+      <p className="text-xl my-2">
         上映時間: {movieData.movie.runtime ? `${movieData.movie.runtime}分` : "情報なし"}
       </p>
       <p className="text-xl mb-4">
