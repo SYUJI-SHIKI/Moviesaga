@@ -90,7 +90,7 @@ const LogInPage = () => {
               会員登録はこちらから
             </Link>
           </div>
-          <div className="flex md:justify-center md:items-center md:m-0 ml-10 mb-3">
+          <div className="flex justify-center items-center md:m-0  mb-3">
             <GoogleLoginButton />
           </div>
         </div>

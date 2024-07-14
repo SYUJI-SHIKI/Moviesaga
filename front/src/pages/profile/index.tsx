@@ -63,7 +63,7 @@ const ProfilePage: React.FC<ProfileProps> = ({ user, movies }) => {
   }
 
   return (
-    <div className="bg-black w-full  text-gray-200 min-h-screen md:h-[180vh]">
+    <div className="bg-black w-full  text-gray-200 min-h-screen ">
       <div className="relative h-64 md:h-96 bg-cover bg-top" style={{backgroundImage: `url(${lastMoviePoster})`}}>
         <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
         <div className="absolute bottom-0 left-0 right-0 p-8">
@@ -74,7 +74,7 @@ const ProfilePage: React.FC<ProfileProps> = ({ user, movies }) => {
               width={150}
               height={150}
               priority
-              className="rounded-full border-4 border-white shadow-lg"
+              className="rounded-full border-4 border-white shadow-lg max-md:h-20 max-md:w-20 bg-black"
             />
             <div>
               <h1 className="text-4xl max-sm:text-xl font-bold text-white">{userData.name}</h1>

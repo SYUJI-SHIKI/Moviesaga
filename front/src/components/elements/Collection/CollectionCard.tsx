@@ -22,16 +22,15 @@ const truncateTitle = (text: string) => {
 const CollectionCard: React.FC<CollectionCardProps> = ({ id, title, description, imageUrl }) => {
   return (
     <Link href={`/collections/${id}`}>
-      <div className='relative group'>
+      <div className='relative group md:w-64 w-96 '>
         <div className="relative flex items-end overflow-hidden p-5 lg:h-80 w-30 m-5 text-center text-whitesmoke bg-whitesmoke shadow-lg transition-transform z-10 group rounded-lg">
           <div className="absolute top-0 left-0 w-full h-[100%]">
             <Image
               src={imageUrl}
               alt={title}
               fill
-              sizes='100px'
               priority
-              className={`transition-transform ${styles.customPosition} md:object-center object-cover aspect-square`}
+              className={`transition-transform ${styles.customPosition} md:object-center object-cover aspect-square w-12`}
               style={{ transition: 'transform calc(var(--d) * 1.5) var(--e)' }}
             />
             <div className="absolute top-0 left-0 w-full h-full bg-slate-100 transition-opacity group-hover:opacity-50 .bg-gradient-to-b from-transparent to-bg-slate-200 opacity-20"></div>
