@@ -35,6 +35,12 @@ const CollectionShow: CustomNextPage = () => {
   const [collectionData, setCollectionData] = useState<CollectionResponse | null>(null);
   const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
   const [isReady, setIsReady] = useState(false);
+  const [shouldLoadYouTube, setShouldLoadYouTube] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShouldLoadYouTube(true), 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     if (id) {
@@ -79,6 +85,17 @@ const CollectionShow: CustomNextPage = () => {
     }
   }
 
+  const onError = (event: YouTubeEvent) => {
+    console.error('Youtube player error:', event.data);
+    return (
+      <div className="text-white">
+        動画の読み込みでエラーが発生しました。<br />
+        リロードを試みるか、1作品のみの登録だと <br />
+        再生されないことがあるのでご容赦ください 
+      </div>
+    )
+  }
+
   if (!collectionData) return <p>Loading...</p>;
 
   const currentMovie = collectionData.collection.movies[currentMovieIndex];
@@ -92,24 +109,27 @@ const CollectionShow: CustomNextPage = () => {
       <div className="bg-black text-white ">
         <div className=" px-10 md:py-8 overflow-hidden">
           <div className="relative md:mt-14  lg:mb-12 rounded-lg shadow-3xl">
-            <YouTube
-              videoId={currentMovie.youtube_trailer_id}
-              opts={{
-                height: '500',
-                width: '100%',
-                playerVars: {
-                  autoplay: 1,
-                  controls: 0,
-                  modestbranding: 1,
-                  showinfo: 0,
-                  loop: 1,
-                  rel: 0,
-                  playlist: currentMovie.youtube_trailer_id,
-                },
-              }}
-              onReady={onReady}
-              className="w-full"
-            />
+            {shouldLoadYouTube && (
+              <YouTube
+                videoId={currentMovie.youtube_trailer_id}
+                opts={{
+                  height: '500',
+                  width: '100%',
+                  playerVars: {
+                    autoplay: 1,
+                    controls: 0,
+                    modestbranding: 1,
+                    showinfo: 0,
+                    loop: 1,
+                    rel: 0,
+                    playlist: currentMovie.youtube_trailer_id,
+                  },
+                }}
+                onError={onError}
+                onReady={onReady}
+                className="w-full"
+              />
+            )}
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
             <div className="absolute lg:bottom-0 bottom-12  lg:left-0 md:left-[-20px] left-[-30px]  p-8">
               <h2 className="text-4xl text-slate-300 font-bold text-opacity-80 mb-2 ">{currentMovie.original_title}</h2>
