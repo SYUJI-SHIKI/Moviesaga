@@ -41,8 +41,8 @@ const LogInPage = () => {
       <div className="fixed inset-0 z-20 overflow-x-hidden">
         <WeakGrain />
       </div>
-      <div className="flex justify-center items-center min-h-screen w-full p-2  bg-gradient-to-br from-[#d9bf6a] via-[#a49742] to-[#f4e32a] animate-gradient-flow bg-[length:400%_400%] text-[#2C2410]">
-        <div className="bg-[#F2E8B3]/90 backdrop-blur-sm flex flex-col items-center justify-center mb-5 z-30 rounded-xl shadow-2xl p-5 md:w-96 md:p-8 border-2 border-[#8C7A1D] hover:shadow-3xl transition-all duration-300 ease-in-out transform">
+      <div className="flex justify-center items-center min-h-screen w-full p-2 max-sm:items-start bg-gradient-to-br from-[#d9bf6a] via-[#a49742] to-[#f4e32a] animate-gradient-flow bg-[length:400%_400%] text-[#2C2410]">
+        <div className="bg-[#F2E8B3]/90 backdrop-blur-sm flex flex-col items-center justify-center mb-5 z-30 max-sm:mt-32 rounded-xl shadow-2xl p-5 md:w-96 md:p-8 border-2 border-[#8C7A1D] hover:shadow-3xl transition-all duration-300 ease-in-out transform">
           <h1 className="text-3xl text-center mb-6 font-serif text-[#4A3F10] shadow-text">ログイン</h1>
           <form onSubmit={handleLogin} className="space-y-6 w-full">
             <div className="flex rounded-md overflow-hidden shadow-md">

@@ -37,7 +37,7 @@ const BeforeHeader: React.FC = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 z-50 p-0 m-0 w-full bg-transparent">
+    <header className="fixed top-0 left-0 z-40 p-0 m-0 w-full bg-transparent">
       <div　className="flex flex-row items-center ml-2 mt-7 font-Anton md:text-5xl text-2xl text-amber-100">
         {/* <Link href="/">
           <div className="bg-black rounded-3xl border-2 border-white p-2 md:p-3">
@@ -47,7 +47,7 @@ const BeforeHeader: React.FC = () => {
         <div className="lg:hidden">
           <button
             onClick={toggleMenu}
-            className="fixed text-white focus:outline-none top-6 right-5 z-50"
+            className="fixed text-white focus:outline-none top-6 right-5 z-40"
             >
             {isOpen ? null : <GiFilmProjector size={40} className="rounded-full border-4 bg-black border-white" />}
           </button>

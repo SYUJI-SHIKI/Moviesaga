@@ -70,16 +70,16 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-[#e9adad] via-[#fdf4f3] to-[#ea4a4a] text-[#f4e1d2] animate-gradient-flow bg-[length:400%_400%]">
+    <div className="flex justify-center items-center min-h-screen max-sm:items-start bg-gradient-to-br from-[#e4e3e3] via-[#c98f8692] to-[#ea4a4a] text-[#f4e1d2] animate-gradient-flow bg-[length:400%_400%]">
       <div className="fixed inset-0 z-20 overflow-x-hidden">
         <WeakGrain />
       </div>
-      <div className="bg-[#f4e1d2]/10 backdrop-blur-md rounded-xl shadow-lg w-[450px] p-8 z-30 my-10 mb-20 border border-[#d2b48c]/20 hover:shadow-2xl transition-all duration-300 ease-in-out">
+      <div className="bg-[#f4e1d2]/10 backdrop-blur-md rounded-xl shadow-lg w-[450px] p-8 z-30 my-10 mb-20 max-sm:mt-20 border border-[#d2b48c]/20 hover:shadow-2xl transition-all duration-300 ease-in-out">
         <div className="text-2xl text-center mb-6 font-serif text-[#f4e1d2]">新規登録</div>
         <form onSubmit={handleSubmit} className="space-y-6">
           {error && <ErrorMessage message={error} />}
           <div className="flex rounded-md overflow-hidden">
-            <label htmlFor="name" className="bg-[#8b4513] px-4 py-3 flex items-center text-[#f4e1d2]">
+            <label htmlFor="name" className="bg-[#c59f9f] px-4 py-3 flex items-center text-[#f4e1d2]">
               <FaRegUser />
             </label>
             <input
@@ -93,7 +93,7 @@ const SignUpPage = () => {
             />
           </div>
           <div className="flex rounded-md overflow-hidden">
-            <label htmlFor="email" className="bg-[#8b4513] px-4 py-3 flex items-center text-[#f4e1d2]">
+            <label htmlFor="email" className="bg-[#c59f9f] px-4 py-3 flex items-center text-[#f4e1d2]">
               <MdOutlineEmail />
             </label>
             <input
@@ -107,7 +107,7 @@ const SignUpPage = () => {
             />
           </div>
           <div className="flex rounded-md overflow-hidden">
-            <label htmlFor="password" className="bg-[#8b4513] px-4 py-3 flex items-center text-[#f4e1d2]">
+            <label htmlFor="password" className="bg-[#c59f9f] px-4 py-3 flex items-center text-[#f4e1d2]">
               <RiLockPasswordLine />
             </label>
             <input
@@ -121,7 +121,7 @@ const SignUpPage = () => {
             />
           </div>
           <div className="flex rounded-md overflow-hidden">
-            <label htmlFor="passwordConfirmation" className="bg-[#8b4513] px-4 py-3 flex items-center text-[#f4e1d2]">
+            <label htmlFor="passwordConfirmation" className="bg-[#c59f9f] px-4 py-3 flex items-center text-[#f4e1d2]">
               <RiLockPasswordLine />
             </label>
             <input
@@ -136,12 +136,12 @@ const SignUpPage = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-[#8b4513] text-[#f4e1d2] font-bold uppercase py-3 rounded-md hover:bg-[#a0522d] transition duration-300"
+            className="w-full bg-[#c59f9f] text-[#f4e1d2] font-bold uppercase py-3 rounded-md hover:bg-[#a0522d] transition duration-300"
           >
             Sign Up
           </button>
         </form>
-        <div className={`bg-[#cf6325] z-30 mx-auto my-8 w-10 h-10 uppercase rounded-full ${styles['or-divider']}`}>
+        <div className={`bg-[#c56e6e] z-30 mx-auto my-8 w-10 h-10 uppercase rounded-full ${styles['or-divider']}`}>
           <div className="p-2 font-medium text-[#f4e1d2]">
             OR
           </div>

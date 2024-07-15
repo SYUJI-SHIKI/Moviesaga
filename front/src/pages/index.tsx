@@ -31,20 +31,20 @@ const RootPage: CustomNextPage= () => {
             <div className="lg:m-7 m-2  lg:17 opacity-90  md:text-9xl text-5xl font-Anton">MovieSaga</div>
             <div className="lg:text-4xl">人生の１本の映画をさがす旅へ</div>
           </div>
-          <div className="mt-5 w-full flex justify-end relative">
+          <div className="mt-5 w-full flex justify-end relative max-sm:hidden">
             <div className="flex absolute top-[30px] md:top-[-50px] right-[-60px]">
               <ProjectorGif />
             </div>
           </div>
         </div>
         <div className="flex flex-col">
-          <div className="bg-black h-14 md:h-20 text-white flex items-center justify-center top-0 mt-60">
+          <div className="bg-black h-14 md:h-20 text-white flex items-center justify-center top-0 max-sm:mt-20 mt-60">
             <div className="flex flex-col items-center justify-center font-bold text-2xl z-20">
               MovieSagaでできること
             </div>
           </div>
         </div>
-        <div className="flex flex-col md:justify-center md:items-center mt-8 md:mx-3">
+        <div className="flex flex-col md:justify-center md:items-center max-sm:mb-52 mt-8 md:mx-3">
           <div className="w-full  md:w-3/4 lg:w-full h-[400px] md:h-[400px] rounded-xl shadow-lg ">
             <div className="flex flex-col md:flex-row h-full">
               <AppInfo />
@@ -75,7 +75,7 @@ const RootPage: CustomNextPage= () => {
           </div>
         </div>
       </div>
-      <div className="flex text-white w-full bg-gray-950 md:min-h-36 min-h-52 px-4 justify-center text-center">
+      <div className="flex text-white w-full bg-gray-950 md:min-h-36 min-h-52 max-sm:mb-10 px-4 justify-center text-center">
         <div className="mt-10">
         This [website, program, service, application, product] uses TMDB and the TMDB APIs but is not endorsed, certified, or otherwise approved by TMDB.
         </div>

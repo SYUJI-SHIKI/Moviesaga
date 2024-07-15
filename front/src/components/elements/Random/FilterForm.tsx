@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import api from 'lib/api';
-import Loading from '../Loading/Loading';
+import LoadingGif from '../Loading/LoadingGif';
 import RadioGroup from '../RadioButton/RadioGroup';
 import useForm from '@/hooks/useForm';
 import { keywordOptions, genreOptions, languageOptions, runtimeOptions } from './filterOptions';
@@ -43,7 +43,7 @@ const FilterForm = () => {
     }
   };
 
-  if (loading) return <Loading />;
+  if (loading) return <LoadingGif />;
 
   return (
     <div className="flex flex-col justify-center items-center min-h-screen mb-10"
