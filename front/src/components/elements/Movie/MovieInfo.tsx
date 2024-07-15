@@ -38,6 +38,7 @@ const MovieInfo: React.FC<MovieInfoProps> = ({ movieData, isAuthenticated, handl
           alt={`${movieData.movie.original_title} poster`}
           width={400}
           height={750}
+          priority
           className="rounded-lg shadow-md md:m-6"
         />
         <div className="w-full lg:w-2/5">

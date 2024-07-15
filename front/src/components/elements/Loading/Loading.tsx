@@ -24,21 +24,19 @@ const Loading = () => {
   };
 
   return (
-    <FilmBackground length={15}>
-      <div className="w-full min-h-screen bg-black z-50 text-white flex flex-col justify-center items-center">
-        <div className="mt-3 text-7xl font-Anton">
-          {"Loading...".split("").map((char, index) => (
-            <span
-              key={index}
-              className="transition-colors duration-220"
-              style={{ color: getColor(index) }}
-            >
-              {char}
-            </span>
-          ))}
-        </div>
+    <div className="w-full min-h-screen bg-black z-50 text-white flex flex-col justify-center items-center">
+      <div className="mt-3 text-7xl font-Anton">
+        {"Loading...".split("").map((char, index) => (
+          <span
+            key={index}
+            className="transition-colors duration-220"
+            style={{ color: getColor(index) }}
+          >
+            {char}
+          </span>
+        ))}
       </div>
-    </FilmBackground>
+    </div>
   );
 };
 

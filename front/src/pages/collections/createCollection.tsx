@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import api from "lib/api";
 import { createCollection } from "@/features/api/CollectionApi";
 import CollectionForm from "@/components/elements/Collection/CollectionForm";
+import Loading from "@/components/elements/Loading/Loading";
 import { SimpleMovie } from "@/types/movie";
 import { CustomNextPage } from "@/types/next-page";
 // import { ErrorMessage } from '@/components/Alert/Alert';
@@ -72,13 +73,7 @@ const CollectionCreate: CustomNextPage = () => {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
-      </div>
-    );
-  }
+  if (loading) return <Loading />;
 
   // if (error) {
   //   return <ErrorMessage message={error} />;

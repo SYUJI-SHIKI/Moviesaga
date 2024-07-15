@@ -28,7 +28,7 @@ const MovieIndex: React.FC<MovieIndexProps> = ({movies}) => {
                       src={movie.poster_path}
                       className="w-full h-auto object-cover"
                       width={100}
-                      height={150}
+                      height={75}
                       alt={movie.original_title || `Movie ${movie.id}`}
                     />
                   </div>

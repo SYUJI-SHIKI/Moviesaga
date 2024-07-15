@@ -24,7 +24,7 @@ const RootPage: CustomNextPage= () => {
   }, [router]);
 
   return (
-    <FilmBackground length={31}>
+    <FilmBackground length={33}>
       <div className="text-amber-50 flex flex-col w-full max-sm:bg-black max-sm:items-center">
         <div className=" w-full md:h-2/5 h-1/4  flex flex-col sepia md:items-center">
           <div className="lg:backdrop-blur-3xl md:px-10 py-7 opacity-80 bg-black rounded-3xl z-30 mt-20 flex flex-col items-center justify-center">
@@ -53,10 +53,10 @@ const RootPage: CustomNextPage= () => {
             </div>
           </div>
         </div>
-          <div className="bg-black h-14 z-10 md:h-20 w-full lg:mt-6 mt-36 md:mt-48 text-white font-bold text-2xl flex justify-center items-center">
+          <div className="bg-black h-14 z-10 md:h-20 w-full lg:mt-6 mt-48 text-white font-bold text-2xl flex justify-center items-center">
               MovieSagaを使う
           </div>
-        <div className={`flex-grow md:h-52 h-36 flex flex-col justify-start ${styles["bg-homepage-end"]}`}>
+        <div className={` md:h-52 h-36 flex flex-col justify-start ${styles["bg-homepage-end"]}`}>
           <div className="flex flex-row justify-center mt-14 flex-nowrap z-30">
             {isUserSignedIn ? (
               <>

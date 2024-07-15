@@ -5,6 +5,7 @@ import CollectionForm from "@/components/elements/Collection/CollectionForm";
 import { SimpleMovie } from "@/types/movie";
 import { CustomNextPage } from "@/types/next-page";
 import { useRouter } from "next/router";
+import Loading from "@/components/elements/Loading/Loading";
 
 const CollectionEdit: CustomNextPage = () => {
   const [movieCache, setMovieCache] = useState<{ [page: number]: SimpleMovie[] }>({});
@@ -85,13 +86,7 @@ const CollectionEdit: CustomNextPage = () => {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
-      </div>
-    );
-  }
+  if (loading) return <Loading />;
 
   const availableMovies = (movieCache[currentPage] || []).filter(
     movie => !selectedMovies.some(selected => selected.id === movie.id)

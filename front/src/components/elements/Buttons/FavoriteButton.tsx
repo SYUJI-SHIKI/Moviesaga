@@ -10,14 +10,14 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ isFavorited, onToggle }
   return (
     <button onClick={onToggle} className="favorite-button rounded-xl bg-indigo-800 py-1 px-3 max-sm:w-52">
       {isFavorited ? (
-        <div className='relative flex items-center active:animate-spin-slow'>
+        <div className='relative flex items-center active:animate-spin-slow w-44'>
           <IoHeartCircleOutline className='relative size-10 text-red-800' />
-          <div className='ml-2 w-28'>「いいね」を外す</div>
+          <div className='ml-2 w-34'>「いいね」を外す</div>
         </div>
       ) : (
-        <div className='relative flex items-center active:animate-spin-slow'>
+        <div className='relative flex items-center active:animate-spin-slow w-44'>
           <IoHeartCircle className='relative size-10 text-red-800' />
-          <div className='ml-2 w-28'>「いいね」する</div>
+          <div className='ml-2 w-34'>「いいね」する</div>
         </div>
       )}
     </button>
