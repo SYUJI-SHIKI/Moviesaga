@@ -53,7 +53,7 @@ const RootPage: CustomNextPage= () => {
             </div>
           </div>
         </div>
-          <div className="bg-black h-14 z-10 md:h-20 w-full lg:mt-6 mt-48 text-white font-bold text-2xl flex justify-center items-center">
+          <div className="bg-black h-14 z-10 md:h-20 w-full lg:mt-6 mt-52 text-white font-bold text-2xl flex justify-center items-center">
               MovieSagaを使う
           </div>
         <div className={` md:h-52 h-36 flex flex-col justify-start ${styles["bg-homepage-end"]}`}>

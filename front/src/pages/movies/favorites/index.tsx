@@ -12,7 +12,7 @@ const FavoritesPage: React.FC = () => {
 
   return (
     <div className="text-white w-full">
-      <div className="text-3xl bg-black text-white flex items-center justify-center h-32">いいねした映画</div>
+      <div className="text-3xl bg-black text-white flex items-center justify-center h-32">「いいね」した映画</div>
       {favoriteMovies && favoriteMovies.length > 0 ? (
         <div className="mt-2">
           <MovieIndex
@@ -27,7 +27,7 @@ const FavoritesPage: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className="flex justify-center mt-5 p-4 h-24 rounded-2xl bg-black">
+        <div className="flex justify-center w-full mt-5 p-4 h-24 rounded-2xl bg-black">
           <div className=" w-1/2 rounded-2xl">
             「いいね」した映画がありません
           </div>

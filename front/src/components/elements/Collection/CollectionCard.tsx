@@ -29,6 +29,7 @@ const CollectionCard: React.FC<CollectionCardProps> = ({ id, title, description,
               src={imageUrl}
               alt={title}
               fill
+              sizes='200px'
               priority
               className={`transition-transform ${styles.customPosition} md:object-center object-cover aspect-square w-12`}
               style={{ transition: 'transform calc(var(--d) * 1.5) var(--e)' }}
