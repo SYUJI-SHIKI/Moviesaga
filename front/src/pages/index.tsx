@@ -39,7 +39,7 @@ const RootPage: CustomNextPage= () => {
         </div>
         <div className="flex flex-col">
           <div className="bg-black h-14 md:h-20 text-white flex items-center justify-center top-0 max-sm:mt-20 mt-60">
-            <div className="flex flex-col items-center justify-center font-bold text-2xl z-20">
+            <div className="flex flex-col items-center justify-center font-bold max-sm:text-xl text-2xl z-20">
               MovieSagaでできること
             </div>
           </div>
