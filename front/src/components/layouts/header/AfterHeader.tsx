@@ -36,15 +36,14 @@ const AfterHeader: React.FC = () => {
     setIsNavOpen(!isNavOpen);
   };
 
+  const handleBackgroundClick = (e: React.MouseEvent) => {
+    setIsOpen(false);
+  }
+
   return (
     <>
       <header className="fixed top-0 left-0 z-40 p-0 m-0 w-full bg-transparent">
         <div　className="flex flex-row items-center ml-2 mt-7 font-Anton md:text-3xl text-2xl text-amber-100">
-          {/* <Link href="/">
-            <div className="bg-black rounded-3xl border-2 border-white p-2 md:p-3">
-              MovieSaga
-            </div>
-          </Link> */}
           <div className="lg:hidden">
             <button
               onClick={toggleMenu}
@@ -54,7 +53,10 @@ const AfterHeader: React.FC = () => {
             </button>
           </div>
           {isOpen && (
-            <div className={`lg:hidden fixed inset-0 bg-gray-800 bg-opacity-90 z-40 flex justify-center items-center`}>
+            <div
+              className={`lg:hidden fixed inset-0 bg-gray-800 bg-opacity-90 z-40 flex justify-center items-center`}
+              onClick={handleBackgroundClick}
+            >
               <div className="flex flex-col items-center justify-center h-full space-y-6">
               <AfterLoginNav onClose = {toggleMenu} />
               </div>

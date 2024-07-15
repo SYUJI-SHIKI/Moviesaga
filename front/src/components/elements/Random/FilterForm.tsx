@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import api from 'lib/api';
 import LoadingGif from '../Loading/LoadingGif';
@@ -18,7 +18,10 @@ const FilterForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);    
+    setLoading(true);
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
     try {
       const query = new URLSearchParams(formData).toString();
       const response = await api.get(`/movies/random?${query}`, {   
@@ -38,6 +41,7 @@ const FilterForm = () => {
       
     } catch (error) {
       console.error('Fetch error:', error);
+      setLoading(false);
     } finally {
       setLoading(true);
     }

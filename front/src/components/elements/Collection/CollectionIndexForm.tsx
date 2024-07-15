@@ -47,11 +47,11 @@ const CollectionIndexForm: React.FC<CollectionIndexFormProps> = ({ apiEndpoint }
 
   return (
     <>
-      <div className='flex bg-gray-950 flex-col items-center w-full min-h-screen lg:h-[180vh]'>
+      <div className='flex bg-black flex-col items-center w-full sm:h-[145vh] md:h-[180vh] lg:h-[175vh]'>
         {collections && collections.length > 0 ? (
           <>
             <div className="flex items-center justify-center mt-10">
-              <div className="text-3xl text-white font-bold mb-4">Collections</div>
+              <div className="text-5xl text-white font-Anton mb-4">Collections</div>
             </div>
             <div className="grid gap-4 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 md:grid-rows-2 mt-5 md:mt-16 auto-rows-max">
               {collections.map(collection => (
@@ -64,20 +64,20 @@ const CollectionIndexForm: React.FC<CollectionIndexFormProps> = ({ apiEndpoint }
                   userName={collection.userName}
                 />
               ))}
+              <div className=' md:col-start-2 md:col-span-1 lg:col-start-2 lg:col-span-2 mt-3 lg:mt-14 text-gray-300'>
+                  <PaginationStyle
+                    currentPage={page}
+                    totalPages={totalPages}
+                    onPageChange={(newPage) => {
+                      setPage(newPage);
+                    }}
+                  />
+              </div>
             </div>
           </>
         ) : (
           <div className="text-3xl text-white font-bold mb-4 mt-4">特集がありません</div>
         )}
-        <div className='mt-14 fixed bottom-32 text-gray-300'>
-          <PaginationStyle
-            currentPage={page}
-            totalPages={totalPages}
-            onPageChange={(newPage) => {
-              setPage(newPage);
-            }}
-          />
-        </div>
       </div>
     </>
   );
