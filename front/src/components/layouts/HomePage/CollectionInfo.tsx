@@ -14,7 +14,7 @@ const CollectionInfo: React.FC  = () => {
           いいね！した映画の中から自分オリジナルの特集を組めます！
           あなたの好きな映画が誰かの好きな映画になるかも。。
         </div>
-        <div　className='md:text-basic'>
+        <div　className='md:text-base'>
           <br />
           ＊詳細ページに行くと音が流れる仕様になっているので
           注意してお使いください
