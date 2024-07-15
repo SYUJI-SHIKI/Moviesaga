@@ -4,6 +4,7 @@ import { CustomNextPage } from "@/types/next-page";
 import { useAuth } from "@/hooks/useAuth";
 import { useMovieData } from "@/hooks/useMovieData";
 import { motion } from "framer-motion";
+import Loading from "@/components/elements/Loading/Loading";
 import Trailer from "@/components/elements/Movie/MovieTrailer";
 import MovieInfo from "@/components/elements/Movie/MovieInfo";
 import Link from "next/link";
@@ -45,7 +46,7 @@ const MovieDetail: CustomNextPage = () => {
     }
   }, [bgLoaded]);
 
-  if (loading || authLoading) return <div>Loading...</div>;
+  if (loading || authLoading) return <Loading />;
   if (error) return <div>Error: {error}</div>;
   if (!movieData) return <div>Movie not found</div>;
   if (postError) {
@@ -69,13 +70,13 @@ const MovieDetail: CustomNextPage = () => {
     );
   }
 
+  if (loading) return <Loading />;
+
   return (
     <div className="relative min-h-screen text-gray-300 bg-cover bg-center overflow-hidden"
       style={{backgroundImage: `url(${movieData.movie.poster_path})` }}>
       <div className="absolute inset-0  bg-opacity-70 backdrop-blur-sm z-0"></div>
-      {!bgLoaded ? (
-        <div>Loading</div>
-      ) : (
+
         <>
           <motion.div
             className="relative md:flex md:items-center md:justify-center z-10 md:mx-auto mt-16 md:px-4 py-8"
@@ -100,7 +101,7 @@ const MovieDetail: CustomNextPage = () => {
             </div>
           </motion.div>
         </>
-      )}
+      
     </div>
   );
 };

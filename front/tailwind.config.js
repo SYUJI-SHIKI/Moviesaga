@@ -49,6 +49,10 @@ module.exports = {
               opacity: "1"
           }
         },
+        wave: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -61,6 +65,7 @@ module.exports = {
         'slide-out-right': 'slide-out-right 0.5s forwards',
         scroll: 'scroll 20s linear infinite',
         "scale-out-center": "scale-out-center 30s cubic-bezier(0.550, 0.085, 0.680, 0.530)   both",
+        wave: 'wave 2s linear infinite',
       },
     },
   },

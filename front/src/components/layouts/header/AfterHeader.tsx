@@ -48,7 +48,7 @@ const AfterHeader: React.FC = () => {
           <div className="lg:hidden">
             <button
               onClick={toggleMenu}
-              className="fixed text-white focus:outline-none top-9 right-5 z-50"
+              className="fixed text-white focus:outline-none top-9 right-5 z-40"
             >
               {isOpen ?  null : <GiFilmProjector size={40} className="rounded-full bg-black border-4 border-white" />}
             </button>
