@@ -1,16 +1,17 @@
 // pages/_app.tsx
-import { AppProps } from 'next/app'
-import '../app/globals.css'
-import 'tailwindcss/tailwind.css'
-import { motion, AnimatePresence } from 'framer-motion'
-import { useRouter } from 'next/router'
-import FilmBackground from '@/components/layouts/HomePage/FilmBackground'
-import { getAnimationConfig, AnimationType } from '../utils/animations'
-import { CustomNextPage } from '../types/next-page'
+import { AppProps } from 'next/app';
+import '../app/globals.css';
+import 'tailwindcss/tailwind.css';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useRouter } from 'next/router';
+import FilmBackground from '@/components/layouts/HomePage/FilmBackground';
+import { getAnimationConfig, AnimationType } from '../utils/animations';
+import { CustomNextPage } from '../types/next-page';
 import Header from "@/components/layouts/header/Header";
 import Footer from "@/components/layouts/footer/Footer";
-import { useState, useEffect } from 'react'
-import Head from 'next/head'
+import { useState, useEffect } from 'react';
+import Head from 'next/head';
+import customRouter from '../utils/customRouter';
 
 type CustomAppProps = AppProps & {
   Component: CustomNextPage
@@ -23,7 +24,7 @@ function MyApp({ Component, pageProps }: CustomAppProps) {
 
   useEffect(() => {
     const checkIfMobile = () => {
-      setIsMobile(window.innerWidth < 640) // 768pxはモバイルとデスクトップの境界値です。必要に応じて調整してください。
+      setIsMobile(window.innerWidth < 640)
     }
 
     checkIfMobile()

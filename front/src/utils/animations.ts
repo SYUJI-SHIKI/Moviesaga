@@ -1,5 +1,7 @@
 import { MotionProps } from 'framer-motion';
+// import { isNavigationBack } from './customRouter';
 
+//  'none'の追加も忘れない
 export type AnimationType = 'default' | 'fadeIn';
 
 type AnimationConfig = {
@@ -22,8 +24,17 @@ const animations: Record<AnimationType, AnimationConfig> = {
     initial: { opacity: 0 },
     transition: { duration: 1 },
   },
+  // none: {
+  //   exit: { opacity: 1 },
+  //   animate: { opacity: 1 },
+  //   initial: { opacity: 1 },
+  //   transition: { duration: 0 },
+  // },
 };
 
 export function getAnimationConfig(type: AnimationType): AnimationConfig {
+  // if (isNavigationBack()) {
+  //   return animations.none;
+  // }
   return animations[type];
 }
