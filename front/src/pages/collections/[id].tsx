@@ -79,38 +79,37 @@ const CollectionShow: CustomNextPage = () => {
     }
   }
 
-  const YouTubePlayer: React.FC<{ videoId: string }> = ({ videoId }) => {
-    const [isReady, setIsReady] = useState(false);
-
-    useEffect(() => {
-      const timer = setTimeout(() => setIsReady(true), 1000); // YouTubeの読み込みを模倣
-      return () => clearTimeout(timer);
-    }, []);
-
-    return (
-      <div className={`w-full h-[500px] ${isReady ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}>
-        <iframe
-          width="100%"
-          height="100%"
-          src={`https://www.youtube.com/embed/${videoId}?autoplay=1&controls=0&modestbranding=1&showinfo=0&loop=1&playlist=${videoId}&rel=0`}
-
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
-      </div>
-    );
-  };
-
   if (!collectionData) return <p>Loading...</p>;
 
   const currentMovie = collectionData.collection.movies[currentMovieIndex];
+
+  const onReady = (event: YouTubeEvent) => {
+    setIsReady(true);
+  };
 
   return (
     <div className='w-full min-h-screen'>
       <div className="bg-black text-white ">
         <div className=" px-10 md:py-8 overflow-hidden">
           <div className="relative md:mt-14  lg:mb-12 rounded-lg shadow-3xl">
-            <YouTubePlayer videoId={currentMovie.youtube_trailer_id} />
+            <YouTube
+              videoId={currentMovie.youtube_trailer_id}
+              opts={{
+                height: '500',
+                width: '100%',
+                playerVars: {
+                  autoplay: 1,
+                  controls: 0,
+                  modestbranding: 1,
+                  showinfo: 0,
+                  loop: 1,
+                  rel: 0,
+                  playlist: currentMovie.youtube_trailer_id,
+                },
+              }}
+              onReady={onReady}
+              className="w-full"
+            />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
             <div className="absolute lg:bottom-0 bottom-12  lg:left-0 md:left-[-20px] left-[-30px]  p-8">
               <h2 className="text-4xl text-slate-300 font-bold text-opacity-80 mb-2 ">{currentMovie.original_title}</h2>
