@@ -52,12 +52,12 @@ function MyApp({ Component, pageProps }: CustomAppProps) {
         <meta property="og:title" content="MovieSaga" />
         <meta property="og:description" content="映画探しの手助けするサービスです。" />
         <meta property="og:url" content="https://movie-saga-app.com" />
-        <meta property="og:image" content="https://www.movie-saga-app.com/logo.png" />
+        <meta property="og:image" content="https://movie-saga-app.com/logo.png" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="MovieSaga" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:creator" content="@ganbaritaiman9" />
-        <meta name="twitter:image" content="https://www.movie-saga-app.com/logo.png" />
+        <meta name="twitter:image" content="https://movie-saga-app.com/logo.png" />
         <link rel="canonical" href="https://movie-saga-app.com" />
         <link rel="icon" type="image/png" sizes="32x32" href="/logo.png" />
       </Head>
