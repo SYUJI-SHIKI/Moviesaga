@@ -146,7 +146,7 @@ const CollectionForm: React.FC<CollectionFormProps> = ({
         </div>
 
         <div className="flex flex-col lg:flex-row">
-          <div className="w-full lg:w-1/2 lg:mx-2 p-2 flex flex-col items-center rounded-3xl border-4 max-sm:h-[75vh] h-[80vh] lg:h-[90vh]">
+          <div className="w-full lg:w-1/2 lg:mx-2 p-2 flex flex-col items-center rounded-3xl border-4 max-sm:h-[75vh] h-[80vh] lg:h-[100vh]">
             <div className='flex flex-col mb-4'>
               <h3 className="font-bold my-4">利用可能な映画</h3>
               <PaginationStyle
@@ -159,7 +159,7 @@ const CollectionForm: React.FC<CollectionFormProps> = ({
               <MovieList movies={availableMovies} />
             </SortableContext>
           </div>
-          <div className="w-full lg:w-1/2 lg:mx-2 p-2 flex flex-col items-center rounded-3xl border-4 max-sm:h-[75vh] h-[80vh] lg:h-[90vh] max-md:mt-5">
+          <div className="w-full lg:w-1/2 lg:mx-2 p-2 flex flex-col items-center rounded-3xl border-4 max-sm:h-[75vh] h-[80vh] lg:h-[100vh] max-md:mt-5">
             <h3 className="font-bold mt-4 mb-7 space-y-3">
               <p>選択された映画</p>
               <p>(９タイトルまで)</p>
