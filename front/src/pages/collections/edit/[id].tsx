@@ -6,8 +6,11 @@ import { SimpleMovie } from "@/types/movie";
 import { CustomNextPage } from "@/types/next-page";
 import { useRouter } from "next/router";
 import Loading from "@/components/elements/Loading/Loading";
+import { describe } from "node:test";
 
 const CollectionEdit: CustomNextPage = () => {
+  const [formTitle, setFormTitle] = useState('');
+  const [formDescription, setFormDescription] = useState('');
   const [movieCache, setMovieCache] = useState<{ [page: number]: SimpleMovie[] }>({});
   const [selectedMovies, setSelectedMovies] = useState<SimpleMovie[]>([]);
   const [collectionData, setCollectionData] = useState<{ title: string; description: string } | null>(null);
@@ -37,6 +40,8 @@ const CollectionEdit: CustomNextPage = () => {
             title: response.data.title,
             description: response.data.description,
           });
+          setFormTitle(response.data.title);
+          setFormDescription(response.data.description);
           setSelectedMovies(response.data.selectedMovies);
         }
       } else {
@@ -69,7 +74,11 @@ const CollectionEdit: CustomNextPage = () => {
     movieIds: number[];
   }) => {
     try {
-      await updateCollection(Number(id), data);
+      await updateCollection(Number(id), {
+        ...data,
+        title: formTitle,
+        description: formDescription
+      });
       alert("特集が更新されました");
       router.push('/collections');
     } catch (error) {
@@ -101,8 +110,10 @@ const CollectionEdit: CustomNextPage = () => {
       </div>
       {collectionData && (availableMovies.length > 0 || selectedMovies.length > 0) ? (
         <CollectionForm
-          title={collectionData.title}
-          description={collectionData.description}
+          title={formTitle}
+          description={formDescription}
+          onTitleChange={setFormTitle}
+          onDescriptionChange={setFormDescription}
           availableMovies={availableMovies}
           selectedMovies={selectedMovies}
           onMovieSelection={handleMovieSelection}

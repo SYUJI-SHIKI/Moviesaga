@@ -8,6 +8,8 @@ import { CustomNextPage } from "@/types/next-page";
 // import { ErrorMessage } from '@/components/Alert/Alert';
 
 const CollectionCreate: CustomNextPage = () => {
+  const [formTitle, setFormTitle] = useState('');
+  const [formDescription, setFormDescription] = useState('');
   const [movieCache, setMovieCache] = useState<{ [page: number]: SimpleMovie[] }>({});
   const [selectedMovies, setSelectedMovies] = useState<SimpleMovie[]>([]);
   const [loading, setLoading] = useState(true);
@@ -92,6 +94,10 @@ const CollectionCreate: CustomNextPage = () => {
       </div>
       {availableMovies.length > 0 || selectedMovies.length > 0 ? (
         <CollectionForm
+          title={formTitle}
+          description={formDescription}
+          onTitleChange={setFormTitle}
+          onDescriptionChange={setFormDescription}
           availableMovies={availableMovies}
           selectedMovies={selectedMovies}
           onMovieSelection={handleMovieSelection}

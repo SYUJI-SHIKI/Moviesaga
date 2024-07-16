@@ -8,8 +8,10 @@ import { ErrorMessage } from '../Alert/Alert';
 import PaginationStyle from '../Pagination/PaginationStyle';
 
 interface CollectionFormProps {
-  title?: string;
-  description?: string;
+  title: string;
+  description: string;
+  onTitleChange: (title: string) => void;
+  onDescriptionChange: (title: string) => void;
   availableMovies: SimpleMovie[];
   selectedMovies: SimpleMovie[];
   onMovieSelection: (movie: SimpleMovie, isSelected: boolean) => void;
@@ -20,8 +22,10 @@ interface CollectionFormProps {
 }
 
 const CollectionForm: React.FC<CollectionFormProps> = ({
-  title = '',
-  description = '',
+  title,
+  description,
+  onTitleChange,
+  onDescriptionChange,
   availableMovies,
   selectedMovies,
   onMovieSelection,
@@ -119,8 +123,8 @@ const CollectionForm: React.FC<CollectionFormProps> = ({
               <input
                 type="text"
                 id="title"
-                value={formTitle}
-                onChange={(e) => setFormTitle(e.target.value)}
+                value={title}
+                onChange={(e) => onTitleChange(e.target.value)}
                 className="block w-full h-16 mt-1 p-2 rounded-md border-gray-300 text-xl font-bold text-gray-800  focus:ring focus:ring-indigo-200"
               />
             </div>
@@ -128,8 +132,8 @@ const CollectionForm: React.FC<CollectionFormProps> = ({
               <label htmlFor="description" className="block text-lg font-medium text-gray-100">特集の説明(130文字以内)</label>
               <textarea
                 id="description"
-                value={formDescription}
-                onChange={(e) => setFormDescription(e.target.value)}
+                value={description}
+                onChange={(e) => onDescriptionChange(e.target.value)}
                 className="block w-full h-32 mt-1 p-2 rounded-md border-gray-300 text-xl font-bold text-gray-800  focus:ring focus:ring-indigo-200 "
               />
             </div>
