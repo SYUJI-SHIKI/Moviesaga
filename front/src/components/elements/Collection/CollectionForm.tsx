@@ -111,7 +111,7 @@ const CollectionForm: React.FC<CollectionFormProps> = ({
       collisionDetection={closestCenter}
       onDragEnd={handleDragEnd}
     >
-      <form onSubmit={handleSubmit} className="p-6 bg-black rounded-lg shadow-md h-full mb-16 font-bold text-2xl text-gray-100 min-w-full">
+      <form onSubmit={handleSubmit} className=" md:p-6 bg-black rounded-lg shadow-md h-full mb-16 font-bold text-2xl text-gray-100 min-w-full">
         <div className='flex flex-col lg:flex-row'>
           <div className='w-full mb-4'>
             <div className="mb-4 lg:ml-2 w-full lg:w-4/5">
@@ -145,7 +145,7 @@ const CollectionForm: React.FC<CollectionFormProps> = ({
         </div>
 
         <div className="flex flex-col lg:flex-row">
-          <div className="w-full lg:w-1/2 lg:mx-2 p-2 flex flex-col items-center rounded-3xl border-4 max-sm:h-[60vh] h-[65vh] lg:h-[85vh]">
+          <div className="w-full lg:w-1/2 lg:mx-2 p-2 flex flex-col items-center rounded-3xl border-4 max-sm:h-[75vh] h-[80vh] lg:h-[90vh]">
             <div className='flex flex-col mb-4'>
               <h3 className="font-bold my-4">利用可能な映画</h3>
               <PaginationStyle
@@ -158,7 +158,7 @@ const CollectionForm: React.FC<CollectionFormProps> = ({
               <MovieList movies={availableMovies} />
             </SortableContext>
           </div>
-          <div className="w-full lg:w-1/2 lg:mx-2 p-2 flex flex-col items-center rounded-3xl border-4 max-sm:h-[60vh] h-[65vh] lg:h-[85vh] max-md:mt-5">
+          <div className="w-full lg:w-1/2 lg:mx-2 p-2 flex flex-col items-center rounded-3xl border-4 max-sm:h-[75vh] h-[80vh] lg:h-[90vh] max-md:mt-5">
             <h3 className="font-bold mt-4 mb-7 space-y-3">
               <p>選択された映画</p>
               <p>(９タイトルまで)</p>
@@ -172,7 +172,7 @@ const CollectionForm: React.FC<CollectionFormProps> = ({
         </div>
         <div className='flex flex-col justify-center items-center mt-3'>
           {error && <ErrorMessage message={error} />}
-          <button type="submit" className=" px-4 py-2 mt-4 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
+          <button type="submit" className=" px-4 py-2 mt-4 lg:mt-6 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
             作成する
           </button>
         </div>

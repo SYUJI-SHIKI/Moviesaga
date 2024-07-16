@@ -38,7 +38,7 @@ const CollectionShow: CustomNextPage = () => {
   const [shouldLoadYouTube, setShouldLoadYouTube] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShouldLoadYouTube(true), 2000);
+    const timer = setTimeout(() => setShouldLoadYouTube(true), 2500);
     return () => clearTimeout(timer);
   }, []);
 

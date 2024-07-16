@@ -23,7 +23,7 @@ const SortableMovie: React.FC<SortableMovieProps> = ({ movie }) => {
   };
 
   const truncateTitle = (text: string) => {
-    return text.length > 7 ? text.substring(0, 7) + '...' : text;
+    return text.length > 5 ? text.substring(0, 5) + '...' : text;
   };
 
   return (
@@ -36,7 +36,7 @@ const SortableMovie: React.FC<SortableMovieProps> = ({ movie }) => {
       aria-label={`${movie.original_title}をドラッグして並べ替え`}
     >
       <div className="items-center">
-        <div className="md:w-[120px] md:h-[120px] w-[90px] h-[90px] relative aspect-square grid grid-cols-3">
+        <div className="md:w-[120px] md:h-[120px] w-[90px] h-[90px] relative aspect-square grid grid-cols-3 md:mx-1">
           <Image
             src={movie.poster_path}
             alt={movie.original_title}
