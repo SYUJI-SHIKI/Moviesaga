@@ -150,7 +150,7 @@ const CollectionShow: CustomNextPage = () => {
                 )}
               </div>
             </div>
-            <p className="text-xl text-gray-300 mb-6">{collectionData.collection.description}</p>
+            <p className="text-xl md:text-3xl text-gray-300 mb-6">{collectionData.collection.description}</p>
           </div>
 
           <div className=' flex items-center justify-center'>
