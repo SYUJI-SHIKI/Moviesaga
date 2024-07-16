@@ -116,7 +116,10 @@ const CollectionForm: React.FC<CollectionFormProps> = ({
         <div className='flex flex-col lg:flex-row'>
           <div className='w-full mb-4'>
             <div className="mb-4 lg:ml-2 w-full lg:w-4/5">
-              <label htmlFor="title" className="block text-lg font-medium text-gray-100">タイトル(15文字以内)</label>
+              <div className='flex items-end'>
+                <label htmlFor="title" className="block text-lg font-medium text-gray-100">タイトル(15文字以内)</label>
+                <div className='text-base ml-2'>（文字数：　{title.length}/15 文字）</div>
+              </div>
               <input
                 type="text"
                 id="title"
@@ -126,7 +129,10 @@ const CollectionForm: React.FC<CollectionFormProps> = ({
               />
             </div>
             <div className="mb-4 lg:ml-2 w-full lg:w-11/12">
-              <label htmlFor="description" className="block text-lg font-medium text-gray-100">特集の説明(130文字以内)</label>
+              <div className='flex items-end'>
+                <label htmlFor="description" className="block text-lg font-medium text-gray-100">特集の説明(130文字以内)</label>
+                <div className='text-base ml-2'>（文字数：　{description.length}/130 文字）</div>
+              </div>
               <textarea
                 id="description"
                 value={description}
