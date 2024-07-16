@@ -2,7 +2,7 @@ module Api
   module V1
     class CollectionsController < ApiController
       def index
-        items_per_page = params[:per] || 8
+        items_per_page = params[:per] || 6
         @collections = Collection.includes(:movies).order(created_at: :desc).page(params[:page]).per(items_per_page)
         Rails.logger.debug(@collections.total_pages)
 
