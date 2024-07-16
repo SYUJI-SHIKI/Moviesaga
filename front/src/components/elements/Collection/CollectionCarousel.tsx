@@ -16,6 +16,12 @@ interface CarouselProps {
 }
 
 const CollectionCarousel: React.FC<CarouselProps> = ({ movies, currentIndex, onSelectMovie }) => {
+  const handleSelected = (e: React.KeyboardEvent, index: number) => {
+    if (e.key === 'Enter' || e.key === '') {
+      onSelectMovie(index);
+    }
+  };
+
   return (
     <Carousel className="w-11/12">
       <CarouselContent>
@@ -26,6 +32,11 @@ const CollectionCarousel: React.FC<CarouselProps> = ({ movies, currentIndex, onS
                 index === currentIndex ? 'scale-110' : 'opacity-50 hover:opacity-100'
               }`}
               onClick={() => onSelectMovie(index)}
+              onKeyDown={(e) => handleSelected(e, index)}
+              tabIndex={0}
+              role="button"
+              aria-pressed={index === currentIndex}
+              aria-label={`Select movie: ${movie.original_title}`}
             >
               <Image
                 src={movie.poster_path}
