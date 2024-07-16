@@ -34,8 +34,6 @@ const CollectionForm: React.FC<CollectionFormProps> = ({
   totalPages,
   onPageChange,
 }) => {
-  const [formTitle, setFormTitle] = useState(title);
-  const [formDescription, setFormDescription] = useState(description);
   const router = useRouter();
   const [error, setError] = useState("");
 
@@ -68,16 +66,16 @@ const CollectionForm: React.FC<CollectionFormProps> = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (formTitle.trim() === "") {
+    if (title.trim() === "") {
       setError("タイトル名を入れてください");
       return;
     }
 
-    if (formTitle.length > 15) {
+    if (title.length > 15) {
       setError("タイトル名は15文字以下でお願いします");
       return;
     }
-    if (formDescription.length > 130) {
+    if (description.length > 130) {
       setError("投稿内容は130文字以内にしてください");
       return;
     }
@@ -93,11 +91,10 @@ const CollectionForm: React.FC<CollectionFormProps> = ({
 
     try {
       await onSubmit({
-        title: formTitle,
-        description: formDescription,
+        title,
+        description,
         movieIds: selectedMovies.map(movie => movie.id),
       });
-      alert("特集が作成されました");
       router.push('/collections');
     } catch (error) {
       console.error('Error submitting', error);

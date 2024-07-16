@@ -60,7 +60,7 @@ const CollectionCreate: CustomNextPage = () => {
   }) => {
     try {
       await createCollection(data);
-      // 成功時の処理（例：成功メッセージの表示やリダイレクト）
+      alert("特集が作成されました");
     } catch (error) {
       console.error("特集の作成中にエラーが発生しました", error);
       setError("特集の作成に失敗しました。もう一度お試しください。");
@@ -96,8 +96,8 @@ const CollectionCreate: CustomNextPage = () => {
         <CollectionForm
           title={formTitle}
           description={formDescription}
-          onTitleChange={setFormTitle}
-          onDescriptionChange={setFormDescription}
+          onTitleChange={(newTitle) => setFormTitle(newTitle)}
+          onDescriptionChange={(newDescription) => setFormDescription(newDescription)}
           availableMovies={availableMovies}
           selectedMovies={selectedMovies}
           onMovieSelection={handleMovieSelection}
