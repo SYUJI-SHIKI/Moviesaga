@@ -29,7 +29,7 @@ const CollectionCarousel: React.FC<CarouselProps> = ({ movies, currentIndex, onS
           <CarouselItem key={movie.id} className="basis-1/4 max-sm:basis-1/3">
             <div
               className={`cursor-pointer transition-all duration-300 ${
-                index === currentIndex ? 'scale-110' : 'opacity-50 hover:opacity-100'
+                index === currentIndex ? 'md:scale-110' : 'opacity-50 md:hover:opacity-100'
               }`}
               onClick={() => onSelectMovie(index)}
               onKeyDown={(e) => handleSelected(e, index)}
