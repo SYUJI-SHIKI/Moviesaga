@@ -47,7 +47,7 @@ const CollectionIndexForm: React.FC<CollectionIndexFormProps> = ({ apiEndpoint }
 
   return (
     <>
-      <div className='flex bg-black flex-col items-center w-full sm:h-[160vh] md:h-[180vh] lg:h-[175vh]'>
+      <div className='flex bg-black flex-col items-center w-full h-[145vh] lg:h-[165vh]'>
         {collections && collections.length > 0 ? (
           <>
             <div className="flex items-center justify-center mt-10">
