@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import api from 'lib/api';
 import BookmarkButton from '@/components/elements/Buttons/BookmarkButton';
@@ -36,6 +36,7 @@ const CollectionShow: CustomNextPage = () => {
   const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
   const [isReady, setIsReady] = useState(false);
   const [shouldLoadYouTube, setShouldLoadYouTube] = useState(false);
+  const youtubePlayerRef = useRef<YouTube>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => setShouldLoadYouTube(true), 2500);
@@ -53,6 +54,13 @@ const CollectionShow: CustomNextPage = () => {
         });
     }
   }, [id]);
+
+  const handleMovieSelect = (index: number) => {
+    setCurrentMovieIndex(index);
+    if (youtubePlayerRef.current && youtubePlayerRef.current.internalPlayer) {
+      youtubePlayerRef.current.internalPlayer.loadVideoById(collectionData?.collection.movies[index].youtube_trailer_id);
+    }
+  };
 
   const handleEdit = () => {
     router.push(`/collections/edit/${id}`);
@@ -102,6 +110,7 @@ const CollectionShow: CustomNextPage = () => {
 
   const onReady = (event: YouTubeEvent) => {
     setIsReady(true);
+    event.target.playVideo();
   };
 
   return (
@@ -128,6 +137,7 @@ const CollectionShow: CustomNextPage = () => {
                 onError={onError}
                 onReady={onReady}
                 className="w-full"
+                ref={youtubePlayerRef}
               />
             )}
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
@@ -157,7 +167,7 @@ const CollectionShow: CustomNextPage = () => {
             <CollectionCarousel
               movies={collectionData.collection.movies}
               currentIndex={currentMovieIndex}
-              onSelectMovie={setCurrentMovieIndex}
+              onSelectMovie={handleMovieSelect}
             />
           </div>
           <Link href={`/movies/${currentMovie.tmdb_id}`}>
