@@ -19,7 +19,11 @@ const CollectionIndexForm: React.FC<CollectionIndexFormProps> = ({ apiEndpoint }
   const [collections, setCollections] = useState<Collection[]>([]);
   const [page, setPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
-  const [itemsPerPage, setItemsPerPage] = useState<number>(6);
+
+  const [itemsPerPage, setItemsPerPage] = useState(() => {
+    if (typeof window === 'undefined') return 8;
+    return window.innerWidth < 640 ? 6 : 8;
+  });
 
   useEffect(() => {
     const updateItemsPerPage = () => {

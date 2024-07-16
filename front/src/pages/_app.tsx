@@ -57,9 +57,9 @@ function MyApp({ Component, pageProps }: CustomAppProps) {
         <meta property="og:site_name" content="MovieSaga" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:creator" content="@ganbaritaiman9" />
-        <meta name="twitter:image" content="https://movie-saga-app.com/logo.png" />
+        <meta name="twitter:image" content="https://movie-saga-app.com//logo.png" />
         <link rel="canonical" href="https://movie-saga-app.com" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/logo.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/MovieSaga_favicon.png" />
       </Head>
       <AnimatePresence mode="wait">
         <motion.div
