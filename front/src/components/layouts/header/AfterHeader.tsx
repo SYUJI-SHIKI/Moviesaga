@@ -62,7 +62,7 @@ const AfterHeader: React.FC = () => {
               </div>
             </div>
           )}
-          <div className="hidden lg:block fixed right-5 text-white text-bond mt-7 focus:outline-none z-30">
+          <div className="hidden lg:block fixed right-5 text-white mt-7 focus:outline-none z-30">
             <Sheet open={isNavOpen} onOpenChange={setIsNavOpen}>
               <SheetTrigger asChild>
                 <button
