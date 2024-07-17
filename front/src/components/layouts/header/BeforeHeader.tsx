@@ -43,7 +43,7 @@ const BeforeHeader: React.FC = () => {
         <div className="lg:hidden">
           <button
             onClick={toggleMenu}
-            className="fixed text-white focus:outline-none top-6 right-5 z-40"
+            className="fixed text-white focus:outline-none top-9 right-5 z-40"
             >
             {isOpen ? null : <GiFilmProjector size={40} className="rounded-full border-4 bg-black border-white" />}
           </button>
@@ -58,7 +58,7 @@ const BeforeHeader: React.FC = () => {
             </div>
           </div>
         )}
-        <div className="hidden lg:block fixed right-5 text-white focus:outline-none z-30">
+        <div className="hidden lg:block fixed right-5 mt-7 text-white focus:outline-none z-30">
           <Sheet open={isNavOpen} onOpenChange={setIsNavOpen}>
             <SheetTrigger asChild>
               <button

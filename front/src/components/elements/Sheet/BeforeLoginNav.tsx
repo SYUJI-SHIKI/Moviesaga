@@ -10,7 +10,7 @@ const BeforeLoginNav: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         className="text-white absolute top-4 right-4 focus:outline-none">
         <FaTimes size={24} />
       </button>
-      <div className="lg:mt-10 ml-3 font-extrabold lg:text-3xl">
+      <div className="lg:mt-10 ml-3 font-extrabold">
         <Link href="/">
           <div className="text-gray-200 hover:text-opacity-100 text-opacity-80 mb-5">
             ホーム
