@@ -62,7 +62,7 @@ function MyApp({ Component, pageProps }: CustomAppProps) {
         <link rel="canonical" href="https://movie-saga-app.com" />
         <link rel="icon" type="image/png" sizes="32x32" href="/MovieSaga_favicon.png" />
       </Head>
-      <GoogleAnalytics gaId={process.env.GA_ID ?? ""} />
+      <GoogleAnalytics gaId="G-J65G5HEPNR" />
       <AnimatePresence mode="wait">
         <motion.div
           key={router.route}
