@@ -1,5 +1,6 @@
 // pages/_app.tsx
 import { AppProps } from 'next/app';
+import { GoogleAnalytics } from '@next/third-parties/google'
 import '../app/globals.css';
 import 'tailwindcss/tailwind.css';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -61,6 +62,7 @@ function MyApp({ Component, pageProps }: CustomAppProps) {
         <link rel="canonical" href="https://movie-saga-app.com" />
         <link rel="icon" type="image/png" sizes="32x32" href="/MovieSaga_favicon.png" />
       </Head>
+      <GoogleAnalytics gaId={process.env.GA_ID ?? ""} />
       <AnimatePresence mode="wait">
         <motion.div
           key={router.route}
