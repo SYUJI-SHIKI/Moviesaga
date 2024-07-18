@@ -171,7 +171,7 @@ const CollectionShow: CustomNextPage = () => {
               onSelectMovie={handleMovieSelect}
             />
           </div>
-          <p>映画の画像をタッチすると予告が再生されます</p>
+          <p className='lg:hidden'>映画の画像をタッチすると<br />予告が再生されます(音声が出ます)</p>
           <Link href={`/movies/${currentMovie.tmdb_id}`}>
             <div className='text-2xl max-sm:text-xl font-bold flex items-center justify-center mt-10 max-sm:mb-20 mb-14 hover:text-blue-500'>
               「{currentMovie.original_title}」の詳細はこちら
