@@ -20,7 +20,7 @@ const Trailer: React.FC<TrailerProps> = ({ movieData }) => {
       autoplay: 1,
       mute: 1,
       loop: 1,
-      rel: 0,
+      fs: 0,
       modestbranding: 1,
       showinfo: 0,
       playlist: movieData.movie.youtube_trailer_id,

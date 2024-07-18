@@ -130,7 +130,7 @@ const CollectionShow: CustomNextPage = () => {
                     modestbranding: 1,
                     showinfo: 0,
                     loop: 1,
-                    rel: 0,
+                    fs: 0,
                     playsinline: 1,
                     playlist: currentMovie.youtube_trailer_id,
                   },
