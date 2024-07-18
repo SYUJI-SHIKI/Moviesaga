@@ -164,13 +164,14 @@ const CollectionShow: CustomNextPage = () => {
             <p className="text-xl md:text-3xl text-gray-300 mb-6">{collectionData.collection.description}</p>
           </div>
 
-          <div className=' flex items-center justify-center'>
+          <div className='flex items-center justify-center'>
             <CollectionCarousel
               movies={collectionData.collection.movies}
               currentIndex={currentMovieIndex}
               onSelectMovie={handleMovieSelect}
             />
           </div>
+          <p>映画の画像をタッチすると予告が再生されます</p>
           <Link href={`/movies/${currentMovie.tmdb_id}`}>
             <div className='text-2xl max-sm:text-xl font-bold flex items-center justify-center mt-10 max-sm:mb-20 mb-14 hover:text-blue-500'>
               「{currentMovie.original_title}」の詳細はこちら

@@ -55,7 +55,10 @@ const CollectionIndexForm: React.FC<CollectionIndexFormProps> = ({ apiEndpoint }
         {collections && collections.length > 0 ? (
           <>
             <div className="flex items-center justify-center mt-10">
-              <div className="text-5xl text-white font-Anton mb-4">Collections</div>
+              <div className="flex flex-col text-white items-center">
+                <div className="text-5xl text-white font-Anton mb-4">Collections</div>
+                <div className='max-md:hidden'>特集を開くと音声が流れるのでご注意ください</div>
+              </div>
             </div>
             <div className="grid gap-4 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 md:grid-rows-2 mt-5 md:mt-16 auto-rows-max">
               {collections.map(collection => (
