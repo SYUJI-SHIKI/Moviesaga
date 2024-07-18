@@ -1,6 +1,6 @@
 export const keywordOptions = [
   { optionValue: "", label: "指定なし" },
-  { optionValue: "now_playing", label: "映画で上映中" },
+  { optionValue: "now_playing", label: "公開予定・現在上映中" },
   { optionValue: "true_story", label: "実話を元にした作品" },
   { optionValue: "animation", label: "アニメ作品" },
 ];

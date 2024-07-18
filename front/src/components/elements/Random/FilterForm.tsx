@@ -54,7 +54,7 @@ const FilterForm = () => {
       style={{ backgroundImage: 'url("/screen.png")', backgroundSize: 'cover', backgroundPosition: 'top' }}
     >
       <form onSubmit={handleSubmit} className='w-full'>
-        <div className="px-20 pb-10 w-90 lg:flex md:flex mt-20 lg:mt-18 gap-4 lg:mr-5">
+        <div className="px-10 md:px-20 pb-10 w-90 lg:flex md:flex mt-20 lg:mt-18 gap-4 lg:mr-5">
           <RadioGroup
             title="お好み"
             name="keyword"
