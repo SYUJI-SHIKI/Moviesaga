@@ -5,6 +5,7 @@ import ProjectorGif from "@/components/layouts/HomePage/ProjectorGif";
 import CollectionButton from "@/components/elements/Buttons/CollectionButton";
 import RandomButton from "@/components/elements/Buttons/RandomButton";
 import SearchButton from "@/components/elements/Buttons/SearchButton";
+import LoginButton from "@/components/elements/Buttons/Login";
 import AppInfo from "@/components/layouts/HomePage/AppInfo";
 import CollectionInfo from "@/components/layouts/HomePage/CollectionInfo";
 import RandomInfo from "@/components/layouts/HomePage/RandomInfo";
@@ -65,10 +66,18 @@ const RootPage: CustomNextPage= () => {
                 <div className="mt-5 md:mx-7  flex-shrink-0"><CollectionButton /></div>
               </>
             ) : (
-              <div className="flex flex-col items-center">
-                <div className="md:mt-2 mx-1 md:mx-7  flex-shrink-0"><RandomButton/></div>
-                <div className="mt-2" id="before-login-button">
-                  ランダム機能を試してみる
+              <div className="flex max-sm:flex-col items-center">
+                <div className="flex md:flex-col items-center justify-center">
+                  <div className="md:mt-2 mx-1 flex-shrink-0"><RandomButton/></div>
+                  <div className="mt-1" id="before-login-button">
+                    試してみる
+                  </div>
+                </div>
+                <div className="flex md:flex-col items-center justify-center">
+                  <div className="md:mt-2 mx-1 max-sm:ml-2 flex-shrink-0"><LoginButton/></div>
+                  <div className="mt-1" id="before-login-button">
+                    ログインする
+                  </div>
                 </div>
               </div>
             )}
