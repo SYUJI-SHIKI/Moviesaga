@@ -101,7 +101,6 @@ API| TMDB API <br> Youtube Data API <br> Google Translate API(未定) <br> wikip
 - TMDB APIでも映画予告は提供しているが基本,海外向けの予告になっているので
 日本版の映画予告を取得するためのYouTube Data API
 
-
 ### 本リリース：
 - TMDB APIが映画のタイトルによっては
 英文のあらすじしかない場合があるのでGoogle Translate APIを使って翻訳するか
