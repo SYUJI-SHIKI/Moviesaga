@@ -36,7 +36,7 @@ movieとsagaを掛け合わせて直訳で「映画の長い物語」「映画�
 - ユーザーが好きな映画で簡単に特集を組めたり  
 それを共有することもできます。  
 - 映画を選ぶだけにとどまらず予告をひたすら流すページも用意して  
-このアプリだけでも楽しめるような仕様にしてあります(本リリースで実装予定)
+このアプリだけでも楽しめるような仕様にしてあります(実装予定)
 
 ## ■ ユーザーの獲得について･･･
 - xで公表するのはもちろんのこと、  
@@ -66,11 +66,11 @@ AIが好きそうなものを提供してくれるアプリが開発されてい
 | カテゴリー | 使用技術 |
 |-----|----|
 サーバーサイド| Ruby 3.2.2 <br> Ruby on Rails 7.1.3
-フロントエンド| TypeScript 5.4.5 <br> React 18.3.2 
-cssフレームワーク| Bootstrap または Tailwind CSS
+フロントエンド| Nextjs 14.2.4 <br> TypeScript 5.0.0 <br> React 18.3.1 
+cssフレームワーク| shadcn/ui Tailwind CSS
 データベース| PostgreSQL 16.2
 開発環境| Docker
-API| TMDB API <br> Youtube Data API <br> Google Translate API(未定) <br> wikipedia api(未定)
+API| TMDB API <br> Youtube Data API <br> Google Translate API
 
 ## ■ 機能候補
 ### MVPリリース:
@@ -85,16 +85,16 @@ API| TMDB API <br> Youtube Data API <br> Google Translate API(未定) <br> wikip
 - ユーザー独自の特集を組める機能
 
 ### 本リリース：
-- ランダムで取得するとき読み取りに時間がかかるのでプレースホルダーやデフォルトコンテンツを用意する
-- ランダムで映画を提供してくれる機能の検索条件をより充実にする（配信サービスはあるかなど）
+- railsで作ったレイアウトをNextjsへ移行
 - 映画の予告に特化したページ
-- 映画詳細画面の充実 （主要キャストやwikipedia apiを使って映画のあらすじから紐づけられる事象があればそれを表示する機能）
-- レイアウトをより良いものにする
+- 映画詳細画面の充実
 - プライバシーポリシーやお問い合わせフォームの内容
 - レビューに合わせて必要そうなものも随時、導入したいと思います
-### 以下、実装未確定な機能
+### 以下、実装予定の機能
+- 予告に特化したページの作成
 - 検索をかけたときその作品のレコメンドを提供する機能
-- Google認証
+- solid Queueの実装
+
 
 ## ■ 機能の実装方針予定
 ### MVPリリース：
@@ -104,13 +104,10 @@ API| TMDB API <br> Youtube Data API <br> Google Translate API(未定) <br> wikip
 
 ### 本リリース：
 - TMDB APIが映画のタイトルによっては
-英文のあらすじしかない場合があるのでGoogle Translate APIを使って翻訳するか
-Wikipedia apiを使ってあらすじを抽出するか悩み中（技術検証してない）
-- 映画のあらすじと事象を紐づける際のWikipediaのapi
+英文のあらすじしかない場合があるのでGoogle Translate APIを使って翻訳する
 
 ### 実装はしないが実装できる技術の習得はしておきたい機能
-- 関連映画のレコメンドを取得する機能(
-Google認証するためにGoogle Identity Platformの機能)
+- 関連映画のレコメンドを取得する機能
 
 ### 画面遷移図
 https://www.figma.com/design/hbWFX3mRKDMfnq9PeNncPE/%E5%8D%92%E6%A5%AD%E5%88%B6%E4%BD%9C?node-id=0-1&t=tCQQwauOn3ctIvJm-1
