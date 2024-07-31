@@ -201,5 +201,4 @@ API| TMDB API / Youtube Data API / Google Translate API
 https://www.figma.com/design/hbWFX3mRKDMfnq9PeNncPE/%E5%8D%92%E6%A5%AD%E5%88%B6%E4%BD%9C?node-id=0-1&t=tCQQwauOn3ctIvJm-1
 
 ### ER図
-[![Image from Gyazo](https://i.gyazo.com/0868f38bea4dd4453473db3388b403f3.png)](https://gyazo.com/0868f38bea4dd4453473db3388b403f3)
-
+[![Image from Gyazo](https://i.gyazo.com/359cef6d6bb8f7daacfcd1421989b591.png)](https://gyazo.com/359cef6d6bb8f7daacfcd1421989b591)
