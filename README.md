@@ -72,41 +72,127 @@ cssフレームワーク| shadcn/ui Tailwind CSS
 開発環境| Docker
 API| TMDB API <br> Youtube Data API <br> Google Translate API
 
-## ■ 使い方・機能
+## ■ 使い方・機能・ページ紹介
 ### ホーム画面
 <table>
   <tr>
-    <th>PC</th>
     <th>携帯</th>
+    <th>PC</th>
   </tr>
   <tr>
     <td>
-      <img src="https://i.gyazo.com/56cccca4d560f4859a3fdff8995a36d1.gif" width="600" alt="Image from Gyazo"><br>
+      <img src="https://i.gyazo.com/5adb76edb8f41775138d0bedd20e962e.gif" width="250" height="350" alt="Image from Gyazo">
+    </td>
+    <td>
+      <img src="https://i.gyazo.com/56cccca4d560f4859a3fdff8995a36d1.gif" width="500" alt="Image from Gyazo"><br>
       <br><br>
       <p align='center'>PCではダイナミックさを、携帯ではスタイリッシュさを引き立たせるように<br>レスポンシブに対応した設計にしてあります</p>
     </td>
-    <td>
-      <img src="https://i.gyazo.com/5adb76edb8f41775138d0bedd20e962e.gif" width="300" alt="Image from Gyazo">
-    </td>
   </tr>
 </table>
-<br>
+
 ### ログイン・新規登録画面
 <table>
   <tr>
-    <td>ログイン画面</td>
-    <td>新規登録画面</td>
+    <th>ログイン画面</th>
+    <th>新規登録画面</th>
+    <th>説明</th>
+  </tr>
+  <tr> 
+    <td>
+      <img src="https://i.gyazo.com/b1da57e218f336c2a3211b6d0be3c430.png" width="200" height="300" alt="Image from Gyazo">  
+    </td>
+    <td>
+      <img src="https://i.gyazo.com/1622125456746d789a6619cf522dab06.png" width="200" height="300" alt="Image from Gyazo">  
+    </td>
+    <td>
+      <p>ログイン画面ではレトロシネマを思わせる色合いを<br>新規登録画面では映画の幕やレッドカーペットを思わせる色合いを<br>イメージにして作りました</p>
+    </td>
   </tr>
 </table>
-- 検索条件に合わせてランダムで映画を提供してくれる機能
-(MVPリリース時の検索条件の例：映画ジャンル・上映時間・上映中なのか)
-- タイトルをお気に入り設定できる機能
+
+### ランダム機能
+- 検索条件に合わせてランダムで映画を提供してくれる機能です
+<table>
+  <tr>
+    <th>ランダム画面</th>
+    <th>動作確認</th>
+  </tr>
+  <tr>
+    <td>
+      <img src="https://i.gyazo.com/6d35d92f3655939116e2c02b64f8e342.jpg" width="500">
+    </td>
+    <td>
+      <img src="https://i.gyazo.com/827d556b3c901b5a931ca6c288706b75.gif" width="500">
+    </td>
+  </tr>
+</table>
+
+### 映画詳細画面
+- いいね機能を実装したので好みの映画を登録できます。
+<table>
+  <tr>
+    <th>詳細画面・上部(予告映像)</th>
+    <th>詳細画面・下部(ポスター・あらすじ)</th>
+  </tr>
+  <tr>
+    <td>
+      <img src="https://i.gyazo.com/b9c02d9f53b504c28788ac1799039d04.png" width="500">
+    </td>
+    <td valign="bottom">
+      <img src="https://i.gyazo.com/87a6d1e723b8ebd334bfae30aedca8b0.jpg" width="500">
+    </td>
+  </tr>
+</table>
+
+### 特集作成画面
+- いいねした映画の中から最大9タイトルまで選んで特集を組むことが出来ます。
+<table>
+  <tr><th>特集作成画面</th></tr>
+  <tr>
+    <td>
+    <img src="https://i.gyazo.com/bf852966db78dc321cc0a2de243e32e8.gif">
+    </td>
+  </tr>
+</table>
+
+### 特集画面
+<table>
+  <tr>
+    <th>特集一覧画面</th>
+    <th>特集詳細画面</th>
+  </tr>
+  <tr>
+    <td>
+    <img src="https://i.gyazo.com/d5031fa5cd0af653948b44fde45b3b63.gif" width="500">
+    </td>
+    <td>
+    <img src="https://i.gyazo.com/7fb17d0a33b51a381f78d58853070be1.gif" width="500">
+    </td>
+  </tr>
+</table>
+
+### 検索画面・マイページ
+<table>
+  <tr>
+    <th>検索一覧画面</th>
+    <th>マイページ画面</th>
+  </tr>
+  <tr>
+    <td>
+    <img src="https://i.gyazo.com/781dcc8b55d111714f5bb7bb17e46278.jpg" width="500">
+    </td>
+    <td>
+    <img src="https://i.gyazo.com/54ddf7a83da995bc0b1c6a7af8a5b355.gif" width="500">
+    </td>
+  </tr>
+</table>
+
+
 - YouTube Data APIの上限コストを超えないために
 予告を流したらDBに映画のタイトルや予告のデータを保存する機能
 - TMDB APIの規約で6か月以上のキャッシュの保存を禁止しているので
 保存したデータを6か月超えたら削除する機能
-- ログイン機能
-- ユーザー独自の特集を組める機能
 
 ### 本リリース：
 - railsで作ったレイアウトをNextjsへ移行
