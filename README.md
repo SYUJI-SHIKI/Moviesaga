@@ -62,16 +62,6 @@ AIが好きそうなものを提供してくれるアプリが開発されてい
 映画の予告に重きを置いてるサイトは今のところ見たことはなく映画館の前のあの  
 予告をみるわくわく感が感じられるページもあったら素敵だなと考えています。
 
-## ■ 使用技術
-| カテゴリー | 使用技術 |
-|-----|----|
-サーバーサイド| Ruby 3.2.2 <br> Ruby on Rails 7.1.3
-フロントエンド| Nextjs 14.2.4 <br> TypeScript 5.0.0 <br> React 18.3.1 
-cssフレームワーク| shadcn/ui Tailwind CSS
-データベース| PostgreSQL 16.2
-開発環境| Docker
-API| TMDB API <br> Youtube Data API <br> Google Translate API
-
 ## ■ 使い方・機能・ページ紹介
 ### ホーム画面
 <table>
@@ -157,6 +147,7 @@ API| TMDB API <br> Youtube Data API <br> Google Translate API
 </table>
 
 ### 特集画面
+- 特集にはブックマーク機能があるのでお好みの特集をブックマークできます。
 <table>
   <tr>
     <th>特集一覧画面</th>
@@ -188,35 +179,26 @@ API| TMDB API <br> Youtube Data API <br> Google Translate API
   </tr>
 </table>
 
-
 - YouTube Data APIの上限コストを超えないために
 予告を流したらDBに映画のタイトルや予告のデータを保存する機能
 - TMDB APIの規約で6か月以上のキャッシュの保存を禁止しているので
 保存したデータを6か月超えたら削除する機能
 
-### 本リリース：
-- railsで作ったレイアウトをNextjsへ移行
-- 映画の予告に特化したページ
-- 映画詳細画面の充実
-- プライバシーポリシーやお問い合わせフォームの内容
-- レビューに合わせて必要そうなものも随時、導入したいと思います
+## ■ 使用技術
+| カテゴリー | 使用技術 |
+|-----|----|
+バックエンド| Ruby 3.2.2 / Ruby on Rails 7.1.3
+フロントエンド| Nextjs 14.2.4 / TypeScript 5.0.0 / React 18.3.1 
+cssフレームワーク| shadcn/ui / Tailwind CSS
+データベース| PostgreSQL 16.2
+認証機能| devise token auth 1.2.2 / omniauth-google-oauth2 1.1.1
+開発環境| Docker
+API| TMDB API / Youtube Data API / Google Translate API
+
 ### 以下、実装予定の機能
 - 予告に特化したページの作成
 - 検索をかけたときその作品のレコメンドを提供する機能
 - solid Queueの実装
-
-
-## ■ 機能の実装方針予定
-### MVPリリース：
-- 映画のデータベースが必要なのでTMDB API
-- TMDB APIでも映画予告は提供しているが基本,海外向けの予告になっているので
-日本版の映画予告を取得するためのYouTube Data API
-
-### 本リリース：
-- TMDB APIが映画のタイトルによっては
-英文のあらすじしかない場合があるのでGoogle Translate APIを使って翻訳する
-
-### 実装はしないが実装できる技術の習得はしておきたい機能
 - 関連映画のレコメンドを取得する機能
 
 ### 画面遷移図
