@@ -72,8 +72,32 @@ cssフレームワーク| shadcn/ui Tailwind CSS
 開発環境| Docker
 API| TMDB API <br> Youtube Data API <br> Google Translate API
 
-## ■ 機能候補
-### MVPリリース:
+## ■ 使い方・機能
+### ホーム画面
+<table>
+  <tr>
+    <th>PC</th>
+    <th>携帯</th>
+  </tr>
+  <tr>
+    <td>
+      <img src="https://i.gyazo.com/56cccca4d560f4859a3fdff8995a36d1.gif" width="600" alt="Image from Gyazo"><br>
+      <br><br>
+      <p align='center'>PCではダイナミックさを、携帯ではスタイリッシュさを引き立たせるように<br>レスポンシブに対応した設計にしてあります</p>
+    </td>
+    <td>
+      <img src="https://i.gyazo.com/5adb76edb8f41775138d0bedd20e962e.gif" width="300" alt="Image from Gyazo">
+    </td>
+  </tr>
+</table>
+<br>
+### ログイン・新規登録画面
+<table>
+  <tr>
+    <td>ログイン画面</td>
+    <td>新規登録画面</td>
+  </tr>
+</table>
 - 検索条件に合わせてランダムで映画を提供してくれる機能
 (MVPリリース時の検索条件の例：映画ジャンル・上映時間・上映中なのか)
 - タイトルをお気に入り設定できる機能
